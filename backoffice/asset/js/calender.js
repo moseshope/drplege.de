@@ -25,31 +25,69 @@ function generateCalendar() {
   let conditionCount = 1;
   for (let i = 1; i <= daysInMonth; i++) {
     const date2 = new Date();
-    const date1 = new Date(`${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${String(i).padStart(2, "0")}`);
-    row.innerHTML += `<td><div id="${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${i}" class="${date2.getDate() === i && date2.getFullYear() === currentYear && date2.getMonth() === currentMonth && "today"} ${date1 < date2 && "disable-date"}">${i}</div></td>`;
+    const date1 = new Date(
+      `${currentYear}-${(currentMonth + 1)
+        .toString()
+        .padStart(2, "0")}-${String(i).padStart(2, "0")}`
+    );
+    row.innerHTML += `<td><div id="${currentYear}-${String(
+      currentMonth + 1
+    ).padStart(2, "0")}-${i}" class="${
+      date2.getDate() === i &&
+      date2.getFullYear() === currentYear &&
+      date2.getMonth() === currentMonth &&
+      "today"
+    } ${date1 < date2 && "disable-date"}">${i}</div></td>`;
 
-    if (firstDay + i === 7 || (i + firstDay) / conditionCount === 7 || i === daysInMonth) {
+    if (
+      firstDay + i === 7 ||
+      (i + firstDay) / conditionCount === 7 ||
+      i === daysInMonth
+    ) {
       daysTable.innerHTML += row.innerHTML;
       row.innerHTML = "";
       conditionCount++;
     }
   }
   monthYear.textContent = `${getMonthName(currentMonth)} ${currentYear}`;
-  preMonthYear.textContent = `${getMonthName(currentMonth === 0 ? 11 : currentMonth - 1)} ${currentMonth === 0 ? currentYear - 1 : currentYear}`;
-  nextMonthYear.textContent = `${getMonthName(currentMonth === 11 ? 0 : currentMonth + 1)} ${currentMonth === 11 ? currentYear + 1 : currentYear}`;
+  preMonthYear.textContent = `${getMonthName(
+    currentMonth === 0 ? 11 : currentMonth - 1
+  )} ${currentMonth === 0 ? currentYear - 1 : currentYear}`;
+  nextMonthYear.textContent = `${getMonthName(
+    currentMonth === 11 ? 0 : currentMonth + 1
+  )} ${currentMonth === 11 ? currentYear + 1 : currentYear}`;
 }
 
 // Function to get the month name
 function getMonthName(month) {
-  const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const monthNames = [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ];
   return monthNames[month];
 }
 
 // Function to handle date selection
 function handleDateClick(event) {
   const date = event.target.textContent;
-  const formattedDate = `${date.padStart(2, "0")}-${(currentMonth + 1).toString().padStart(2, "0")}-${currentYear}`;
-  const date1 = new Date(`${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${date.padStart(2, "0")}`);
+  const formattedDate = `${date.padStart(2, "0")}-${(currentMonth + 1)
+    .toString()
+    .padStart(2, "0")}-${currentYear}`;
+  const date1 = new Date(
+    `${currentYear}-${(currentMonth + 1)
+      .toString()
+      .padStart(2, "0")}-${date.padStart(2, "0")}`
+  );
   const date2 = new Date();
   if (date1 < date2) return formattedDate;
   var selectedEl = document.querySelector(".selected-date");
@@ -80,6 +118,8 @@ function nextMonth() {
   generateCalendar();
 }
 
-generateCalendar();
+if (calendar) {
+  generateCalendar();
+}
 
 // daysTable.addEventListener('click', handleDateClick);

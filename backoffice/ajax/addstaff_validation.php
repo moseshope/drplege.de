@@ -4,7 +4,7 @@ include('../config/database.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     $name = $_POST['name'];
-    $qualification = $_POST['qualification'];
+    // $qualification = $_POST['qualification'];
     $email = $_POST['email'];
     $telephone = $_POST['telephone'];
     $password = $_POST['password'];
@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $message = "Name is required";
         echo json_encode(['name' => $message]);
     }
-    if(empty($qualification)){
-        $message = "Qualification is required";
-        echo json_encode(['qualification' => $message]);
-    }
+    // if(empty($qualification)){
+    //     $message = "Qualification is required";
+    //     echo json_encode(['qualification' => $message]);
+    // }
     if(empty($email)){
         $message = "Email is required";
         echo json_encode(['email' => $message]);

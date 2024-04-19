@@ -258,7 +258,6 @@
                                   <div class="levelOne" style="margin-left: 0">
                                     <ul class="leftList" start="1" style="margin-top: 0; margin-bottom: 0; padding: 0; padding-left: 20px; color: #101112; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 17px; font-weight: 400; letter-spacing: 0; line-height: 150%; text-align: left; mso-line-height-alt: 25.5px; list-style-type: disc">
                                       <li style="margin-bottom: 8px; text-align: left">Ihr Name: $doctorName</li>
-                                      <li style="margin-bottom: 8px; text-align: left">Qualifikation: $qualification</li>
                                       <li style="margin-bottom: 8px; text-align: left">E-Mail: <a href="mailto:$email">$email</a></li>
                                       <li style="margin-bottom: 8px; text-align: left">Passwort: $password</li>
                                       <li style="margin-bottom: 8px; text-align: left">Telefon: <a href="tel:$telephone">$telephone</a></li>

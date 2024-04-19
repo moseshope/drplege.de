@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $currentURL = "http" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 's' : '') . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $name = mysqli_real_escape_string($connect, $_POST['name']);
-        $qualification = mysqli_real_escape_string($connect, $_POST['qualification']);
         $email = mysqli_real_escape_string($connect, $_POST['email']);
         $originalPassword = $_POST['password'];
         $password = mysqli_real_escape_string($connect, md5($_POST['password']));
@@ -31,15 +30,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
         $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : array();
 
-        if (is_array($staff_services)) {
-                $staff_services = implode('__', $staff_services);
-                }
+        // if (is_array($staff_services)) {
+        //         $staff_services = implode('__', $staff_services);
+        //         }
 
         $created_at = date("Y-m-d");
-
-        $sql = "insert into user(name,qualification,email,password,profile,telephone,status,role,services,created_at) values('$name','$qualification','$email','$password','$profileName','$telephone','$status','$role','$staff_services','$created_at')";
+        $sql = "insert into user(name,email,password,profile,telephone,status,role,created_at) values('$name','$email','$password','$profileName','$telephone','$status','$role','$created_at')";
         $query = $connect->query($sql);
+        $user_id = $connect->insert_id;
+        $servicesArray = [];
 
+        if (is_array($staff_services)) {
+                $data = [];
+                foreach ($staff_services as $key => $value) {
+                        $data[] = "($user_id, $value)";
+                        }
+                $data = implode(",", $data);
+                $sql = "INSERT INTO services_docs (user_id, service_id) VALUES $data;";
+                $connect->query($sql);
+                // $staff_services
+                $sql = "SELECT * FROM services WHERE id IN (". implode(",", $staff_services) .")";
+                $result = $connect->query($sql);
+                if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                        $servicesArray[] = $row['services'];
+                        }
+                }
+        }
         if ($query) {
                 $mail = new PHPMailer(true);
                 $mail->CharSet = PHPMailer::CHARSET_UTF8;
@@ -57,11 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $body = file_get_contents('../mail/add-doctor_mail.php');
                 $body = str_replace('$doctorName', $name, $body);
-                $body = str_replace('$qualification', $qualification, $body);
                 $body = str_replace('$email', $email, $body);
                 $body = str_replace('$password', $originalPassword, $body);
                 $body = str_replace('$telephone', $telephone, $body);
-                $body = str_replace('$serviceName', $staff_services, $body);
+                $body = str_replace('$serviceName', implode(",", $servicesArray), $body);
                 $mail->Body = $body;
                 $mail->send();
 

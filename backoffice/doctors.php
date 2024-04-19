@@ -25,7 +25,7 @@ $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
 
 $conditions = array();
 if ($searchTerm !== null) {
-  $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%' OR user.qualification LIKE '%$searchTerm%')";
+  $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%')";
   }
 if ($startDate !== null && $endDate !== null) {
   $conditions[] = "user.created_at BETWEEN '$startDate' AND '$endDate'";
@@ -64,9 +64,18 @@ $staffList = array();
 
 if ($StaffResult->num_rows > 0) {
   while ($row = $StaffResult->fetch_assoc()) {
-    $staffList[] = $row;
+    $getService = "SELECT sd.user_id, s.services FROM services_docs AS sd LEFT JOIN services AS s ON sd.service_id = s.id WHERE sd.user_id='" . $row['id'] . "'";
+    $services = [];
+    $sericesResult = $connect->query($getService);
+    if ($sericesResult->num_rows > 0) {
+      while ($row1 = $sericesResult->fetch_assoc()) {
+        $services[] = $row1['services'];
+      }
+      $row['serviceList'] = $services;
     }
+    $staffList[] = $row;
   }
+}
 
 // Pagination
 $itemsPerPage = 20;
@@ -152,22 +161,17 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   </div>
                 </td>
                 <td class="">
-                <!-- <button class="cursor-pointer showAllBtn"
-              style="background-color: var(--main); color: white;"
-              data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button> -->
                 <div class="text-start mx-auto" style="max-width: fit-content;">
                   <ul>
                     <?php
-                    $originalList = $staffList[$i]['services'];
-                    $services = explode('__', $originalList);
-                    foreach ($services as $service) {
+                    $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
+                    foreach ($serviceList as $service) {
                       ?>
                       <li class="text-left"><?= $service ?></li>
                     <?php } ?>
                   </ul>
                 </div>
                 </td>
-                <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
                 <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
                 <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
 
@@ -265,7 +269,6 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
                 data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
                 </td>
-                <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
                 <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
                 <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
 
@@ -384,14 +387,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <span class="error" id="confirm_password-error"></span>
             </div>
           </div>
-        <!-- <div class="col-lg-6 col-12">
-        <div class="form-group p-2 my-2">
-        <label class="my-1" for="Qualification">Qualifikation</label>
-        <input type="text" name="qualification" class="form-control custom-input" id="Qualification"
-        placeholder="Qualifikation">
-        <span class="error" id="qualification-error"></span>
-        </div>
-        </div> -->
+        
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
@@ -417,7 +413,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <?php
               foreach ($servicesArray as $service) {
                 echo '<div class="form-check">';
-                echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
+                echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['id'] . '">';
                 echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
                 echo '</div>';
                 }
@@ -457,9 +453,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer"
+          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+          <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer mx-1"
           data-bs-target="#show-info">Ja</button>
-          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">No</button>
         </div>
       </div>
     </div>
@@ -612,7 +608,7 @@ aria-hidden="true">
         <!-- <form> -->
 
         <div class="row">
-          <!-- <input type="hidden" name="id" value="" class="form-control custom-input" id="StaffId"> -->
+          <input type="hidden" name="id" value="" class="form-control custom-input" id="StaffId">
           <div class="col-lg-6 col-12">
           <div class="form-group p-2 my-2">
           <label class="my-1" for="Name">Name</label>
@@ -629,14 +625,6 @@ aria-hidden="true">
           <span class="error" id="email-edit-error"></span>
           </div>
           </div>
-          <!-- <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="Qualification">Qualifikation</label>
-          <input type="text" name="qualification" value="" class="form-control custom-input" id="StaffQualification"
-          placeholder="Enter Qualification">
-          <span class="error" id="qualification-edit-error"></span>
-          </div>
-          </div> -->
           <div class="col-lg-6 col-12">
           <div class="form-group p-2 my-2">
           <label class="my-1" for="Status">Status</label>
@@ -664,8 +652,8 @@ aria-hidden="true">
           <?php
           foreach ($servicesArray as $service) {
             echo '<div class="form-check">';
-            echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
-            echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
+            echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="edit_' . $service['services'] . '" value="' . $service['id'] . '">';
+            echo '<label class="form-check-label" for="edit_' . $service['services'] . '">' . $service['services'] . '</label>';
             echo '</div>';
             }
           ?>
@@ -716,9 +704,9 @@ aria-hidden="true">
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
           </div>
           <div class="d-flex justify-content-center align-items-center">
-          <button type="submit" class="success-button cursor-pointer" data-bs-target="#show-info"
+            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+          <button type="submit" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
           data-bs-toggle="modal" data-bs-dismiss="modal">Ja</button>
-          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
           </div>
           </div>
           </div>
@@ -737,9 +725,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
 </div>
 <div class="d-flex justify-content-center align-items-center">
-<button type="button" class="success-button cursor-pointer" data-bs-toggle="modal" data-bs-dismiss="modal"
+  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+<button type="button" class="success-button cursor-pointer mx-1" data-bs-toggle="modal" data-bs-dismiss="modal"
 id="UpdateStaffConfirmationBtn">Ja</button>
-<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">No</button>
 </div>
 </div>
 </div>
@@ -774,9 +762,9 @@ aria-hidden="true">
 <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
 </div>
 <div class="d-flex justify-content-center align-items-center">
-<button type="button" class="success-button cursor-pointer" data-bs-target="#show-info" data-bs-toggle="modal"
+  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+<button type="button" class="success-button cursor-pointer mx-1" data-bs-target="#show-info" data-bs-toggle="modal"
 data-bs-dismiss="modal" id="deleteStaffYesBtn">Ja</button>
-<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
 </div>
 </div>
 </div>
@@ -822,7 +810,7 @@ success: function(response) {
 
 var staffData = JSON.parse(response);
 var serviceString = staffData.services;
-var serviceArray = serviceString.split('__');
+// var serviceArray = serviceString.split('__');
 for (var i = 0; i < serviceArray.length; i++) {
 serviceArray[i] = serviceArray[i].trim();
 }
@@ -994,7 +982,6 @@ console.log(staffData)
 console.log(staffData.status)
 $('#StaffId').val(staffData.id);
 $('#StaffName').val(staffData.name);
-$('#StaffQualification').val(staffData.qualification);
 $('#StaffEmail').val(staffData.email);
 $('#StaffTelephone').val(staffData.telephone);
 $('#StaffStatus-Options-E').val(staffData.status);
@@ -1127,8 +1114,9 @@ reader.readAsDataURL(file);
     $(this).find('input').eq(0).focus();
   });
 
-  $("#add-staff").on("hidden.bs.modal", function() {
-    $(this).find('input').val('');
+  $("#add-staff").on("show.bs.modal", function() {
+    $(this).find('input:not([type=checkbox])').val('');
+    $(this).find('input[type=checkbox]').prop('checked', false);
   });
 
 </script>

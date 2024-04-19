@@ -413,7 +413,6 @@ $(document).ready(function () {
         var staffData = JSON.parse(response);
         $("#StaffId").val(staffData.id);
         $("#StaffName").val(staffData.name);
-        $("#StaffQualification").val(staffData.qualification);
         $("#StaffEmail").val(staffData.email);
         $("#StaffTelephone").val(staffData.telephone);
         $("#StaffStatus-Options-E").val(staffData.status);

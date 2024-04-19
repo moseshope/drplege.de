@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-$itemsPerPage = 20;
+$itemsPerPage = 1000;
 $totalItems = count($timeList);
 $totalPages = ceil($totalItems / $itemsPerPage);
 $currentPage = isset($_GET['page']) ? max(1, min((int) $_GET['page'], $totalPages)) : 1;
@@ -415,8 +415,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         });
         $('#deleteConfirmationYesBtn').on('click', function() {
             $('#deletedConfirmation').modal('hide');
-            $('#Confirmation').modal('hide');
-            $('#deleteSlotShowInfo').modal('show');
+            // $('#Confirmation').modal('hide');
+            // $('#deleteSlotShowInfo').modal('show');
             $.ajax({
                 url: './ajax/addslot.php',
                 method: 'POST',

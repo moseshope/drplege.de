@@ -4,7 +4,6 @@ include ('../config/database.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = mysqli_real_escape_string($connect, $_POST['id']);
         $name = mysqli_real_escape_string($connect, $_POST['name']);
-        $qualification = mysqli_real_escape_string($connect, $_POST['qualification']);
         $email = mysqli_real_escape_string($connect, $_POST['email']);
         $telephone = mysqli_real_escape_string($connect, $_POST['telephone']);
         $status = mysqli_real_escape_string($connect, $_POST['status']);
@@ -24,14 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $profileName = $profile;
                 }
 
-        $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : $services;
+        $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : '';
 
         if (is_array($staff_services)) {
-                $staff_services = implode('__', $staff_services);
-                }
+                $sql = "DELETE FROM services_docs WHERE user_id='$id'";
+                $connect->query($sql);
+                $data = [];
+                foreach ($staff_services as $key => $value) {
+                        $data[] = "($id, $value)";
+                        }
+                $data = implode(",", $data);
+                $sql = "INSERT INTO services_docs (user_id, service_id) VALUES $data;";
+                $connect->query($sql);
+        }
         $updated_at = date("Y-m-d");
 
-        $sql = "update user set name='$name',qualification='$qualification',email='$email',profile='$profileName',telephone='$telephone',status='$status',services='$staff_services' where id=$id";
+        $sql = "update user set name='$name',email='$email',profile='$profileName',telephone='$telephone',status='$status' where id=$id";
         $query = $connect->query($sql);
         if ($query) {
                 // header("Location: ./../nurse");

@@ -431,14 +431,7 @@ if($role == 1){
                                     <span  class="error" id="name-error"></span>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-12">
-                                <div class="form-group p-2 my-2">
-                                    <label class="my-1" for="Qualification">Qualifikation</label>
-                                    <input type="text" name="qualification" class="form-control custom-input" id="Qualification"
-                                        placeholder="Qualifikation eingeben">
-                                        <span  class="error" id="qualification-error"></span>
-                                </div>
-                            </div>
+                            
                             <div class="col-lg-6 col-12">
                                 <div class="form-group p-2 my-2">
                                     <label class="my-1" for="email">E-Mail</label>

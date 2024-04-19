@@ -14,28 +14,34 @@ $servicesList = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $servicesList[] = $row['services'];
+        $servicesList[] = $row;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : array();
+        
+    if (is_array($staff_services)) {
+        $sql = "DELETE FROM services_docs WHERE user_id = '$doctorId'";
+        $result = $connect->query($sql);
+        $data = [];
+        foreach ($staff_services as $key => $value) {
+            $data[] = "($doctorId, $value)";
+        }
+        $data = implode(",", $data);
+        $sql = "INSERT INTO services_docs (user_id, service_id) VALUES $data;";
+        $result = $connect->query($sql);
     }
 }
 
 $checkedService = [];
 
-$checkedServices = "select services from user where id='$doctorId' ";
+$checkedServices = "SELECT s.services, sd.service_id from services_docs AS sd LEFT JOIN services AS s ON sd.service_id = s.id where user_id='$doctorId'";
 $checkedResult = $connect->query($checkedServices);
-if ($checkedResult->num_rows > 0) {
+if ($checkedResult && $checkedResult->num_rows > 0) {
     while ($service = $checkedResult->fetch_assoc()) {
-        $servicesArray = explode(",", $service['services']);
-        $checkedService = array_merge($checkedService, $servicesArray);
+        $checkedService[] = $service['service_id'];
     }
-}
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : array();
-        
-    if (is_array($staff_services)) {
-            $staff_services = implode(',', $staff_services);
-    }
-    $sql = "update user set services='$staff_services' where id='$doctorId'";
-    $result = $connect->query($sql);
 }
 
 ?>
@@ -59,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <ul class="row" id="selectTime">
                                 <?php foreach ($servicesList as $service) { ?>
                                     <label class="col-12">
-                                        <input type="checkbox" class="optionalFeature" name="staff_services[]" value="<?= $service ?>" <?php if (in_array($service, $checkedService)) echo 'checked'; ?>>
-                                        <?= $service ?>
+                                        <input type="checkbox" class="optionalFeature" name="staff_services[]" value="<?= $service['id'] ?>" <?php if (in_array($service['id'], $checkedService)) echo 'checked'; ?>>
+                                        <?= $service['services'] ?>
                                     </label>
                                 <?php } ?>
                             </ul>
@@ -156,7 +162,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </script> -->
 <script>
 
-    // var doctor_id = <?php echo $_SESSION['doctor_id'] ?>;
     // var selectedValues = [];
 
     // // function getDate(event) {

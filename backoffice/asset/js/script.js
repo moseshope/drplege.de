@@ -376,7 +376,6 @@ $(document).ready(function () {
   $("#addStaffBtn").on("click", function () {
     if ($("#AddStaff").valid()) {
       var name = $("#Name").val();
-      var qualification = $("#Qualification").val();
       var email = $("#email").val();
       var telephone = $("#Telephone").val();
       var password = $("#password").val();
@@ -386,7 +385,6 @@ $(document).ready(function () {
         method: "POST",
         data: {
           name: name,
-          qualification: qualification,
           email: email,
           telephone: telephone,
           password: password,
@@ -401,28 +399,31 @@ $(document).ready(function () {
             } else {
               $("#name-error").hide();
             }
-            if (responseData.qualification) {
-              $("#qualification-error").text(responseData.qualification).addClass("text-danger");
-            } else {
-              $("#qualification-error").hide();
-            }
             if (responseData.email) {
-              $("#email-error").text(responseData.email).addClass("text-danger");
+              $("#email-error")
+                .text(responseData.email)
+                .addClass("text-danger");
             } else {
               $("#email-error").hide();
             }
             if (responseData.telephone) {
-              $("#telephone-error").text(responseData.telephone).addClass("text-danger");
+              $("#telephone-error")
+                .text(responseData.telephone)
+                .addClass("text-danger");
             } else {
               $("#telephone-error").hide();
             }
             if (responseData.password) {
-              $("#password-error").text(responseData.password).addClass("text-danger");
+              $("#password-error")
+                .text(responseData.password)
+                .addClass("text-danger");
             } else {
               $("#password-error").hide();
             }
             if (responseData.confirm_password) {
-              $("#confirm_password-error").text(responseData.confirm_password).addClass("text-danger");
+              $("#confirm_password-error")
+                .text(responseData.confirm_password)
+                .addClass("text-danger");
             } else {
               $("#confirm_password-error").hide();
             }
@@ -525,18 +526,24 @@ $(document).ready(function () {
             }
 
             if (responseData.email) {
-              $("#email-error").text(responseData.email).addClass("text-danger");
+              $("#email-error")
+                .text(responseData.email)
+                .addClass("text-danger");
             } else {
               $("#email-error").hide();
             }
 
             if (responseData.password) {
-              $("#password-error").text(responseData.password).addClass("text-danger");
+              $("#password-error")
+                .text(responseData.password)
+                .addClass("text-danger");
             } else {
               $("#password-error").hide();
             }
             if (responseData.confirm_password) {
-              $("#confirm_password-error").text(responseData.confirm_password).addClass("text-danger");
+              $("#confirm_password-error")
+                .text(responseData.confirm_password)
+                .addClass("text-danger");
             } else {
               $("#confirm_password-error").hide();
             }
@@ -642,12 +649,16 @@ $(document).ready(function () {
             var jsonObjects = response.split("}{");
             var responseData = JSON.parse(jsonObjects);
             if (responseData.name) {
-              $("#name-edit-error").text(responseData.name).addClass("text-danger");
+              $("#name-edit-error")
+                .text(responseData.name)
+                .addClass("text-danger");
             } else {
               $("#name-edit-error").hide();
             }
             if (responseData.email) {
-              $("#email-edit-error").text(responseData.email).addClass("text-danger");
+              $("#email-edit-error")
+                .text(responseData.email)
+                .addClass("text-danger");
             } else {
               $("#email-edit-error").hide();
             }
@@ -687,7 +698,6 @@ $(document).ready(function () {
     if ($("#EditStaff").valid()) {
       var id = $("#StaffId").val();
       var name = $("#StaffName").val();
-      var qualification = $("#StaffQualification").val();
       var email = $("#StaffEmail").val();
       var telephone = $("#StaffTelephone").val();
       $.ajax({
@@ -696,7 +706,6 @@ $(document).ready(function () {
         data: {
           id: id,
           name: name,
-          qualification: qualification,
           email: email,
           telephone: telephone,
         },
@@ -705,22 +714,23 @@ $(document).ready(function () {
             var jsonObjects = response.split("}{");
             var responseData = JSON.parse(jsonObjects);
             if (responseData.name) {
-              $("#name-edit-error").text(responseData.name).addClass("text-danger");
+              $("#name-edit-error")
+                .text(responseData.name)
+                .addClass("text-danger");
             } else {
               $("#name-edit-error").hide();
             }
-            if (responseData.qualification) {
-              $("#qualification-edit-error").text(responseData.qualification).addClass("text-danger");
-            } else {
-              $("#qualification-edit-error").hide();
-            }
             if (responseData.email) {
-              $("#email-edit-error").text(responseData.email).addClass("text-danger");
+              $("#email-edit-error")
+                .text(responseData.email)
+                .addClass("text-danger");
             } else {
               $("#email-edit-error").hide();
             }
             if (responseData.telephone) {
-              $("#telephone-edit-error").text(responseData.telephone).addClass("text-danger");
+              $("#telephone-edit-error")
+                .text(responseData.telephone)
+                .addClass("text-danger");
             } else {
               $("#telephone-edit-error").hide();
             }
@@ -775,7 +785,9 @@ $(document).ready(function () {
         success: function (response) {
           if (response) {
             var responseData = JSON.parse(response);
-            $("#current_password-error").text(responseData).addClass("text-danger");
+            $("#current_password-error")
+              .text(responseData)
+              .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
             $("#Confirmation").modal("show");
@@ -797,18 +809,24 @@ $(document).ready(function () {
       data: { id: id },
       success: function (response) {
         var staffData = JSON.parse(response);
-        console.log(staffData);
+        // console.log(staffData);
         $("#StaffId").val(staffData.id);
         $("#StaffName").val(staffData.name);
-        $("#StaffQualification").val(staffData.qualification);
         $("#StaffEmail").val(staffData.email);
         $("#StaffTelephone").val(staffData.telephone);
         $("#StaffStatus-Options-E").val(staffData.status);
-        $("#Services-Options-E").val(staffData.services);
-        $("#image-preview-E").attr('src', `https://drpleger.de/termin-buchen/images/${staffData.profile}`);
+        // $("#Services-Options-E").val(staffData.services);
+        $(`input[type=checkbox]`).prop("checked", false);
+        staffData.services?.forEach((service) => {
+          $(`input[type=checkbox][value='${service}']`).prop("checked", true);
+        });
+        $("#image-preview-E").attr(
+          "src",
+          `https://drpleger.de/termin-buchen/images/${staffData.profile}`
+        );
         $("#edit-staff").modal("show");
 
-        updateCheckboxForServices(staffData.services);
+        // updateCheckboxForServices(staffData.services);
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
@@ -902,12 +920,18 @@ $(document).ready(function () {
           if (response) {
             var responseData = JSON.parse(response);
             if (responseData.germany) {
-              $("#serviceGermany-error").text(responseData.germany).addClass("text-danger").show();
+              $("#serviceGermany-error")
+                .text(responseData.germany)
+                .addClass("text-danger")
+                .show();
             } else {
               $("#serviceGermany-error").text("").hide();
             }
             if (responseData.english) {
-              $("#servicesEnglish-error").text(responseData.english).addClass("text-danger").show();
+              $("#servicesEnglish-error")
+                .text(responseData.english)
+                .addClass("text-danger")
+                .show();
             } else {
               $("#servicesEnglish-error").text("").hide();
             }
@@ -1002,7 +1026,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         $("#deletedConfirmation").modal("hide");
-        $("#deleteSlotShowInfo").modal("show");
+        // $("#deleteSlotShowInfo").modal("show");
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
@@ -1056,12 +1080,18 @@ $(document).ready(function () {
           if (response) {
             var responseData = JSON.parse(response);
             if (responseData.germany) {
-              $("#editGermany-error").text(responseData.germany).addClass("text-danger").show();
+              $("#editGermany-error")
+                .text(responseData.germany)
+                .addClass("text-danger")
+                .show();
             } else {
               $("#editGermany-error").text("").hide();
             }
             if (responseData.english) {
-              $("#editEnglish-error").text(responseData.english).addClass("text-danger").show();
+              $("#editEnglish-error")
+                .text(responseData.english)
+                .addClass("text-danger")
+                .show();
             } else {
               $("#editEnglish-error").text("").hide();
             }

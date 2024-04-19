@@ -6,38 +6,35 @@ include ('./../backoffice/config/database.php');
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
         
     $service = $_GET['service'];
-    $sql = "SELECT * FROM user WHERE services like '%$service%' AND deleted_at IS NULL AND role = 2";
+    $serviceId = $_GET['serviceId'];
+    $sql = "SELECT * FROM services_docs WHERE service_id = $serviceId";
+    $result = $connect->query($sql);
+    $userIds = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $userIds[] = $row["user_id"];
+        }
+    }
+
+    $sql = "SELECT * FROM user WHERE id IN (" . implode(',', $userIds) . ") AND deleted_at IS NULL AND role = 2";
     $result = $connect->query($sql);
     $staffData = array();
     
     if ($result && $result->num_rows > 0) { 
         while ($row = $result->fetch_assoc()) {
-            $serviceArray = explode('__', $row['services']);
-            $servicesData = array();
-
-            foreach ($serviceArray as $service) {
-                if($lang == 'de'){
-                    $sql1 = "SELECT * FROM services WHERE services='$service'";
-                    $result1 = $connect->query($sql1);
-                    if ($result1 && $result1->num_rows > 0) {
-                        while ($serviceRow = $result1->fetch_assoc()) {
-                            $servicesData[] = $serviceRow['services'];
-                        }
-                    }
-                }else{
-                    $sql1 = "SELECT * FROM services WHERE services='$service'";
-                    $result1 = $connect->query($sql1);
-                    if ($result1 && $result1->num_rows > 0) {
-                        while ($serviceRow = $result1->fetch_assoc()) {
-                            $servicesData[] = $serviceRow['services_en'];
-                        }
-                    }
-                }
+            $getService = "SELECT sd.user_id, s.services". ($lang == 'de' ? '' : '_en') ." FROM services_docs AS sd LEFT JOIN services AS s ON sd.service_id = s.id WHERE sd.user_id='" . $row['id'] . "'";
+            $services = [];
+            $sericesResult = $connect->query($getService);
+            if ($sericesResult && $sericesResult->num_rows > 0) {
+            while ($row1 = $sericesResult->fetch_assoc()) {
+                $services[] = $row1['services'. ($lang == 'de'?'':'_en')];
+            }
+            $row['serviceList'] = $services;
             }
             $rowData = array(
                 'doctorId' => $row['id'],
                 'doctorName' => $row['name'],
-                'services' => $servicesData,
+                'services' => $services,
                 'profile' => $row['profile']
             );
 

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $sql = "update user set deleted_at='$deleted_at', status='deleted' where id=$id";
       $query = $connect->query($sql);
       if ($query) {
-            header("Location: ./../nurse");
+            header("Location: ./../doctors");
             }
       }
 

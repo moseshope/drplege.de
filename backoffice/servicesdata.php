@@ -46,10 +46,10 @@ include('./layout/sidebar.php');
                   <thead>
                      <tr>
                         <td style="width: 100px;">#</td>
-                        <td>DE</td>
-                        <td>EN</td>
-                        <td style="min-width: 350px;">
-                           <div class="text-center mx-auto">Optionen</div>
+                        <td class="text-center" style="min-width:300px;">DE</td>
+                        <td class="text-center" style="min-width:300px;">EN</td>
+                        <td style="max-width: 250px;">
+                           <div class="text-center">Optionen</div>
                         </td>
                      </tr>
                   </thead>
@@ -69,13 +69,13 @@ include('./layout/sidebar.php');
                         <td>
                         <div class="d-flex justify-content-center" style="min-width: 350px;">
                            <!-- Edit Button -->
-                           <div class="editservices me-4" id="editservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-services">
-                              <i class="fas fa-edit cursor-pointer"></i>
+                           <div class="editservices" id="editservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-services">
+                              <i class="fas fa-edit cursor-pointer mx-3"></i>
                            </div>
                            
                            <!-- Delete Button -->
-                           <div class="deleteservices ms-4 text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#deletedConfirmation">
-                              <i class="fas fa-trash cursor-pointer"></i>
+                           <div class="deleteservices text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#deletedConfirmation">
+                              <i class="fas fa-trash cursor-pointer mx-3"></i>
                            </div>
                         </div>
 
@@ -123,8 +123,8 @@ include('./layout/sidebar.php');
                </div>
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
-               <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-               <button type="button" id="addServicesBtn" class="success-button cursor-pointer">Einreichen</button>
+               <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
+               <button type="button" id="addServicesBtn" class="success-button cursor-pointer mx-1">Einreichen</button>
             </div>
          </div>
       </div>
@@ -139,9 +139,9 @@ include('./layout/sidebar.php');
                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-               <button type="button" id="ConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info"
-                  >Ja</button>
-               <button type="button" id="ConfirmationNoBtn" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+               <button type="button" id="ConfirmationYesBtn" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
+               >Ja</button>
+               <button type="button" id="ConfirmationNoBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
             </div>
          </div>
       </div>
@@ -190,8 +190,8 @@ include('./layout/sidebar.php');
                </div>
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
-               <button type="button" id="cancelEdit" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-               <button type="button" id="updateServicesBtn" class="success-button cursor-pointer">Update</button>
+               <button type="button" id="cancelEdit" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
+               <button type="button" id="updateServicesBtn" class="success-button cursor-pointer mx-1">Update</button>
             </div>
          </div>
       </div>
@@ -206,9 +206,9 @@ include('./layout/sidebar.php');
                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-               <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer"
+               <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+               <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer mx-1"
                   >Ja</button>
-               <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
             </div>
          </div>
       </div>
@@ -241,9 +241,9 @@ include('./layout/sidebar.php');
          <div class="d-flex justify-content-center align-items-center">
            
                <input type="hidden" name="deleteid" id="deleteid">
-               <button type="button" id="deleteConfirmationYesBtn" name="deleteConfirmationYesBtn" class="success-button cursor-pointer"
+               <button type="button"  class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+               <button type="button" id="deleteConfirmationYesBtn" name="deleteConfirmationYesBtn" class="mx-1 success-button cursor-pointer"
                   >Ja</button>
-               <button type="button"  class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
             
          </div>
       </div>
@@ -284,6 +284,12 @@ include('./layout/sidebar.php');
        currentPage:currentPage ? Number(currentPage) : 1
    })
    <?php } ?> 
+</script>
+
+<script>
+   $("#add-services").on("shown.bs.modal", function() {
+    $(this).find('input').eq(0).focus();
+  });
 </script>
 <!-- logout script  -->
 <?php include('./layout/script.php')?>

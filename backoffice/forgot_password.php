@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     },
                 },
                 messages: {
-                    services: {
+                    email: {
                         required: "Dienstleistungen ist erforderlich.",
                     },
                 },

@@ -374,20 +374,80 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Passwort</label>
-              <input type="password" name="password" class="form-control custom-input" id="password"
-              placeholder="Passwort" require>
-              <span class="error" id="password-error"></span>
+                <div class="password-input-container position-relative d-flex align-items-center">
+                  <!-- Password input -->
+                  <input type="password" name="password" class="form-control custom-input pe-5" id="password"
+                      placeholder="Passwort" required>
+                  <!-- Eye button to toggle visibility -->
+                  <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-password">
+                      <i class="fas fa-eye" id="eye-icon"></i>
+                  </span>
+                </div>
+                <span class="error" id="password-error"></span>
             </div>
           </div>
+
+          <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  const passwordInput = document.getElementById('password');
+                  const togglePasswordButton = document.getElementById('toggle-password');
+                  const eyeIcon = document.getElementById('eye-icon');
+
+                  // Function to toggle the password visibility
+                  function togglePasswordVisibility() {
+                      if (passwordInput.type === 'password') {
+                          passwordInput.type = 'text';
+                          eyeIcon.classList.remove('fa-eye');
+                          eyeIcon.classList.add('fa-eye-slash');
+                      } else {
+                          passwordInput.type = 'password';
+                          eyeIcon.classList.remove('fa-eye-slash');
+                          eyeIcon.classList.add('fa-eye');
+                      }
+                  }
+
+                  // Attach the function to the button's click event
+                  togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+              });
+          </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Passwort bestätigen</label>
-              <input type="password" name="confirm_password" class="form-control custom-input" id="confirm_password"
-              placeholder="Passwort bestätigen" require>
-              <span class="error" id="confirm_password-error"></span>
+                <div class="password-input-container position-relative d-flex align-items-center">
+                  <!-- Password input -->
+                  <input type="password" name="confirm_password" class="form-control custom-input pe-5" id="confirm_password"
+                      placeholder="Passwort bestätigen" required>
+                  <!-- Eye button to toggle visibility -->
+                  <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-confirm_password">
+                      <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                  </span>
+                </div>
+                <span class="error" id="confirm_password-error"></span>
             </div>
           </div>
-        
+
+          <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  const passwordInputConfirm = document.getElementById('confirm_password');
+                  const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
+                  const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+
+                  // Function to toggle the password visibility
+                  function togglePasswordConfirmVisibility() {
+                      if (passwordInputConfirm.type === 'password') {
+                          passwordInputConfirm.type = 'text';
+                          eyeIconConfirm.classList.remove('fa-eye');
+                          eyeIconConfirm.classList.add('fa-eye-slash');
+                      } else {
+                          passwordInputConfirm.type = 'password';
+                          eyeIconConfirm.classList.remove('fa-eye-slash');
+                          eyeIconConfirm.classList.add('fa-eye');
+                      }
+                  }
+                // Attach the function to the button's click event
+                  togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
+              });
+          </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>

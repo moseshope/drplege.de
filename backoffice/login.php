@@ -80,16 +80,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                             <p  class="error mb-0" id="email-error"></p>
                         </div>
                         <div class="form-group p-2 my-2">
-                            <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Passwort</label>
-                            <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                                style="background-color: var(--input-bg); border-radius: 4px;">
-                                <input type="password" class="form-control custom-input" name="password" id="password" value="<?php echo $passwordValue?>"
-                                    placeholder="Passwort eingeben">
-                                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer"
-                                    onclick="showPassword('password')"></i>
+                        <label class="my-1" for="password">Passwort</label>
+                            <div class="password-input-container position-relative d-flex align-items-center" style="font-family: Cambridge-Round-Regular;">
+                            <!-- Password input -->
+                            <input type="password" name="password" class="form-control custom-input pe-5" id="password" placeholder="Passwort" required>
+                            <!-- Eye button to toggle visibility -->
+                            <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-password">
+                                <i class="fas fa-eye" id="eye-icon"></i>
+                            </span>
                             </div>
-                            <p class="error mb-0" id="password-error"></p>
+                            <span class="error" id="password-error"></span>
                         </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const passwordInput = document.getElementById('password');
+                                const togglePasswordButton = document.getElementById('toggle-password');
+                                const eyeIcon = document.getElementById('eye-icon');
+
+                                // Function to toggle the password visibility
+                                function togglePasswordVisibility() {
+                                    if (passwordInput.type === 'password') {
+                                        passwordInput.type = 'text';
+                                        eyeIcon.classList.remove('fa-eye');
+                                        eyeIcon.classList.add('fa-eye-slash');
+                                    } else {
+                                        passwordInput.type = 'password';
+                                        eyeIcon.classList.remove('fa-eye-slash');
+                                        eyeIcon.classList.add('fa-eye');
+                                    }
+                                }
+
+                                // Attach the function to the button's click event
+                                togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+                            });
+                        </script>
                         <div class="d-flex justify-content-end mx-3">
                             <p class="mb-0  cursor-pointer"
                                 onclick="window.location = './forgot_password'" style="font-family: Cambridge-Round-Regular;">Passwort vergessen</p>
@@ -117,6 +142,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="asset/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <?php
         if (!empty($error)) {
             echo "<script>showToast('$error', 'error')</script>";

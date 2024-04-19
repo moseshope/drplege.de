@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // $staff_services
                 $sql = "SELECT * FROM services WHERE id IN (". implode(",", $staff_services) .")";
                 $result = $connect->query($sql);
-                if ($result->num_rows > 0) {
+                if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                         $servicesArray[] = $row['services'];
                         }

@@ -115,11 +115,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <table class="table">
                             <thead>
                                 <tr>
-                                        <td>#</td>
-                                        <td>Name</td>
-                                        <td>E-Mail</td>
-                                        <td class="text-center">Status<i data-value="status" class="fa-solid fa-arrow-up-arrow-down Shorting ms-1" style="font-size: 14px;display: inline-block;"></i> </td>
-                                        <td><div class="d-flex justify-content-center">Optionen</div></td>
+                                    <td>#</td>
+                                    <td>Name</td>
+                                    <td>E-Mail</td>
+                                    <td class="text-center">Status<i data-value="status" class="fa-solid fa-arrow-up-arrow-down Shorting ms-1" style="font-size: 14px;display: inline-block;"></i> </td>
+                                    <td><div class="d-flex justify-content-center">Optionen</div></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -245,11 +245,42 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
                             <div class="col-lg-6 col-12">
                                 <div class="form-group p-2 my-2">
-                                    <label class="my-1" for="password">Passwort bestätigen</label>
-                                    <input type="password" name="confirm_password" class="form-control custom-input" id="confirm_password" placeholder="Passwort bestätigen" require>
+                                <label class="my-1" for="password">Passwort bestätigen</label>
+                                    <div class="password-input-container position-relative d-flex align-items-center">
+                                    <!-- Password input -->
+                                    <input type="password" name="confirm_password" class="form-control custom-input pe-5" id="confirm_password"
+                                        placeholder="Passwort bestätigen" required>
+                                    <!-- Eye button to toggle visibility -->
+                                    <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-confirm_password">
+                                        <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                                    </span>
+                                    </div>
                                     <span class="error" id="confirm_password-error"></span>
                                 </div>
                             </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const passwordInputConfirm = document.getElementById('confirm_password');
+                                    const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
+                                    const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+
+                                    // Function to toggle the password visibility
+                                    function togglePasswordConfirmVisibility() {
+                                        if (passwordInputConfirm.type === 'password') {
+                                            passwordInputConfirm.type = 'text';
+                                            eyeIconConfirm.classList.remove('fa-eye');
+                                            eyeIconConfirm.classList.add('fa-eye-slash');
+                                        } else {
+                                            passwordInputConfirm.type = 'password';
+                                            eyeIconConfirm.classList.remove('fa-eye-slash');
+                                            eyeIconConfirm.classList.add('fa-eye');
+                                        }
+                                    }
+                                    // Attach the function to the button's click event
+                                    togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
+                                });
+                            </script>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group p-2 my-2">
                                     <label class="my-1" for="Status">Status</label>

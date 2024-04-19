@@ -197,9 +197,9 @@ if($role == 1){
                     </div>
                 </div> */ ?>
                 <?php }else{ ?>
-                    <div class="row w-100 mt-5 pt-5 box-row">
-                <div class="col-md-6 col-xl-4 col-xxl-3 col-12 mb-5">
-                    <div class="dashboard-box d-flex flex-column justify-content-between">
+            <div class="row w-100 box-row">
+                <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
+                    <!-- <div class="dashboard-box d-flex flex-column justify-content-between">
                         <div class="d-flex justify-content-center align-items-center mt-5">
                             <img src="asset/images/calender.png" alt="calender-icon" height="60px">
                             <p class="text-truncate" id="totalPatients"></p>
@@ -207,11 +207,11 @@ if($role == 1){
                         <div class="box-menubar">
                             <p>Heutige Termine</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
-                <div class="col-md-6 col-xl-4 col-xxl-3 col-12 mb-5">
-                    <div class="dashboard-box d-flex flex-column justify-content-between">
+                <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
+                    <!-- <div class="dashboard-box d-flex flex-column justify-content-between">
                         <div class="d-flex justify-content-center align-items-center mt-5">
                         <img src="asset/images/patient.png" alt="calender-icon" height="60px">
                             <p class="text-truncate" id=""><?php echo $totalPatients1 ?></p>
@@ -219,7 +219,7 @@ if($role == 1){
                         <div class="box-menubar">
                             <p>Behandelte Patienten</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
                 <?php }?>
@@ -851,7 +851,7 @@ if($role == 1){
                 month: 'long',
                 year: 'numeric'
             });
-            $('#appointmentHeading').text(formattedDate  + ' Termine');
+            $('#appointmentHeading').text(formattedDate);
             $('#calendarBody .selected-date').removeClass('selected-date');
 
             updateUrlParam('date', clickedDate);
@@ -1270,7 +1270,7 @@ if($role == 1){
                 month: 'long',
                 year: 'numeric'
             });
-            $('#appointmentHeading').text(formattedDate  + ' Termine');
+            $('#appointmentHeading').text(formattedDate);
             $('#calendarBody .selected-date').removeClass('selected-date');
 
             updateUrlParam('date', clickedDate);

@@ -80,261 +80,260 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 ?>
 <!-- Main -->
 <div id="main-content">
-<div class="p-2 w-100">
-<div class="d-flex justify-content-center align-items-center">
-<h1 class="page-heading">Doktoren</h1>
-</div>
-<div class="px-2">
+  <div class="p-2 w-100">
+    <div class="d-flex justify-content-center align-items-center">
+      <h1 class="page-heading">Doktoren</h1>
+    </div>
+    <div class="px-2">
 
-<div class="d-flex flex-wrap">
-<!-- <div class="dashboard-search m-2 mx-0">
-<i class="bi bi-search"></i>
-<input type="text" class="w-100" id="Search-input"
-placeholder="Search" oninput="search()">
-</div> -->
-<!-- <form method="get"> -->
-<div class="dashboard-search my-auto">
-<i class="bi bi-search"></i>
-<input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
-value="<?php echo $searchTerm ?>">
-</div>
-<!-- </form> -->
-<div class="flex-grow-1"></div>
+      <div class="d-flex flex-wrap">
+      <!-- <div class="dashboard-search m-2 mx-0">
+      <i class="bi bi-search"></i>
+      <input type="text" class="w-100" id="Search-input"
+      placeholder="Search" oninput="search()">
+      </div> -->
+      <!-- <form method="get"> -->
+        <div class="dashboard-search my-auto">
+          <i class="bi bi-search"></i>
+          <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
+          value="<?php echo $searchTerm ?>">
+        </div>
+      <!-- </form> -->
+      <div class="flex-grow-1"></div>
 
-<?php if ($role == 1) { ?>
-      <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
-      data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
-<?php } ?>
-</div>
+      <?php if ($role == 1) { ?>
+        <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
+        data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
+      <?php } ?>
+      </div>
 
-<div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
-<div class=" table-responsive">
-<table class="table">
-<thead>
-<tr>
-<?php if ($role == 1) { ?>
-      <td>#</td>
-      <td>Arzt</td>
-      <td class="text-center">Leistung</td>
-      <td class="text-center">Status<i data-value="status"
-      class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
-      style="font-size: 14px;display: inline-block;"></i> </td>
-      <td>
-      <div class="d-flex justify-content-center">Optionen</div>
-      </td>
-<?php } else { ?>
-      <td>#</td>
-      <td>Arzt</td>
-      <td class="text-center">Leistung</td>
-      <td class="text-center">Status </td>
-<?php } ?>
-</tr>
-</thead>
-<tbody>
-<?php if ($role == 1) {
-  for ($i = $startIndex; $i <= $endIndex; $i++) {
-    ; ?>
-            <tr class="doctor-row">
-            <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
-            <td style="min-width: 150px; max-width: 250px;">
-            <div class="d-flex p-0 m-0 flex-column">
-            <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
-            <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-            style="font-weight: 500;">E:
-            </span><a style="color: var(--main);"
-            href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
-            </p>
-            <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-            style="color: var(--main);font-weight: 500;">T:
-            </span><a style="color: var(--main);"
-            href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
-            </p>
-            </div>
-            </td>
-            <td class="">
-            <!-- <button class="cursor-pointer showAllBtn"
-style="background-color: var(--main); color: white;"
-data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button> -->
-            <div class="text-start mx-auto" style="max-width: fit-content;">
-            <ul>
-            <?php
-            $originalList = $staffList[$i]['services'];
-            $services = explode('__', $originalList);
-            foreach ($services as $service) {
-              ?>
-                    <li class="text-left"><?= $service ?></li>
-            <?php } ?>
-            </ul>
-            </div>
-            </td>
-            <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
-            <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
-            <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
-
-            <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
-            <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
-            <!-- <td class="text-center">
-<?php
-        if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
-          $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
-          echo implode(', ', $timesArray);
-          } else {
-          echo 'No';
-          }
-        ?>
-<button class="cursor-pointer showTimeBtn"
-style="background-color: var(--main); color: white;"
-data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
-</td> -->
-            <?php
-            if ($staffList[$i]['status'] === 'Aktiv') {
-              $buttonClass = 'custom-success-btn';
-              } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
-              $buttonClass = 'custom-warnings-btn';
-              } else {
-              $buttonClass = 'custom-danger-btn';
-              }
-            ?>
-            <td class="text-center"><button
-            class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
-            <td>
-            <!-- <div class="d-flex justify-content-center dropdown">
-<?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
-          ; ?>
-<span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
-style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
-class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="bi bi-list"></i>
-</span>
-<ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
-<li class="px-2 py-1 mx-2  cursor-pointer editButton"
-data-id="<?php echo $staffList[$i]['id']; ?>" style="border-bottom: 1px solid #d7caca;"
-data-bs-toggle="modal">
-Bearbeiten
-</li>
-<li class="px-2 py-1 mx-2 cursor-pointer deleteButton"
-data-id="<?php echo $staffList[$i]['id']; ?>" style="color: var(--main);"
-data-bs-toggle="modal">
-Löschen
-</li>
-
-</ul>
-<?php } else { ?>
-<label style="color: green;">Inaktiv</label>
-<?php } ?>
-</div> -->
-            <div class="d-flex justify-content-center">
-            <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') { ?>
-                              <!-- Edit button -->
-                              <div class="editButton mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
-                                data-bs-toggle="modal">
-                                  <i class="fas fa-edit cursor-pointer"></i>
+      <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
+        <div class=" table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <?php if ($role == 1) { ?>
+                  <td>#</td>
+                  <td>Arzt</td>
+                  <td class="text-center">Leistung</td>
+                  <td class="text-center">Status<i data-value="status"
+                  class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
+                  style="font-size: 14px;display: inline-block;"></i> </td>
+                  <td>
+                    <div class="d-flex justify-content-center">Optionen</div>
+                  </td>
+                <?php } else { ?>
+                  <td>#</td>
+                  <td>Arzt</td>
+                  <td class="text-center">Leistung</td>
+                  <td class="text-center">Status </td>
+                <?php } ?>
+              </tr>
+            </thead>
+            <tbody>
+              <?php if ($role == 1) {
+                for ($i = $startIndex; $i <= $endIndex; $i++) {
+                  ; ?>
+                <tr class="doctor-row">
+                <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
+                <td style="min-width: 150px; max-width: 250px;">
+                  <div class="d-flex p-0 m-0 flex-column">
+                    <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
+                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                    style="font-weight: 500;">E:
+                    </span><a style="color: var(--main);"
+                    href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                    </p>
+                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                    style="color: var(--main);font-weight: 500;">T:
+                    </span><a style="color: var(--main);"
+                    href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                    </p>
                   </div>
-                  <!-- Delete button -->
-                  <div class="deleteButton text-danger mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
-                  data-bs-toggle="modal">
-                  <i class="fas fa-trash cursor-pointer"></i>
+                </td>
+                <td class="">
+                <!-- <button class="cursor-pointer showAllBtn"
+              style="background-color: var(--main); color: white;"
+              data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button> -->
+                <div class="text-start mx-auto" style="max-width: fit-content;">
+                  <ul>
+                    <?php
+                    $originalList = $staffList[$i]['services'];
+                    $services = explode('__', $originalList);
+                    foreach ($services as $service) {
+                      ?>
+                      <li class="text-left"><?= $service ?></li>
+                    <?php } ?>
+                  </ul>
+                </div>
+                </td>
+                <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
+                <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
+                <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
+
+                <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
+                <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
+                <!-- <td class="text-center">
+              <?php
+                if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
+                  $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
+                  echo implode(', ', $timesArray);
+                  } else {
+                  echo 'No';
+                  }
+                ?>
+              <button class="cursor-pointer showTimeBtn"
+              style="background-color: var(--main); color: white;"
+              data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
+              </td> -->
+                <?php
+                if ($staffList[$i]['status'] === 'Aktiv') {
+                  $buttonClass = 'custom-success-btn';
+                  } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
+                  $buttonClass = 'custom-warnings-btn';
+                  } else {
+                  $buttonClass = 'custom-danger-btn';
+                  }
+                ?>
+                <td class="text-center"><button
+                class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
+                <td>
+                <!-- <div class="d-flex justify-content-center dropdown">
+              <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
+                        ; ?>
+              <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
+              style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
+              class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-list"></i>
+              </span>
+              <ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
+              <li class="px-2 py-1 mx-2  cursor-pointer editButton"
+              data-id="<?php echo $staffList[$i]['id']; ?>" style="border-bottom: 1px solid #d7caca;"
+              data-bs-toggle="modal">
+              Bearbeiten
+              </li>
+              <li class="px-2 py-1 mx-2 cursor-pointer deleteButton"
+              data-id="<?php echo $staffList[$i]['id']; ?>" style="color: var(--main);"
+              data-bs-toggle="modal">
+              Löschen
+              </li>
+
+              </ul>
+              <?php } else { ?>
+              <label style="color: green;">Inaktiv</label>
+              <?php } ?>
+              </div> -->
+                  <div class="d-flex justify-content-center">
+                    <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') { ?>
+                      <!-- Edit button -->
+                      <div class="editButton mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
+                        data-bs-toggle="modal">
+                          <i class="fas fa-edit cursor-pointer"></i>
+                      </div>
+                      <!-- Delete button -->
+                      <div class="deleteButton text-danger mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
+                      data-bs-toggle="modal">
+                        <i class="fas fa-trash cursor-pointer"></i>
+                      </div>
+                    <?php } else { ?>
+                    <label style="color: green;">Inaktiv</label>
+                  <?php } ?>
                   </div>
-            <?php } else { ?>
-                  <label style="color: green;">Inaktiv</label>
-            <?php } ?>
-            </div>
+                  </td>
+                  </tr>
+                  <?php }
+                } else {
+                for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
+                <tr class="doctor-row">
+                <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
+                <td style="min-width: 150px; max-width: 250px;">
+                <div class="d-flex p-0 m-0 flex-column">
+                <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
+                <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                style="font-weight: 500;">E:
+                </span><a style="color: var(--main);"
+                href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                </p>
+                <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                style="color: var(--main);font-weight: 500;">T:
+                </span><a style="color: var(--main);"
+                href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                </p>
+                </div>
+                </td>
+                <td class="text-center">
+                <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
+                data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
+                </td>
+                <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
+                <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
+                <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
 
-            </td>
-            </tr>
-      <?php }
-  } else {
-  for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
-            <tr class="doctor-row">
-            <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
-            <td style="min-width: 150px; max-width: 250px;">
-            <div class="d-flex p-0 m-0 flex-column">
-            <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
-            <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-            style="font-weight: 500;">E:
-            </span><a style="color: var(--main);"
-            href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
-            </p>
-            <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-            style="color: var(--main);font-weight: 500;">T:
-            </span><a style="color: var(--main);"
-            href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
-            </p>
-            </div>
-            </td>
-            <td class="text-center">
-            <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
-            data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
-            </td>
-            <!-- <td><?php echo $staffList[$i]['qualification']; ?></td> -->
-            <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
-            <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
+                <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
+                <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
+                <!-- <td class="text-center">
+              <?php
+                if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
+                  $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
+                  echo implode(', ', $timesArray);
+                  } else {
+                  echo 'No';
+                  }
+                ?> 
+              <button class="cursor-pointer showTimeBtn"
+              style="background-color: var(--main); color: white;"
+              data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
+              </td> -->
+                <?php
+                if ($staffList[$i]['status'] === 'Aktiv') {
+                  $buttonClass = 'custom-success-btn';
+                  } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
+                  $buttonClass = 'custom-warnings-btn';
+                  } else {
+                  $buttonClass = 'custom-danger-btn';
+                  }
+                ?>
+                <td class="text-center"><button
+                class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
+                <!-- <td>
+              <div class="d-flex justify-content-center dropdown">
+              <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
+                        ; ?>
+              <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
+              style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
+              class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-list"></i>
+              </span>
+              <ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
+              <li class="px-2 py-1 mx-2  cursor-pointer editButton" data-id="<?php echo $staffList[$i]['id']; ?>"    style="border-bottom: 1px solid #d7caca;" data-bs-toggle="modal">
+              Bearbeiten
+              </li>
+              <li class="px-2 py-1 mx-2 cursor-pointer deleteButton" data-id="<?php echo $staffList[$i]['id']; ?>"    style="color: var(--main);" data-bs-toggle="modal">
+              Löschen
+              </li>
 
-            <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
-            <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
-            <!-- <td class="text-center">
-<?php
-        if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
-          $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
-          echo implode(', ', $timesArray);
-          } else {
-          echo 'No';
-          }
-        ?> 
-<button class="cursor-pointer showTimeBtn"
-style="background-color: var(--main); color: white;"
-data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
-</td> -->
-            <?php
-            if ($staffList[$i]['status'] === 'Aktiv') {
-              $buttonClass = 'custom-success-btn';
-              } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
-              $buttonClass = 'custom-warnings-btn';
-              } else {
-              $buttonClass = 'custom-danger-btn';
-              }
-            ?>
-            <td class="text-center"><button
-            class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
-            <!-- <td>
-<div class="d-flex justify-content-center dropdown">
-<?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
-          ; ?>
-<span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
-style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
-class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="bi bi-list"></i>
-</span>
-<ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
-<li class="px-2 py-1 mx-2  cursor-pointer editButton" data-id="<?php echo $staffList[$i]['id']; ?>"    style="border-bottom: 1px solid #d7caca;" data-bs-toggle="modal">
-Bearbeiten
-</li>
-<li class="px-2 py-1 mx-2 cursor-pointer deleteButton" data-id="<?php echo $staffList[$i]['id']; ?>"    style="color: var(--main);" data-bs-toggle="modal">
-Löschen
-</li>
+              </ul>
+              <?php } else { ?>
+              <label style="color: green;">Inaktiv</label>
+              <?php } ?>
+              </div>
+              </td> -->
+                                                                  </tr>
+                                        <?php }
+                } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-</ul>
-<?php } else { ?>
-<label style="color: green;">Inaktiv</label>
-<?php } ?>
-</div>
-</td> -->
-            </tr>
-      <?php }
-  } ?>
-</tbody>
-</table>
-</div>
-</div>
+    <!-- pagination -->
 
-<!-- pagination -->
+    <div class="white-table">
+      <ul class="custom-pagination" id="custom-pagination"></ul>
+    </div>
 
-<div class="white-table">
-<ul class="custom-pagination" id="custom-pagination"></ul>
-</div>
-
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
 
@@ -342,180 +341,180 @@ Löschen
 
 <!-- Add Staff -->
 <form id="AddStaff" method="post" action="./controller/addstaff.php" enctype="multipart/form-data">
-<div class="modal fade " id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true" data-bs-backdrop='static'>
-<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center py-2">
-<div class="flex-grow-1"></div>
-<h1 class="modal-heading" style="font-weight: 800; margin-left:72px">Doktor hinzufügen</h1>
-<div class="flex-grow-1"></div>
-<button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
-aria-label="Close"></button>
-</div>
+  <div class="modal fade " id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center py-2">
+          <div class="flex-grow-1"></div>
+          <h1 class="modal-heading" style="font-weight: 800; margin-left:72px">Doktor hinzufügen</h1>
+          <div class="flex-grow-1"></div>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
+          aria-label="Close"></button>
+        </div>
 
-<div class="row">
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Name">Name</label>
-<input autofocus type="text" name="name" class="form-control custom-input" id="Name" placeholder="Name">
-<span class="error" id="name-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="email">E-Mail</label>
-<input type="email" name="email" class="form-control custom-input" id="email" placeholder="E-Mail">
-<span class="error" id="email-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="password">Passwort</label>
-<input type="password" name="password" class="form-control custom-input" id="password"
-placeholder="Passwort" require>
-<span class="error" id="password-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="password">Passwort bestätigen</label>
-<input type="password" name="confirm_password" class="form-control custom-input" id="confirm_password"
-placeholder="Passwort bestätigen" require>
-<span class="error" id="confirm_password-error"></span>
-</div>
-</div>
-<!-- <div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Qualification">Qualifikation</label>
-<input type="text" name="qualification" class="form-control custom-input" id="Qualification"
-placeholder="Qualifikation">
-<span class="error" id="qualification-error"></span>
-</div>
-</div> -->
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Status">Status</label>
-<select name="status" class="cursor-pointer form-select custom-input" id="Status">
-<option selected>Aktiv</option>
-<option>Deaktiviert</option>
-</select>
-<span class="error" id="status-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Telephone">Telefon</label>
-<input type="text" name="telephone" class="form-control custom-input" id="Telephone"
-placeholder="Telefon">
-<span class="error" id="telephone-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 select-group my-2" id="select-group">
-<label class="my-1" for="Services">Leistung</label>
-<div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
-<?php
-foreach ($servicesArray as $service) {
-  echo '<div class="form-check">';
-  echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
-  echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
-  echo '</div>';
-  }
-?>
-</div>
-<span class="error" id="staff_services-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-  <div class="form-group p-2 my-2">
-    <label class="my-1" for="Status">Profil</label>
-    <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image"
-    aria-invalid="false" accept="image/*">
-    <button class="custom-main-btn my-2 w-100 d-block" type="button" id="open-image-picker"><i
-    class="bi bi-upload me-2"></i>Bild hochladen</button>
-    <div class="text-center"><img id="image-preview" width="100px"></div>
-<span class="error" id="status-error"></span>
-</div>
-</div>
-<!-- <div class="col-lg-6 col-12 ">
-</div> -->
-</div>
-<div class="d-flex justify-content-center align-items-center py-2 my-3">
-<button type="button" class="cancel-button mx-2 cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-<button type="button" id="addStaffBtn" class="success-button mx-2 cursor-pointer">Hinzufügen</button>
-</div>
-</div>
-</div>
-</div>
-<!-- staff Confirmation -->
-<div class="modal fade " id="StaffConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column">
-<h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-<p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-<button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer"
-data-bs-target="#show-info">Ja</button>
-<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">No</button>
-</div>
-</div>
-</div>
-</div>
-<!-- staff show info  -->
-<div class="modal fade " id="staffShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column py-4">
-<h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
-aktualisiert.</h1>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-<button id="StaffShowInfoBtn" type="submit" class="success-button cursor-pointer"
-data-bs-dismiss="modal">Okay</button>
-</div>
-</div>
-</div>
-</div>
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Name">Name</label>
+              <input autofocus type="text" name="name" class="form-control custom-input" id="Name" placeholder="Name">
+              <span class="error" id="name-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="email">E-Mail</label>
+              <input type="email" name="email" class="form-control custom-input" id="email" placeholder="E-Mail">
+              <span class="error" id="email-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="password">Passwort</label>
+              <input type="password" name="password" class="form-control custom-input" id="password"
+              placeholder="Passwort" require>
+              <span class="error" id="password-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="password">Passwort bestätigen</label>
+              <input type="password" name="confirm_password" class="form-control custom-input" id="confirm_password"
+              placeholder="Passwort bestätigen" require>
+              <span class="error" id="confirm_password-error"></span>
+            </div>
+          </div>
+        <!-- <div class="col-lg-6 col-12">
+        <div class="form-group p-2 my-2">
+        <label class="my-1" for="Qualification">Qualifikation</label>
+        <input type="text" name="qualification" class="form-control custom-input" id="Qualification"
+        placeholder="Qualifikation">
+        <span class="error" id="qualification-error"></span>
+        </div>
+        </div> -->
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Status">Status</label>
+              <select name="status" class="cursor-pointer form-select custom-input" id="Status">
+              <option selected>Aktiv</option>
+              <option>Deaktiviert</option>
+              </select>
+              <span class="error" id="status-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Telephone">Telefon</label>
+              <input type="text" name="telephone" class="form-control custom-input" id="Telephone"
+              placeholder="Telefon">
+              <span class="error" id="telephone-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 select-group my-2" id="select-group">
+              <label class="my-1" for="Services">Leistung</label>
+              <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
+              <?php
+              foreach ($servicesArray as $service) {
+                echo '<div class="form-check">';
+                echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
+                echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
+                echo '</div>';
+                }
+              ?>
+              </div>
+              <span class="error" id="staff_services-error"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Status">Profil</label>
+              <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image"
+              aria-invalid="false" accept="image/*">
+              <button class="custom-main-btn my-2 w-100 d-block" type="button" id="open-image-picker"><i
+              class="bi bi-upload me-2"></i>Bild hochladen</button>
+              <div class="text-center"><img id="image-preview" width="100px"></div>
+              <span class="error" id="status-error"></span>
+            </div>
+          </div>
+        <!-- <div class="col-lg-6 col-12 ">
+        </div> -->
+        </div>
+        <div class="d-flex justify-content-center align-items-center py-2 my-3">
+          <button type="button" class="cancel-button mx-2 cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
+          <button type="button" id="addStaffBtn" class="success-button mx-2 cursor-pointer">Hinzufügen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- staff Confirmation -->
+  <div class="modal fade " id="StaffConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+          <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+          <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer"
+          data-bs-target="#show-info">Ja</button>
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- staff show info  -->
+  <div class="modal fade " id="staffShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column py-4">
+          <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
+          aktualisiert.</h1>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button id="StaffShowInfoBtn" type="submit" class="success-button cursor-pointer"
+          data-bs-dismiss="modal">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 
 <!-- Services list model  -->
 <div class="modal fade " id="services-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
 aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center mb-4">
-<h1 class="modal-heading" style="font-weight: 800;">Leistungen</h1>
-</div>
-<ul style="color: black;font-size: var(--md-text);font-weight:500;" id="showAll">
-</ul>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-</div>
-</div>
-</div>
+  <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <h1 class="modal-heading" style="font-weight: 800;">Leistungen</h1>
+      </div>
+      <ul style="color: black;font-size: var(--md-text);font-weight:500;" id="showAll">
+      </ul>
+      <div class="d-flex justify-content-center align-items-center">
+        <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- time list model  -->
 
 <div class="modal fade " id="time-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
 aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center mb-4">
-<h1 class="modal-heading" style="font-weight: 800;">Zeitliste</h1>
-</div>
-<ul style="color: black;font-size: var(--md-text);font-weight:500;" id="timeList">
-</ul>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-</div>
-</div>
-</div>
+  <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <h1 class="modal-heading" style="font-weight: 800;">Zeitliste</h1>
+      </div>
+      <ul style="color: black;font-size: var(--md-text);font-weight:500;" id="timeList">
+      </ul>
+      <div class="d-flex justify-content-center align-items-center">
+        <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- <div class="modal fade" id="services-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -533,201 +532,201 @@ aria-hidden="true">
 <!-- patients list model  -->
 <div class="modal fade " id="patient-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
 aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center mb-4">
-<h1 class="modal-heading" style="font-weight: 800;">Patientenliste</h1>
-</div>
-<ul style="color: black;font-size: var(--md-text);font-weight:500;" id="patientList">
-<!-- <li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li>
-<li>
-<div class="row">
-<div class="col-6">Jhon Deo</div>
-<div class="col-6"><span>Visited on: </span>21.11.2023
-</div>
-</div>
-</li> -->
-</ul>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-</div>
-</div>
-</div>
+  <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <h1 class="modal-heading" style="font-weight: 800;">Patientenliste</h1>
+      </div>
+      <ul style="color: black;font-size: var(--md-text);font-weight:500;" id="patientList">
+      <!-- <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li>
+      <li>
+      <div class="row">
+      <div class="col-6">Jhon Deo</div>
+      <div class="col-6"><span>Visited on: </span>21.11.2023
+      </div>
+      </div>
+      </li> -->
+      </ul>
+      <div class="d-flex justify-content-center align-items-center">
+        <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Edit Staff -->
 <form id="EditStaff" action="./controller/editstaff.php" method="post" enctype="multipart/form-data">
-<div class="modal fade " id="edit-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true" data-bs-backdrop='static'>
-<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center py-2">
-<div class="flex-grow-1"></div>
-<h1 class="modal-heading" style="font-weight: 800;">Doktor bearbeiten</h1>
-<div class="flex-grow-1"></div>
-<button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
-aria-label="Close"></button>
-</div>
+  <div class="modal fade " id="edit-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center py-2">
+          <div class="flex-grow-1"></div>
+          <h1 class="modal-heading" style="font-weight: 800;">Doktor bearbeiten</h1>
+          <div class="flex-grow-1"></div>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
+          aria-label="Close"></button>
+        </div>
 
-<!-- <form> -->
+        <!-- <form> -->
 
-<div class="row">
-<!-- <input type="hidden" name="id" value="" class="form-control custom-input" id="StaffId"> -->
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Name">Name</label>
-<input type="text" name="name" value="" class="form-control custom-input" id="StaffName"
-placeholder="Name">
-<span class="error" id="name-edit-error"></span>
-</div>
-</div>
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="email">E-Mail</label>
-<input type="email" name="email" value="" class="form-control custom-input" id="StaffEmail"
-placeholder="E-mail">
-<span class="error" id="email-edit-error"></span>
-</div>
-</div>
-<!-- <div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Qualification">Qualifikation</label>
-<input type="text" name="qualification" value="" class="form-control custom-input" id="StaffQualification"
-placeholder="Enter Qualification">
-<span class="error" id="qualification-edit-error"></span>
-</div>
-</div> -->
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Status">Status</label>
-<select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
-<option selected value="Aktiv">Aktiv</option>
-<option value="Deaktiviert">Deaktiviert</option>
-</select>
-<span class="error" id="status-error"></span>
-</div>
-</div>
+        <div class="row">
+          <!-- <input type="hidden" name="id" value="" class="form-control custom-input" id="StaffId"> -->
+          <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Name">Name</label>
+          <input type="text" name="name" value="" class="form-control custom-input" id="StaffName"
+          placeholder="Name">
+          <span class="error" id="name-edit-error"></span>
+          </div>
+          </div>
+          <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="email">E-Mail</label>
+          <input type="email" name="email" value="" class="form-control custom-input" id="StaffEmail"
+          placeholder="E-mail">
+          <span class="error" id="email-edit-error"></span>
+          </div>
+          </div>
+          <!-- <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Qualification">Qualifikation</label>
+          <input type="text" name="qualification" value="" class="form-control custom-input" id="StaffQualification"
+          placeholder="Enter Qualification">
+          <span class="error" id="qualification-edit-error"></span>
+          </div>
+          </div> -->
+          <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Status">Status</label>
+          <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
+          <option selected value="Aktiv">Aktiv</option>
+          <option value="Deaktiviert">Deaktiviert</option>
+          </select>
+          <span class="error" id="status-error"></span>
+          </div>
+          </div>
 
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Telephone">Telefon</label>
-<input type="text" name="telephone" value="" class="form-control custom-input" id="StaffTelephone"
-placeholder="Telephone">
-<span class="error" id="telephone-edit-error"></span>
-</div>
-</div>
+          <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Telephone">Telefon</label>
+          <input type="text" name="telephone" value="" class="form-control custom-input" id="StaffTelephone"
+          placeholder="Telephone">
+          <span class="error" id="telephone-edit-error"></span>
+          </div>
+          </div>
 
-<div class="col-lg-6">
-<div class="form-group p-2 select-group my-2" id="select-group">
-<label class="my-1" for="Services">Leistungen</label>
-<div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
-<?php
-foreach ($servicesArray as $service) {
-  echo '<div class="form-check">';
-  echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
-  echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
-  echo '</div>';
-  }
-?>
-</div>
+          <div class="col-lg-6">
+          <div class="form-group p-2 select-group my-2" id="select-group">
+          <label class="my-1" for="Services">Leistungen</label>
+          <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
+          <?php
+          foreach ($servicesArray as $service) {
+            echo '<div class="form-check">';
+            echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['services'] . '">';
+            echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
+            echo '</div>';
+            }
+          ?>
+          </div>
 
-<span class="error" id="staff_services-error"></span>
-</div>
-</div>
+          <span class="error" id="staff_services-error"></span>
+          </div>
+          </div>
 
-<div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Status">Profil</label>
-<input type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
-aria-invalid="false" accept="image/*">
-<button class="custom-main-btn d-block w-100 my-2" type="button" id="open-image-picker-E"><i
-class="bi bi-upload mx-2"></i>Bild hochladen</button>
-<div class="text-center"><img id="image-preview-E" width="100px"></div>
-<span class="error" id="status-error"></span>
-</div>
-</div>
+          <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Status">Profil</label>
+          <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
+          aria-invalid="false" accept="image/*">
+          <button class="custom-main-btn d-block w-100 my-2" type="button" id="open-image-picker-E"><i
+          class="bi bi-upload mx-2"></i>Bild hochladen</button>
+          <div class="text-center"><img id="image-preview-E" width="100px"></div>
+          <span class="error" id="status-error"></span>
+          </div>
+          </div>
 
 
-<!-- <div class="col-lg-6 col-12">
-<div class="form-group p-2 my-2">
-<label class="my-1" for="Status">Role</label>
-<select name="role" class="form-control custom-input" id="role">
-<option value='2'>Arzt</option>
-<option value='3'>Schwester</option>
-</select>
-<span  class="error" id="status-error"></span>
-</div>
-</div> -->
+          <!-- <div class="col-lg-6 col-12">
+          <div class="form-group p-2 my-2">
+          <label class="my-1" for="Status">Role</label>
+          <select name="role" class="form-control custom-input" id="role">
+          <option value='2'>Arzt</option>
+          <option value='3'>Schwester</option>
+          </select>
+          <span  class="error" id="status-error"></span>
+          </div>
+          </div> -->
 
-</div>
-<div class="d-flex justify-content-center align-items-center py-2 my-3">
-<button type="button" class="cancel-button cursor-pointer mx-2" data-bs-dismiss="modal"
-id="cancelStaff">Abbrechen</button>
-<button type="button" class="success-button cursor-pointer mx-2" id="UpdateStaffBtn">Aktualisieren</button>
-</div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center py-2 my-3">
+          <button type="button" class="cancel-button cursor-pointer mx-2" data-bs-dismiss="modal"
+          id="cancelStaff">Abbrechen</button>
+          <button type="button" class="success-button cursor-pointer mx-2" id="UpdateStaffBtn">Aktualisieren</button>
+          </div>
 
-<!-- Confirmation -->
-<div class="modal fade " id="EditConfirmation" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column">
-<h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-<p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-target="#show-info"
-data-bs-toggle="modal" data-bs-dismiss="modal">Ja</button>
-<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
-</div>
-</div>
-</div>
-</div>
-<!-- </form> -->
-</div>
-</div>
-</div>
+          <!-- Confirmation -->
+          <div class="modal fade " id="EditConfirmation" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+          <div class="d-flex justify-content-center align-items-center flex-column">
+          <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+          <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="success-button cursor-pointer" data-bs-target="#show-info"
+          data-bs-toggle="modal" data-bs-dismiss="modal">Ja</button>
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+          </div>
+          </div>
+          </div>
+          </div>
+      <!-- </form> -->
+      </div>
+    </div>
+  </div>
 <!-- edit conformation -->
 <div class="modal fade " id="EditStaffConfirmation" tabindex="-1" role="dialog"
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -919,11 +918,11 @@ console.error('Error:', error);
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
 <?php if ($totalItems > $itemsPerPage) { ?>
-      CreatePagination({
-      elementId: "custom-pagination",
-      totalPage: <?php echo $totalPages; ?>,
-      currentPage: currentPage ? Number(currentPage) : 1
-      })
+                          CreatePagination({
+                          elementId: "custom-pagination",
+                          totalPage: <?php echo $totalPages; ?>,
+                          currentPage: currentPage ? Number(currentPage) : 1
+                          })
 <?php } ?>
 </script>
 

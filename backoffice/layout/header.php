@@ -1,52 +1,52 @@
-<?php 
- $id = $_SESSION['staff_id'];
- 
- $sql = "select * from user where id='$id' and deleted_at IS NULL";
- $result = $connect->query($sql);
- $row = $result->fetch_assoc();
- $role = $row['role'];
- 
- $currentURL = $_SERVER['REQUEST_URI'];
+<?php
+$id = $_SESSION['staff_id'];
+
+$sql = "select * from user where id='$id' and deleted_at IS NULL";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc();
+$role = $row['role'];
+
+$currentURL = $_SERVER['REQUEST_URI'];
 // $fileName = substr(strrchr($currentURL, '/'), 1);
 $fileName = basename(parse_url($currentURL, PHP_URL_PATH));
 
-    if($role == 1) {
-        // Allow access for role 1
-        $allowedUrls = array(
-            "index",
-            "doctors",
-            "employees",
-            "patients",
-            "time_slot",
-            "servicesdata",
-            "nurse",
-            "profile",
-            );
-    }elseif($role == 2){
-        $allowedUrls = array(
-            "index",
-            "patients",
-            "time",
-            "services",
-            "profile",
-            );
-    }else{
-            $allowedUrls = array(
-            		"doctors",
-                "employees",
-                "patients",
-            );
+if ($role == 1) {
+    // Allow access for role 1
+    $allowedUrls = array(
+        "index",
+        "doctors",
+        "employees",
+        "patients",
+        "time_slot",
+        "servicesdata",
+        "nurse",
+        "profile",
+    );
+    } elseif ($role == 2) {
+    $allowedUrls = array(
+        "index",
+        "patients",
+        "time",
+        "services",
+        "profile",
+    );
+    } else {
+    $allowedUrls = array(
+        "doctors",
+        "employees",
+        "patients",
+    );
     }
-    
-    // $currentUrl = $_SERVER['REQUEST_URI'];
-    if($role == 1 || $role == 2){
 
-        if(!in_array($fileName, $allowedUrls)) {
-            header("Location: index");
+// $currentUrl = $_SERVER['REQUEST_URI'];
+if ($role == 1 || $role == 2) {
+
+    if (!in_array($fileName, $allowedUrls)) {
+        header("Location: index");
         }
-    }else{
-        if(!in_array($fileName, $allowedUrls)) {
-            header("Location: employees");
+    } else {
+    if (!in_array($fileName, $allowedUrls)) {
+        header("Location: employees");
         }
     }
 ?>
@@ -66,16 +66,16 @@ $fileName = basename(parse_url($currentURL, PHP_URL_PATH));
     <!-- FontAwesome -->
     <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
     <!-- Custom Css -->
-    <?php if($role == 1){?>
-        <link rel="stylesheet" href="asset/css/index.css">
-        <title>Dr. Pleger - Admin</title>
-    <?php }elseif($role == 3){?>
-        <link rel="stylesheet" href="asset/css/index2.css">
-        <title>Dr. Pleger - Mitarbeiter</title>
-    <?php }else{?>
-        <title>Dr. Pleger - Doktoren</title>
-        <link rel="stylesheet" href="asset/css/index2.css">
-        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <?php if ($role == 1) { ?>
+            <link rel="stylesheet" href="asset/css/index.css">
+            <title>Dr. Pleger - Admin</title>
+    <?php } elseif ($role == 3) { ?>
+            <link rel="stylesheet" href="asset/css/index2.css">
+            <title>Dr. Pleger - Mitarbeiter</title>
+    <?php } else { ?>
+            <title>Dr. Pleger - Doktoren</title>
+            <link rel="stylesheet" href="asset/css/index2.css">
+            <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <?php } ?>
 </head>
 

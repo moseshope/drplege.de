@@ -1,0 +1,37 @@
+.custom-navbar {
+	border-bottom: 5px solid var(--primary);
+	background-color: #fff;
+}
+.nav-logo {
+	height: 100%;
+	width: fit-content;
+}
+.custom-navbar ul {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--primary);
+	font-size: 16px;
+	font-weight: bolder;
+	margin: 0px;
+}
+.custom-navbar ul li{
+	margin-left: 16px;
+	margin-right: 16px;
+}
+.logout-btn{
+	padding: 4px;
+	align-self: center;
+	width: 175px;
+	color: white;
+	background-color: var(--main);
+	border: none;
+	border-radius: 24px;
+}
+
+@media (max-width: 768px) {
+	.custom-navbar ul {
+		display: none;
+	}
+}

@@ -1,0 +1,83 @@
+.sidebar {
+    background-color: var(--main);
+    height: calc(100vh - 115px);
+    position: fixed;
+    width: 210px;
+    color: white;
+    overflow: auto;
+    margin: 20px 0px 0px 20px;
+    padding: 20px 0px 0px 0px;
+    border-radius: 50px 0px 0px 50px;
+}
+@keyframes sidebarAnimation {
+    0% {
+        left: -300px;
+    }
+    100% {
+        left: -0;
+    }
+}
+.sidebar-menu li a {
+    color: white;
+    border-bottom: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 24px;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: all 0.4s;
+}
+.sidebar-menu .active {
+    color: var(--secondary);
+}
+.sidebar li a:hover:not(.active) {
+    background-color: var(--secondary);
+    color: white;
+}
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+.menu-close-button {
+    display: none !important;
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    cursor: pointer;
+}
+.menu-button {
+    display: none !important;
+    font-size: 30px;
+    cursor: pointer;
+}
+.nav-menu-item{
+    display: none;
+}
+.nav-menu-item ul{
+    display: none;
+    list-style:circle;
+    margin-left: 50px;
+    font-size: var(--md-text);
+    overflow: hidden;
+    width: fit-content;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+        z-index: 9999;
+        width: 100%;
+        animation: sidebarAnimation 0.5s ease-in-out;
+    }
+    .nav-menu-item{
+        display: block;
+    }
+    .menu-close-button {
+        display: flex !important;
+    }
+    .menu-button {
+        display: flex !important;
+    }
+}

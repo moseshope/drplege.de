@@ -1,0 +1,599 @@
+@import "variable.css";
+@import "navbar.css";
+@import "sidebar.css";
+@import "modal.css";
+@import "pagination.css";
+
+@font-face {
+  font-family: Cambridge-Round-Bold;
+  src: url(../font/Cambridge-Round-Bold.ttf);
+}
+@font-face {
+  font-family: Cambridge-Round-Light;
+  src: url(../font/Cambridge-Round-Light.ttf);
+}
+@font-face {
+  font-family: Cambridge-Round-Regular;
+  src: url(../font/Cambridge-Round-Regular.ttf);
+}
+@font-face {
+  font-family: Cambridge-Round-SemiBold;
+  src: url(../font/Cambridge-Round-SemiBold.ttf);
+}
+body {
+  font-family: Cambridge-Round-Regular;
+  background-color: #f7f4f0;
+  height: 100vh;
+}
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+#main-content {
+  margin: 20px 20px 20px 230px;
+  height: calc(100vh - 115px);
+  overflow: auto;
+  background-color: #fff;
+  border-radius: 0px 50px 50px 0px;
+}
+#main-content .p-2.w-100 {
+  padding: 20px 0.5rem 0.5rem 0.5rem !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.page-heading {
+  color: var(--main);
+  font-size: 40px;
+  font-weight: bolder;
+}
+.dashboard-box {
+  border: 1px solid var(--primary);
+  font-size: var(--xl-heading);
+  background-color: var(--secondary-light);
+  color: var(--main);
+  position: relative;
+  font-weight: bolder;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  min-height: 150px;
+}
+.dashboard-box i svg {
+  color: var(--secondary);
+  width: 50px;
+  height: 50px;
+}
+.dashboard-box i {
+  color: var(--secondary);
+  width: 50px;
+  height: 50px;
+}
+.dashboard-box button {
+  color: white;
+  background-color: var(--secondary);
+  font-size: var(--xs-text);
+  width: 150px;
+  max-width: 100%;
+  padding: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  outline: none;
+  border: 0px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 8px;
+}
+.dashboard-box .box-menubar {
+  position: absolute;
+  z-index: 10;
+  top: -20px;
+  left: 16px;
+  font-size: 16px;
+  background-color: var(--main);
+  color: white;
+  border-radius: 8px;
+}
+.dashboard-box .box-menubar p {
+  margin: 0;
+  padding: 8px;
+}
+.dashboard-search {
+  background-color: rgb(239, 228, 228);
+  color: var(--main);
+  max-width: 350px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  display: flex;
+  height: 32px;
+}
+.dashboard-search input {
+  outline: none;
+  border: none;
+  background-color: var(--input-bg);
+  color: var(--main);
+  margin-left: 8px;
+}
+.form-control:focus {
+  border-color: var(--main);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main);
+}
+.today-appointments {
+  background-color: var(--main);
+  border-radius: 16px;
+  color: white;
+}
+.today-appointments table {
+  font-size: var(--md-text);
+}
+.today-appointments thead {
+  border-bottom: 3px solid var(--secondary);
+}
+.today-appointments thead td {
+  border-top: none;
+}
+.my-calender {
+  border: 1px solid var(--main);
+  border-radius: 16px;
+}
+@media (max-width: 768px) {
+  #main-content {
+    margin-left: 0px;
+  }
+  .dashboard-box i {
+    display: none;
+  }
+}
+.custom-upcoming-btn {
+  background-color: #fff0eb;
+  color: #f16522;
+  font-weight: 500;
+}
+
+/* calender */
+.calendar {
+  width: 100%;
+  margin: auto;
+}
+.calendar .header {
+  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    user-select: none !important;
+    font-weight: 500;
+    color: var(--secondary);
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    background-color: transparent;
+    padding: 15px 20px;
+}
+.calendar .header i {
+  color: #750a0a;
+  font-size: 35px;
+  transform: translateY(-2px);
+}
+.calendar .header .cursor-pointer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.calendar .header .pre-month-year {
+  color: black;
+}
+.calendar .header .icon {
+  background-color: transparent;
+  color: var(--secondary);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: var(--sm-text);
+  line-height: 7px;
+}
+.calendar table {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.calendar thead {
+  font-size: var(--md-text);
+  color: var(--main);
+  font-weight: 900;
+}
+.calendar td {
+  font-size: var(--sm-text);
+}
+.calendar td div {
+  margin: auto;
+  cursor: pointer;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 4px;
+}
+.calendar td .selected-date {
+  background-color: var(--main);
+  color: white;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.calendar .disable-date {
+  color: rgba(128, 128, 128, 0.589);
+}
+
+.calendar .today {
+  border: 1px solid var(--secondary);
+  color: var(--main);
+  border-radius: 50%;
+}
+.calendar td div:hover:not(.selected-date, .today) {
+  background-color: #eaf2f8;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  border-radius: 10px;
+  list-style: none;
+  padding: 0px;
+  position: absolute;
+  top: -50%;
+  text-align: center;
+  right: 70%;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-bottom: 0px;
+}
+.dropdown-content li {
+  color: #381e14;
+  font-size: var(--sm-text);
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.custom-secondary-button {
+  background-color: var(--secondary);
+  min-width: 175px;
+  font-size: var(--sm-text);
+  border-radius: 40px;
+  outline: none;
+  border: none;
+  color: white;
+  height: 32px;
+}
+.custom-table td {
+  border: none;
+  font-weight: 500;
+}
+.custom-table thead td {
+  background-color: var(--secondary-light);
+  color: var(--main);
+}
+.custom-table thead {
+  background-color: var(--secondary-light);
+  color: var(--main);
+  font-weight: 700;
+  border-bottom: 2px solid var(--main);
+  font-size: 18px;
+}
+.custom-table tbody {
+  font-weight: 700;
+  font-size: var(--sm-text);
+}
+.custom-table button {
+  border-radius: 16px;
+  min-width: 150px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  padding: 4px;
+}
+.custom-success-btn {
+  background-color: #ebf9eb;
+  color: #109b04;
+  font-weight: 500;
+}
+.custom-danger-btn {
+  background-color: #efc5c8;
+  color: #d1232a;
+  font-weight: 500;
+}
+
+.custom-main-btn {
+  /* padding: 4px; */
+  align-self: center;
+  width: 160px;
+  color: white;
+  background-color: var(--main);
+  border: none;
+  border-radius: 24px;
+}
+
+.custom-warnings-btn {
+  background-color: #fdf3e8;
+  color: #d67b18;
+  font-weight: 500;
+}
+.input-date {
+  color: var(--main);
+  font-weight: 500;
+  border-bottom: 1px solid var(--main);
+}
+.input-date input {
+  border: none;
+  outline: none;
+  font-size: var(--md-text);
+  color: var(--main);
+  color-scheme: var(--main);
+}
+.profile-form {
+  color: var(--main);
+  font-weight: bolder;
+}
+.custom-input {
+  outline: none;
+  height: 45px;
+  border: none;
+  background-color: var(--input-bg);
+  color: var(--main);
+  font-weight: 500;
+}
+.success-button {
+  background-color: var(--main);
+  outline: none;
+  border: none;
+  color: white;
+  width: 150px;
+  font-size: 18px;
+  border-radius: 16px;
+  font-family: Cambridge-Round-Regular;
+}
+.cancel-button {
+  background-color: var(--gray);
+  outline: none;
+  border: none;
+  color: white;
+  width: 150px;
+  font-size: 18px;
+  border-radius: 16px;
+  font-family: Cambridge-Round-Regular;
+}
+.hideinputFocus .form-control:focus {
+  border: none;
+  box-shadow: none;
+  background-color: var(--input-bg);
+}
+.today-appointments td {
+  color: white;
+  background-color: var(--main);
+  border: none;
+}
+.dropdown {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.input-with-icon:focus-within {
+  border-color: var(--main);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main);
+}
+.login-body {
+  margin: 8px;
+  color: var(--main);
+  font-weight: 500;
+  max-width: 100%;
+  width: 450px;
+  border-color: var(--main);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main);
+  position: relative;
+  background-color: white;
+  border-radius: 25px;
+}
+.login-logo {
+  position: absolute;
+  background-color: var(--main);
+  width: 50%;
+  height: 75px;
+  left: 25%;
+  top: -50px;
+  border-color: var(--main);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main);
+  border-radius: 20px;
+}
+.select-time {
+  max-width: 600px;
+  color: var(--main);
+  font-weight: 500;
+  list-style-position: inside;
+  border: 3px solid var(--main);
+  border-radius: 16px;
+  height: fit-content;
+}
+.select-time li {
+  list-style-type: circle;
+  font-size: var(--md-text);
+}
+/* Toast */
+.toast {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, 0px);
+  font-weight: 500;
+  padding: 15px;
+  border-radius: 16px;
+  opacity: 0;
+  animation: downToUp 0.5s ease-in;
+}
+.toast-danger {
+  border: 2px solid var(--main);
+  background-color: var(--input-bg);
+  color: red;
+}
+.toast-success {
+  border: 2px solid darkgreen;
+  background-color: rgb(202, 250, 202);
+  color: darkgreen;
+}
+.toast-warning {
+  border: 2px solid darkorange;
+  background-color: rgb(240, 240, 216);
+  color: darkorange;
+}
+.toast .close {
+  position: absolute;
+  top: 4px;
+  right: 20px;
+  font-size: 25px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.toast.show {
+  opacity: 1;
+}
+@keyframes downToUp {
+  0% {
+    transform: translate(-50%, -50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0px);
+    opacity: 1;
+  }
+}
+.select-group {
+  position: relative;
+  width: 100%;
+}
+.option-group {
+  margin-top: 8px;
+  position: absolute;
+  width: 100%;
+  color: var(--main);
+  background-color: var(--input-bg);
+  display: none;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main);
+  margin-bottom: 8px;
+}
+.option-group:focus {
+  border: none;
+  color: var(--main);
+  background-color: var(--input-bg);
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--input-bg);
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main);
+  border-radius: 10px;
+}
+.show-services {
+  width: 100%;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#patientList .dropdown .cursor-pointer {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#patientList .dropdown .cursor-pointer i {
+  font-size: 20px;
+  line-height: 100%;
+}
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  margin: 0px auto;
+}
+.sidebar-logo img {
+  width: 100%;
+}
+.custom-icon {
+  border-radius: 50%;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+.custom-icon i {
+  line-height: 100%;
+  font-size: 17px;
+}
+
+#profileForm .form-group {
+  width: 75%;
+}
+
+/* loader  */
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid rgb(255, 255, 255);
+  border-top: 5px solid transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,33 @@
+:root {
+    --main: rgb(117, 10, 10);
+    --primary: rgb(209, 35, 42);
+    --secondary: rgb(241, 101, 34);
+    --secondary-light: rgb(252, 245, 245);
+    --gray: rgb(56, 30, 20);
+    --xs-text: 12px;
+    --sm-text: 16px;
+    --md-text: 20px;
+    --lg-text: 24px;
+    --xl-text: 28px;
+    --xxl-text: 32px;
+    --sm-heading: 24px;
+    --md-heading: 30px;
+    --lg-heading: 40px;
+    --xl-heading: 50px;
+    --input-bg:rgb(239, 228, 228);
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --sm-text: 12px;
+        --md-text: 16px;
+        --lg-text: 20px;
+        --xl-text: 14px;
+        --xxl-text: 28px;
+        --sm-heading: 20px;
+        --md-heading: 25px;
+        --lg-heading: 35px;
+        --xl-heading: 45px;
+    }
+
+}

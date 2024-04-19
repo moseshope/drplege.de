@@ -1,0 +1,38 @@
+.modal-heading {
+    color: var(--main);
+    font-size: var(--lg-heading);
+  }
+  
+  .custom-modal {
+    color: var(--main);
+  }
+  
+  .custom-input {
+    outline: none;
+    border: none;
+    background-color: var(--input-bg);
+    color: var(--main);
+    font-weight: bolder;
+  }
+  
+  .custom-modal label {
+    font-weight: bolder;
+  }
+  
+  .custom-modal button {
+    width: 150px;
+    font-size: var(--sm-text);
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    padding: 4px;
+  }
+  .success-button {
+    background-color: var(--main);
+  }
+  
+  .cancel-button {
+    background-color: var(--gray);
+  }
+  

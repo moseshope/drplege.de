@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Redirect requests to remove .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Redirect requests to add trailing slash if it's a directory
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/])$ /$1/ [L,R=301]

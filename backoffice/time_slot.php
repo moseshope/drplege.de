@@ -8,7 +8,7 @@ include ('layout/header.php');
 include ('layout/sidebar.php');
 
 
-$sql = "select * from time_slots where time NOT IN ('Holiday', 'Not available') ORDER BY id ASC";
+$sql = "select * from time_slots where time NOT IN ('Holiday', 'Not available') ORDER BY time ASC";
 $result = $connect->query($sql);
 $timeList = array();
 
@@ -50,11 +50,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <div class="px-2">
                 <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
                     <div class=" table-responsive">
-                        <table class="table pb-3" style="max-width: 700px;">
+                        <table class="table pb-3" style="max-width: 500px;">
                             <thead>
                                 <tr>
-                                    <td style="max-width: 100px;">#</td>
-                                    <td style="min-width: 100px;">Zeit</td>
+                                    <td style="width:10px;">#</td>
+                                    <td class="text-center" style="min-width: 200px;">Zeit</td>
                                     <td>
                                         <div>Optionen</div>
                                     </td>
@@ -67,8 +67,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                         <td>
                                             <?php echo $i + 1; ?>
                                         </td>
-                                        <td>
-                                            <?php echo $timeList[$i]['time']; ?> Uhr
+                                        <td class="text-center">
+                                            <?php echo $timeList[$i]['time']; ?>
                                         </td>
                                         <?php if ($timeList[$i]['time'] != 'Not available' && $timeList[$i]['time'] != 'Holiday') { ?>
                                             <td>
@@ -93,7 +93,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <!-- pagination -->
                         
                     <div class="white-table">
-                    <ul class="custom-pagination" id="custom-pagination"></ul>
+                    <!-- <ul class="custom-pagination" id="custom-pagination"></ul> -->
                     </div>
                 </div>
                 </div>
@@ -126,8 +126,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-                            <button type="button"  id="addSlotBtn" class="success-button cursor-pointer">Hinzufügen</button>
+                            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
+                            <button type="button"  id="addSlotBtn" class="success-button cursor-pointer mx-1">Hinzufügen</button>
                         </div>
                 </div>
             </div>
@@ -142,9 +142,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" id="toConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info"
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" id="toConfirmationYesBtn" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
                             >Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
                     <div class="d-flex justify-content-center align-items-center py-2">
                         <div class="flex-grow-1"></div>
-                        <h1 class="modal-heading" style="font-weight: 800;">Slot bearbeiten</h1>
+                        <h1 class="modal-heading" style="font-weight: 800;">Zeit bearbeiten</h1>
                         <div class="flex-grow-1"></div>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;" aria-label="Close"></button>
                     </div>
@@ -189,8 +189,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer">Update</button>
-                            <button type="button" class="cancel-button cursor-pointer"
+                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer mx-1">Speichern</button>
+                            <button type="button" class="cancel-button cursor-pointer mx-1"
                                 data-bs-dismiss="modal">Abbrechen</button>
                         </div>
                 </div>
@@ -207,9 +207,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">TDiese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer"
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer mx-1"
                             >Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
                     </div>
                 </div>
             </div>
@@ -240,9 +240,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" id="deleteConfirmationYesBtn" class="success-button cursor-pointer"
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" id="deleteConfirmationYesBtn" class="success-button cursor-pointer mx-1"
                             >Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
                     </div>
                 </div>
             </div>
@@ -307,7 +307,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             });
         });
         $('#toConfirmationYesBtn').on('click', function() {
-            $('#ShowInfo').modal('show');
+            $('#Confirmation').modal('hide');
         });
         $('#addSlotBtn').on('click', function() {
             if ($('#AddSlot').valid()) {
@@ -415,8 +415,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         });
         $('#deleteConfirmationYesBtn').on('click', function() {
             $('#deletedConfirmation').modal('hide');
-            // $('#Confirmation').modal('hide');
-            // $('#deleteSlotShowInfo').modal('show');
+            $('#Confirmation').modal('hide');
+            $('#deleteSlotShowInfo').modal('show');
             $.ajax({
                 url: './ajax/addslot.php',
                 method: 'POST',

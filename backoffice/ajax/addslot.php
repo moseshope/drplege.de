@@ -1,25 +1,29 @@
 <?php 
 include('../config/database.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if(isset($_POST['slotId']) && isset($_POST['selectedSlot'])){
-        $id = mysqli_real_escape_string($connect,$_POST['slotId']);
-        $slot = mysqli_real_escape_string($connect,$_POST['selectedSlot']);
+    if (isset($_POST['slotId']) && isset($_POST['selectedSlot'])) {
+        $id = mysqli_real_escape_string($connect, $_POST['slotId']);
+        $slot = mysqli_real_escape_string($connect, $_POST['selectedSlot']);
         $updated_at = date("Y-m-d");
-        $sql = "select * from time_slots where time = '$slot' && deleted_at IS NULL && id != '$id'";
+        $sql = "SELECT * FROM time_slots WHERE time = '$slot' AND id != '$id'";
         $result = $connect->query($sql);
-        if($result->num_rows > 0){
-            $message = "This slot already exits";
+        if ($result->num_rows > 0) {
+            $message = "This slot already exists";
             echo json_encode($message);
-        }else{
-            $sql = "update time_slots set time='$slot', updated_at='$updated_at' where id='$id'";
+        } else {
+            $sql = "UPDATE time_slots SET time='$slot', updated_at='$updated_at' WHERE id='$id'";
             $result = $connect->query($sql);
         }
-    }
-    elseif(isset($_POST['deleteSlotId'])){
-        $id = mysqli_real_escape_string($connect,$_POST['deleteSlotId']);
-        $deleted_at = date("Y-m-d");
-        $sql = "update time_slots set deleted_at='$deleted_at' where id='$id'";
+    } elseif (isset($_POST['deleteSlotId'])) {
+        $id = mysqli_real_escape_string($connect, $_POST['deleteSlotId']);
+        // Use DELETE query to remove the record from the database
+        $sql = "DELETE FROM time_slots WHERE id='$id'";
         $result = $connect->query($sql);
+        if ($result) {
+            echo json_encode("Slot deleted successfully");
+        } else {
+            echo json_encode("Error deleting slot");
+        }
     }
     else{
         $slot = mysqli_real_escape_string($connect,$_POST['slot']);
@@ -28,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $message = "Slot is required";
             echo json_encode($message);
         }else{
-            $sql = "select * from time_slots where time = '$slot' && deleted_at IS NULL";
+            $sql = "select * from time_slots where time = '$slot'";
             $result = $connect->query($sql);
             if($result->num_rows > 0){
                 $message = "This slot already exits";

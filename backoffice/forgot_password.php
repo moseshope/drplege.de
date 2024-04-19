@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                         </div>
                         <div class="d-flex justify-content-end mx-3">
                             <p class="mb-0  cursor-pointer"
-                                onclick="window.location = './login'">Ich will mich anmelden</p>
+                                onclick="window.location = './login'">Zurück zum Login</p>
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
                             <button type="submit" class="success-button cursor-pointer p-1"

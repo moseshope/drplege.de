@@ -3,18 +3,17 @@
 session_start();
 if (isset($_SESSION['staff_id'])) {
     header("Location: index");
-}
+    }
 
-include('./config/database.php');
+include ('./config/database.php');
 
 $emailValue = '';
 $passwordValue = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
-{
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailValue = isset($_POST['email']) ? $_POST['email'] : '';
     $passwordValue = isset($_POST['password']) ? $_POST['password'] : '';
-    $error = ""; 
+    $error = "";
 
     $email = $_POST['email'];
     $password = md5($_POST['password']);
@@ -30,21 +29,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         // if($row['role'] == 3){
         //     header("Location: ./employees");
         // }else{
-            if ($password == $row['password']) {
-                $_SESSION['staff_id'] = $row['id']; 
-                if($row['role'] == 3){
-                    header("Location: ./employees");
-                }else{
-                    header("Location: ./index");
+        if ($password == $row['password']) {
+            $_SESSION['staff_id'] = $row['id'];
+            if ($row['role'] == 3) {
+                header("Location: ./employees");
+                } else {
+                header("Location: ./index");
                 }
             } else {
-                $error = "Ungültige Anmeldedaten.";
+            $error = "Ungültige Anmeldedaten.";
             }
         // }
-    } else {
+        } else {
         $error = "Ungültige Anmeldedaten.";
+        }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -73,59 +72,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                         <h3 style="font-weight: 700; font-family: Cambridge-Round-Bold;">Login</h3>
                     </div>
                     <form class="px-2" method="post" id="loginForm">
-                        <div class="form-group p-2 my-2">
-                            <label class="my-1" for="email" style="font-family: Cambridge-Round-Regular;">E-Mail</label>
-                            <input type="text" class="form-control custom-input" name="email" id="email" value="<?php echo $emailValue?>" placeholder="E-Mail eingeben">
-                            <!-- <p class="error-msg" id="email-error"></p> -->
-                            <p  class="error mb-0" id="email-error"></p>
-                        </div>
-                        <div class="form-group p-2 my-2">
-                        <label class="my-1" for="password">Passwort</label>
-                            <div class="password-input-container position-relative d-flex align-items-center" style="font-family: Cambridge-Round-Regular;">
-                            <!-- Password input -->
-                            <input type="password" name="password" class="form-control custom-input pe-5" id="password" placeholder="Passwort" required>
-                            <!-- Eye button to toggle visibility -->
-                            <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-password">
-                                <i class="fas fa-eye" id="eye-icon"></i>
-                            </span>
-                            </div>
-                            <span class="error" id="password-error"></span>
-                        </div>
+    <div class="form-group p-2 my-2">
+        <label class="my-1" for="email" style="font-family: Cambridge-Round-Regular;">E-Mail</label>
+        <input type="text" class="form-control custom-input" name="email" id="email" value="<?php echo $emailValue ?>" placeholder="E-Mail eingeben">
+        <p class="error mb-0" id="email-error"></p>
+    </div>
+    <div class="form-group p-2 my-2">
+    <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Passwort</label>
+    <div class="d-flex align-items-center input-with-icon hideinputFocus" style="background-color: var(--input-bg); border-radius: 4px;">
+        <input type="password" class="form-control custom-input" name="password" id="password" placeholder="Passwort eingeben">
+        <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-password-icon" onclick="togglePasswordVisibility()"></i>
+    </div>
+    <p class="error mb-0" id="password-error"></p>
+</div>
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const passwordInput = document.getElementById('password');
-                                const togglePasswordButton = document.getElementById('toggle-password');
-                                const eyeIcon = document.getElementById('eye-icon');
+<script>
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('toggle-password-icon');
 
-                                // Function to toggle the password visibility
-                                function togglePasswordVisibility() {
-                                    if (passwordInput.type === 'password') {
-                                        passwordInput.type = 'text';
-                                        eyeIcon.classList.remove('fa-eye');
-                                        eyeIcon.classList.add('fa-eye-slash');
-                                    } else {
-                                        passwordInput.type = 'password';
-                                        eyeIcon.classList.remove('fa-eye-slash');
-                                        eyeIcon.classList.add('fa-eye');
-                                    }
-                                }
+    // Toggle password visibility
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        // Change icon to eye-slash when password is visible
+        eyeIcon.classList.remove('bi-eye-fill');
+        eyeIcon.classList.add('bi-eye-slash-fill');
+    } else {
+        passwordInput.type = 'password';
+        // Change icon back to eye-fill when password is hidden
+        eyeIcon.classList.remove('bi-eye-slash-fill');
+        eyeIcon.classList.add('bi-eye-fill');
+    }
+}
+</script>
 
-                                // Attach the function to the button's click event
-                                togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-                            });
-                        </script>
-                        <div class="d-flex justify-content-end mx-3">
-                            <p class="mb-0  cursor-pointer"
-                                onclick="window.location = './forgot_password'" style="font-family: Cambridge-Round-Regular;">Passwort vergessen</p>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <!-- <button type="button" class="success-button cursor-pointer"
-                                onclick="window.location = './../index.html'">Login</button> -->
-                                <button type="submit" class="success-button cursor-pointer"
-                                >Login</button>
-                        </div>
-                    </form>
+    <div class="d-flex justify-content-end mx-3">
+        <p class="mb-0  cursor-pointer"
+            onclick="window.location = './forgot_password'" style="font-family: Cambridge-Round-Regular;">Passwort vergessen</p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center py-2 my-3">
+        <button type="submit" class="success-button cursor-pointer">Login</button>
+    </div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('toggle-password');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    // Function to toggle the password visibility
+    function togglePasswordVisibility() {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    }
+
+    // Attach the function to the button's click event
+    togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+});
+</script>
+
                 </div>
                 <div class="login-logo">
                     <img class="w-100 h-100" style="object-fit: contain;" src="asset/images/logo-2.png" alt="logo" />
@@ -145,21 +158,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <?php
-        if (!empty($error)) {
-            echo "<script>showToast('$error', 'error')</script>";
+    if (!empty($error)) {
+        echo "<script>showToast('$error', 'error')</script>";
         }
     ?>
 
-    <?php 
-        if (isset($_SESSION['forgot_success_message'])) {
-            echo "<script>showToast('" . $_SESSION['forgot_success_message'] . "', 'success' );</script>";
-            unset($_SESSION['forgot_success_message']);
-            unset($_SESSION['admin_email']);
+    <?php
+    if (isset($_SESSION['forgot_success_message'])) {
+        echo "<script>showToast('" . $_SESSION['forgot_success_message'] . "', 'success' );</script>";
+        unset($_SESSION['forgot_success_message']);
+        unset($_SESSION['admin_email']);
         }
-        if (isset($_SESSION['reset_password_message'])) {
-            echo "<script>showToast('" . $_SESSION['reset_password_message'] . "', 'success' );</script>";
-            unset($_SESSION['reset_password_message']);
-            // unset($_SESSION['admin_email']);
+    if (isset($_SESSION['reset_password_message'])) {
+        echo "<script>showToast('" . $_SESSION['reset_password_message'] . "', 'success' );</script>";
+        unset($_SESSION['reset_password_message']);
+        // unset($_SESSION['admin_email']);
         }
 
     ?>

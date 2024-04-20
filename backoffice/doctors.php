@@ -497,8 +497,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         </div> -->
         </div>
         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-          <button type="button" class="cancel-button mx-2 cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-          <button type="button" id="addStaffBtn" class="success-button mx-2 cursor-pointer">Hinzufügen</button>
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
+          <button type="button" id="addStaffBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Hinzufügen</button>
         </div>
       </div>
     </div>
@@ -749,7 +749,7 @@ aria-hidden="true">
 
           </div>
           <div class="d-flex justify-content-center align-items-center py-2 my-3">
-          <button type="button" class="cancel-button cursor-pointer mx-2" data-bs-dismiss="modal"
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 5px;"
           id="cancelStaff">Abbrechen</button>
           <button type="button" class="success-button cursor-pointer mx-2" id="UpdateStaffBtn">Aktualisieren</button>
           </div>

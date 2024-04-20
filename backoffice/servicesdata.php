@@ -123,7 +123,7 @@ include('./layout/sidebar.php');
                </div>
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
-               <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
+               <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
                <button type="button" id="addServicesBtn" class="success-button cursor-pointer mx-1">Einreichen</button>
             </div>
          </div>
@@ -190,8 +190,8 @@ include('./layout/sidebar.php');
                </div>
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
-               <button type="button" id="cancelEdit" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
-               <button type="button" id="updateServicesBtn" class="success-button cursor-pointer mx-1">Update</button>
+               <button type="button" id="cancelEdit" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
+               <button type="button" id="updateServicesBtn" class="success-button cursor-pointer mx-1">Aktualisieren</button>
             </div>
          </div>
       </div>

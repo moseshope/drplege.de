@@ -504,9 +504,9 @@ if($role == 1){
                             
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <button type="button"  id="addStaffBtn" class="success-button cursor-pointer">Einreichen</button>
                             <button type="button" class="cancel-button cursor-pointer"
-                                data-bs-dismiss="modal">Abbrechen</button>
+                            data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
+                            <button type="button"  id="addStaffBtn" class="success-button cursor-pointer">Einreichen</button>
                         </div>
                 </div>
             </div>
@@ -679,11 +679,11 @@ if($role == 1){
                         </div>
                     <?php } ?>
 
-                        <div class="d-flex justify-content-center align-items-center my-3">
+                    <div class="d-flex justify-content-center align-items-center my-3">
+                        <button type="button" class="cancel-button cursor-pointer" style="margin-right: 5px;"
+                            data-bs-dismiss="modal">Abbrechen</button>
                             <button type="button" class="success-button cursor-pointer"
                                 id="UpdatePatients">Update</button>
-                            <button type="button" class="cancel-button cursor-pointer"
-                                data-bs-dismiss="modal">Abbrechen</button>
                         </div>
                 </div>
             </div>
@@ -1167,7 +1167,7 @@ if($role == 1){
     <script>
         document.getElementById("open-image-picker").addEventListener('click',()=>{document.getElementById('profile-image').click()});
         function redirectToEmployeePage() {
-            window.location.href = "employees";
+            window.location.href = "login";
         }
     </script>
     <script>

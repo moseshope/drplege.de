@@ -46,7 +46,7 @@ if ($role == 1 || $role == 2) {
         }
     } else {
     if (!in_array($fileName, $allowedUrls)) {
-        header("Location: employees");
+        header("Location: doctors");
         }
     }
 ?>

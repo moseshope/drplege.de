@@ -126,8 +126,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Abbrechen</button>
-                            <button type="button"  id="addSlotBtn" class="success-button cursor-pointer mx-1">Hinzufügen</button>
+                            <button type="button" class="cancel-button cursor-pointer" style="margin-right: 5px;" data-bs-dismiss="modal">Abbrechen</button>
+                            <button type="button"  id="addSlotBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Hinzufügen</button>
                         </div>
                 </div>
             </div>
@@ -189,9 +189,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer mx-1">Speichern</button>
-                            <button type="button" class="cancel-button cursor-pointer mx-1"
+                            <button type="button" class="cancel-button cursor-pointer" style="margin-right: 5px;"
                                 data-bs-dismiss="modal">Abbrechen</button>
+                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Speichern</button>
                         </div>
                 </div>
             </div>

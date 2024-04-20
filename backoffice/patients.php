@@ -644,7 +644,7 @@ if($role == 2){
                             <button type="button" class="success-button cursor-pointer"
                                 id="UpdatePatients">Update</button>
                             <button type="button" class="cancel-button cursor-pointer"
-                                data-bs-dismiss="modal">Abbrechen</button>
+                                data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
                         </div>
                 </div>
             </div>

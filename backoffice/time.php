@@ -136,7 +136,7 @@ usort($timeList, 'sortTimeSlots');
                             <button type="button" class="cancel-button cursor-pointer" style="margin-right: 3px;" data-bs-dismiss="modal"
                                 id="reset">Reset</button>
                             <button type="submit" class="success-button cursor-pointer " style="margin-left: 3px;" data-bs-target=""
-                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh">Hinzufügen</button>
+                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh" style="margin-left: 5px;">Hinzufügen</button>
                         </div>
                     </div>
                 </div>

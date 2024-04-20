@@ -20,8 +20,8 @@
 .sidebar-menu li a {
     color: white;
     border-bottom: none;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     font-size: 20px;
     cursor: pointer;
     padding: 8px 24px;

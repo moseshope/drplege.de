@@ -18,28 +18,28 @@ $role = $row['role'];
             <i class="bi bi-x" onclick="handleSidebar()"></i>
         </div>
     </div>
-    <ul class="d-flex flex-column p-0 sidebar-menu" style="margin-top:30px;">
+    <ul class="d-flex flex-column p-0 sidebar-menu" style="margin-top: 30px !important;">
         <?php if ($role == 1) { ?>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'index') !== false ? 'active' : '') ?>" href="./index">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'index') !== false ? 'active' : '') ?>" href="./index">
                     <i class="bi bi-clipboard-data mx-2"></i>
                     <span class="" style="padding-top:6px;">Übersicht</span>
                 </a>
             </li>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'doctors') !== false ? 'active' : '') ?>" href="doctors">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'doctors') !== false ? 'active' : '') ?>" href="doctors">
                     <i class="bi bi-person-lines-fill mx-2"></i>
                     <span class="" style="padding-top:3px;">Doktoren</span>
                 </a>
             </li>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'nurse') !== false ? 'active' : '') ?>" href="nurse">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'nurse') !== false ? 'active' : '') ?>" href="nurse">
                     <i class="bi bi-people-fill mx-2"></i>
                     <span style="padding-top:3px;">Mitarbeiter</span>  
                 </a>
             </li>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
                     <i class="mx-2 d-flex align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -53,33 +53,33 @@ $role = $row['role'];
                 </a>
             </li>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'time_slot') !== false ? 'active' : '') ?>" href="time_slot">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'time_slot') !== false ? 'active' : '') ?>" href="time_slot">
                     <i class="bi bi-calendar-check mx-2"></i>
                     <span class="pt-1">Praxiszeiten</span>  
                 </a>
             </li>
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'servicesdata') !== false ? 'active' : '') ?>" href="servicesdata">
+                <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'servicesdata') !== false ? 'active' : '') ?>" href="servicesdata">
                     <i class="bi bi-card-checklist mx-2"></i>
                     <span style="padding-top:2px;">Leistungen</span>  
                 </a>
             </li>
         
             <li>
-                <a class="mt-1 d-flex align-items-center <?php echo ($fileName == 'profile' ? 'active' : '') ?>" href="profile">
+                <a class="my-1 d-flex align-items-center <?php echo ($fileName == 'profile' ? 'active' : '') ?>" href="profile">
                     <i class="bi bi-person-circle mx-2"></i>
-                    <span style="padding-top:5px;">Profil</span>
+                    <span style="padding-top:2px;">Profil</span>
                 </a>
             </li>
         <?php } elseif ($role == 2) { ?>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'index') !== false ? 'active' : '') ?>" href="./index">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'index') !== false ? 'active' : '') ?>" href="./index">
                     <i class="bi bi-clipboard-data mx-2"></i>
                         <span>Übersicht</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
                         <i class="mx-2 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -93,32 +93,32 @@ $role = $row['role'];
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'time') !== false ? 'active' : '') ?>" href="time">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'time') !== false ? 'active' : '') ?>" href="time">
                         <i class="bi bi-clock mx-2"></i>
                         <span>Sprechzeiten</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'services') !== false ? 'active' : '') ?>" href="services">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'services') !== false ? 'active' : '') ?>" href="services">
                         <i class="bi bi-clipboard-data mx-2"></i>
                         <span>Leistungen</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center <?php echo ($fileName == 'profile' ? 'active' : '') ?>" href="profile">
+                    <a class="my-1 d-flex align-items-center <?php echo ($fileName == 'profile' ? 'active' : '') ?>" href="profile">
                         <i class="bi bi-person-circle mx-2"></i>
                         <span>Profil</span>
                     </a>
                 </li>
         <?php } else { ?>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'employees') !== false ? 'active' : '') ?>" href="employees">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'employees') !== false ? 'active' : '') ?>" href="employees">
                         <i class="bi bi-person-lines-fill mx-2"></i>
                         <span>Arzt</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
+                    <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'patients') !== false ? 'active' : '') ?>" href="patients">
                         <i class="mx-2 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -133,7 +133,7 @@ $role = $row['role'];
                 </li>
         <?php } ?>    
             <li class="nav-menu-item">
-                <a class="d-flex align-items-center" onclick="handlePageMenu()">
+                <a class="my-1 d-flex align-items-center" onclick="handlePageMenu()">
                     <i class="bi bi-file-earmark-fill mx-2"></i>
                     <span>Seiten</span>
                 </a>

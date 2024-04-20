@@ -36,13 +36,13 @@ usort($timeList, 'sortTimeSlots');
     <div id="main-content">
         <div class="p-2 w-100">
             <div class="d-flex justify-content-center align-items-center">
-                <h1 class="page-heading mb-5">Time</h1>
+                <h1 class="page-heading mb-5">Sprechzeiten</h1>
             </div>
             <div class="row w-100">
                 <div class="col-12 col-lg-6 col-xl-5 col-xxxl-3 col-xxl-4 mb-5">
                     <div class="my-calender px-4">
                         <div class="d-flex justify-content-center py-3" style="color: var(--main);">
-                            <h4 style="font-weight:700;">Datum auswählen</h4>
+                            <!-- <h4 style="font-weight:700;">Datum auswählen</h4> -->
                         </div>
                         <!-- <div class="calendar">
                             <div class="header">
@@ -89,7 +89,7 @@ usort($timeList, 'sortTimeSlots');
                                 <tr>                                    
                                     <th>M</th>
                                     <th>D</th>
-                                    <th>W</th>
+                                    <th>M</th>
                                     <th>D</th>
                                     <th>F</th>
                                     <th>S</th>
@@ -133,10 +133,10 @@ usort($timeList, 'sortTimeSlots');
                                 ?>
                         </ul>
                         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
-                            <button type="submit" class="success-button cursor-pointer mx-3" data-bs-target=""
-                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh">Einreichen</button>
-                            <button type="button" class="cancel-button cursor-pointer mx-3" data-bs-dismiss="modal"
+                            <button type="button" class="cancel-button cursor-pointer" style="margin-right: 3px;" data-bs-dismiss="modal"
                                 id="reset">Reset</button>
+                            <button type="submit" class="success-button cursor-pointer " style="margin-left: 3px;" data-bs-target=""
+                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh">Hinzufügen</button>
                         </div>
                     </div>
                 </div>

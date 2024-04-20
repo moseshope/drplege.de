@@ -95,7 +95,7 @@ $role = $row['role'];
                 <li>
                     <a class="d-flex align-items-center <?php echo (strpos($fileName, 'time') !== false ? 'active' : '') ?>" href="time">
                         <i class="bi bi-clock mx-2"></i>
-                        <span>Zeit</span>
+                        <span>Sprechzeiten</span>
                     </a>
                 </li>
                 <li>

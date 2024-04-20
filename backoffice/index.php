@@ -393,7 +393,7 @@ if($role == 1){
                                 <tr>
                                     <th>M</th>
                                     <th>D</th>
-                                    <th>W</th>
+                                    <th>M</th>
                                     <th>D</th>
                                     <th>F</th>
                                     <th>S</th>

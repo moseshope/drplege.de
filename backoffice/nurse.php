@@ -309,9 +309,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" id="NurseConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info"
-                            >Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">No</button>
+                             style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -392,9 +392,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">
+                                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                                         <button type="button" class="success-button cursor-pointer" data-bs-target="#ShowNurseConfirm"
-                                            data-bs-toggle="modal" data-bs-dismiss="modal">Ja</button>
-                                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                                            data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
                                     </div>
                                 </div>
                             </div>
@@ -427,9 +427,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
+                            <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                             <button type="button" class="success-button cursor-pointer" data-bs-target="#ShowNurseInfo"
-                                data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn">Ja</button>
-                            <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                                data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
                         </div>
                     </div>
                 </div>

@@ -415,9 +415,9 @@ if($role == 2){
                     <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <button type="submit" class="success-button cursor-pointer"
-                        data-bs-toggle="modal" data-bs-dismiss="modal" id="conformationYesBtn">Ja</button>
-                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal" id="conformationYesBtn" style="margin-left: 3px;">Ja</button>
                 </div>
             </div>
         </div>
@@ -448,9 +448,9 @@ if($role == 2){
                     <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <button type="submit" class="success-button cursor-pointer"
-                        data-bs-toggle="modal" data-bs-dismiss="modal" id="cancelConformationYesBtn">Ja</button>
-                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal" id="cancelConformationYesBtn" style="margin-left: 3px;">Ja</button>
                 </div>
             </div>
         </div>
@@ -481,9 +481,9 @@ if($role == 2){
                     <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <button type="submit" class="success-button cursor-pointer"
-                        data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteConformationYesBtn">Ja</button>
-                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteConformationYesBtn" style="margin-left: 3px;">Ja</button>
                 </div>
             </div>
         </div>
@@ -565,9 +565,9 @@ if($role == 2){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" class="success-button cursor-pointer" data-bs-target=""
-                            data-bs-toggle="modal" data-bs-dismiss="modal" id="editconformationYesBtn">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                            data-bs-toggle="modal" data-bs-dismiss="modal" id="editconformationYesBtn" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -660,9 +660,9 @@ if($role == 2){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" class="success-button cursor-pointer"
-                            id="EditConfirmationYesBtn">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                            id="EditConfirmationYesBtn" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -695,9 +695,9 @@ if($role == 2){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" class="success-button cursor-pointer"
-                            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteConformation">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteConformation" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>

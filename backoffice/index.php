@@ -521,9 +521,9 @@ if($role == 1){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info"
-                            >Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -592,8 +592,8 @@ if($role == 1){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" id="ConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
+                        <button type="button" id="ConfirmationYesBtn" class="success-button cursor-pointer" data-bs-target="#show-info" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -698,10 +698,10 @@ if($role == 1){
                         <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <div class="d-flex justify-content-center align-items-center">
                         <button type="button" class="success-button cursor-pointer"
-                            id="EditConfirmationYesBtn">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                            id="EditConfirmationYesBtn" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -733,9 +733,9 @@ if($role == 1){
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" class="success-button cursor-pointer"
-                            id="deleteServiceYesBtn">Ja</button>
-                        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                            id="deleteServiceYesBtn" style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>

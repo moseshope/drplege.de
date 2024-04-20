@@ -94,9 +94,9 @@ if ($checkedResult && $checkedResult->num_rows > 0) {
                     <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <button type="button" class="success-button cursor-pointer" data-bs-target=""
-                        data-bs-toggle="modal" data-bs-dismiss="modal" id="confirmationBtn">Ja</button>
-                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal" id="confirmationBtn" style="margin-left: 3px;">Ja</button>
                 </div>
             </div>
         </div>
@@ -129,9 +129,9 @@ if ($checkedResult && $checkedResult->num_rows > 0) {
                     <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                     <button type="submit" class="success-button cursor-pointer" data-bs-target=""
-                        data-bs-toggle="modal" data-bs-dismiss="modal" id="resetConfirmationBtn">Ja</button>
-                    <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Nein</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal" id="resetConfirmationBtn" style="margin-left: 3px;">Ja</button>
                 </div>
             </div>
         </div>

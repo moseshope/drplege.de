@@ -139,9 +139,9 @@ include('./layout/sidebar.php');
                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
+               <button type="button" id="ConfirmationNoBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                <button type="button" id="ConfirmationYesBtn" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-               >Ja</button>
-               <button type="button" id="ConfirmationNoBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                style="margin-left: 3px;">Ja</button>
             </div>
          </div>
       </div>
@@ -206,9 +206,9 @@ include('./layout/sidebar.php');
                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-               <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+               <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-                  >Ja</button>
+                   style="margin-left: 3px;">Ja</button>
             </div>
          </div>
       </div>
@@ -241,9 +241,9 @@ include('./layout/sidebar.php');
          <div class="d-flex justify-content-center align-items-center">
            
                <input type="hidden" name="deleteid" id="deleteid">
-               <button type="button"  class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+               <button type="button"  class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                <button type="button" id="deleteConfirmationYesBtn" name="deleteConfirmationYesBtn" class="mx-1 success-button cursor-pointer"
-                  >Ja</button>
+                   style="margin-left: 3px;">Ja</button>
             
          </div>
       </div>

@@ -142,9 +142,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" id="toConfirmationYesBtn" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-                            >Ja</button>
+                             style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -207,9 +207,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">TDiese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" id="EditConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-                            >Ja</button>
+                             style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>
@@ -240,9 +240,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+                        <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
                         <button type="button" id="deleteConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-                            >Ja</button>
+                             style="margin-left: 3px;">Ja</button>
                     </div>
                 </div>
             </div>

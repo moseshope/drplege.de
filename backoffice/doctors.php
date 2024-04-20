@@ -513,9 +513,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
           <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-          data-bs-target="#show-info">Ja</button>
+          data-bs-target="#show-info" style="margin-left: 3px;">Ja</button>
         </div>
       </div>
     </div>
@@ -764,9 +764,9 @@ aria-hidden="true">
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
           </div>
           <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
           <button type="submit" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-          data-bs-toggle="modal" data-bs-dismiss="modal">Ja</button>
+          data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
           </div>
           </div>
           </div>
@@ -785,9 +785,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
 </div>
 <div class="d-flex justify-content-center align-items-center">
-  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
 <button type="button" class="success-button cursor-pointer mx-1" data-bs-toggle="modal" data-bs-dismiss="modal"
-id="UpdateStaffConfirmationBtn">Ja</button>
+id="UpdateStaffConfirmationBtn" style="margin-left: 3px;">Ja</button>
 </div>
 </div>
 </div>
@@ -822,9 +822,9 @@ aria-hidden="true">
 <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
 </div>
 <div class="d-flex justify-content-center align-items-center">
-  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal">Nein</button>
+  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
 <button type="button" class="success-button cursor-pointer mx-1" data-bs-target="#show-info" data-bs-toggle="modal"
-data-bs-dismiss="modal" id="deleteStaffYesBtn">Ja</button>
+data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
 </div>
 </div>
 </div>

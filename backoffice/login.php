@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password == $row['password']) {
             $_SESSION['staff_id'] = $row['id'];
             if ($row['role'] == 3) {
-                header("Location: ./employees");
+                header("Location: ./doctors");
                 } else {
                 header("Location: ./index");
                 }

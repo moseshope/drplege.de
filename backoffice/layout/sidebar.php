@@ -55,7 +55,7 @@ $role = $row['role'];
             <li>
                 <a class="mt-1 d-flex align-items-center <?php echo (strpos($fileName, 'time_slot') !== false ? 'active' : '') ?>" href="time_slot">
                     <i class="bi bi-calendar-check mx-2"></i>
-                    <span class="pt-1">Zeitfenster</span>  
+                    <span class="pt-1">Praxiszeiten</span>  
                 </a>
             </li>
             <li>

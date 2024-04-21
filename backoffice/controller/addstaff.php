@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $name = mysqli_real_escape_string($connect, $_POST['name']);
         $email = mysqli_real_escape_string($connect, $_POST['email']);
+        $password_plain = mysqli_real_escape_string($connect, $_POST['password']);
         $originalPassword = $_POST['password'];
         $password = mysqli_real_escape_string($connect, md5($_POST['password']));
         $telephone = mysqli_real_escape_string($connect, $_POST['telephone']);
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //         }
 
         $created_at = date("Y-m-d");
-        $sql = "insert into user(name,email,password,profile,telephone,status,role,created_at) values('$name','$email','$password','$profileName','$telephone','$status','$role','$created_at')";
+        $sql = "insert into user(name,email,password,password_plain,profile,telephone,status,role,created_at) values('$name','$email','$password','$password_plain','$profileName','$telephone','$status','$role','$created_at')";
         $query = $connect->query($sql);
         $user_id = $connect->insert_id;
         $servicesArray = [];

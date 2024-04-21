@@ -269,7 +269,9 @@ a:hover {
   font-weight: 500;
   min-width: 100px;
 }
-
+.navbar-nav .nav-link:hover {
+  color: #db2c2b; /* Change the text color on hover */
+}
 .custom-secondary-button {
   background-color: var(--secondary);
   min-width: 175px;

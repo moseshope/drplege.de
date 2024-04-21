@@ -327,6 +327,9 @@ tbody td {
   justify-content: center;
   transition: all 0.4s;
 }
+.navbar-nav .nav-link:hover {
+  color: #db2c2b; /* Change the text color on hover */
+}
 td.not-current {
   color: #c0c0c0;
 }

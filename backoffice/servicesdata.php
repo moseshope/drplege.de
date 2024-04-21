@@ -124,7 +124,7 @@ include('./layout/sidebar.php');
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
                <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
-               <button type="button" id="addServicesBtn" class="success-button cursor-pointer mx-1">Einreichen</button>
+               <button type="button" id="addServicesBtn" class="success-button cursor-pointer mx-1">Hinzufügen</button>
             </div>
          </div>
       </div>

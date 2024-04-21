@@ -88,7 +88,7 @@ if ($role == 1 || $role == 2) {
                 <i class="bi bi-list" onclick="handleSidebar()"></i>
             </div>
             <div class="nav-logo cursor-pointer" onclick="window.location = 'index.html'">
-                <img class="w-100 h-100" src="asset/images/logo.png" alt="logo-image">
+                <img class="w-100 h-100" src="../images/logo.png" alt="logo-image">
             </div>
             <ul>
                     <li class="cursor-pointer">Startseite</li>

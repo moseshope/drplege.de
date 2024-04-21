@@ -681,7 +681,7 @@ aria-hidden="true">
           <div class="form-group p-2 my-2">
           <label class="my-1" for="email">E-Mail</label>
           <input type="email" name="email" value="" class="form-control custom-input" id="StaffEmail"
-          placeholder="E-mail">
+          placeholder="E-Mail">
           <span class="error" id="email-edit-error"></span>
           </div>
           </div>
@@ -700,7 +700,7 @@ aria-hidden="true">
           <div class="form-group p-2 my-2">
           <label class="my-1" for="Telephone">Telefon</label>
           <input type="text" name="telephone" value="" class="form-control custom-input" id="StaffTelephone"
-          placeholder="Telephone">
+          placeholder="Telefon">
           <span class="error" id="telephone-edit-error"></span>
           </div>
           </div>

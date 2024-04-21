@@ -191,7 +191,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
                             <button type="button" class="cancel-button cursor-pointer" style="margin-right: 5px;"
                                 data-bs-dismiss="modal">Abbrechen</button>
-                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Speichern</button>
+                            <button type="button" id="updateSlotBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Aktualisieren</button>
                         </div>
                 </div>
             </div>

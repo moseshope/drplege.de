@@ -50,7 +50,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <div class="px-2">
                 <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
                     <div class=" table-responsive">
-                        <table class="table pb-3" style="max-width: 500px;">
+                        <table class="table table-hover pb-3" style="max-width: 500px;">
                             <thead>
                                 <tr>
                                     <td style="width:10px;">#</td>
@@ -334,9 +334,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             $('#slot-error').text(responseData).addClass('text-danger');
                         }else{
                             $('#slot-error').hide();
-                            $('#ShowInfo').modal('hide');
+                            // $('#ShowInfo').modal('hide');
                             $('#add-slot').modal('hide');
-                            $('#Confirmation').modal('show');
+                            // $('#Confirmation').modal('show');
                         }
                     },
                     error: function(xhr, status, error) {

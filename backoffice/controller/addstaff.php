@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->send();
 
                 $redirectURL = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'default_page';
-                header("Location: $redirectURL");
+                header("Location: ./../doctors");
                 }
 
         }

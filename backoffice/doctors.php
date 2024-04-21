@@ -118,7 +118,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
       <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
         <div class=" table-responsive">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <?php if ($role == 1) { ?>

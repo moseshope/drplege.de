@@ -238,7 +238,7 @@ if($role == 1){
                             <h4>Today's Appointments</h4>
                         </div>
                         <div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <td style="min-width: 100px;">Patient</td>
@@ -340,7 +340,7 @@ if($role == 1){
                             <h4 id='appointmentHeading'>Heutige Termine</h4>
                         </div>
                         <div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <td>Patient</td>

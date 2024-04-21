@@ -42,7 +42,7 @@ include('./layout/sidebar.php');
       <div class="px-2">
          <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
             <div class=" table-responsive">
-               <table class="table pb-3">
+               <table class="table table-hover pb-3">
                   <thead>
                      <tr>
                         <td style="width: 100px;">#</td>

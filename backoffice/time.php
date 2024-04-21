@@ -104,7 +104,7 @@ usort($timeList, 'sortTimeSlots');
                 <div class="col-12 col-lg-6">
                     <div class="select-time">
                         <div class="d-flex justify-content-center py-3" style="color: var(--main);">
-                            <h4 style="font-weight: 700;">Wählen Sie eine Zeit</h4>
+                            <h4 style="font-weight: 700;">Zeit auswählen</h4>
                         </div>
                         <div class="mx-3 px-3">
                             <label class='fw-bolder cursor-pointer' style="user-select: none;">
@@ -134,7 +134,7 @@ usort($timeList, 'sortTimeSlots');
                         </ul>
                         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
                             <button type="button" class="cancel-button cursor-pointer" style="margin-right: 3px;" data-bs-dismiss="modal"
-                                id="reset">Reset</button>
+                                id="reset">Zurücksetzen</button>
                             <button type="submit" class="success-button cursor-pointer " style="margin-left: 3px;" data-bs-target=""
                                 data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh" style="margin-left: 5px;">Hinzufügen</button>
                         </div>

@@ -44,7 +44,7 @@ include('./layout/sidebar.php');
             <div class=" table-responsive">
                <table class="table table-hover pb-3">
                   <thead>
-                     <tr>
+                     <tr class="border-bottom">
                         <td style="width: 100px;">#</td>
                         <td class="text-center" style="min-width:300px;">DE</td>
                         <td class="text-center" style="min-width:300px;">EN</td>

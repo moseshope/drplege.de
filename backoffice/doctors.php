@@ -161,7 +161,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   </div>
                 </td>
                 <td class="">
-                <div class="text-start mx-auto" style="max-width: fit-content;">
+                <div class="text-start mx-auto">
                   <ul>
                     <?php
                     $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];

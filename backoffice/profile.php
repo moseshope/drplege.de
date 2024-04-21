@@ -41,9 +41,9 @@ if($role == 1){
     $profile = $row['profile'];
     if(!empty($profile)){
 
-        $filePath = 'https://drpleger.de/ct/backoffice/uploads/doctor/'.$profile;
+        $filePath = 'https://drpleger.de/termin-buchen/images/'.$profile;
     }else{
-        $filePath = 'https://drpleger.de/ct/backoffice/uploads/doctor/logo.png';
+        $filePath = 'https://drpleger.de/termin-buchen/images/logo.png';
     }
 
 
@@ -98,7 +98,7 @@ if($role == 1){
                 $profile = $row['profile'];
                 if(!empty($profile)){
         
-                    $filePath = 'https://drpleger.de/ct/backoffice/uploads/doctor/'.$profile;
+                    $filePath = 'https://drpleger.de/termin-buchen/images/'.$profile;
                 }
             }
         

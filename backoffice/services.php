@@ -51,14 +51,14 @@ if ($checkedResult && $checkedResult->num_rows > 0) {
     <div id="main-content">
         <div class="p-2 w-100">
             <div class="d-flex justify-content-center align-items-center">
-                <h1 class="page-heading mb-5">Dienstleistungen</h1>
+                <h1 class="page-heading mb-5">Leistungen</h1>
             </div>
             <div class="row w-100">
                 
                 <div class="col-12 col-lg-6">
                     <div class="select-time">
                         <div class="d-flex justify-content-center py-3" style="color: var(--main);">
-                            <h4 style="font-weight: 700;">Dienstliste</h4>
+                            <!-- <h4 style="font-weight: 700;">Dienstliste</h4> -->
                         </div>
                         
                        
@@ -73,7 +73,7 @@ if ($checkedResult && $checkedResult->num_rows > 0) {
                    
                         <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
                             <button type="button" class="success-button cursor-pointer mx-3" data-bs-target=""
-                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh">Einreichen</button>
+                                data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh">Aktualisieren</button>
                             
                         </div>
                     </div>

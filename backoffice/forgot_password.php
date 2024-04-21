@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 },
                 messages: {
                     email: {
-                        required: "Dienstleistungen ist erforderlich.",
+                        required: "Bitte geben Sie Ihre E-Mail Adresse ein",
                     },
                 },
                 errorPlacement: function(error, element) {

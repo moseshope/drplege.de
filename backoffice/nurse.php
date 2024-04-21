@@ -91,7 +91,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                     placeholder="Suche" name="search" value="<?php echo $searchTerm?>">
                             </div>
                             <div class="flex-grow-1"></div>
-                            <div class="d-flex flex-wrap align-items-center m-2">
+                            <!-- <div class="d-flex flex-wrap align-items-center m-2">
                                 <div class="input-date">
                                     <input class="mx-2" type="date" id="start-date" name="start_date" placeholder="Start Date" value="<?php echo $startDate; ?>">
                                 </div>
@@ -105,7 +105,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                 <div>
                                     <button type="submit" class="cursor-pointer showTimeBtn btn fs-4 mt-2 mt-md-0" style="color: var(--main); " id="clearDatepicker"><i class="fa-solid fa-arrow-rotate-right"></i></button>
                                 </div>
-                            </div>
+                            </div> -->
                         <button type="submit" class="cursor-pointer custom-secondary-button my-auto"
                             data-bs-toggle="modal" data-bs-target="#add-nurse"><i class="bi bi-plus"
                                 style="color: white; "></i>Mitarbeiter hinzufügen</button>

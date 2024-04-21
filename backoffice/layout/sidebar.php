@@ -23,19 +23,19 @@ $role = $row['role'];
             <li>
                 <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'index') !== false ? 'active' : '') ?>" href="./index">
                     <i class="bi bi-clipboard-data mx-2"></i>
-                    <span class="" style="padding-top:6px;">Übersicht</span>
+                    <span class="" style="padding-top:4px;">Übersicht</span>
                 </a>
             </li>
             <li>
                 <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'doctors') !== false ? 'active' : '') ?>" href="doctors">
                     <i class="bi bi-person-lines-fill mx-2"></i>
-                    <span class="" style="padding-top:3px;">Doktoren</span>
+                    <span class="" style="padding-top:4px;">Doktoren</span>
                 </a>
             </li>
             <li>
                 <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'nurse') !== false ? 'active' : '') ?>" href="nurse">
                     <i class="bi bi-people-fill mx-2"></i>
-                    <span style="padding-top:3px;">Mitarbeiter</span>  
+                    <span style="padding-top:4px;">Mitarbeiter</span>  
                 </a>
             </li>
             <li>
@@ -49,7 +49,7 @@ $role = $row['role'];
                                 d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12z" />
                         </svg>
                     </i>
-                    <span style="padding-top:2px;">Patienten</span>
+                    <span style="padding-top: 4px;">Patienten</span>
                 </a>
             </li>
             <li>
@@ -61,14 +61,14 @@ $role = $row['role'];
             <li>
                 <a class="my-1 d-flex align-items-center <?php echo (strpos($fileName, 'servicesdata') !== false ? 'active' : '') ?>" href="servicesdata">
                     <i class="bi bi-card-checklist mx-2"></i>
-                    <span style="padding-top:2px;">Leistungen</span>  
+                    <span style="padding-top:4px;">Leistungen</span>  
                 </a>
             </li>
         
             <li>
                 <a class="my-1 d-flex align-items-center <?php echo ($fileName == 'profile' ? 'active' : '') ?>" href="profile">
                     <i class="bi bi-person-circle mx-2"></i>
-                    <span style="padding-top:2px;">Profil</span>
+                    <span style="padding-top:4px;">Profil</span>
                 </a>
             </li>
         <?php } elseif ($role == 2) { ?>

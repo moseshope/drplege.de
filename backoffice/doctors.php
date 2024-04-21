@@ -230,14 +230,14 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   <div class="d-flex justify-content-center">
                     <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') { ?>
                       <!-- Edit button -->
-                      <div class="editButton mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
+                      <div class="editButton" data-id="<?php echo $staffList[$i]['id']; ?>"
                         data-bs-toggle="modal">
-                          <i class="fas fa-edit cursor-pointer"></i>
+                          <i class="fas fa-edit cursor-pointer pe-2"></i>
                       </div>
                       <!-- Delete button -->
-                      <div class="deleteButton text-danger mx-3" data-id="<?php echo $staffList[$i]['id']; ?>"
+                      <div class="deleteButton text-danger" data-id="<?php echo $staffList[$i]['id']; ?>"
                       data-bs-toggle="modal">
-                        <i class="fas fa-trash cursor-pointer"></i>
+                        <i class="fas fa-trash cursor-pointer ps-2"></i>
                       </div>
                     <?php } else { ?>
                     <label style="color: green;">Inaktiv</label>
@@ -344,8 +344,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
 <!-- Add Staff -->
 <form id="AddStaff" method="post" action="./controller/addstaff.php" enctype="multipart/form-data">
-  <div class="modal fade " id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true" data-bs-backdrop='static'>
+  <div class="modal fade" id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center py-2">
@@ -654,7 +654,7 @@ aria-hidden="true">
 <!-- Edit Staff -->
 <form id="EditStaff" action="./controller/editstaff.php" method="post" enctype="multipart/form-data">
   <div class="modal fade " id="edit-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true" data-bs-backdrop='static'>
+  aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center py-2">

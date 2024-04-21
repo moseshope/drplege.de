@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "select * from user where id='$id'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();
-        $services = $row['services'];
         $profile = $row['profile'];
 
         if ($_FILES["profile"]["name"]) {
@@ -41,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "update user set name='$name',email='$email',profile='$profileName',telephone='$telephone',status='$status' where id=$id";
         $query = $connect->query($sql);
         if ($query) {
-                // header("Location: ./../nurse");
+                header("Location: ./../doctors");
                 }
         }
 

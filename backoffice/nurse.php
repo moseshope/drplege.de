@@ -142,12 +142,12 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                             <div class="d-flex justify-content-center">
                                                 <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {; ?>
                                                     <!-- Edit button -->
-                                                    <div class=" mx-3 editNurseButton" data-id="<?php echo $staffList[$i]['id'];?>"  data-bs-toggle="modal">
-                                                        <i class="fas fa-edit cursor-pointer"></i>
+                                                    <div class="editNurseButton" data-id="<?php echo $staffList[$i]['id'];?>"  data-bs-toggle="modal">
+                                                        <i class="fas fa-edit pe-2 cursor-pointer"></i>
                                                     </div>
                                                     <!-- Delete button -->
-                                                    <div class="mx-3 deleteNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
-                                                        <i class="fas fa-trash cursor-pointer text-danger"></i>
+                                                    <div class="deleteNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
+                                                        <i class="fas fa-trash cursor-pointer text-danger ps-2"></i>
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -284,11 +284,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             <div class="col-lg-6 col-12">
                                 <div class="form-group p-2 my-2">
                                     <label class="my-1" for="Status">Status</label>
-                                    <select name="status" class="form-control custom-input" id="Status">
-                                        <option>Aktiv</option>
-                                        <option>Deaktiviert</option>
+                                    <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
+                                    <option selected value="Aktiv">Aktiv</option>
+                                    <option value="Deaktiviert">Deaktiviert</option>
                                     </select>
-                                    <span  class="error" id="status-error"></span>
+                                    <span class="error" id="status-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -335,7 +335,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
     <!-- Edit Staff -->
     <form id="Editnurse" action="./controller/editnurse.php" method="post">
         <div class="modal fade" id="edit-nurse" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true" data-bs-backdrop='static'>
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-md" role="document">
                 <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
                     <div class="d-flex justify-content-center align-items-center py-2">
@@ -364,14 +364,14 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group p-2 my-2">
-                                    <label class="my-1" for="Status">Status</label>
-                                    <select name="status" class="form-control custom-input" value="" id="NurseStatus">
-                                        <option value="Aktiv">Aktiv</option>
-                                        <option value="Deaktiviert">Deaktiviert</option>
-                                    </select>
-                                    <span  class="error" id="status-error"></span>
-                                </div>
+                            <div class="form-group p-2 my-2">
+                                <label class="my-1" for="Status">Status</label>
+                                <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
+                                <option selected value="Aktiv">Aktiv</option>
+                                <option value="Deaktiviert">Deaktiviert</option>
+                                </select>
+                                <span class="error" id="status-error"></span>
+                            </div>
                             </div> 
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">

@@ -277,7 +277,7 @@ if ($ServiceResult->num_rows > 0) {
 	<!-- <h4>First select Language :</h4> -->
 	<!-- Step Form Section End -->
 	<div class="confirm-box modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop='static'>
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-body">

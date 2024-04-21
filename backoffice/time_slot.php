@@ -75,12 +75,12 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                             <div class="d-flex justify-content-center" style="width: 100px;">
                                                 <!-- Edit Button -->
                                                 <div class="editButton" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-edit cursor-pointer me-3"></i>
+                                                    <i class="fas fa-edit cursor-pointer pe-2"></i>
                                                 </div>
         
                                                 <!-- Delete Button -->
                                                 <div class="todeletebutton text-danger cursor-pointer" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-trash ms-3 me-4"></i>
+                                                    <i class="fas fa-trash ps-2 pe-4"></i>
                                                 </div>
                                             </div>
 

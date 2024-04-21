@@ -70,12 +70,12 @@ include('./layout/sidebar.php');
                         <div class="d-flex justify-content-center" style="min-width: 350px;">
                            <!-- Edit Button -->
                            <div class="editservices" id="editservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-services">
-                              <i class="fas fa-edit cursor-pointer mx-3"></i>
+                              <i class="fas fa-edit cursor-pointer pe-2"></i>
                            </div>
                            
                            <!-- Delete Button -->
                            <div class="deleteservices text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#deletedConfirmation">
-                              <i class="fas fa-trash cursor-pointer mx-3"></i>
+                              <i class="fas fa-trash cursor-pointer ps-2"></i>
                            </div>
                         </div>
 
@@ -98,7 +98,7 @@ include('./layout/sidebar.php');
 <!-- Modals -->
 <!-- Add Services -->
 <form id="AddServices" method="post">
-   <div class="modal fade " id="add-services" data-bs-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade " id="add-services"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-md" role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -130,7 +130,7 @@ include('./layout/sidebar.php');
       </div>
    </div>
    <!-- Services Confirmation -->
-   <div class="modal fade" id="Confirmation" tabindex="-1" data-bs-backdrop='static' role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade" id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -147,7 +147,7 @@ include('./layout/sidebar.php');
       </div>
    </div>
    <!-- Services Confirm Yes show info  -->
-   <div class="modal fade " id="ShowInfo" tabindex="-1" data-bs-backdrop='static' role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade " id="ShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered " role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -164,7 +164,7 @@ include('./layout/sidebar.php');
 
 <!-- edit Staff -->
 <form id="EditServices" method="post" action="">
-   <div class="modal fade " id="edit-services" data-bs-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade " id="edit-services" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-md" role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -197,7 +197,7 @@ include('./layout/sidebar.php');
       </div>
    </div>
    <!-- staff Confirmation -->
-   <div class="modal fade " id="EditSlotConfirmation" data-bs-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade " id="EditSlotConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -214,7 +214,7 @@ include('./layout/sidebar.php');
       </div>
    </div>
    <!-- staff show info  -->
-   <div class="modal fade " id="editSlotShowInfo" data-bs-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+   <div class="modal fade " id="editSlotShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered " role="document">
          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -230,7 +230,7 @@ include('./layout/sidebar.php');
 </form>
 
 <!-- slot delete models  -->
-<div class="modal fade" data-bs-backdrop='static' id="deletedConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="deletedConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
    aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -250,7 +250,7 @@ include('./layout/sidebar.php');
    </div>
 </div>
 <!-- staff show info  -->
-<div class="modal fade" data-bs-backdrop='static' id="deleteSlotShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="deleteSlotShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
    aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered " role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">

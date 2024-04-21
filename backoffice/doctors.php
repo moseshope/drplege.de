@@ -232,12 +232,12 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                       <!-- Edit button -->
                       <div class="editButton" data-id="<?php echo $staffList[$i]['id']; ?>"
                         data-bs-toggle="modal">
-                          <i class="fas fa-edit cursor-pointer pe-2"></i>
+                          <i class="fas fa-edit cursor-pointer px-2"></i>
                       </div>
                       <!-- Delete button -->
                       <div class="deleteButton text-danger" data-id="<?php echo $staffList[$i]['id']; ?>"
                       data-bs-toggle="modal">
-                        <i class="fas fa-trash cursor-pointer ps-2"></i>
+                        <i class="fas fa-trash cursor-pointer px-2"></i>
                       </div>
                     <?php } else { ?>
                     <label style="color: green;">Inaktiv</label>

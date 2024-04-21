@@ -55,7 +55,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                 <tr>
                                     <td style="width:10px;">#</td>
                                     <td class="text-center" style="min-width: 200px;">Zeit</td>
-                                    <td>
+                                    <td class="text-center">
                                         <div>Optionen</div>
                                     </td>
                                 </tr>
@@ -72,15 +72,15 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                         </td>
                                         <?php if ($timeList[$i]['time'] != 'Not available' && $timeList[$i]['time'] != 'Holiday') { ?>
                                             <td>
-                                            <div class="d-flex justify-content-center" style="width: 100px;">
+                                            <div class="d-flex justify-content-center mx-auto" style="width: 100px;">
                                                 <!-- Edit Button -->
                                                 <div class="editButton" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-edit cursor-pointer pe-2"></i>
+                                                    <i class="fas fa-edit cursor-pointer px-2"></i>
                                                 </div>
         
                                                 <!-- Delete Button -->
                                                 <div class="todeletebutton text-danger cursor-pointer" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-trash ps-2 pe-4"></i>
+                                                    <i class="fas fa-trash px-2"></i>
                                                 </div>
                                             </div>
 

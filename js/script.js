@@ -168,8 +168,8 @@ $(document).ready(function () {
               <div class="doctor-image">
                 <img src="${
                   doctor.profile != null && doctor.profile != ""
-                    ? "http://localhost/termin-buchen/images/" + doctor.profile
-                    : "https://drpleger.de/ct/backoffice/asset/images/logo.png"
+                    ? "https://drpleger.de/termin-buchen/images/" + doctor.profile
+                    : "https://drpleger.de/termin-buchen/backoffice/asset/images/logo.png"
                 }" style="height: 100px; width: 100px; border-radius: 100px; object-fit: containt;">
                   </div>
                     <div class="doctor-content">

@@ -44,13 +44,13 @@ if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
 
   $column = isset($_GET['column']) ? $_GET['column'] : null;
   if ($column == 'doctor') {
-    $orderClause = "user.name $orderBy";
+    $orderClause = "user.id $orderBy";
     } else {
-    $orderClause = "patients.status $orderBy";
+    $orderClause = "user.id $orderBy";
     }
 
   } else {
-  $orderClause = "user.id DESC";
+  $orderClause = "user.id ASC";
   }
 
 $GetStaff = "SELECT user.*, COUNT(CASE WHEN patients.status = 'Vollendet' THEN patients.id ELSE NULL END) AS patient_count
@@ -966,11 +966,11 @@ console.error('Error:', error);
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
 <?php if ($totalItems > $itemsPerPage) { ?>
-                          CreatePagination({
-                          elementId: "custom-pagination",
-                          totalPage: <?php echo $totalPages; ?>,
-                          currentPage: currentPage ? Number(currentPage) : 1
-                          })
+  CreatePagination({
+  elementId: "custom-pagination",
+  totalPage: <?php echo $totalPages; ?>,
+  currentPage: currentPage ? Number(currentPage) : 1
+  })
 <?php } ?>
 </script>
 
@@ -997,7 +997,6 @@ doctorRows[i].style.display = "none";
 }
 </script> -->
 <script>
-$formattedList = str_replace(',', '<br>', <?php echo $staffList[$i]['services']; ?>)
 
 function filterByDate() {
 const startDate = document.getElementById("start-date").value;

@@ -143,11 +143,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                                 <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {; ?>
                                                     <!-- Edit button -->
                                                     <div class="editNurseButton" data-id="<?php echo $staffList[$i]['id'];?>"  data-bs-toggle="modal">
-                                                        <i class="fas fa-edit px-2 cursor-pointer"></i>
+                                                        <i class="fas fa-edit p-2 cursor-pointer"></i>
                                                     </div>
                                                     <!-- Delete button -->
                                                     <div class="deleteNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
-                                                        <i class="fas fa-trash cursor-pointer text-danger px-2"></i>
+                                                        <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
                                                     </div>
                                                 <?php } ?>
                                             </div>

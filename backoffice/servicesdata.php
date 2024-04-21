@@ -70,12 +70,12 @@ include('./layout/sidebar.php');
                         <div class="d-flex justify-content-center" style="min-width: 350px;">
                            <!-- Edit Button -->
                            <div class="editservices" id="editservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-services">
-                              <i class="fas fa-edit cursor-pointer px-2"></i>
+                              <i class="fas fa-edit cursor-pointer p-2"></i>
                            </div>
                            
                            <!-- Delete Button -->
                            <div class="deleteservices text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#deletedConfirmation">
-                              <i class="fas fa-trash cursor-pointer px-2"></i>
+                              <i class="fas fa-trash cursor-pointer p-2"></i>
                            </div>
                         </div>
 

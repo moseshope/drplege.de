@@ -132,19 +132,6 @@ $role = $row['role'];
                     </a>
                 </li>
         <?php } ?>    
-            <li class="nav-menu-item">
-                <a class="my-1 d-flex align-items-center" onclick="handlePageMenu()">
-                    <i class="bi bi-file-earmark-fill mx-2"></i>
-                    <span>Seiten</span>
-                </a>
-                <ul id="nav-menu-item-list">
-                    <li class="cursor-pointer">Startseite</li>
-                    <li class="cursor-pointer">Über uns</li>
-                    <li class="cursor-pointer">Leistungen </li>
-                    <li class="cursor-pointer">Ernennung</li>
-                    <li class="cursor-pointer">Kontakt</li>
-                    <li class="cursor-pointer">Profil</li>
-                </ul>
-            </li>
+            
         </ul>
 </div>

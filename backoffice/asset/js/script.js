@@ -790,7 +790,7 @@ $(document).ready(function () {
               .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
-            $("#Confirmation").modal("show");
+            // $("#Confirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {

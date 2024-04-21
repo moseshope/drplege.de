@@ -393,7 +393,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         }else{
                             $('#edit_slot-error').hide();
                             $('#edit-slot').modal('hide');
-                            $('#EditSlotConfirmation').modal('show');
+                            // $('#EditSlotConfirmation').modal('show');
                         }
                     },
                     error: function(xhr, status, error) {
@@ -405,7 +405,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         });
         $('#EditConfirmationYesBtn').on('click', function() {
             $('#EditSlotConfirmation').modal('hide');
-            $('#editSlotShowInfo').modal('show');
+            // $('#editSlotShowInfo').modal('show');
         });
 
         var deleteSlotId = '';

@@ -172,7 +172,7 @@ usort($timeList, 'sortTimeSlots');
                     <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich aktualisiert.</h1>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal" id="showInfoBtn">Okay</button>
+                    <button type="submit" class="success-button curdsor-pointer" data-bs-dismiss="modal" id="showInfoBtn">Okay</button>
                 </div>
             </div>
         </div>
@@ -330,7 +330,7 @@ usort($timeList, 'sortTimeSlots');
             $('#resetConfirmation').modal('show');
     })
     $('#resetConfirmationBtn').on('click', function() {
-            $('#reset-show-info').modal('show');
+            // $('#reset-show-info').modal('show');
     })
     $('#resetShowInfoBtn').on('click', function() {
         $.ajax({

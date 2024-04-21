@@ -25,9 +25,10 @@ if($role == 1){
     
         if($current_password == $row['password']){
             $password = mysqli_real_escape_string($connect,md5($_POST['password']));
+            $password_plain=mysqli_real_escape_string($connect,($_POST['password']));
             $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
         
-            $sql = "update user set password='$password' where id='$id'";
+            $sql = "update user set password='$password' password_plain='$password_plain' where id='$id'";
             if ($connect->query($sql) === TRUE) {
             }
         }else{
@@ -51,14 +52,14 @@ if($role == 1){
     {
         $password = $_POST['password'];
         if($password){
-            
+            $password_plain = mysqli_real_escape_string($connect, $_POST ['password']);
             $password = mysqli_real_escape_string($connect,md5($_POST['password']));
             $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
             if($_FILES["profile"]["name"]){
                     
                     
                     $originalFileName = $_FILES["profile"]["name"];
-                    $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+                    $extension  = pathinfo($originalFileName, PATHINFO_EXTENSION);
                     $profileName = rand(11111111, 99999999). "." . $extension;
                     $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "https://drpleger.de/termin-buchen/images/" . $profileName);
                 }
@@ -66,7 +67,7 @@ if($role == 1){
                         $profileName = $profile;
                 }
             
-                $sql = "update user set password='$password',profile='$profileName' where id='$id'";
+                $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
             }else{
                 if($_FILES["profile"]["name"]){
                     

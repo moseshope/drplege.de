@@ -64,27 +64,27 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                 <?php for ($i = $startIndex; $i <= $endIndex; $i++) {
                                     ; ?>
                                     <tr class="doctor-row">
-                                        <td>
+                                        <td class="align-middle">
                                             <?php echo $i + 1; ?>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center align-middle">
                                             <?php echo $timeList[$i]['time']; ?>
                                         </td>
                                         <?php if ($timeList[$i]['time'] != 'Not available' && $timeList[$i]['time'] != 'Holiday') { ?>
-                                            <td>
-                                            <div class="d-flex justify-content-center mx-auto" style="width: 100px;">
-                                                <!-- Edit Button -->
-                                                <div class="editButton" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-edit cursor-pointer p-2"></i>
-                                                </div>
-        
-                                                <!-- Delete Button -->
-                                                <div class="todeletebutton text-danger cursor-pointer" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
-                                                    <i class="fas fa-trash p-2"></i>
-                                                </div>
+                                        <td>
+                                        <div class="d-flex justify-content-center mx-auto" style="width: 100px;">
+                                            <!-- Edit Button -->
+                                            <div class="editButton" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
+                                                <i class="fas fa-edit cursor-pointer p-2"></i>
                                             </div>
+    
+                                            <!-- Delete Button -->
+                                            <div class="todeletebutton text-danger cursor-pointer" data-id="<?php echo $timeList[$i]['id']; ?>" data-bs-toggle="modal">
+                                                <i class="fas fa-trash p-2"></i>
+                                            </div>
+                                        </div>
 
-                                            </td>
+                                        </td>
                                         <?php } ?>
                                     </tr>
                                 <?php } ?>

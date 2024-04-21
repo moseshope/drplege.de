@@ -125,9 +125,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             <tbody>
                                 <?php  for ($i = $startIndex; $i <= $endIndex; $i++) {;?>
                                     <tr class="doctor-row">
-                                        <td style="max-width: 100px;"><?php echo $i + 1; ?></td>    
-                                        <td style="max-width: 100px;"><?php echo  $staffList[$i]['name']; ?></td>
-                                        <td style="max-width: 100px;"><?php echo  $staffList[$i]['email']; ?></td>  
+                                        <td class="align-middle" style="max-width: 100px;"><?php echo $i + 1; ?></td>    
+                                        <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['name']; ?></td>
+                                        <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['email']; ?></td>  
                                         <?php
                                             if ($staffList[$i]['status'] === 'Aktiv') {
                                                 $buttonClass = 'custom-success-btn';

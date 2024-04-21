@@ -281,7 +281,8 @@ a:hover {
   height: 32px;
 }
 .custom-table td {
-  border: none;
+  /* border: none; */
+  border-color: rgba(117, 10, 10, 0.32);
   font-weight: 500;
 }
 .custom-table thead td {

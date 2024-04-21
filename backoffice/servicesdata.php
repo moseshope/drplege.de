@@ -44,7 +44,7 @@ include('./layout/sidebar.php');
             <div class=" table-responsive">
                <table class="table table-hover pb-3">
                   <thead>
-                     <tr class="border-bottom">
+                     <tr class="">
                         <td style="width: 100px;">#</td>
                         <td class="text-center" style="min-width:300px;">DE</td>
                         <td class="text-center" style="min-width:300px;">EN</td>
@@ -56,14 +56,14 @@ include('./layout/sidebar.php');
                   <tbody>
                      <?php for ($i = $startIndex; $i <= $endIndex; $i++) {
                         ; ?>
-                     <tr class="doctor-row">
-                        <td>
+                     <tr class="doctor-row border-bottom">
+                        <td class="align-middle">
                            <?php echo $i + 1; ?>
                         </td>
-                        <td>
+                        <td class="align-middle">
                            <?php echo $servicesList[$i]['services']; ?> 
                         </td>
-                        <td>
+                        <td class="align-middle">
                            <?php echo $servicesList[$i]['services_en']; ?> 
                         </td>
                         <td>

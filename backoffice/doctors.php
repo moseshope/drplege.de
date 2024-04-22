@@ -489,7 +489,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               aria-invalid="false" accept="image/*">
               <button class="custom-main-btn my-2 w-100 d-block" type="button" id="open-image-picker"><i
               class="bi bi-upload me-2"></i>Bild hochladen</button>
-              <div class="text-center"><img id="image-preview" width="100px"></div>
+              <div class="text-center"><img id="image-preview" class="user-select-none" width="100px"></div>
               <span class="error" id="status-error"></span>
             </div>
           </div>
@@ -729,7 +729,7 @@ aria-hidden="true">
           <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
           aria-invalid="false" accept="image/*">
           <button class="custom-main-btn d-block w-100 my-2" type="button" id="open-image-picker-E"><i
-          class="bi bi-upload mx-2"></i>Bild hochladen</button>
+          class="bi bi-upload mx-2"></i></button>
           <div class="text-center"><img id="image-preview-E" width="100px"></div>
           <span class="error" id="status-error"></span>
           </div>

@@ -13,7 +13,7 @@ if(!empty($_POST['currentPassword'])){
         $currentPassword = md5($_POST['currentPassword']);
         if($currentPassword == $row['password']){
         }else{
-            $error = "Invalid current password.";
+            $error = "Aktuelles Passwort ungültig.";
             echo json_encode($error);
         }
     }

@@ -790,7 +790,7 @@ $(document).ready(function () {
               .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
-            // $("#Confirmation").modal("show");
+            $("#Confirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {
@@ -820,10 +820,17 @@ $(document).ready(function () {
         staffData.services?.forEach((service) => {
           $(`input[type=checkbox][value='${service}']`).prop("checked", true);
         });
-        $("#image-preview-E").attr(
-          "src",
-          `https://drpleger.de/termin-buchen/images/${staffData.profile}`
-        );
+        // Assuming staffData.profile is defined somewhere
+        if (staffData.profile) {
+          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/${staffData.profile}`);
+          $('#open-image-picker-E').text('Bild ändern');
+        } else {
+          $('#open-image-picker-E').text('Bild hochladen')
+          // If staffData.profile does not exist, set the src attribute to an empty string
+          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/logo.png`);
+          $("#image-preview-E").css("display", "none");
+        }
+       
         $("#edit-staff").modal("show");
 
         // updateCheckboxForServices(staffData.services);

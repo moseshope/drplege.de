@@ -331,16 +331,16 @@ if($role == 1){
                             <div class="col-lg-6 col-12">
                                 <div class="form-group p-2 my-2">
                                     <label class="my-1" for="Status">Profil</label>
-                                    <input hidden type="file" name="profile" class="form-control custom-input d-none" id="profile-image" aria-invalid="false">
+                                    <input hidden type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E" aria-invalid="false">
                                     <div class="d-flex align-items-center">
                                         <div class="mr-2">
-                                            <button class="btn custom-main-btn" type="button" id="open-image-picker">
+                                            <button class="custom-main-btn" style="padding-top: 6px; padding-bottom: 6px;" type="button" id="open-image-picker-E">
                                                 <i class="bi bi-upload mr-1"></i> Bild hochladen
                                             </button>
                                         </div>
                                         <div>
                                             <?php 
-                                                echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-pre">' ;
+                                                echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">' ;
                                             ?>
                                         </div>
                                     </div>
@@ -406,9 +406,9 @@ if($role == 1){
     <?php }else{?>
         <script src="asset/js/script2.js"></script>
         <script>
-        document.getElementById("open-image-picker").addEventListener('click',()=>{document.getElementById('profile-image').click()});
-            document.getElementById('profile-image').addEventListener('change',(event)=>{
-                document.getElementById('image-pre').src = URL.createObjectURL(event.target.files[0]);
+        document.getElementById("open-image-picker-E").addEventListener('click',()=>{document.getElementById('profile-image-E').click()});
+            document.getElementById('profile-image-E').addEventListener('change',(event)=>{
+                document.getElementById('image-preview-E').src = URL.createObjectURL(event.target.files[0]);
             })
         </script>
     <?php }?>

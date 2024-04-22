@@ -281,11 +281,12 @@ $(document).ready(function () {
       password: {
         required: "Please enter your password",
         minlength: "Your password must be at least 6 characters long",
+        equalTo:"Aktuelles Passwort ungültig."
       },
       confirm_password: {
         required: "Please enter your password",
         minlength: "Your password must be at least 6 characters long",
-        equalTo: "Passwords do not match",
+        equalTo: "Passwörter stimmen nicht überein",
       },
     },
     errorPlacement: function (error, element) {

@@ -828,7 +828,6 @@ $(document).ready(function () {
           $('#open-image-picker-E').text('Bild hochladen')
           // If staffData.profile does not exist, set the src attribute to an empty string
           $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/logo.png`);
-          $("#image-preview-E").css("display", "none");
         }
        
         $("#edit-staff").modal("show");

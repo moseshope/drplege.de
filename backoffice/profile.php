@@ -41,10 +41,11 @@ if($role == 1){
     $row = $result->fetch_assoc();
     $profile = $row['profile'];
     if(!empty($profile)){
-
         $filePath = 'https://drpleger.de/termin-buchen/images/'.$profile;
+        $buttonName='Bild ändern';
     }else{
         $filePath = 'https://drpleger.de/termin-buchen/images/logo.png';
+        $buttonName= 'Bild hochladen';
     }
 
 
@@ -61,7 +62,7 @@ if($role == 1){
                     $originalFileName = $_FILES["profile"]["name"];
                     $extension  = pathinfo($originalFileName, PATHINFO_EXTENSION);
                     $profileName = rand(11111111, 99999999). "." . $extension;
-                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "https://drpleger.de/termin-buchen/images/" . $profileName);
+                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
                 }
                 else{
                         $profileName = $profile;
@@ -70,12 +71,10 @@ if($role == 1){
                 $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
             }else{
                 if($_FILES["profile"]["name"]){
-                    
-                    
                     $originalFileName = $_FILES["profile"]["name"];
                     $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
                     $profileName = rand(11111111, 99999999). "." . $extension;
-                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "https://drpleger.de/termin-buchen/images/" . $profileName);
+                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
                 }
                 else{
                         $profileName = $profile;
@@ -335,12 +334,15 @@ if($role == 1){
                                     <div class="d-flex align-items-center">
                                         <div class="mr-2">
                                             <button class="custom-main-btn" style="padding-top: 6px; padding-bottom: 6px;" type="button" id="open-image-picker-E">
-                                                <i class="bi bi-upload mr-1"></i> Bild hochladen
+                                                <i class="bi bi-upload mr-1"></i>
+                                                <span><?php 
+                                                echo $buttonName
+                                            ?></span>
                                             </button>
                                         </div>
                                         <div>
                                             <?php 
-                                                echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">' ;
+                                                echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">';
                                             ?>
                                         </div>
                                     </div>

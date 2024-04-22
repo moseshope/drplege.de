@@ -274,18 +274,18 @@ $(document).ready(function () {
       },
     },
     messages: {
-      // current_password: {
-      //   required: "Please enter your current password",
-      //   minlength: "Your password must be at least 6 characters long",
-      // },
-      password: {
-        required: "Please enter your password",
+      current_password: {
+        required: "Bitte geben Sie Ihr Passwort ein",
         minlength: "Your password must be at least 6 characters long",
         equalTo:"Aktuelles Passwort ungültig."
       },
+      password: {
+        required: "Bitte geben Sie Ihr Passwort ein",
+        minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
+      },
       confirm_password: {
-        required: "Please enter your password",
-        minlength: "Your password must be at least 6 characters long",
+        required: "Bitte geben Sie Ihr Passwort ein",
+        minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
         equalTo: "Passwörter stimmen nicht überein",
       },
     },

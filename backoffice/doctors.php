@@ -96,24 +96,24 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
     <div class="px-2">
 
       <div class="d-flex flex-wrap">
-      <!-- <div class="dashboard-search m-2 mx-0">
+        <!-- <div class="dashboard-search m-2 mx-0">
       <i class="bi bi-search"></i>
       <input type="text" class="w-100" id="Search-input"
       placeholder="Search" oninput="search()">
       </div> -->
-      <!-- <form method="get"> -->
+        <!-- <form method="get"> -->
         <div class="dashboard-search my-auto">
           <i class="bi bi-search"></i>
           <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
-          value="<?php echo $searchTerm ?>">
+            value="<?php echo $searchTerm ?>">
         </div>
-      <!-- </form> -->
-      <div class="flex-grow-1"></div>
+        <!-- </form> -->
+        <div class="flex-grow-1"></div>
 
-      <?php if ($role == 1) { ?>
+        <?php if ($role == 1) { ?>
         <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
-        data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
-      <?php } ?>
+          data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
+        <?php } ?>
       </div>
 
       <div class="mt-4 custom-table" id="Search-Options" onchange="handleSelect('Search-input')">
@@ -122,20 +122,20 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <thead>
               <tr>
                 <?php if ($role == 1) { ?>
-                  <td>#</td>
-                  <td>Arzt</td>
-                  <td class="text-center">Leistung</td>
-                  <td class="text-center">Status<i data-value="status"
-                  class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
-                  style="font-size: 14px;display: inline-block;"></i> </td>
-                  <td>
-                    <div class="d-flex justify-content-center">Optionen</div>
-                  </td>
+                <td>#</td>
+                <td>Arzt</td>
+                <td class="text-center">Leistung</td>
+                <td class="text-center">Status<i data-value="status"
+                    class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
+                    style="font-size: 14px;display: inline-block;"></i> </td>
+                <td>
+                  <div class="d-flex justify-content-center">Optionen</div>
+                </td>
                 <?php } else { ?>
-                  <td>#</td>
-                  <td>Arzt</td>
-                  <td class="text-center">Leistung</td>
-                  <td class="text-center">Status </td>
+                <td>#</td>
+                <td>Arzt</td>
+                <td class="text-center">Leistung</td>
+                <td class="text-center">Status </td>
                 <?php } ?>
               </tr>
             </thead>
@@ -143,34 +143,34 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <?php if ($role == 1) {
                 for ($i = $startIndex; $i <= $endIndex; $i++) {
                   ; ?>
-                <tr class="doctor-row">
+              <tr class="doctor-row">
                 <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
                 <td style="min-width: 150px; max-width: 250px;">
                   <div class="d-flex p-0 m-0 flex-column">
                     <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
                     <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                    style="font-weight: 500;">E:
-                    </span><a style="color: var(--main);"
-                    href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                        style="font-weight: 500;">E:
+                      </span><a style="color: var(--main);"
+                        href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
                     </p>
                     <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                    style="color: var(--main);font-weight: 500;">T:
-                    </span><a style="color: var(--main);"
-                    href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                        style="color: var(--main);font-weight: 500;">T:
+                      </span><a style="color: var(--main);"
+                        href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
                     </p>
                   </div>
                 </td>
                 <td class="">
-                <div class="text-start mx-auto">
-                  <ul>
-                    <?php
+                  <div class="text-start mx-auto">
+                    <ul>
+                      <?php
                     $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
                     foreach ($serviceList as $service) {
                       ?>
                       <li class="text-left"><?= $service ?></li>
-                    <?php } ?>
-                  </ul>
-                </div>
+                      <?php } ?>
+                    </ul>
+                  </div>
                 </td>
                 <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
                 <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
@@ -200,9 +200,10 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   }
                 ?>
                 <td class="text-center"><button
-                class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button>
+                </td>
                 <td>
-                <!-- <div class="d-flex justify-content-center dropdown">
+                  <!-- <div class="d-flex justify-content-center dropdown">
               <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
                         ; ?>
               <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
@@ -229,45 +230,46 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               </div> -->
                   <div class="d-flex justify-content-center">
                     <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') { ?>
-                      <!-- Edit button -->
-                      <div class="editButton" data-id="<?php echo $staffList[$i]['id']; ?>"
-                        data-bs-toggle="modal">
-                          <i class="fas fa-edit cursor-pointer p-2"></i>
-                      </div>
-                      <!-- Delete button -->
-                      <div class="deleteButton text-danger" data-id="<?php echo $staffList[$i]['id']; ?>"
-                      data-bs-toggle="modal">
+                    <!-- Edit button -->
+                    <div class="editButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
+                      <i class="fas fa-edit cursor-pointer p-2"></i>
+                    </div>
+                    <!-- Delete button -->
+                    <form method="post" action="./controller/deletestaff.php">
+                      <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
+                      <button type="submit" class="iconButton text-danger" data-id="<?php echo $staffList[$i]['id']; ?>">
                         <i class="fas fa-trash cursor-pointer p-2"></i>
-                      </div>
+                      </button>
+                    </form>
                     <?php } else { ?>
                     <label style="color: green;">Inaktiv</label>
-                  <?php } ?>
+                    <?php } ?>
                   </div>
-                  </td>
-                  </tr>
-                  <?php }
+                </td>
+              </tr>
+              <?php }
                 } else {
                 for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
-                <tr class="doctor-row">
+              <tr class="doctor-row">
                 <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
                 <td style="min-width: 150px; max-width: 250px;">
-                <div class="d-flex p-0 m-0 flex-column">
-                <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
-                <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                style="font-weight: 500;">E:
-                </span><a style="color: var(--main);"
-                href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
-                </p>
-                <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                style="color: var(--main);font-weight: 500;">T:
-                </span><a style="color: var(--main);"
-                href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
-                </p>
-                </div>
+                  <div class="d-flex p-0 m-0 flex-column">
+                    <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
+                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                        style="font-weight: 500;">E:
+                      </span><a style="color: var(--main);"
+                        href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                    </p>
+                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                        style="color: var(--main);font-weight: 500;">T:
+                      </span><a style="color: var(--main);"
+                        href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                    </p>
+                  </div>
                 </td>
                 <td class="text-center">
-                <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
-                data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
+                  <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
+                    data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
                 </td>
                 <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
                 <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
@@ -297,7 +299,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   }
                 ?>
                 <td class="text-center"><button
-                class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button></td>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button>
+                </td>
                 <!-- <td>
               <div class="d-flex justify-content-center dropdown">
               <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
@@ -321,19 +324,19 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <?php } ?>
               </div>
               </td> -->
-                                                                  </tr>
-                                        <?php }
+              </tr>
+              <?php }
                 } ?>
             </tbody>
           </table>
         </div>
       </div>
 
-    <!-- pagination -->
+      <!-- pagination -->
 
-    <div class="white-table">
-      <ul class="custom-pagination" id="custom-pagination"></ul>
-    </div>
+      <div class="white-table">
+        <ul class="custom-pagination" id="custom-pagination"></ul>
+      </div>
 
     </div>
   </div>
@@ -345,7 +348,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 <!-- Add Staff -->
 <form id="AddStaff" method="post" action="./controller/addstaff.php" enctype="multipart/form-data">
   <div class="modal fade" id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true" >
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center py-2">
@@ -353,7 +356,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <h1 class="modal-heading" style="font-weight: 800; margin-left:72px">Doktor hinzufügen</h1>
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
-          aria-label="Close"></button>
+            aria-label="Close"></button>
         </div>
 
         <div class="row">
@@ -374,86 +377,88 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Passwort</label>
-                <div class="password-input-container position-relative d-flex align-items-center">
-                  <!-- Password input -->
-                  <input type="password" name="password" class="form-control custom-input pe-5" id="password"
-                      placeholder="Passwort" required>
-                  <!-- Eye button to toggle visibility -->
-                  <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-password">
-                      <i class="fas fa-eye" id="eye-icon"></i>
-                  </span>
-                </div>
-                <span class="error" id="password-error"></span>
+              <div class="password-input-container position-relative d-flex align-items-center">
+                <!-- Password input -->
+                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
+                  placeholder="Passwort" required>
+                <!-- Eye button to toggle visibility -->
+                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
+                  id="toggle-password">
+                  <i class="fas fa-eye" id="eye-icon"></i>
+                </span>
+              </div>
+              <span class="error" id="password-error"></span>
             </div>
           </div>
 
           <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                  const passwordInput = document.getElementById('password');
-                  const togglePasswordButton = document.getElementById('toggle-password');
-                  const eyeIcon = document.getElementById('eye-icon');
+          document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const togglePasswordButton = document.getElementById('toggle-password');
+            const eyeIcon = document.getElementById('eye-icon');
 
-                  // Function to toggle the password visibility
-                  function togglePasswordVisibility() {
-                      if (passwordInput.type === 'password') {
-                          passwordInput.type = 'text';
-                          eyeIcon.classList.remove('fa-eye');
-                          eyeIcon.classList.add('fa-eye-slash');
-                      } else {
-                          passwordInput.type = 'password';
-                          eyeIcon.classList.remove('fa-eye-slash');
-                          eyeIcon.classList.add('fa-eye');
-                      }
-                  }
+            // Function to toggle the password visibility
+            function togglePasswordVisibility() {
+              if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+              } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+              }
+            }
 
-                  // Attach the function to the button's click event
-                  togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-              });
+            // Attach the function to the button's click event
+            togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+          });
           </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Passwort bestätigen</label>
-                <div class="password-input-container position-relative d-flex align-items-center">
-                  <!-- Password input -->
-                  <input type="password" name="confirm_password" class="form-control custom-input pe-5" id="confirm_password"
-                      placeholder="Passwort bestätigen" required>
-                  <!-- Eye button to toggle visibility -->
-                  <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button" id="toggle-confirm_password">
-                      <i class="fas fa-eye" id="eye-icon-confirm"></i>
-                  </span>
-                </div>
-                <span class="error" id="confirm_password-error"></span>
+              <div class="password-input-container position-relative d-flex align-items-center">
+                <!-- Password input -->
+                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
+                  id="confirm_password" placeholder="Passwort bestätigen" required>
+                <!-- Eye button to toggle visibility -->
+                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
+                  id="toggle-confirm_password">
+                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                </span>
+              </div>
+              <span class="error" id="confirm_password-error"></span>
             </div>
           </div>
 
           <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                  const passwordInputConfirm = document.getElementById('confirm_password');
-                  const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
-                  const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+          document.addEventListener('DOMContentLoaded', function() {
+            const passwordInputConfirm = document.getElementById('confirm_password');
+            const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
+            const eyeIconConfirm = document.getElementById('eye-icon-confirm');
 
-                  // Function to toggle the password visibility
-                  function togglePasswordConfirmVisibility() {
-                      if (passwordInputConfirm.type === 'password') {
-                          passwordInputConfirm.type = 'text';
-                          eyeIconConfirm.classList.remove('fa-eye');
-                          eyeIconConfirm.classList.add('fa-eye-slash');
-                      } else {
-                          passwordInputConfirm.type = 'password';
-                          eyeIconConfirm.classList.remove('fa-eye-slash');
-                          eyeIconConfirm.classList.add('fa-eye');
-                      }
-                  }
-                // Attach the function to the button's click event
-                  togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
-              });
+            // Function to toggle the password visibility
+            function togglePasswordConfirmVisibility() {
+              if (passwordInputConfirm.type === 'password') {
+                passwordInputConfirm.type = 'text';
+                eyeIconConfirm.classList.remove('fa-eye');
+                eyeIconConfirm.classList.add('fa-eye-slash');
+              } else {
+                passwordInputConfirm.type = 'password';
+                eyeIconConfirm.classList.remove('fa-eye-slash');
+                eyeIconConfirm.classList.add('fa-eye');
+              }
+            }
+            // Attach the function to the button's click event
+            togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
+          });
           </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
               <select name="status" class="cursor-pointer form-select custom-input" id="Status">
-              <option selected>Aktiv</option>
-              <option>Deaktiviert</option>
+                <option selected>Aktiv</option>
+                <option>Deaktiviert</option>
               </select>
               <span class="error" id="status-error"></span>
             </div>
@@ -462,7 +467,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Telephone">Telefon</label>
               <input type="text" name="telephone" class="form-control custom-input" id="Telephone"
-              placeholder="Telefon">
+                placeholder="Telefon">
               <span class="error" id="telephone-error"></span>
             </div>
           </div>
@@ -470,7 +475,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <div class="form-group p-2 select-group my-2" id="select-group">
               <label class="my-1" for="Services">Leistung</label>
               <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
-              <?php
+                <?php
               foreach ($servicesArray as $service) {
                 echo '<div class="form-check">';
                 echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['id'] . '">';
@@ -486,26 +491,28 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Profil</label>
               <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image"
-              aria-invalid="false" accept="image/*">
+                aria-invalid="false" accept="image/*">
               <button class="custom-main-btn my-2 w-100 d-block" type="button" id="open-image-picker"><i
-              class="bi bi-upload me-2"></i>Bild hochladen</button>
+                  class="bi bi-upload me-2"></i>Bild hochladen</button>
               <div class="text-center"><img id="image-preview" class="user-select-none" width="100px"></div>
               <span class="error" id="status-error"></span>
             </div>
           </div>
-        <!-- <div class="col-lg-6 col-12 ">
+          <!-- <div class="col-lg-6 col-12 ">
         </div> -->
         </div>
         <div class="d-flex justify-content-center align-items-center py-2 my-3">
-          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
-          <button type="button" id="addStaffBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Hinzufügen</button>
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
+            style="margin-right: 5px;">Abbrechen</button>
+          <button type="submit" id="addStaffBtn" class="success-button cursor-pointer"
+            style="margin-left: 5px;">Hinzufügen</button>
         </div>
       </div>
     </div>
   </div>
   <!-- staff Confirmation -->
   <div class="modal fade " id="StaffConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center flex-column">
@@ -513,25 +520,26 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
+          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
+            style="margin-right: 3px;">Nein</button>
           <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-          data-bs-target="#show-info" style="margin-left: 3px;">Ja</button>
+            data-bs-target="#show-info" style="margin-left: 3px;">Ja</button>
         </div>
       </div>
     </div>
   </div>
   <!-- staff show info  -->
   <div class="modal fade " id="staffShowInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered " role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center flex-column py-4">
           <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
-          aktualisiert.</h1>
+            aktualisiert.</h1>
         </div>
         <div class="d-flex justify-content-center align-items-center">
           <button id="StaffShowInfoBtn" type="submit" class="success-button cursor-pointer"
-          data-bs-dismiss="modal">Okay</button>
+            data-bs-dismiss="modal">Okay</button>
         </div>
       </div>
     </div>
@@ -540,7 +548,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
 <!-- Services list model  -->
 <div class="modal fade " id="services-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered " role="document">
     <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
       <div class="d-flex justify-content-center align-items-center mb-4">
@@ -558,7 +566,7 @@ aria-hidden="true">
 <!-- time list model  -->
 
 <div class="modal fade " id="time-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered " role="document">
     <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
       <div class="d-flex justify-content-center align-items-center mb-4">
@@ -587,14 +595,14 @@ aria-hidden="true">
 </div>
 <!-- patients list model  -->
 <div class="modal fade " id="patient-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered " role="document">
     <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
       <div class="d-flex justify-content-center align-items-center mb-4">
         <h1 class="modal-heading" style="font-weight: 800;">Patientenliste</h1>
       </div>
       <ul style="color: black;font-size: var(--md-text);font-weight:500;" id="patientList">
-      <!-- <li>
+        <!-- <li>
       <div class="row">
       <div class="col-6">Jhon Deo</div>
       <div class="col-6"><span>Visited on: </span>21.11.2023
@@ -654,7 +662,7 @@ aria-hidden="true">
 <!-- Edit Staff -->
 <form id="EditStaff" action="./controller/editstaff.php" method="post" enctype="multipart/form-data">
   <div class="modal fade " id="edit-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center py-2">
@@ -662,7 +670,7 @@ aria-hidden="true">
           <h1 class="modal-heading" style="font-weight: 800;">Doktor bearbeiten</h1>
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:50px;"
-          aria-label="Close"></button>
+            aria-label="Close"></button>
         </div>
 
         <!-- <form> -->
@@ -670,46 +678,46 @@ aria-hidden="true">
         <div class="row">
           <input type="hidden" name="id" value="" class="form-control custom-input" id="StaffId">
           <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="Name">Name</label>
-          <input type="text" name="name" value="" class="form-control custom-input" id="StaffName"
-          placeholder="Name">
-          <span class="error" id="name-edit-error"></span>
-          </div>
-          </div>
-          <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="email">E-Mail</label>
-          <input type="email" name="email" value="" class="form-control custom-input" id="StaffEmail"
-          placeholder="E-Mail">
-          <span class="error" id="email-edit-error"></span>
-          </div>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Name">Name</label>
+              <input type="text" name="name" value="" class="form-control custom-input" id="StaffName"
+                placeholder="Name">
+              <span class="error" id="name-edit-error"></span>
+            </div>
           </div>
           <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="Status">Status</label>
-          <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
-          <option selected value="Aktiv">Aktiv</option>
-          <option value="Deaktiviert">Deaktiviert</option>
-          </select>
-          <span class="error" id="status-error"></span>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="email">E-Mail</label>
+              <input type="email" name="email" value="" class="form-control custom-input" id="StaffEmail"
+                placeholder="E-Mail">
+              <span class="error" id="email-edit-error"></span>
+            </div>
           </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Status">Status</label>
+              <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
+                <option selected value="Aktiv">Aktiv</option>
+                <option value="Deaktiviert">Deaktiviert</option>
+              </select>
+              <span class="error" id="status-error"></span>
+            </div>
           </div>
 
           <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="Telephone">Telefon</label>
-          <input type="text" name="telephone" value="" class="form-control custom-input" id="StaffTelephone"
-          placeholder="Telefon">
-          <span class="error" id="telephone-edit-error"></span>
-          </div>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Telephone">Telefon</label>
+              <input type="text" name="telephone" value="" class="form-control custom-input" id="StaffTelephone"
+                placeholder="Telefon">
+              <span class="error" id="telephone-edit-error"></span>
+            </div>
           </div>
 
           <div class="col-lg-6">
-          <div class="form-group p-2 select-group my-2" id="select-group">
-          <label class="my-1" for="Services">Leistungen</label>
-          <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
-          <?php
+            <div class="form-group p-2 select-group my-2" id="select-group">
+              <label class="my-1" for="Services">Leistungen</label>
+              <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
+                <?php
           foreach ($servicesArray as $service) {
             echo '<div class="form-check">';
             echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="edit_' . $service['services'] . '" value="' . $service['id'] . '">';
@@ -717,22 +725,22 @@ aria-hidden="true">
             echo '</div>';
             }
           ?>
-          </div>
+              </div>
 
-          <span class="error" id="staff_services-error"></span>
-          </div>
+              <span class="error" id="staff_services-error"></span>
+            </div>
           </div>
 
           <div class="col-lg-6 col-12">
-          <div class="form-group p-2 my-2">
-          <label class="my-1" for="Status">Profil</label>
-          <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
-          aria-invalid="false" accept="image/*">
-          <button class="custom-main-btn d-block w-100 my-2" type="button" id="open-image-picker-E"><i
-          class="bi bi-upload mx-2"></i></button>
-          <div class="text-center"><img id="image-preview-E" width="100px"></div>
-          <span class="error" id="status-error"></span>
-          </div>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Status">Profil</label>
+              <input type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
+                aria-invalid="false" accept="image/*">
+              <button class="custom-main-btn d-block w-100 my-2" type="button" id="open-image-picker-E"><i
+                  class="bi bi-upload mx-2"></i></button>
+              <div class="text-center"><img id="image-preview-E" width="100px"></div>
+              <span class="error" id="status-error"></span>
+            </div>
           </div>
 
 
@@ -747,108 +755,111 @@ aria-hidden="true">
           </div>
           </div> -->
 
-          </div>
-          <div class="d-flex justify-content-center align-items-center py-2 my-3">
+        </div>
+        <div class="d-flex justify-content-center align-items-center py-2 my-3">
           <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 5px;"
-          id="cancelStaff">Abbrechen</button>
-          <button type="button" class="success-button cursor-pointer mx-2" id="UpdateStaffBtn">Aktualisieren</button>
-          </div>
+            id="cancelStaff">Abbrechen</button>
+          <button type="submit" class="success-button cursor-pointer mx-2" id="UpdateStaffBtn">Aktualisieren</button>
+        </div>
 
-          <!-- Confirmation -->
-          <div class="modal fade " id="EditConfirmation" tabindex="-1" role="dialog"
+        <!-- Confirmation -->
+        <div class="modal fade " id="EditConfirmation" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-          <div class="d-flex justify-content-center align-items-center flex-column">
-          <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-          <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+            <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
+                  style="margin-right: 3px;">Nein</button>
+                <button type="submit" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
+                  data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
+              </div>
+            </div>
           </div>
-          <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
-          <button type="submit" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-          data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
-          </div>
-          </div>
-          </div>
-          </div>
-      <!-- </form> -->
+        </div>
+        <!-- </form> -->
       </div>
     </div>
   </div>
-<!-- edit conformation -->
-<div class="modal fade " id="EditStaffConfirmation" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column">
-<h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-<p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
-<button type="button" class="success-button cursor-pointer mx-1" data-bs-toggle="modal" data-bs-dismiss="modal"
-id="UpdateStaffConfirmationBtn" style="margin-left: 3px;">Ja</button>
-</div>
-</div>
-</div>
-</div>
+  <!-- edit conformation -->
+  <div class="modal fade " id="EditStaffConfirmation" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+          <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+          <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
+            style="margin-right: 3px;">Nein</button>
+          <button type="button" class="success-button cursor-pointer mx-1" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="UpdateStaffConfirmationBtn" style="margin-left: 3px;">Ja</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="modal fade " id="edit-show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column py-4">
-<h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
-aktualisiert.</h1>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal"
-id="UpdateStaffShowInfoBtn">Okay</button>
-</div>
-</div>
-</div>
-</div>
+  <div class="modal fade " id="edit-show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column py-4">
+          <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
+            aktualisiert.</h1>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal"
+            id="UpdateStaffShowInfoBtn">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 
 <!-- Confirmation -->
 <form method="post" action="./controller/deletestaff.php">
-<div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<input type="hidden" name="id" value="" class="form-control custom-input" id="deleteStaffId">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column">
-<h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-<p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-  <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 3px;">Nein</button>
-<button type="button" class="success-button cursor-pointer mx-1" data-bs-target="#show-info" data-bs-toggle="modal"
-data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
-</div>
-</div>
-</div>
-</div>
+  <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <input type="hidden" name="id" value="" class="form-control custom-input" id="deleteStaffId">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+          <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+          <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
+            style="margin-right: 3px;">Nein</button>
+          <button type="button" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
+            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered " role="document">
-<div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-<div class="d-flex justify-content-center align-items-center flex-column py-4">
-<h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
-gelöscht.</h1>
-</div>
-<div class="d-flex justify-content-center align-items-center">
-<button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-</div>
-</div>
-</div>
-</div>
+  <div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+        <div class="d-flex justify-content-center align-items-center flex-column py-4">
+          <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Datensatz erfolgreich
+            gelöscht.</h1>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="asset/js/index.js"></script>
 <script src="asset/js/pagination.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -857,108 +868,108 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
 <script src="./asset/js/script.js"></script>
 <script>
 $(document).ready(function() {
-// show service 
-$('.showAllBtn').on('click', function() {
-var id = $(this).data('id');
-$.ajax({
-url: './ajax/servicelist.php',
-method: 'GET',
-data: {
-id: id
-},
-success: function(response) {
+  // show service 
+  $('.showAllBtn').on('click', function() {
+    var id = $(this).data('id');
+    $.ajax({
+      url: './ajax/servicelist.php',
+      method: 'GET',
+      data: {
+        id: id
+      },
+      success: function(response) {
 
-var staffData = JSON.parse(response);
-var serviceString = staffData.services;
-// var serviceArray = serviceString.split('__');
-for (var i = 0; i < serviceArray.length; i++) {
-serviceArray[i] = serviceArray[i].trim();
-}
-var servicesList = '';
-serviceArray.forEach(function(service) {
-servicesList += '<li> ' + service.trim() + '</li>';
-});
-$('#showAll').html(servicesList);
-$('#services-list').modal('show');
-},
-error: function(xhr, status, error) {
-console.error('Error:', error);
-}
-});
-});
-// show time 
-$('.showTimeBtn').on('click', function() {
-var id = $(this).data('id');
-$.ajax({
-url: './ajax/timelist.php',
-method: 'GET',
-data: {
-id: id
-},
-success: function(response) {
-var responseData = JSON.parse(response);
-responseData.sort(function(a, b) {
-return new Date(a.selected_date) - new Date(b.selected_date);
-});
-var timeSlotsList = '';
-responseData.forEach(function(slot) {
-var selectedDate = slot.selected_date;
-var times = JSON.parse(slot.time);
-times.sort();
-timeSlotsList += '<li>Date: ' + selectedDate + '<ul>';
+        var staffData = JSON.parse(response);
+        var serviceString = staffData.services;
+        // var serviceArray = serviceString.split('__');
+        for (var i = 0; i < serviceArray.length; i++) {
+          serviceArray[i] = serviceArray[i].trim();
+        }
+        var servicesList = '';
+        serviceArray.forEach(function(service) {
+          servicesList += '<li> ' + service.trim() + '</li>';
+        });
+        $('#showAll').html(servicesList);
+        $('#services-list').modal('show');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+  // show time 
+  $('.showTimeBtn').on('click', function() {
+    var id = $(this).data('id');
+    $.ajax({
+      url: './ajax/timelist.php',
+      method: 'GET',
+      data: {
+        id: id
+      },
+      success: function(response) {
+        var responseData = JSON.parse(response);
+        responseData.sort(function(a, b) {
+          return new Date(a.selected_date) - new Date(b.selected_date);
+        });
+        var timeSlotsList = '';
+        responseData.forEach(function(slot) {
+          var selectedDate = slot.selected_date;
+          var times = JSON.parse(slot.time);
+          times.sort();
+          timeSlotsList += '<li>Date: ' + selectedDate + '<ul>';
 
-times.forEach(function(time) {
-timeSlotsList += '<li>' + time + ' Uhr</li>';
-});
+          times.forEach(function(time) {
+            timeSlotsList += '<li>' + time + ' Uhr</li>';
+          });
 
-timeSlotsList += '</ul></li>';
-});
+          timeSlotsList += '</ul></li>';
+        });
 
-// Display the list
-$('#timeList').html(
-'<ul class="show-services" style="color: #381e14;font-size: var(--md-text);font-weight:500;">' +
-timeSlotsList + '</ul>');
-$('#time-list').modal('show');
-},
-error: function(xhr, status, error) {
-console.error('Error:', error);
-}
-});
-});
+        // Display the list
+        $('#timeList').html(
+          '<ul class="show-services" style="color: #381e14;font-size: var(--md-text);font-weight:500;">' +
+          timeSlotsList + '</ul>');
+        $('#time-list').modal('show');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  });
 
-$('.patientList').on('click', function() {
-var id = $(this).data('id');
-$.ajax({
-url: './ajax/patientlist.php',
-method: 'GET',
-data: {
-id: id
-},
-success: function(response) {
-var patientData = JSON.parse(response);
-var patientList = $('#patientList');
-var patientCount = patientData.length;
-patientList.empty();
-for (var i = 0; i < patientData.length; i++) {
-var patient = patientData[i];
-var listItem = $('<li>');
+  $('.patientList').on('click', function() {
+    var id = $(this).data('id');
+    $.ajax({
+      url: './ajax/patientlist.php',
+      method: 'GET',
+      data: {
+        id: id
+      },
+      success: function(response) {
+        var patientData = JSON.parse(response);
+        var patientList = $('#patientList');
+        var patientCount = patientData.length;
+        patientList.empty();
+        for (var i = 0; i < patientData.length; i++) {
+          var patient = patientData[i];
+          var listItem = $('<li>');
 
-listItem.html(`
+          listItem.html(`
 <div class="row">
 <div class="col-6">${patient.name}</div>
 <div class="col-6"><span>Visited on: </span>${patient.created_at}</div>
 </div>
 `);
 
-patientList.append(listItem);
-}
-$('#patient-list').modal('show');
-},
-error: function(xhr, status, error) {
-console.error('Error:', error);
-}
-});
-});
+          patientList.append(listItem);
+        }
+        $('#patient-list').modal('show');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  });
 });
 </script>
 
@@ -966,11 +977,11 @@ console.error('Error:', error);
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
 <?php if ($totalItems > $itemsPerPage) { ?>
-  CreatePagination({
+CreatePagination({
   elementId: "custom-pagination",
   totalPage: <?php echo $totalPages; ?>,
   currentPage: currentPage ? Number(currentPage) : 1
-  })
+})
 <?php } ?>
 </script>
 
@@ -997,32 +1008,31 @@ doctorRows[i].style.display = "none";
 }
 </script> -->
 <script>
-
 function filterByDate() {
-const startDate = document.getElementById("start-date").value;
-const endDate = document.getElementById("end-date").value;
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
 
-const startDateObj = parseCustomDate(startDate);
-const endDateObj = parseCustomDate(endDate);
+  const startDateObj = parseCustomDate(startDate);
+  const endDateObj = parseCustomDate(endDate);
 
-const doctorRows = document.getElementsByClassName("doctor-row");
+  const doctorRows = document.getElementsByClassName("doctor-row");
 
-for (let i = 0; i < doctorRows.length; i++) {
-const dateString = doctorRows[i].getElementsByClassName("created-at")[0].textContent;
-const dataDate = parseCustomDate(dateString);
+  for (let i = 0; i < doctorRows.length; i++) {
+    const dateString = doctorRows[i].getElementsByClassName("created-at")[0].textContent;
+    const dataDate = parseCustomDate(dateString);
 
-if (dataDate >= startDateObj && dataDate <= endDateObj) {
-doctorRows[i].style.display = "table-row";
-} else {
-doctorRows[i].style.display = "none";
-}
-}
+    if (dataDate >= startDateObj && dataDate <= endDateObj) {
+      doctorRows[i].style.display = "table-row";
+    } else {
+      doctorRows[i].style.display = "none";
+    }
+  }
 }
 
 // Custom function to parse dates in the format "24.12.2023"
 function parseCustomDate(dateString) {
-const [day, month, year] = dateString.split('.');
-return new Date(`${year}-${month}-${day}`);
+  const [day, month, year] = dateString.split('.');
+  return new Date(`${year}-${month}-${day}`);
 }
 </script>
 <!-- <script>
@@ -1059,109 +1069,109 @@ console.error('Error:', error);
 
 <script>
 $(document).ready(function() {
-$('#Services-Options-E').on('change', function() {
-var selectedOptions = $(this).val();
-$('#Services-input-E').val(selectedOptions ? selectedOptions.join(', ') : '');
-});
+  $('#Services-Options-E').on('change', function() {
+    var selectedOptions = $(this).val();
+    $('#Services-input-E').val(selectedOptions ? selectedOptions.join(', ') : '');
+  });
 
-$('#Services-Options').on('change', function() {
-var selectedOptions = $(this).val();
-$('#Services-input').val(selectedOptions ? selectedOptions.join(', ') : '');
-});
+  $('#Services-Options').on('change', function() {
+    var selectedOptions = $(this).val();
+    $('#Services-input').val(selectedOptions ? selectedOptions.join(', ') : '');
+  });
 });
 
 $('#Search-input').on('keyup', function(e) {
-if (e.key === 'Enter' || e.keyCode === 13) {
-var searchValue = $(this).val();
-var url = window.location.href.split('?')[0];
-window.location.href = url + '?search=' + encodeURIComponent(searchValue);
-console.log("Search value:", searchValue);
-}
+  if (e.key === 'Enter' || e.keyCode === 13) {
+    var searchValue = $(this).val();
+    var url = window.location.href.split('?')[0];
+    window.location.href = url + '?search=' + encodeURIComponent(searchValue);
+    console.log("Search value:", searchValue);
+  }
 });
 $('#applyDatepicker').on('click', function() {
 
-var startDate = $('#start-date').val();
-var endDate = $('#end-date').val();
+  var startDate = $('#start-date').val();
+  var endDate = $('#end-date').val();
 
-var url = window.location.href;
-var separator = url.indexOf('?') !== -1 ? '&' : '?';
-var newUrl = url + separator + 'start_date=' + encodeURIComponent(startDate) + '&end_date=' + encodeURIComponent(
-endDate);
-window.location.href = newUrl;
+  var url = window.location.href;
+  var separator = url.indexOf('?') !== -1 ? '&' : '?';
+  var newUrl = url + separator + 'start_date=' + encodeURIComponent(startDate) + '&end_date=' + encodeURIComponent(
+    endDate);
+  window.location.href = newUrl;
 
 });
 
 $('.Shorting').on('click', function() {
-var column = $(this).data('value');
-var url = window.location.href;
-var orderby = 'asc';
-if (url.includes('orderby')) {
-var url2 = new URL(url);
-var c = url2.searchParams.get("orderby");
-orderby = (c == 'asc') ? 'desc' : 'asc';
-}
-var url2 = window.location.href.split('?')[0];
-newUrl = url2 + '?' + 'orderby=' + encodeURIComponent(orderby) + '&column=' + encodeURIComponent(column);
-window.location.href = newUrl;
+  var column = $(this).data('value');
+  var url = window.location.href;
+  var orderby = 'asc';
+  if (url.includes('orderby')) {
+    var url2 = new URL(url);
+    var c = url2.searchParams.get("orderby");
+    orderby = (c == 'asc') ? 'desc' : 'asc';
+  }
+  var url2 = window.location.href.split('?')[0];
+  newUrl = url2 + '?' + 'orderby=' + encodeURIComponent(orderby) + '&column=' + encodeURIComponent(column);
+  window.location.href = newUrl;
 
 });
 
 $('#clearDatepicker').on('click', function() {
-var url = window.location.href;
-var baseUrl = url.split('?')[0];
-window.location.href = baseUrl;
+  var url = window.location.href;
+  var baseUrl = url.split('?')[0];
+  window.location.href = baseUrl;
 })
 
 $('#cancelStaff').on('click', function() {
-location.reload(true);
+  location.reload(true);
 })
 </script>
 <script>
 document.getElementById("open-image-picker").addEventListener('click', () => {
-document.getElementById('profile-image').click()
+  document.getElementById('profile-image').click()
 });
 
 function redirectToEmployeePage() {
-window.location.href = "employees";
+  window.location.href = "employees";
 }
 
 document.getElementById('profile-image').addEventListener('change', function(event) {
-var file = event.target.files[0];
-if (file) {
-var reader = new FileReader();
-reader.onload = function(e) {
-var image = document.getElementById('image-preview');
-image.src = e.target.result;
-// Set max height and width
-image.style.maxHeight = '100px';
-image.style.maxWidth = '100px';
-};
-reader.readAsDataURL(file);
-}
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var image = document.getElementById('image-preview');
+      image.src = e.target.result;
+      // Set max height and width
+      image.style.maxHeight = '100px';
+      image.style.maxWidth = '100px';
+    };
+    reader.readAsDataURL(file);
+  }
 });
 </script>
 <script>
 document.getElementById("open-image-picker-E").addEventListener('click', () => {
-document.getElementById('profile-image-E').click()
+  document.getElementById('profile-image-E').click()
 });
 
 function redirectToEmployeePage() {
-window.location.href = "employees";
+  window.location.href = "employees";
 }
 
 document.getElementById('profile-image-E').addEventListener('change', function(event) {
-var file = event.target.files[0];
-if (file) {
-var reader = new FileReader();
-reader.onload = function(e) {
-var image = document.getElementById('image-preview-E');
-image.src = e.target.result;
-// Set max height and width
-image.style.maxHeight = '100px';
-image.style.maxWidth = '100px';
-};
-reader.readAsDataURL(file);
-}
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var image = document.getElementById('image-preview-E');
+      image.src = e.target.result;
+      // Set max height and width
+      image.style.maxHeight = '100px';
+      image.style.maxWidth = '100px';
+    };
+    reader.readAsDataURL(file);
+  }
 });
 </script>
 
@@ -1169,15 +1179,15 @@ reader.readAsDataURL(file);
 <?php include ('./layout/script.php') ?>
 
 <script>
-  $("#edit-staff, #add-staff").on("shown.bs.modal", function() {
-    $(this).find('input').eq(0).focus();
-  });
+$("#edit-staff, #add-staff").on("shown.bs.modal", function() {
+  $(this).find('input').eq(0).focus();
+});
 
-  $("#add-staff").on("show.bs.modal", function() {
-    $(this).find('input:not([type=checkbox])').val('');
-    $(this).find('input[type=checkbox]').prop('checked', false);
-  });
-
+$("#add-staff").on("show.bs.modal", function() {
+  $(this).find('input:not([type=checkbox])').val('');
+  $(this).find('input[type=checkbox]').prop('checked', false);
+});
 </script>
 </body>
+
 </html>

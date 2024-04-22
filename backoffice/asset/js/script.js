@@ -302,11 +302,12 @@ $(document).ready(function () {
     },
     messages: {
       current_password: {
-        required: "Bitte geben Sie Ihr aktuelles Kennwort ein",
-        minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
+        required: "Bitte geben Sie Ihr Passwort ein",
+        minlength: "Your password must be at least 6 characters long",
+        equalTo:"Aktuelles Passwort ungültig."
       },
       password: {
-        required: "Bitte geben Sie Ihr Kennwort ein",
+        required: "Bitte geben Sie Ihr Passwort ein",
         minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
       },
       confirm_password: {
@@ -429,7 +430,7 @@ $(document).ready(function () {
             }
           } else {
             $("#add-staff").modal("hide");
-            $("#StaffConfirmation").modal("show");
+            // $("#StaffConfirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {
@@ -438,13 +439,13 @@ $(document).ready(function () {
       });
     }
   });
-  $("#StaffConfirmationYesBtn").on("click", function () {
-    $("#staffShowInfo").modal("show");
-    $("#StaffConfirmation").modal("hide");
-  });
-  $("#StaffShowInfoBtn").on("click", function () {
-    $("#staffShowInfo").modal("hide");
-  });
+  // $("#StaffConfirmationYesBtn").on("click", function () {
+  //   $("#staffShowInfo").modal("show");
+  //   $("#StaffConfirmation").modal("hide");
+  // });
+  // $("#StaffShowInfoBtn").on("click", function () {
+  //   $("#staffShowInfo").modal("hide");
+  // });
 
   // Add Nurse
 
@@ -549,7 +550,7 @@ $(document).ready(function () {
             }
           } else {
             $("#add-nurse").modal("hide");
-            $("#NurseConfirmation").modal("show");
+            // $("#NurseConfirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {
@@ -663,7 +664,7 @@ $(document).ready(function () {
               $("#email-edit-error").hide();
             }
           } else {
-            $("#EditNurseConfirm").modal("show");
+            // $("#EditNurseConfirm").modal("show");
             $("#edit-nurse").modal("hide");
           }
         },
@@ -685,7 +686,7 @@ $(document).ready(function () {
       success: function (response) {
         var nurseData = JSON.parse(response);
         $("#deleteNurseId").val(nurseData);
-        $("#deleteNurseConfirmation").modal("show");
+        // $("#deleteNurseConfirmation").modal("show");
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
@@ -736,7 +737,7 @@ $(document).ready(function () {
             }
           } else {
             $("#edit-staff").modal("hide");
-            $("#EditStaffConfirmation").modal("show");
+            // $("#EditStaffConfirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {
@@ -861,7 +862,7 @@ $(document).ready(function () {
       success: function (response) {
         var staffData = JSON.parse(response);
         $("#deleteStaffId").val(staffData);
-        $("#Confirmation").modal("show");
+        // $("#Confirmation").modal("show");
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);

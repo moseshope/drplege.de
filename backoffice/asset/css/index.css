@@ -310,6 +310,11 @@ a:hover {
   border: none;
   padding: 4px;
 }
+button.iconButton {
+  background: none;
+  min-width: fit-content;
+  padding: 0;
+}
 .custom-success-btn {
   background-color: #ebf9eb;
   color: #109b04;

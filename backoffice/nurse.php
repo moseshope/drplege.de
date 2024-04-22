@@ -146,10 +146,13 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                                                         <i class="fas fa-edit p-2 cursor-pointer"></i>
                                                     </div>
                                                     <!-- Delete button -->
-                                                    <div class="deleteNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
+                                                    <form method="post" action="./controller/deletenurse.php">
+                                                        <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
+                                                        <button type="submit" class="iconButton deleteNurseButton" data-id="<?php echo $staffList[$i]['id'];?>">
                                                         <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
-                                                    </div>
+                                                        </button>
                                                 <?php } ?>
+                                                </form>
                                             </div>
 
                                         </td>
@@ -294,7 +297,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
                             <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
-                            <button type="button"  id="addNurseBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Hinzufügen</button>
+                            <button type="submit"  id="addNurseBtn" class="success-button cursor-pointer" style="margin-left: 5px;">Hinzufügen</button>
                         </div>
                 </div>
             </div>
@@ -376,7 +379,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         </div>
                         <div class="d-flex justify-content-center align-items-center py-2 my-3">
                             <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal" id="cancelNurse" style="margin-right: 5px;">Abbrechen</button>
-                            <button type="button" class="success-button cursor-pointer" id="UpdateNurseBtn" name="UpdateNurseBtn">Aktualisieren</button>
+                            <button type="submit" class="success-button cursor-pointer" id="UpdateNurseBtn" name="UpdateNurseBtn">Aktualisieren</button>
                         </div>   
                 </div>
             </div>

@@ -56,29 +56,37 @@ if($role == 1){
             $password_plain = mysqli_real_escape_string($connect, $_POST ['password']);
             $password = mysqli_real_escape_string($connect,md5($_POST['password']));
             $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
-            if($_FILES["profile"]["name"]){
-                    
-                    
-                    $originalFileName = $_FILES["profile"]["name"];
-                    $extension  = pathinfo($originalFileName, PATHINFO_EXTENSION);
-                    $profileName = rand(11111111, 99999999). "." . $extension;
-                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
-                }
-                else{
-                        $profileName = $profile;
-                }
-            
+            if($_FILES["profile"]["name"]) {
+                // If a file is uploaded
+                $originalFileName = $_FILES["profile"]["name"];
+                $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+                // Get the current timestamp
+                $timestamp = time();
+                // Concatenate the timestamp with the original filename (separated by an underscore)
+                $profileName = $timestamp . "_" . $originalFileName;
+                // Move the uploaded file to the desired location with the composed profile name
+                $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
+            } else {
+                // If no file is uploaded, use the existing profile name
+                $profileName = $profile;
+            }
                 $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
             }else{
-                if($_FILES["profile"]["name"]){
+                if($_FILES["profile"]["name"]) {
+                    // If a file is uploaded
                     $originalFileName = $_FILES["profile"]["name"];
                     $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-                    $profileName = rand(11111111, 99999999). "." . $extension;
+                    // Get the current timestamp
+                    $timestamp = time();
+                    // Concatenate the timestamp with the original filename (separated by an underscore)
+                    $profileName = $timestamp . "_" . $originalFileName;
+                    // Move the uploaded file to the desired location with the composed profile name
                     $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
+                } else {
+                    // If no file is uploaded, use the existing profile name
+                    $profileName = $profile;
                 }
-                else{
-                        $profileName = $profile;
-                }
+                
             
                 $sql = "update user set profile='$profileName' where id='$id'";
                 if($sql == true)

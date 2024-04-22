@@ -276,7 +276,7 @@ $(document).ready(function () {
     messages: {
       current_password: {
         required: "Bitte geben Sie Ihr Passwort ein",
-        minlength: "Your password must be at least 6 characters long",
+        // minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
         equalTo:"Aktuelles Passwort ungültig."
       },
       password: {

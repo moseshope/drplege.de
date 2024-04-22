@@ -20,15 +20,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $status = mysqli_real_escape_string($connect, $_POST['status']);
         $role = 2;
 
-        if ($_FILES["profile"]["name"]) {
-
+        if($_FILES["profile"]["name"]) {
+                // If a file is uploaded
                 $originalFileName = $_FILES["profile"]["name"];
                 $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-                $profileName = rand(11111111, 99999999) . "." . $extension;
+                // Get the current timestamp
+                $timestamp = time();
+                // Concatenate the timestamp with the original filename (separated by an underscore)
+                $profileName = $timestamp . "_" . $originalFileName;
+                // Move the uploaded file to the desired location with the composed profile name
                 $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
-                } else {
+            } else {
+                // If no file is uploaded, use the existing profile name
                 $profileName = NULL;
-                }
+            }
+            
+
         $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : array();
 
         // if (is_array($staff_services)) {

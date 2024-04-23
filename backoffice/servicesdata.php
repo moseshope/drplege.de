@@ -74,7 +74,7 @@ include('./layout/sidebar.php');
                            </div>
                            
                            <!-- Delete Button -->
-                           <div class="deleteservices text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>" data-bs-toggle="modal" data-bs-target="#deletedConfirmation">
+                           <div class="deleteservices text-danger" id="deleteservices-<?php echo $i ?>" data-id="<?php echo $servicesList[$i]['id']; ?>">
                               <i class="fas fa-trash cursor-pointer p-2"></i>
                            </div>
                         </div>
@@ -124,7 +124,7 @@ include('./layout/sidebar.php');
             </div>
             <div class="d-flex justify-content-center align-items-center py-2 my-3">
                <button type="button" id="cancelSericesBtn" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal" style="margin-right: 5px;">Abbrechen</button>
-               <button type="button" id="addServicesBtn" class="success-button cursor-pointer mx-1">Hinzufügen</button>
+               <button type="submit" id="addServicesBtn" class="success-button cursor-pointer mx-1">Hinzufügen</button>
             </div>
          </div>
       </div>

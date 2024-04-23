@@ -290,7 +290,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 },
                 messages: {
                     slot: {
-                        required: "Slot is required.",
+                        required: "Steckplatz ist erforderlich required.",
                     },
                 },
                 errorPlacement: function(error, element) {
@@ -336,6 +336,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                             $('#slot-error').hide();
                             // $('#ShowInfo').modal('hide');
                             $('#add-slot').modal('hide');
+                            location.reload();
                             // $('#Confirmation').modal('show');
                         }
                     },
@@ -393,6 +394,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                         }else{
                             $('#edit_slot-error').hide();
                             $('#edit-slot').modal('hide');
+                            location.reload();
                             // $('#EditSlotConfirmation').modal('show');
                         }
                     },
@@ -411,12 +413,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         var deleteSlotId = '';
         $('.todeletebutton').on('click', function() {
             deleteSlotId = $(this).data('id');
-            $('#deletedConfirmation').modal('show');
-        });
-        $('#deleteConfirmationYesBtn').on('click', function() {
-            $('#deletedConfirmation').modal('hide');
-            // $('#Confirmation').modal('hide');
-            // $('#deleteSlotShowInfo').modal('show');
+            // $('#deletedConfirmation').modal('show');
             $.ajax({
                 url: './ajax/addslot.php',
                 method: 'POST',
@@ -430,6 +427,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                     console.error('Error:', error);
                 }
             });
+        });
+        $('#deleteConfirmationYesBtn').on('click', function() {
+            $('#deletedConfirmation').modal('hide');
+            // $('#Confirmation').modal('hide');
+            // $('#deleteSlotShowInfo').modal('show');
         });
 
     </script>

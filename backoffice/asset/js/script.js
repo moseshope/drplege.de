@@ -904,7 +904,7 @@ $(document).ready(function () {
 
   // Clear Button
 
-  $("#cancelSericesBtn").on("click", function () {
+  $("#cancelServicesBtn").on("click", function () {
     $("#AddServices").trigger("reset");
     $("#serviceGermany-error").empty();
     $("#servicesEnglish-error").empty();
@@ -943,15 +943,27 @@ $(document).ready(function () {
               $("#servicesEnglish-error").text("").hide();
             }
           } else {
-            $("#add-services").modal("hide");
-            $("#Confirmation").modal("show");
+            // $("#Confirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {
           console.error("Error:", error);
         },
       });
+      $.ajax({
+        url: "./ajax/addservices.php",
+        method: "POST",
+        data: { services: services, services_en: services_en },
+        success: function (response) {
+          // $("#ShowInfo").modal("show");
+          $("#add-services").modal("hide");
+          },
+        error: function (xhr, status, error) {
+          console.error("Error:", error);
+        },
+      });
     }
+  });
   });
 
   $("#ServicesShowInfoBtn").click(function () {
@@ -1020,6 +1032,21 @@ $(document).ready(function () {
   $(".deleteservices").on("click", function (e) {
     var id = $(this).attr("data-id");
     $("#deleteid").val(id);
+    $.ajax({
+      url: "./ajax/deleteservices.php",
+      method: "POST",
+      data: {
+        id: id,
+      },
+      success: function (response) {
+        // $("#deletedConfirmation").modal("hide");
+        // $("#deleteSlotShowInfo").modal("show");
+        location.reload();
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
   });
 
   //  Delete Query Services
@@ -1034,6 +1061,7 @@ $(document).ready(function () {
       success: function (response) {
         $("#deletedConfirmation").modal("hide");
         // $("#deleteSlotShowInfo").modal("show");
+        location.reload();
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
@@ -1103,9 +1131,26 @@ $(document).ready(function () {
               $("#editEnglish-error").text("").hide();
             }
           } else {
-            $("#edit-services").modal("hide");
-            $("#EditSlotConfirmation").modal("show");
+            // $("#EditSlotConfirmation").modal("show");
           }
+        },
+        error: function (xhr, status, error) {
+          console.error("Error:", error);
+        },
+      });
+      $.ajax({
+        url: "./ajax/updateservices.php",
+        method: "POST",
+        data: {
+          servicesId: servicesId,
+          services: services,
+          services_en: services_en,
+        },
+        success: function (response) {
+          $("#edit-services").modal("hide");
+          location.reload();
+          // $("#EditSlotConfirmation").modal("hide");
+          // $("#editSlotShowInfo").modal("show");
         },
         error: function (xhr, status, error) {
           console.error("Error:", error);
@@ -1125,21 +1170,5 @@ $(document).ready(function () {
     var services_en = $("#editEnglish").val();
     var servicesId = $("#editId").val();
 
-    $.ajax({
-      url: "./ajax/updateservices.php",
-      method: "POST",
-      data: {
-        servicesId: servicesId,
-        services: services,
-        services_en: services_en,
-      },
-      success: function (response) {
-        $("#EditSlotConfirmation").modal("hide");
-        $("#editSlotShowInfo").modal("show");
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
   });
-});
+

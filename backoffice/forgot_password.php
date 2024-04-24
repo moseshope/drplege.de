@@ -121,13 +121,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       rules: {
         email: {
           required: true,
-          // email: true
+          email: true
         },
       },
       messages: {
         email: {
           required: "Bitte geben Sie Ihre E-Mail Adresse ein",
-          // email: "Bitte geben Sie eine gültige E-Mail Adresse ein"
+          email: "Bitte geben Sie eine gültige E-Mail Adresse ein"
         },
       },
       errorPlacement: function(error, element) {

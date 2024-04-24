@@ -4,6 +4,6 @@
     $lang = $_GET['lang'];
     $_SESSION['lang'] = $lang;
   }
-  echo 1;
+  echo true;
   exit;
 ?>

@@ -336,7 +336,7 @@ if($role == 2){
                                         <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id'];?></td>
                                         <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services'];?></td>
                                         <td><?php echo $PatientsList[$i]['doctor'];?></td>
-                                        <td><?php echo $PatientsList[$i]['selected_date'];?> | <?php echo $PatientsList[$i]['visits'];?> Uhr</td>
+                                        <td><?php echo $PatientsList[$i]['selected_date'];?> | <?php echo $PatientsList[$i]['visits'];?> </td>
                                         <td><?php echo $PatientsList[$i]['recipe'];?></td>
                                         <?php
                                                 if ($PatientsList[$i]['status'] === 'Vollendet') {

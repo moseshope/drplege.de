@@ -204,11 +204,12 @@ if ($checkedResult && $checkedResult->num_rows > 0) {
     // });
 
     $('#refresh').on('click', function() {
-            $('#Confirmation').modal('show');
+            // $('#Confirmation').modal('show');
+            location.reload();
     })
 
     $('#confirmationBtn').on('click', function() {
-            $('#show-info').modal('show');
+            // $('#show-info').modal('show');
     })
     // $('#showInfoBtn').on('click', function() {
        

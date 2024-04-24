@@ -2,7 +2,7 @@
 session_start();
 
 $lang = (!empty($_SESSION['lang'])) ? $_SESSION['lang'] : 'de';
-include ('../lang/' . $lang . '.php');
+include ('lang/' . $lang . '.php');
 include ('./backoffice/config/database.php');
 
 $GetServices = "select * from services where deleted_at IS NULL";

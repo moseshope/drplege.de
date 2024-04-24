@@ -919,7 +919,7 @@ $(document).ready(function() {
           timeSlotsList += '<li>Date: ' + selectedDate + '<ul>';
 
           times.forEach(function(time) {
-            timeSlotsList += '<li>' + time + ' Uhr</li>';
+            timeSlotsList += '<li>' + time + '</li>';
           });
 
           timeSlotsList += '</ul></li>';

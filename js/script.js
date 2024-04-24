@@ -269,7 +269,7 @@ $(document).ready(function () {
                 $("#timeList").append(
                   '<div class="time-box next-step" onclick="getTime(this)"><p>' +
                     time +
-                    (lang && lang === "en" ? "" : " Uhr") +
+                    (lang && lang === "en" ? "" : "") +
                     "</p></div>"
                 );
               }

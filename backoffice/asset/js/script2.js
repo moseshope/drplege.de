@@ -388,9 +388,10 @@ $(document).ready(function () {
           if (response) {
             var responseData = JSON.parse(response);
             $("#currentpassword-error").text(responseData).addClass("text-danger");
+            location.reload();
           } else {
             $("#currentpassword-error").hide();
-            $("#Confirmation").modal("show");
+            // $("#Confirmation").modal("show");
           }
         },
         error: function (xhr, status, error) {

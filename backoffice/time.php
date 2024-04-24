@@ -125,7 +125,7 @@ usort($timeList, 'sortTimeSlots');
                                                   </label>";
                                         }else{
                                             echo "<label class='col-12 col-md-6 col-lg-4'>
-                                                    <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time Uhr
+                                                    <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
                                                   </label>";
                                         }
                                     }
@@ -302,12 +302,12 @@ usort($timeList, 'sortTimeSlots');
         selectedValues = $('input.optionalFeature:checked').map(function() {
                 return $(this).val();
             }).get();
-
-            $('#Confirmation').modal('show');
+            location.reload();
+            // $('#Confirmation').modal('show');
     })
 
     $('#confirmationBtn').on('click', function() {
-            $('#show-info').modal('show');
+            // $('#show-info').modal('show');
     })
     // $('#showInfoBtn').on('click', function() {
     //     $.ajax({

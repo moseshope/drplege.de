@@ -5,9 +5,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include('./../../config/mail.php');
-require '../../vendor/autoload.php';
-include('./../../config/database.php');
+include('./../backoffice/config/mail.php');
+require './../backoffice/vendor/autoload.php';
+include('./../backoffice/config/database.php');
 header('Content-Type: application/json');
 // $doctorMailContent = include('./../doctor_mail.php');
 
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mail->Subject = 'Terminbestätigung';
                     $mail->isHTML(true);
 
-                    $body = file_get_contents('./../../mail/patient_mail.php');
+                    $body = file_get_contents('./../backoffice/mail/patient_mail.php');
                     $body = str_replace('$LastInsertId', $lastInsertId, $body);
                     $body = str_replace('$doctor_name', $doctorName, $body);
                     $body = str_replace('$PatientName', $name, $body);

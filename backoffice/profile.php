@@ -362,7 +362,7 @@ if($role == 1){
                         </div>
                     </div>
 
-                    <!-- Confirmation -->
+                    <!-- role==2 Confirmation -->
                     <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">

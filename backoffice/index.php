@@ -925,7 +925,7 @@ if($role == 1){
                     <td>${patient.name}</td>
                     <td>${patient.doctor}</td>
                     <td>${patient.services}</td>
-                    <td>${patient.visits} Uhr</td>
+                    <td>${patient.visits} </td>
                     <td>
                         <div class="d-flex justify-content-center dropdown">
                             <span onclick="HandleDropMenu('Drop-menu-${index + 1}')"
@@ -1355,7 +1355,7 @@ if($role == 1){
                     <td>${patient.name}</td>
                     <td>${patient.doctor}</td>
                     <td>${patient.services}</td>
-                    <td>${patient.visits} Uhr</td>
+                    <td>${patient.visits} </td>
                     <td>
                         <div class="d-flex justify-content-center dropdown">
                             <span onclick="HandleDropMenu('Drop-menu-${index + 1}')"

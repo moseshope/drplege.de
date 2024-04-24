@@ -237,7 +237,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                     <!-- Delete button -->
                     <form method="post" action="./controller/deletestaff.php">
                       <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
-                      <button type="submit" class="iconButton text-danger" data-id="<?php echo $staffList[$i]['id']; ?>">
+                      <button type="submit" class="iconButton text-danger"
+                        data-id="<?php echo $staffList[$i]['id']; ?>">
                         <i class="fas fa-trash cursor-pointer p-2"></i>
                       </button>
                     </form>

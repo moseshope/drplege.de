@@ -596,6 +596,9 @@ button.iconButton {
   border-top: 5px solid transparent;
   animation: spin 1s linear infinite;
 }
+.td.align-middle {
+  padding-top: 9px;
+}
 
 @keyframes spin {
   from {

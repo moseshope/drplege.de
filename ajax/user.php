@@ -5,25 +5,25 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include('./../backoffice/config/mail.php');
+include ('./../backoffice/config/mail.php');
 require './../backoffice/vendor/autoload.php';
-include('./../backoffice/config/database.php');
+include ('./../backoffice/config/database.php');
 header('Content-Type: application/json');
 // $doctorMailContent = include('./../doctor_mail.php');
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if($_POST['name'] && $_POST['birthdate'] && $_POST['phone'] && $_POST['email']){
-        
+    if ($_POST['name'] && $_POST['birthdate'] && $_POST['phone'] && $_POST['email']) {
+
         $createdAt = date("Y-m-d");
 
         $serviceName = $_POST['serviceName'];
-        if($lang == 'de'){
+        if ($lang == 'de') {
             $serviceData = "select id from services where services = '$serviceName'";
-        }else{
+            } else {
             $serviceData = "select id from services where services_en = '$serviceName'";
-        }
+            }
         $serviceResult = $connect->query($serviceData);
         $serviceRow = $serviceResult->fetch_assoc();
         $serviceId = $serviceRow['id'];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $selectedDate = $_POST['selectedDate'];
         $date = DateTime::createFromFormat('d.m.Y', $selectedDate);
         $appointment_date = $date->format('Y-m-d');
-        
+
         $name = $_POST['name'];
         $birthdate = $_POST['birthdate'];
         $phone = $_POST['phone'];
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($lastInsertId > 0) {
 
             if ($reminder == 1) {
-                
+
                 $mail = new PHPMailer(true);
                 $mail->CharSet = PHPMailer::CHARSET_UTF8;
 
@@ -86,10 +86,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mail->Body = $body;
                     $mail->send();
 
-                } catch (Exception $e) {
+                    } catch (Exception $e) {
                     echo json_encode(['error' => 'Email sending failed. Error: ' . $mail->ErrorInfo]);
+                    }
                 }
-            }
 
             // $mail2 = new PHPMailer(true);
             // $mail->CharSet = PHPMailer::CHARSET_UTF8;
@@ -118,22 +118,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //     $mail2->Body = $body;
             //     $mail2->send();
-                
+
             // } catch (Exception $e) {
             //     echo json_encode(['error' => 'Email sending failed. Error: ' . $mail2->ErrorInfo]);
             // }
 
             echo json_encode(['id' => $lastInsertId]);
 
-        } else {
+            } else {
             echo json_encode(['error' => 'Bitte versuchen Sie es später erneut.']);
+            }
+
+        } else {
+        echo json_encode(['error' => 'Ungültige Daten']);
         }
 
     } else {
-        echo json_encode(['error' => 'Ungültige Daten']);
-    }
-
-} else {
     echo json_encode(['error' => 'Ungültige Anfragemethode']);
-}
+    }
 ?>

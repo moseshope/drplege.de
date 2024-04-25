@@ -370,7 +370,7 @@ $(document).ready(function () {
   });
 
   $("#ConfirmationYesBtn").on("click", function () {
-    $("#show-info").modal("show");
+    // $("#show-info").modal("show");
     $("#Confirmation").modal("hide");
   });
   // add staff
@@ -408,7 +408,7 @@ $(document).ready(function () {
               $("#email-error").hide();
             }
             if (responseData.telephone) {
-              $("#telephone-error")
+            $("#telephone-error")
                 .text(responseData.telephone)
                 .addClass("text-danger");
             } else {
@@ -686,7 +686,7 @@ $(document).ready(function () {
       success: function (response) {
         var nurseData = JSON.parse(response);
         $("#deleteNurseId").val(nurseData);
-        // $("#deleteNurseConfirmation").modal("show");
+        $("#deleteNurseConfirmation").modal("show");
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
@@ -753,8 +753,8 @@ $(document).ready(function () {
 
   // delete staff
   $("#deleteStaffYesBtn").on("click", function () {
-    $("#Confirmation").modal("hide");
-    $("#show-info").modal("show");
+    $("#deleteNurseConfirmation").modal("hide");
+    // $("#show-info").modal("show");
   });
 
   // update patients
@@ -862,7 +862,7 @@ $(document).ready(function () {
       success: function (response) {
         var staffData = JSON.parse(response);
         $("#deleteStaffId").val(staffData);
-        // $("#Confirmation").modal("show");
+        $("#Confirmation").modal("show");
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);

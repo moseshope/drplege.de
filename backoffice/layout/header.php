@@ -88,16 +88,16 @@ if ($role == 1 || $role == 2) {
                 <i class="bi bi-list" onclick="handleSidebar()"></i>
             </div>
             <div class="nav-logo cursor-pointer" onclick="window.location = 'index.html'">
-                <img class="w-100 h-100" src="../images/logo.png" alt="logo-image">
+                <img class="w-100 h-100" href="https://drpleger.de/" src="../images/logo.png" alt="logo-image">
             </div>
-            <ul>
+            <!-- <ul>
                 <li class="cursor-pointer">Startseite</li>
                 <li class="cursor-pointer">Über uns</li>
                 <li class="cursor-pointer">Dienstleistungen </li>
                 <li class="cursor-pointer">Ernennung</li>
                 <li class="cursor-pointer">Kontakt</li>
                 <li class="cursor-pointer">Profil</li>
-            </ul>
+            </ul> -->
             <div class="flex-grow-1"></div>
             <button class="logout-btn cursor-pointer" onclick="window.location = './controller/logout.php'">
                 Logout

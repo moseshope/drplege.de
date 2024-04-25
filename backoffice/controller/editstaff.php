@@ -23,10 +23,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $profileName = $timestamp . "_" . $originalFileName;
                 // Move the uploaded file to the desired location with the composed profile name
                 $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
+                
+                // If the previous profile image exists, delete it
+                if (!empty($profile) && file_exists("../../images/" . $profile)) {
+                    unlink("../../images/" . $profile);
+                }
             } else {
                 // If no file is uploaded, use the existing profile name
                 $profileName = $profile;
             }
+            
+
+        // if($_FILES["profile"]["name"]) {
+        //         // If a file is uploaded
+        //         $originalFileName = $_FILES["profile"]["name"];
+        //         $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+        //         // Get the current timestamp
+        //         $timestamp = time();
+        //         // Concatenate the timestamp with the original filename (separated by an underscore)
+        //         $profileName = $timestamp . "_" . $originalFileName;
+        //         // Move the uploaded file to the desired location with the composed profile name
+        //         $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
+        //     } else {
+        //         // If no file is uploaded, use the existing profile name
+        //         $profileName = $profile;
+        //     }
             
 
         $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : '';

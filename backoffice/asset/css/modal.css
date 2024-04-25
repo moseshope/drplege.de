@@ -1,12 +1,12 @@
 #edit-patients .modal-dialog {
     max-width: 450px;
 }
-#AddStaff .modal-dialog {
+/* #AddStaff .modal-dialog {
     max-width: 650px;
 }
 #EditStaff .modal-dialog{
-    max-width: 650px;
-}
+    max-width: 650px; */
+/* } */
 
 .modal-heading {
     color: var(--main);

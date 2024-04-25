@@ -56,20 +56,27 @@ if($role == 1){
             $password_plain = mysqli_real_escape_string($connect, $_POST ['password']);
             $password = mysqli_real_escape_string($connect,md5($_POST['password']));
             $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
+            // 
             if($_FILES["profile"]["name"]) {
-                // If a file is uploaded
-                $originalFileName = $_FILES["profile"]["name"];
-                $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-                // Get the current timestamp
-                $timestamp = time();
-                // Concatenate the timestamp with the original filename (separated by an underscore)
-                $profileName = $timestamp . "_" . $originalFileName;
-                // Move the uploaded file to the desired location with the composed profile name
-                $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
-            } else {
-                // If no file is uploaded, use the existing profile name
-                $profileName = $profile;
-            }
+              // If a file is uploaded
+              $originalFileName = $_FILES["profile"]["name"];
+              $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+              // Get the current timestamp
+              $timestamp = time();
+              // Concatenate the timestamp with the original filename (separated by an underscore)
+              $profileName = $timestamp . "_" . $originalFileName;
+              // Move the uploaded file to the desired location with the composed profile name
+              $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
+              
+              // If the previous profile image exists, delete it
+              if (!empty($profile) && file_exists("../../images/" . $profile)) {
+                  unlink("../../images/" . $profile);
+              }
+          } else {
+              // If no file is uploaded, use the existing profile name
+              $profileName = $profile;
+          }
+          
                 $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
             }else{
                 if($_FILES["profile"]["name"]) {
@@ -301,11 +308,11 @@ window.location = "profile";
           <div class="col-lg-5 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">Name</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['name']?>" disabled>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['name']?>">
             </div>
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">E-Mail</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['email']?>" disabled>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['email']?>">
             </div>
 
             <div class="form-group p-2 my-2">

@@ -36,7 +36,7 @@ $whereClause = "";
 if (!empty($conditions)) {
   $whereClause = "WHERE user.deleted_at IS NULL AND user.status = 'Aktiv' AND role = 2 AND " . implode(" AND ", $conditions);
   } else {
-  $whereClause = "WHERE user.deleted_at IS NULL AND user.status = 'Aktiv' AND role = 2";
+$whereClause = "WHERE user.deleted_at IS NULL AND user.status = 'Aktiv' AND role = 2";
   }
 
 $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
@@ -102,11 +102,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
       placeholder="Search" oninput="search()">
       </div> -->
         <!-- <form method="get"> -->
-        <div class="dashboard-search my-auto">
-          <i class="bi bi-search"></i>
-          <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
+          <div class="dashboard-search my-auto">
+            <i class="bi bi-search"></i>
+            <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
             value="<?php echo $searchTerm ?>">
-        </div>
+          </div>
         <!-- </form> -->
         <div class="flex-grow-1"></div>
 
@@ -351,7 +351,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
   <div class="modal fade" id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px; width: 800px;">
         <div class="d-flex justify-content-center align-items-center py-2">
           <div class="flex-grow-1"></div>
           <h1 class="modal-heading" style="font-weight: 800; margin-left:72px">Doktor hinzufügen</h1>
@@ -665,7 +665,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
   <div class="modal fade " id="edit-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px; width: 800px;">
         <div class="d-flex justify-content-center align-items-center py-2">
           <div class="flex-grow-1"></div>
           <h1 class="modal-heading" style="font-weight: 800;">Doktor bearbeiten</h1>

@@ -449,7 +449,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         <div class="d-flex justify-content-center align-items-center">
           <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
             style="margin-right: 3px;">Nein</button>
-          <button type="button" class="success-button cursor-pointer" data-bs-target="#ShowNurseInfo"
+          <button type="submit" class="success-button cursor-pointer" data-bs-target="#ShowNurseInfo"
             data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
         </div>
       </div>

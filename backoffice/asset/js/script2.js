@@ -357,7 +357,7 @@ $(document).ready(function () {
   // delete staff
   $("#deleteStaffYesBtn").on("click", function () {
     $("#Confirmation").modal("hide");
-    $("#show-info").modal("show");
+    // $("#show-info").modal("show");
   });
 
   // update patients

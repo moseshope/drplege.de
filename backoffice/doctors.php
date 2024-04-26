@@ -34,9 +34,9 @@ if ($startDate !== null && $endDate !== null) {
 // Construct the WHERE clause
 $whereClause = "";
 if (!empty($conditions)) {
-  $whereClause = "WHERE user.deleted_at IS NULL AND user.status = 'Aktiv' AND role = 2 AND " . implode(" AND ", $conditions);
+  $whereClause = "user.status = 'Aktiv' AND role = 2 AND " . implode(" AND ", $conditions);
   } else {
-$whereClause = "WHERE user.deleted_at IS NULL AND user.status = 'Aktiv' AND role = 2";
+$whereClause = "user.status = 'Aktiv' AND role = 2";
   }
 
 $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
@@ -62,7 +62,7 @@ GROUP BY user.id ORDER BY $orderClause";
 $StaffResult = $connect->query($GetStaff);
 $staffList = array();
 
-if ($StaffResult->num_rows > 0) {
+if ($StaffResult && $StaffResult->num_rows > 0) {
   while ($row = $StaffResult->fetch_assoc()) {
     $getService = "SELECT sd.user_id, s.services FROM services_docs AS sd LEFT JOIN services AS s ON sd.service_id = s.id WHERE sd.user_id='" . $row['id'] . "'";
     $services = [];

@@ -160,7 +160,7 @@ usort($timeList, 'sortTimeSlots');
             ?>
           </ul>
           <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
-            <button type="button" class="cancel-button cursor-pointer" style="margin-right: 3px;"
+            <button type="submit" class="cancel-button cursor-pointer" style="margin-right: 3px;"
               data-bs-dismiss="modal" id="reset">Zurücksetzen</button>
             <button type="submit" class="success-button cursor-pointer " style="margin-left: 3px;" data-bs-target=""
               data-bs-toggle="modal" data-bs-dismiss="modal" id="refresh" style="margin-left: 5px;">Hinzufügen</button>
@@ -364,12 +364,6 @@ $('#confirmationBtn').on('click', function() {
 // })
 
 $('#reset').on('click', function() {
-  $('#resetConfirmation').modal('show');
-})
-$('#resetConfirmationBtn').on('click', function() {
-  // $('#reset-show-info').modal('show');
-})
-$('#resetShowInfoBtn').on('click', function() {
   $.ajax({
     url: './ajax/resettime.php',
     method: 'GET',
@@ -383,6 +377,12 @@ $('#resetShowInfoBtn').on('click', function() {
       console.error('Error:', error);
     }
   });
+  // $('#resetConfirmation').modal('show');
+})
+$('#resetConfirmationBtn').on('click', function() {
+  // $('#reset-show-info').modal('show');
+})
+$('#resetShowInfoBtn').on('click', function() {
 })
 </script>
 

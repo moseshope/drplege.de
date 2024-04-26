@@ -79,9 +79,9 @@ $(document).ready(function () {
       name: {
         required: true,
       },
-      qualification: {
-        required: true,
-      },
+      // qualification: {
+      //   required: true,
+      // },
       email: {
         required: true,
         email: true,
@@ -108,9 +108,9 @@ $(document).ready(function () {
       name: {
         required: "Name ist erforderlich.",
       },
-      qualification: {
-        required: "Qualifikation ist erforderlich.",
-      },
+      // qualification: {
+      //   required: "Qualifikation ist erforderlich.",
+      // },
       email: {
         required: "E-Mail ist erforderlich.",
         email: "Bitte geben Sie eine gültige E-Mail Adresse ein.",
@@ -152,9 +152,9 @@ $(document).ready(function () {
       name: {
         required: true,
       },
-      qualification: {
-        required: true,
-      },
+      // qualification: {
+      //   required: true,
+      // },
       email: {
         required: true,
         email: true,
@@ -174,9 +174,9 @@ $(document).ready(function () {
       name: {
         required: "Name ist erforderlich.",
       },
-      qualification: {
-        required: "Qualifikation ist erforderlich.",
-      },
+      // qualification: {
+      //   required: "Qualifikation ist erforderlich.",
+      // },
       email: {
         required: "E-Mail ist erforderlich.",
         email: "Bitte geben Sie eine gültige E-Mail Adresse ein.",

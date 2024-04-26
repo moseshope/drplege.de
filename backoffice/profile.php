@@ -317,37 +317,117 @@ window.location = "profile";
 
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Aktuelles Passwort</label>
-              <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                style="background-color: var(--input-bg); border-radius: 4px;">
-                <input type="password" name="current_password" class="form-control custom-input" id="current_password"
-                  placeholder="Aktuelles Passwort eingeben">
-                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" onclick="showPassword('current_password')"></i>
+              <div class="password-input-container position-relative d-flex align-items-center">
+                <!-- Password input -->
+                <input type="password" name="current_password" class="form-control custom-input pe-5"
+                  id="current_password" placeholder="Aktuelles Passwort eingeben" required>
+                <!-- Eye button to toggle visibility -->
+                <span class="toggle-current_password position-absolute end-0" style="margin-right:16px;" role="button"
+                  id="toggle-current_password">
+                  <i class="fas fa-eye" id="eye-icon-current"></i>
+                </span>
               </div>
-              <span class="error" id="currentpassword-error"></span>
-
+              <span class="error" id="current_password-error"></span>
             </div>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const passwordInputCurrent = document.getElementById('current_password');
+              const togglePasswordButtonCurrent = document.getElementById('toggle-current_password');
+              const eyeIconCurrent = document.getElementById('eye-icon-current');
+
+              // Function to toggle the password visibility
+              function togglePasswordVisibilityCurrent() {
+                if (passwordInputCurrent.type === 'password') {
+                  passwordInputCurrent.type = 'text';
+                  eyeIconCurrent.classList.remove('fa-eye');
+                  eyeIconCurrent.classList.add('fa-eye-slash');
+                } else {
+                  passwordInputCurrent.type = 'password';
+                  eyeIconCurrent.classList.remove('fa-eye-slash');
+                  eyeIconCurrent.classList.add('fa-eye');
+                }
+              }
+
+              // Attach the function to the button's click event
+              togglePasswordButtonCurrent.addEventListener('click', togglePasswordVisibilityCurrent);
+            });
+            </script>
+
             <div class="form-group p-2 my-2">
               <label class="my-1" for="password">Neues Passwort</label>
-              <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                style="background-color: var(--input-bg); border-radius: 4px;">
-                <input type="password" name="password" class="form-control custom-input" id="password"
-                  placeholder="Passwort eingeben">
-                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" onclick="showPassword('password')"></i>
+              <div class="password-input-container position-relative d-flex align-items-center">
+                <!-- Password input -->
+                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
+                  placeholder="Passwort eingeben" required>
+                <!-- Eye button to toggle visibility -->
+                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
+                  id="toggle-password">
+                  <i class="fas fa-eye" id="eye-icon"></i>
+                </span>
               </div>
               <span class="error" id="password-error"></span>
-
             </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const passwordInput = document.getElementById('password');
+              const togglePasswordButton = document.getElementById('toggle-password');
+              const eyeIcon = document.getElementById('eye-icon');
+
+              // Function to toggle the password visibility
+              function togglePasswordVisibility() {
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  eyeIcon.classList.remove('fa-eye');
+                  eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                  passwordInput.type = 'password';
+                  eyeIcon.classList.remove('fa-eye-slash');
+                  eyeIcon.classList.add('fa-eye');
+                }
+              }
+
+              // Attach the function to the button's click event
+              togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+            });
+            </script>
+
             <div class="form-group p-2 my-2">
-              <label class="my-1" for="confirm_password">Passwort bestätigen</label>
-              <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                style="background-color: var(--input-bg);  border-radius: 4px">
-                <input type="password" name="confirm_password" class="form-control custom-input" id="confirm_password"
-                  placeholder="Passwort bestätigen">
-                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" onclick="showPassword('confirm_password')"></i>
+              <label class="my-1" for="password">Passwort bestätigen</label>
+              <div class="password-input-container position-relative d-flex align-items-center">
+                <!-- Password input -->
+                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
+                  id="confirm_password" placeholder="Passwort bestätigen" required>
+                <!-- Eye button to toggle visibility -->
+                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
+                  id="toggle-confirm_password">
+                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                </span>
               </div>
               <span class="error" id="confirm_password-error"></span>
-
             </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const passwordInputConfirm = document.getElementById('confirm_password');
+              const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
+              const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+
+              // Function to toggle the password visibility
+              function togglePasswordConfirmVisibility() {
+                if (passwordInputConfirm.type === 'password') {
+                  passwordInputConfirm.type = 'text';
+                  eyeIconConfirm.classList.remove('fa-eye');
+                  eyeIconConfirm.classList.add('fa-eye-slash');
+                } else {
+                  passwordInputConfirm.type = 'password';
+                  eyeIconConfirm.classList.remove('fa-eye-slash');
+                  eyeIconConfirm.classList.add('fa-eye');
+                }
+              }
+              // Attach the function to the button's click event
+              togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
+            });
+            </script>
             <div class="col-lg-6 col-12">
               <div class="form-group p-2 my-2">
                 <label class="my-1" for="Status">Profil</label>
@@ -359,14 +439,14 @@ window.location = "profile";
                       id="open-image-picker-E">
                       <i class="bi bi-upload mr-1"></i>
                       <span><?php 
-                                                echo $buttonName
-                                            ?></span>
+                              echo $buttonName
+                          ?></span>
                     </button>
                   </div>
                   <div>
                     <?php 
-                                                echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">';
-                                            ?>
+                      echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">';
+                  ?>
                   </div>
                 </div>
               </div>

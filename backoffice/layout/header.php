@@ -54,43 +54,43 @@ if ($role == 1 || $role == 2) {
 <html lang="des">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
-    <!-- Custom Css -->
-    <?php if ($role == 1) { ?>
-            <link rel="stylesheet" href="asset/css/index.css">
-            <title>Dr. Pleger - Admin</title>
-    <?php } elseif ($role == 3) { ?>
-            <link rel="stylesheet" href="asset/css/index2.css">
-            <title>Dr. Pleger - Mitarbeiter</title>
-    <?php } else { ?>
-            <title>Dr. Pleger - Doktoren</title>
-            <link rel="stylesheet" href="asset/css/index2.css">
-            <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <?php } ?>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
+  <!-- Custom Css -->
+  <?php if ($role == 1) { ?>
+  <link rel="stylesheet" href="asset/css/index.css">
+  <title>Dr. Pleger - Admin</title>
+  <?php } elseif ($role == 3) { ?>
+  <link rel="stylesheet" href="asset/css/index2.css">
+  <title>Dr. Pleger - Mitarbeiter</title>
+  <?php } else { ?>
+  <title>Dr. Pleger - Doktoren</title>
+  <link rel="stylesheet" href="asset/css/index2.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <?php } ?>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="w-100 custom-navbar">
-        <div class="container d-flex justify-content-around flex-unwrap">
-            <div class="menu-button align-items-center">
-                <i class="bi bi-list" onclick="handleSidebar()"></i>
-            </div>
-            <div class="nav-logo cursor-pointer" onclick="window.location = 'index.html'">
-                <img class="w-100 h-100" href="https://drpleger.de/" src="../images/logo.png" alt="logo-image">
-            </div>
-            <!-- <ul>
+  <!-- Navbar -->
+  <nav class="w-100 custom-navbar">
+    <div class="container d-flex justify-content-between">
+      <div class="menu-button align-items-center">
+        <i class="bi bi-list" onclick="handleSidebar()"></i>
+      </div>
+      <div class="nav-logo cursor-pointer" onclick="window.location = 'index.html'">
+        <img class="w-100 h-100" href="https://drpleger.de/" src="../images/logo.png" alt="logo-image">
+      </div>
+      <!-- <ul>
                 <li class="cursor-pointer">Startseite</li>
                 <li class="cursor-pointer">Über uns</li>
                 <li class="cursor-pointer">Dienstleistungen </li>
@@ -98,9 +98,10 @@ if ($role == 1 || $role == 2) {
                 <li class="cursor-pointer">Kontakt</li>
                 <li class="cursor-pointer">Profil</li>
             </ul> -->
-            <div class="flex-grow-1"></div>
-            <button class="logout-btn cursor-pointer" onclick="window.location = './controller/logout.php'">
-                Logout
-            </button>
-        </div>
-    </nav>
+      <div class="flex-grow-1"></div>
+      <button class="logout-btn cursor-pointer" onclick="window.location = './controller/logout.php'">
+        Logout
+      </button>
+    </div>
+  </nav>
+</body>

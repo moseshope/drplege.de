@@ -107,6 +107,32 @@ usort($timeList, 'sortTimeSlots');
           <div class="d-flex justify-content-center py-3" style="color: var(--main);">
             <h4 style="font-weight: 700;">Zeit auswählen</h4>
           </div>
+          <!-- <form method="post"> from to date, button to apply and cancel -->
+          <div class="mx-2 w-100">
+            <div class="d-flex justify-content-md-center flex-wrap m-2">
+              <div class="input-date">
+                <input class="mx-2" type="date" id="start-date" name="start_date" placeholder="Start Date"
+                  value="<?php echo $startDate; ?>">
+              </div>
+              <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;">To</p>
+              <div class="input-date">
+                <input class="mx-2" type="date" id="end-date" name="end_date" placeholder="End Date"
+                  value="<?php echo $endDate; ?>">
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center my-3">
+              <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
+                style="background-color: var(--main); color: white; border-radius: 16px;"
+                id="applyDatepicker">Anwenden</button>
+              <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
+
+              <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
+                style="background-color: var(--main); color: white; border-radius: 16px;"
+                id="clearDatepicker">Löschen</button>
+              <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
+
+            </div>
+          </div>
           <div class="mx-3 px-3">
             <label class='fw-bolder cursor-pointer' style="user-select: none;">
               <input type='checkbox' onchange="handleSelectAll()" id="selectAllCheckBox"> Alle auswählen
@@ -114,24 +140,24 @@ usort($timeList, 'sortTimeSlots');
           </div>
           <ul class="row" id="selectTime">
             <?php 
-                                    echo "<form>";
-                                    foreach ($timeList as $time) {
-                                        if($time === "Holiday"){
-                                            echo "<label class='col-12 col-md-6 col-lg-4'>
-                                                    <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Urlaub
-                                                  </label>";
-                                        }else if($time === "Not available"){
-                                            echo "<label class='col-12 col-md-6 col-lg-4'>
-                                                    <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Nicht verfügbar
-                                                  </label>";
-                                        }else{
-                                            echo "<label class='col-12 col-md-6 col-lg-4'>
-                                                    <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
-                                                  </label>";
-                                        }
-                                    }
-                                    echo "</form>";
-                                ?>
+                echo "<form>";
+                foreach ($timeList as $time) {
+                    if($time === "Holiday"){
+                        echo "<label class='col-12 col-md-6 col-lg-4'>
+                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Urlaub
+                              </label>";
+                    }else if($time === "Not available"){
+                        echo "<label class='col-12 col-md-6 col-lg-4'>
+                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Nicht verfügbar
+                              </label>";
+                    }else{
+                        echo "<label class='col-12 col-md-6 col-lg-4'>
+                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
+                              </label>";
+                    }
+                }
+                echo "</form>";
+            ?>
           </ul>
           <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
             <button type="button" class="cancel-button cursor-pointer" style="margin-right: 3px;"
@@ -220,14 +246,18 @@ usort($timeList, 'sortTimeSlots');
   </div>
 </div>
 <!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="asset/js/index.js"></script>
 <script src="asset/js/calender-2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- <script>
-    
-</script> -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+</script>
+
 <script>
 // select All Time
 const timesList = document.querySelectorAll('#selectTime input');

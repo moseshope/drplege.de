@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="asset/css/index.css">
   <link rel="stylesheet" href="asset/css/backend.css">
@@ -85,6 +86,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-password-icon"
                   onclick="togglePasswordVisibility()"></i>
               </div>
+              <script>
+              function togglePasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
               <p class="error mb-0" id="password-error"></p>
             </div>
             <div class="d-flex justify-content-end mx-3">
@@ -95,6 +115,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <button type="submit" class="success-button cursor-pointer">Login</button>
             </div>
           </form>
+          <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const togglePasswordButton = document.getElementById('toggle-password');
+            const eyeIcon = document.getElementById('eye-icon');
+
+            // Function to toggle the password visibility
+            function togglePasswordVisibility() {
+              if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+              } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+              }
+            }
+
+            // Attach the function to the button's click event
+            togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+          });
+          </script>
         </div>
         <div class="login-logo">
           <img class="w-100 h-100" style="object-fit: contain;" src="asset/images/logo-2.png" alt="logo" />
@@ -105,7 +148,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+  </script>
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <!-- jQuery Validate -->
@@ -113,42 +157,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Custom JavaScript -->
   <script src="asset/js/index.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#loginForm').validate({
-        rules: {
-          email: {
-            required: true,
-            email: true
-          },
-          password: {
-            required: true
-          }
+  $(document).ready(function() {
+    $('#loginForm').validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
         },
-        messages: {
-          email: {
-            required: "Bitte geben Sie Ihre E-Mail Adresse ein",
-            email: "Bitte geben Sie eine gültige E-Mail Adresse ein"
-          },
-          password: {
-            required: "Bitte geben Sie Ihr Passwort ein"
-          }
+        password: {
+          required: true
+        }
+      },
+      messages: {
+        email: {
+          required: "Bitte geben Sie Ihre E-Mail Adresse ein",
+          email: "Bitte geben Sie eine gültige E-Mail Adresse ein"
         },
-        errorPlacement: function(error, element) {
-          if (element.attr("name") == "email") {
-            error.insertAfter(element);
-          } else {
-            error.insertAfter(element.parent());
-          }
-        },
-        highlight: function(element) {
-          $(element).addClass('is-invalid');
-        },
-        unhighlight: function(element) {
-          $(element).removeClass('is-invalid');
-        },
-        errorClass: 'text-danger'
-      });
+        password: {
+          required: "Bitte geben Sie Ihr Passwort ein"
+        }
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") == "email") {
+          error.insertAfter(element);
+        } else {
+          error.insertAfter(element.parent());
+        }
+      },
+      highlight: function(element) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function(element) {
+        $(element).removeClass('is-invalid');
+      },
+      errorClass: 'text-danger'
     });
+  });
   </script>
 </body>
 

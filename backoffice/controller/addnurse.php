@@ -5,8 +5,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = mysqli_real_escape_string($connect, $_POST['email']);
         $originalPassword = $_POST['password'];
         $password = mysqli_real_escape_string($connect, md5($_POST['password']));
-        $password_plain = mysqli_real_escape_string($connect,($_POST['password']));
+        $password_plain = mysqli_real_escape_string($connect, ($_POST['password']));
         $status = mysqli_real_escape_string($connect, $_POST['status']);
+
+        // Translate status to database-friendly values
+        if ($status === 'Aktiv') {
+                $status = '1';
+                } elseif ($status === 'Deaktiviert') {
+                $status = '0';
+                }
         $role = 3;
         $created_at = date("Y-m-d");
         $sql = "insert into user(name,email,password,password_plain,status,role,created_at) values('$name','$email','$password','$password_plain','$status','$role','$created_at')";

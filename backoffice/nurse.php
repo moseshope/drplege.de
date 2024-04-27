@@ -91,21 +91,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             value="<?php echo $searchTerm?>">
         </div>
         <div class="flex-grow-1"></div>
-        <!-- <div class="d-flex flex-wrap align-items-center m-2">
-                                <div class="input-date">
-                                    <input class="mx-2" type="date" id="start-date" name="start_date" placeholder="Start Date" value="<?php echo $startDate; ?>">
-                                </div>
-                                <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;">To</p>
-                                <div class="input-date">
-                                    <input class="mx-2" type="date" id="end-date" name="end_date" placeholder="End Date" value="<?php echo $endDate; ?>">
-                                </div>
-                                <div>
-                                    <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mt-2 mt-md-0 mx-3" style="color: white;" id="applyDatepicker">Anwenden</button>       
-                                </div>
-                                <div>
-                                    <button type="submit" class="cursor-pointer showTimeBtn btn fs-4 mt-2 mt-md-0" style="color: var(--main); " id="clearDatepicker"><i class="fa-solid fa-arrow-rotate-right"></i></button>
-                                </div>
-                            </div> -->
+        
         <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
           data-bs-target="#add-nurse"><i class="bi bi-plus" style="color: white; "></i>Mitarbeiter hinzufügen</button>
       </div>
@@ -132,20 +118,23 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['name']; ?></td>
                 <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['email']; ?></td>
                 <?php
-                                            if ($staffList[$i]['status'] === 'Aktiv') {
-                                                $buttonClass = 'custom-success-btn';
-                                            } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
-                                                $buttonClass = 'custom-warnings-btn';
-                                            } else {
-                                                $buttonClass = 'custom-danger-btn';
-                                            }
-                                        ?>
+                    if ($staffList[$i]['status'] === '1') {
+                        $buttonClass = 'custom-success-btn';
+                        $buttonText = 'Aktiv';
+                    } elseif ($staffList[$i]['status'] === '0') {
+                        $buttonClass = 'custom-warnings-btn';
+                        $buttonText = 'Deaktiviert';
+                    } else {
+                        $buttonClass = 'custom-danger-btn';
+                        $buttonText = 'Deleted';
+                    }
+                ?>
                 <td class="text-center"><button
-                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status'];?></button>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText;?></button>
                 </td>
                 <td>
                   <div class="d-flex justify-content-center">
-                    <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {; ?>
+                    <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {; ?>
                     <!-- Edit button -->
                     <div class="editNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
                       <i class="fas fa-edit p-2 cursor-pointer"></i>
@@ -450,7 +439,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
             style="margin-right: 3px;">Nein</button>
           <button type="submit" class="success-button cursor-pointer" data-bs-target="#ShowNurseInfo"
-            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
+            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteNurseYesBtn" style="margin-left: 3px;">Ja</button>
         </div>
       </div>
     </div>

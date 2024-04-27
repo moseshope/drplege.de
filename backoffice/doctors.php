@@ -34,10 +34,11 @@ if ($startDate !== null && $endDate !== null) {
 // Construct the WHERE clause
 $whereClause = "";
 if (!empty($conditions)) {
-  $whereClause = "user.status = 'Aktiv' AND role = 2 AND " . implode(" AND ", $conditions);
-  } else {
-$whereClause = "user.status = 'Aktiv' AND role = 2";
-  }
+    $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2 AND " . implode(" AND ", $conditions);
+} else {
+    $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2";
+}
+
 
 $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
 if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
@@ -102,11 +103,11 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
       placeholder="Search" oninput="search()">
       </div> -->
         <!-- <form method="get"> -->
-          <div class="dashboard-search my-auto">
-            <i class="bi bi-search"></i>
-            <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
+        <div class="dashboard-search my-auto">
+          <i class="bi bi-search"></i>
+          <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
             value="<?php echo $searchTerm ?>">
-          </div>
+        </div>
         <!-- </form> -->
         <div class="flex-grow-1"></div>
 
@@ -191,60 +192,36 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
                 <?php
-                if ($staffList[$i]['status'] === 'Aktiv') {
-                  $buttonClass = 'custom-success-btn';
-                  } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
-                  $buttonClass = 'custom-warnings-btn';
-                  } else {
-                  $buttonClass = 'custom-danger-btn';
-                  }
+                    if ($staffList[$i]['status'] === '1') {
+                        $buttonClass = 'custom-success-btn';
+                        $buttonText = 'Aktiv';
+                    } elseif ($staffList[$i]['status'] === '0') {
+                        $buttonClass = 'custom-warnings-btn';
+                        $buttonText = 'Deaktiviert';
+                    } else {
+                        $buttonClass = 'custom-danger-btn';
+                        $buttonText = 'Deleted';
+                    }
                 ?>
                 <td class="text-center"><button
-                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText;?></button>
                 </td>
                 <td>
-                  <!-- <div class="d-flex justify-content-center dropdown">
-              <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
-                        ; ?>
-              <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
-              style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
-              class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-list"></i>
-              </span>
-              <ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
-              <li class="px-2 py-1 mx-2  cursor-pointer editButton"
-              data-id="<?php echo $staffList[$i]['id']; ?>" style="border-bottom: 1px solid #d7caca;"
-              data-bs-toggle="modal">
-              Bearbeiten
-              </li>
-              <li class="px-2 py-1 mx-2 cursor-pointer deleteButton"
-              data-id="<?php echo $staffList[$i]['id']; ?>" style="color: var(--main);"
-              data-bs-toggle="modal">
-              Löschen
-              </li>
-
-              </ul>
-              <?php } else { ?>
-              <label style="color: green;">Inaktiv</label>
-              <?php } ?>
-              </div> -->
                   <div class="d-flex justify-content-center">
-                    <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') { ?>
+                    <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') { ?>
                     <!-- Edit button -->
-                    <div class="editButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
+                    <div class="editStaffButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
                       <i class="fas fa-edit cursor-pointer p-2"></i>
                     </div>
                     <!-- Delete button -->
                     <form method="post" action="./controller/deletestaff.php">
                       <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
-                      <button type="submit" class="iconButton text-danger"
-                        data-id="<?php echo $staffList[$i]['id']; ?>">
-                        <i class="fas fa-trash cursor-pointer p-2"></i>
+                      <button type="button" class="iconButton deleteStaffButton"
+                        data-id="<?php echo $staffList[$i]['id'];?>">
+                        <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
                       </button>
+                      <?php } ?>
                     </form>
-                    <?php } else { ?>
-                    <label style="color: green;">Inaktiv</label>
-                    <?php } ?>
                   </div>
                 </td>
               </tr>
@@ -291,20 +268,23 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
                 <?php
-                if ($staffList[$i]['status'] === 'Aktiv') {
+                if ($staffList[$i]['status'] === '1') {
                   $buttonClass = 'custom-success-btn';
-                  } elseif ($staffList[$i]['status'] === 'Deaktiviert') {
+                  $buttonText = 'Aktiv';
+                  } elseif ($staffList[$i]['status'] === '0') {
                   $buttonClass = 'custom-warnings-btn';
+                  $buttonText = 'Deaktiviert';
                   } else {
                   $buttonClass = 'custom-danger-btn';
+                  $buttonText = 'Deleted';
                   }
                 ?>
                 <td class="text-center"><button
-                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $staffList[$i]['status']; ?></button>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
                 </td>
                 <!-- <td>
               <div class="d-flex justify-content-center dropdown">
-              <?php if ($staffList[$i]['status'] === 'Aktiv' || $staffList[$i]['status'] === 'Deaktiviert') {
+              <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {
                         ; ?>
               <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
               style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
@@ -524,7 +504,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
           <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
             style="margin-right: 3px;">Nein</button>
           <button type="button" id="StaffConfirmationYesBtn" class="success-button cursor-pointer mx-1"
-            data-bs-target="#show-info" style="margin-left: 3px;">Ja</button>
+            style="margin-left: 3px;">Ja</button>
         </div>
       </div>
     </div>
@@ -775,8 +755,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <div class="d-flex justify-content-center align-items-center">
                 <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
                   style="margin-right: 3px;">Nein</button>
-                <button type="submit" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-                  data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
+                <button type="submit" class="success-button cursor-pointer mx-1" data-bs-toggle="modal"
+                  data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
               </div>
             </div>
           </div>
@@ -823,8 +803,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
 <!-- Confirmation -->
 <form method="post" action="./controller/deletestaff.php">
-  <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+  <div class="modal fade " id="deleteStaffConfirmation" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <input type="hidden" name="id" value="" class="form-control custom-input" id="deleteStaffId">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
@@ -835,8 +815,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         <div class="d-flex justify-content-center align-items-center">
           <button type="button" class="cancel-button cursor-pointer mx-1" data-bs-dismiss="modal"
             style="margin-right: 3px;">Nein</button>
-          <button type="button" class="success-button cursor-pointer mx-1" data-bs-target="#show-info"
-            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteStaffYesBtn" style="margin-left: 3px;">Ja</button>
+          <button type="submit" class="success-button cursor-pointer" data-bs-target="#ShowNurseInfo"
+            data-bs-toggle="modal" data-bs-dismiss="modal" id="deleteNurseYesBtn" style="margin-left: 3px;">Ja</button>
         </div>
       </div>
     </div>
@@ -1036,37 +1016,7 @@ function parseCustomDate(dateString) {
   return new Date(`${year}-${month}-${day}`);
 }
 </script>
-<!-- <script>
-$(document).ready(function() {
-$('.editButton').on('click', function() {
-var id = $(this).data('id');
-console.log(id);
 
-$.ajax({
-url: './ajax/staff.php',
-method: 'POST',
-data: { id: id },
-success: function(response) {
-var staffData = JSON.parse(response);
-console.log(staffData)
-console.log(staffData.status)
-$('#StaffId').val(staffData.id);
-$('#StaffName').val(staffData.name);
-$('#StaffEmail').val(staffData.email);
-$('#StaffTelephone').val(staffData.telephone);
-$('#StaffStatus-Options-E').val(staffData.status);
-$('#StaffServices-Options-E').val(staffData.services);
-$('#edit-staff').modal('show');
-},
-error: function(xhr, status, error) {
-console.error('Error:', error);
-}
-
-});
-
-});
-})
-</script> -->
 
 <script>
 $(document).ready(function() {

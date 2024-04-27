@@ -648,11 +648,11 @@ if($role == 1){
             <label class="my-1" for="Status">Arzt wechseln</label>
             <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
               <?php 
-                                    foreach ($staffList as $staff) {
-                                        $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
-                                        echo "<option value='".$staff['id']."' id='".$staff['id']."'>" . $staff['name'] . "</option>";
-                                    }
-                                ?>
+                foreach ($staffList as $staff) {
+                    $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
+                    echo "<option value='".$staff['id']."' id='".$staff['id']."'>" . $staff['name'] . "</option>";
+                }
+            ?>
             </select>
             <p class="error" id="doctor-error"></p>
           </div>

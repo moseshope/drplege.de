@@ -83,11 +83,11 @@ if ($role == 1 || $role == 2) {
 
   <!-- Navbar -->
   <nav class="w-100 custom-navbar">
-    <div class="container d-flex justify-content-between">
+    <div class="d-flex justify-content-around">
       <div class="menu-button align-items-center">
         <i class="bi bi-list" onclick="handleSidebar()"></i>
       </div>
-      <div class="nav-logo cursor-pointer" onclick="window.location = 'index.html'">
+      <div class="nav-logo cursor-pointer" style="margin-left:54px !important;" onclick="window.location = 'index.html'">
         <img class="w-100 h-100" href="https://drpleger.de/" src="../images/logo.png" alt="logo-image">
       </div>
       <!-- <ul>

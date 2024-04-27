@@ -324,7 +324,7 @@ $(document).ready(function () {
   });
 
   $("#ConfirmationYesBtn").on("click", function () {
-    $("#show-info").modal("show");
+    // $("#show-info").modal("show");
     $("#Confirmation").modal("hide");
   });
   // add staff
@@ -350,7 +350,7 @@ $(document).ready(function () {
     }
   });
   $("#UpdateStaffConfirmationBtn").on("click", function () {
-    $("#edit-show-info").modal("show");
+    // $("#edit-show-info").modal("show");
     $("#EditStaffConfirmation").modal("hide");
   });
 
@@ -367,13 +367,13 @@ $(document).ready(function () {
   });
   $("#EditConfirmationYesBtn").on("click", function () {
     $("#EditConfirmation").modal("hide");
-    $("#edit-show-info").modal("show");
+    // $("#edit-show-info").modal("show");
   });
 
   // delete patients
   $("#deleteConformation").on("click", function () {
     $("#Confirmation").modal("hide");
-    $("#show-info").modal("show");
+    // $("#show-info").modal("show");
   });
 
   // update profile
@@ -405,7 +405,7 @@ $(document).ready(function () {
   });
 
   // set value edit employee form
-  $(".editButton").on("click", function () {
+  $(".editStaffButton").on("click", function () {
     var id = $(this).data("id");
     $.ajax({
       url: "./ajax/staff.php",

@@ -18,9 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = mysqli_real_escape_string($connect, md5($_POST['password']));
         $telephone = mysqli_real_escape_string($connect, $_POST['telephone']);
         $status = mysqli_real_escape_string($connect, $_POST['status']);
+
+        // Translate status to database-friendly values
+        if ($status === 'Aktiv') {
+                $status = '1';
+                } elseif ($status === 'Deaktiviert') {
+                $status = '0';
+                }
         $role = 2;
 
-        if($_FILES["profile"]["name"]) {
+        if ($_FILES["profile"]["name"]) {
                 // If a file is uploaded
                 $originalFileName = $_FILES["profile"]["name"];
                 $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
@@ -30,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $profileName = $timestamp . "_" . $originalFileName;
                 // Move the uploaded file to the desired location with the composed profile name
                 $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
-            } else {
+                } else {
                 // If no file is uploaded, use the existing profile name
                 $profileName = NULL;
-            }
-            
+                }
+
 
         $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : array();
 
@@ -57,14 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $sql = "INSERT INTO services_docs (user_id, service_id) VALUES $data;";
                 $connect->query($sql);
                 // $staff_services
-                $sql = "SELECT * FROM services WHERE id IN (". implode(",", $staff_services) .")";
+                $sql = "SELECT * FROM services WHERE id IN (" . implode(",", $staff_services) . ")";
                 $result = $connect->query($sql);
                 if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                        $servicesArray[] = $row['services'];
+                        while ($row = $result->fetch_assoc()) {
+                                $servicesArray[] = $row['services'];
+                                }
                         }
                 }
-        }
         if ($query) {
                 $mail = new PHPMailer(true);
                 $mail->CharSet = PHPMailer::CHARSET_UTF8;

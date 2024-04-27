@@ -5,6 +5,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = mysqli_real_escape_string($connect, $_POST['name']);
         $email = mysqli_real_escape_string($connect, $_POST['email']);
         $status = mysqli_real_escape_string($connect, $_POST['status']);
+
+        // Translate status to database-friendly values
+        if ($status === 'Aktiv') {
+                $status = '1';
+                } elseif ($status === 'Deaktiviert') {
+                $status = '0';
+                }
         $sql = "select * from user where id='$id'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();

@@ -8,12 +8,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $telephone = mysqli_real_escape_string($connect, $_POST['telephone']);
         $status = mysqli_real_escape_string($connect, $_POST['status']);
 
+        // Translate status to database-friendly values
+        if ($status === 'Aktiv') {
+                $status = '1';
+                } elseif ($status === 'Deaktiviert') {
+                $status = '0';
+                }
+
         $sql = "select * from user where id='$id'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();
         $profile = $row['profile'];
 
-        if($_FILES["profile"]["name"]) {
+        if ($_FILES["profile"]["name"]) {
                 // If a file is uploaded
                 $originalFileName = $_FILES["profile"]["name"];
                 $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
@@ -23,16 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $profileName = $timestamp . "_" . $originalFileName;
                 // Move the uploaded file to the desired location with the composed profile name
                 $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
-                
+
                 // If the previous profile image exists, delete it
                 if (!empty($profile) && file_exists("../../images/" . $profile)) {
-                    unlink("../../images/" . $profile);
-                }
-            } else {
+                        unlink("../../images/" . $profile);
+                        }
+                } else {
                 // If no file is uploaded, use the existing profile name
                 $profileName = $profile;
-            }
-            
+                }
+
 
         // if($_FILES["profile"]["name"]) {
         //         // If a file is uploaded
@@ -48,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //         // If no file is uploaded, use the existing profile name
         //         $profileName = $profile;
         //     }
-            
+
 
         $staff_services = isset($_POST['staff_services']) ? $_POST['staff_services'] : '';
 
@@ -62,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $data = implode(",", $data);
                 $sql = "INSERT INTO services_docs (user_id, service_id) VALUES $data;";
                 $connect->query($sql);
-        }
+                }
         $updated_at = date("Y-m-d");
 
         $sql = "update user set name='$name',email='$email',profile='$profileName',telephone='$telephone',status='$status' where id=$id";

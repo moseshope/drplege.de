@@ -675,6 +675,25 @@ $(document).ready(function () {
     }
   });
 
+  // Delete Staff
+
+  $(".deleteStaffButton").on("click", function () {
+    var id = $(this).data("id");
+    $.ajax({
+      url: "./ajax/deletestaff.php",
+      method: "GET",
+      data: { id: id },
+      success: function (response) {
+        var staffData = JSON.parse(response);
+        $("#deleteStaffId").val(staffData);
+        $("#deleteStaffConfirmation").modal("show");
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
+  });
+
   // Delete Nurse
 
   $(".deleteNurseButton").on("click", function () {
@@ -747,13 +766,13 @@ $(document).ready(function () {
     }
   });
   $("#UpdateStaffConfirmationBtn").on("click", function () {
-    $("#edit-show-info").modal("show");
+    // $("#edit-show-info").modal("show");
     $("#EditStaffConfirmation").modal("hide");
   });
 
   // delete staff
   $("#deleteStaffYesBtn").on("click", function () {
-    $("#deleteNurseConfirmation").modal("hide");
+    $("#deleteStaffConfirmation").modal("hide");
     // $("#show-info").modal("show");
   });
 
@@ -766,13 +785,13 @@ $(document).ready(function () {
   });
   $("#EditConfirmationYesBtn").on("click", function () {
     $("#EditConfirmation").modal("hide");
-    $("#E-edit-show-info").modal("show");
+    // $("#E-edit-show-info").modal("show");
   });
 
   // delete patients
   $("#deleteConformation").on("click", function () {
     $("#ConfirmationDelete").modal("hide");
-    $("#show-info-delete").modal("show");
+    // $("#show-info-delete").modal("show");
   });
 
   // update profile
@@ -802,7 +821,20 @@ $(document).ready(function () {
   });
 
   // set value edit employee form
-  $(".editButton").on("click", function () {
+  $(".editStaffButton").on("click", function () {
+    var id = $(this).data("id");
+    $.ajax({
+      url: "./ajax/staff.php",
+      method: "POST",
+      data: { id: id },
+      success: function (response) {
+        var staffData = JSON.parse(response);
+        // console.log(staffData);
+        $("#StaffId").val(staffData.id);
+        $("#StaffName").val(staffData.name);
+        $("#StaffEmail").val(staffData.email);
+        $("#StaffTelephone").val(staffData.telephone);
+    $(".editButton").on("click", function () {
     var id = $(this).data("id");
     $.ajax({
       url: "./ajax/staff.php",
@@ -816,6 +848,31 @@ $(document).ready(function () {
         $("#StaffEmail").val(staffData.email);
         $("#StaffTelephone").val(staffData.telephone);
         $("#StaffStatus-Options-E").val(staffData.status);
+
+        // $("#Services-Options-E").val(staffData.services);
+        $(`input[type=checkbox]`).prop("checked", false);
+        staffData.services?.forEach((service) => {
+          $(`input[type=checkbox][value='${service}']`).prop("checked", true);
+        });
+        // Assuming staffData.profile is defined somewhere
+        if (staffData.profile) {
+          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/${staffData.profile}`);
+          $('#open-image-picker-E').text('Bild ändern');
+        } else {
+          $('#open-image-picker-E').text('Bild hochladen')
+          // If staffData.profile does not exist, set the src attribute to an empty string
+          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/logo.png`);
+        }
+       
+        $("#edit-staff").modal("show");
+
+        // updateCheckboxForServices(staffData.services);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
+  });
         // $("#Services-Options-E").val(staffData.services);
         $(`input[type=checkbox]`).prop("checked", false);
         staffData.services?.forEach((service) => {
@@ -855,19 +912,8 @@ $(document).ready(function () {
   // delete employee
   $(".deleteButton").on("click", function () {
     var id = $(this).data("id");
-    $.ajax({
-      url: "./ajax/deletestaff.php",
-      method: "GET",
-      data: { id: id },
-      success: function (response) {
-        var staffData = JSON.parse(response);
-        $("#deleteStaffId").val(staffData);
-        $("#Confirmation").modal("show");
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
+    $("#Confirmation").modal("show");
+    
   });
 
   // Services Form validation

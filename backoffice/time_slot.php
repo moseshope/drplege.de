@@ -440,6 +440,10 @@ $('#deleteConfirmationYesBtn').on('click', function() {
   location.reload();
   // $('#deleteSlotShowInfo').modal('show');
 });
+
+$('#add-slot').on('hidden.bs.modal', function() {
+  $('#slot').val(''); // Clear the value of the input field with id 'slot'
+});
 </script>
 <script>
 const params = new URLSearchParams(window.location.search);

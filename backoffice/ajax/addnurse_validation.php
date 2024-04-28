@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
     if(empty($email)){
-        $message = "Email is required";
+        $message = "E-Mail ist erforderlich";
         echo json_encode(['email' => $message]);
     }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Invalid email format";

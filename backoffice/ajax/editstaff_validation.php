@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo json_encode(['name' => $message]);
     }
     if(empty($email)){
-        $message = "Email is required";
+        $message = "E-Mail ist erforderlich";
         echo json_encode(['email' => $message]);
     }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Invalid email format";
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql = "select * from user where telephone = '$telephone' && deleted_at IS NULL  && id != '$id'";
         $result = $connect->query($sql);
         if($result->num_rows > 0){
-            $message = "This telephone already exits";
+            $message = "Dieses Telefon existiert bereits";
             echo json_encode(['telephone' => $message]);
         }
     }

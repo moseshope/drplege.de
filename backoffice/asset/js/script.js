@@ -724,45 +724,52 @@ $(document).ready(function () {
         url: "./ajax/editstaff_validation.php",
         method: "POST",
         data: {
-          id: id,
-          name: name,
-          email: email,
-          telephone: telephone,
+            id: id,
+            name: name,
+            email: email,
+            telephone: telephone,
         },
         success: function (response) {
           if (response) {
-            var jsonObjects = response.split("}{");
-            var responseData = JSON.parse(jsonObjects);
+            var responseData = JSON.parse(response);
             if (responseData.name) {
-              $("#name-edit-error")
-                .text(responseData.name)
-                .addClass("text-danger");
+                $("#name-edit-error")
+                    .text(responseData.name)
+                    .addClass("text-danger")
+                    .show();
             } else {
-              $("#name-edit-error").hide();
+                $("#name-edit-error").hide();
             }
             if (responseData.email) {
-              $("#email-edit-error")
-                .text(responseData.email)
-                .addClass("text-danger");
+                $("#email-edit-error")
+                    .text(responseData.email)
+                    .addClass("text-danger")
+                    .show();
             } else {
-              $("#email-edit-error").hide();
+                $("#email-edit-error").hide();
             }
-            if (responseData.telephone) {
-              $("#telephone-edit-error")
-                .text(responseData.telephone)
-                .addClass("text-danger");
+            if ($("#StaffTelephone").val().trim() === '') {
+                $("#telephone-edit-error").hide();
             } else {
-              $("#telephone-edit-error").hide();
+                if (responseData.telephone) {
+                    $("#telephone-edit-error")
+                        .text(responseData.telephone)
+                        .addClass("text-danger")
+                        .show();
+                } else {
+                    $("#telephone-edit-error").hide();
+                }
             }
-          } else {
-            $("#edit-staff").modal("hide");
-            // $("#EditStaffConfirmation").modal("show");
-          }
+        } else {
+            $("#telephone-edit-error").hide(); // Hide the error message if there is no response for the telephone field
+        }
+        
         },
         error: function (xhr, status, error) {
-          console.error("Error:", error);
+            console.error("Error:", error);
         },
-      });
+    });
+    
     }
   });
   $("#UpdateStaffConfirmationBtn").on("click", function () {

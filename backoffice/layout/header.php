@@ -87,9 +87,12 @@ if ($role == 1 || $role == 2) {
       <div class="menu-button align-items-center">
         <i class="bi bi-list" onclick="handleSidebar()"></i>
       </div>
-      <div class="nav-logo cursor-pointer" style="margin-left:54px !important;" onclick="window.location = 'index.html'">
-        <img class="w-100 h-100" href="https://drpleger.de/" src="../images/logo.png" alt="logo-image">
+      <div class="nav-logo cursor-pointer" style="margin-left:54px !important;">
+        <a href="https://drpleger.de/">
+          <img class="w-100 h-100" src="../images/logo.png" alt="logo-image">
+        </a>
       </div>
+
       <!-- <ul>
                 <li class="cursor-pointer">Startseite</li>
                 <li class="cursor-pointer">Über uns</li>

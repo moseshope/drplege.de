@@ -1106,7 +1106,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         $("#deletedConfirmation").modal("hide");
-        // $("#deleteSlotShowInfo").modal("show");
+        $("#deleteSlotShowInfo").modal("show");
         location.reload();
       },
       error: function (xhr, status, error) {

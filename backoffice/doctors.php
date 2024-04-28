@@ -330,8 +330,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 <form id="AddStaff" method="post" action="./controller/addstaff.php" enctype="multipart/form-data">
   <div class="modal fade" id="add-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-      <div class="modal-content p-3 custom-modal" style="border-radius: 16px; width: 800px;">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
         <div class="d-flex justify-content-center align-items-center py-2">
           <div class="flex-grow-1"></div>
           <h1 class="modal-heading" style="font-weight: 800; margin-left:72px">Doktor hinzufügen</h1>

@@ -897,6 +897,7 @@ $("#add-staff").on("hidden.bs.modal", function () {
         $("#StaffName").val(staffData.name);
         $("#StaffEmail").val(staffData.email);
         $("#StaffTelephone").val(staffData.telephone);
+        $("#StaffStatus-Options-E").val(staffData.status);
     $(".editButton").on("click", function () {
     var id = $(this).data("id");
     $.ajax({

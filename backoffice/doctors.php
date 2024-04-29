@@ -661,12 +661,22 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <span class="error" id="email-edit-error"></span>
             </div>
           </div>
+          
+          <?php
+          // Assuming $status is retrieved or set somewhere in your PHP code
+          $status = isset($status) ? $status : ''; // Initialize $status variable if not already set
+          
+          // Check if $status is set to "Aktiv" or "Deaktiviert"
+          $isAktiv = ($status == 1) ? 'selected' : '';
+          $isDeaktiviert = ($status == 0) ? 'selected' : '';
+          ?>
+
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
-              <select name="status" class="form-select cursor-pointer custom-input" value="" id="StaffStatus-Options-E">
-                <option selected value="Aktiv">Aktiv</option>
-                <option value="Deaktiviert">Deaktiviert</option>
+              <select name="status" class="form-select cursor-pointer custom-input" id="StaffStatus-Options-E">
+                <option <?php echo $isAktiv; ?> value="1">Aktiv</option>
+                <option <?php echo $isDeaktiviert; ?> value="0">Deaktiviert</option>
               </select>
               <span class="error" id="status-error"></span>
             </div>

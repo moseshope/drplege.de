@@ -324,6 +324,7 @@ $(document).ready(function() {
 $('#toConfirmationYesBtn').on('click', function() {
   $('#Confirmation').modal('hide');
 });
+
 $('#addSlotBtn').on('click', function() {
   if ($('#AddSlot').valid()) {
     var selectedSlot = $('#slot').val();
@@ -334,15 +335,16 @@ $('#addSlotBtn').on('click', function() {
         slot: selectedSlot
       },
       success: function(response) {
+        // Clear any existing error message
+        $('#slot-error').hide().text('');
+
         if (response) {
           var responseData = JSON.parse(response);
-          $('#slot-error').text(responseData).addClass('text-danger');
+          $('#slot-error').text(responseData).addClass('text-danger').show(); // Show error message if response is not empty
         } else {
           $('#slot-error').hide();
-          // $('#ShowInfo').modal('hide');
           $('#add-slot').modal('hide');
           location.reload();
-          // $('#Confirmation').modal('show');
         }
       },
       error: function(xhr, status, error) {
@@ -352,6 +354,11 @@ $('#addSlotBtn').on('click', function() {
     });
 
   }
+});
+
+// Clear error message when modal is closed
+$('#add-slot').on('hidden.bs.modal', function () {
+  $('#slot-error').hide().text('');
 });
 
 

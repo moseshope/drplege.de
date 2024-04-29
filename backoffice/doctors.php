@@ -417,7 +417,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 }
               }
               </script>
-              <p class="error mb-0" id="password-error"></p>
+              <p class="error mb-0" id="confirm_password-error"></p>
             </div>
           </div>
 

@@ -146,6 +146,13 @@ $(document).ready(function () {
     },
   });
 
+// Event handler for when the modal is closed
+$("#add-staff").on("hidden.bs.modal", function () {
+  // Reset the form validation
+  $("#AddStaff").validate().resetForm();
+});
+
+
   // edit employess validation
   $("#EditStaff").validate({
     rules: {
@@ -439,6 +446,55 @@ $(document).ready(function () {
       });
     }
   });
+  $("#add-staff").on("shown.bs.modal", function () {
+    $("#name-error").hide().text("");
+    $("#email-error").hide().text("");
+    $("#telephone-error").hide().text("");
+    $("#password-error").hide().text("");
+    $("#confirm_password-error").hide().text("");
+  });
+
+  $("#add-staff").on("hidden.bs.modal", function () {
+    $("#name-error").hide().text("");
+    $("#email-error").hide().text("");
+    $("#telephone-error").hide().text("");
+    $("#password-error").hide().text("");
+    $("#confirm_password-error").hide().text("");
+  });
+
+  $('#addSlotBtn').on('click', function() {
+    if ($('#AddSlot').valid()) {
+      var selectedSlot = $('#slot').val();
+      $.ajax({
+        url: './ajax/addslot.php',
+        method: 'POST',
+        data: {
+          slot: selectedSlot
+        },
+        success: function(response) {
+          // Clear any existing error message
+          $('#slot-error').hide().text('');
+  
+          if (response) {
+            var responseData = JSON.parse(response);
+            $('#slot-error').text(responseData).addClass('text-danger').show(); // Show error message if response is not empty
+          } else {
+            $('#slot-error').hide();
+            $('#add-slot').modal('hide');
+            location.reload();
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('Error:', error);
+        }
+  
+      });
+  
+    }
+  });
+  
+  // Clear error message when modal is closed
+
   // $("#StaffConfirmationYesBtn").on("click", function () {
   //   $("#staffShowInfo").modal("show");
   //   $("#StaffConfirmation").modal("hide");

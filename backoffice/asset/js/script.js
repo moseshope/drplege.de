@@ -180,9 +180,6 @@ $(document).ready(function () {
       name: {
         required: "Name ist erforderlich.",
       },
-      // qualification: {
-      //   required: "Qualifikation ist erforderlich.",
-      // },
       email: {
         required: "E-Mail ist erforderlich.",
         email: "Bitte geben Sie eine gültige E-Mail Adresse ein.",
@@ -728,6 +725,23 @@ $(document).ready(function () {
     }
   });
 
+  // Function to clear validation messages
+function clearValidationMessages() {
+  $("#EditStaff .error").each(function () {
+      $(this).text(''); // Clear the error message text
+      $(this).removeClass('text-danger'); // Remove the text-danger class
+  });
+}
+
+// Clear validation messages when the modal is closed
+$('#EditStaff').on('hidden.bs.modal', function () {
+  clearValidationMessages(); // Clear validation messages
+});
+// Clear validation messages when the modal is reopened
+$('#EditStaff').on('shown.bs.modal', function () {
+  clearValidationMessages(); // Clear validation messages
+});
+
   // Delete Staff
 
   $(".deleteStaffButton").on("click", function () {
@@ -831,6 +845,9 @@ $('#EditStaff').on('hidden.bs.modal', function () {
   $("#name-edit-error").hide();
   $("#email-edit-error").hide();
   $("#telephone-edit-error").hide();
+  $("#name-edit-error").hide().text('');
+  $("#email-edit-error").hide().text('');
+  $("#telephone-edit-error").hide().text('');
 });
 
 // Clear error messages when the modal is reopened
@@ -838,6 +855,9 @@ $('#EditStaff').on('shown.bs.modal', function () {
   $("#name-edit-error").hide();
   $("#email-edit-error").hide();
   $("#telephone-edit-error").hide();
+  $("#name-edit-error").hide().text('');
+  $("#email-edit-error").hide().text('');
+  $("#telephone-edit-error").hide().text('');
 });
 
 

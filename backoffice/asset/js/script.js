@@ -146,12 +146,11 @@ $(document).ready(function () {
     },
   });
 
-// Event handler for when the modal is closed
-$("#add-staff").on("hidden.bs.modal", function () {
-  // Reset the form validation
-  $("#AddStaff").validate().resetForm();
-});
-
+  // Event handler for when the modal is closed
+  $("#add-staff").on("hidden.bs.modal", function () {
+    // Reset the form validation
+    $("#AddStaff").validate().resetForm();
+  });
 
   // edit employess validation
   $("#EditStaff").validate({
@@ -311,7 +310,7 @@ $("#add-staff").on("hidden.bs.modal", function () {
       current_password: {
         required: "Bitte geben Sie Ihr Passwort ein",
         // minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
-        equalTo:"Aktuelles Passwort ungültig."
+        equalTo: "Aktuelles Passwort ungültig.",
       },
       password: {
         required: "Bitte geben Sie Ihr Passwort ein",
@@ -415,7 +414,7 @@ $("#add-staff").on("hidden.bs.modal", function () {
               $("#email-error").hide();
             }
             if (responseData.telephone) {
-            $("#telephone-error")
+              $("#telephone-error")
                 .text(responseData.telephone)
                 .addClass("text-danger");
             } else {
@@ -462,37 +461,35 @@ $("#add-staff").on("hidden.bs.modal", function () {
     $("#confirm_password-error").hide().text("");
   });
 
-  $('#addSlotBtn').on('click', function() {
-    if ($('#AddSlot').valid()) {
-      var selectedSlot = $('#slot').val();
+  $("#addSlotBtn").on("click", function () {
+    if ($("#AddSlot").valid()) {
+      var selectedSlot = $("#slot").val();
       $.ajax({
-        url: './ajax/addslot.php',
-        method: 'POST',
+        url: "./ajax/addslot.php",
+        method: "POST",
         data: {
-          slot: selectedSlot
+          slot: selectedSlot,
         },
-        success: function(response) {
+        success: function (response) {
           // Clear any existing error message
-          $('#slot-error').hide().text('');
-  
+          $("#slot-error").hide().text("");
+
           if (response) {
             var responseData = JSON.parse(response);
-            $('#slot-error').text(responseData).addClass('text-danger').show(); // Show error message if response is not empty
+            $("#slot-error").text(responseData).addClass("text-danger").show(); // Show error message if response is not empty
           } else {
-            $('#slot-error').hide();
-            $('#add-slot').modal('hide');
+            $("#slot-error").hide();
+            $("#add-slot").modal("hide");
             location.reload();
           }
         },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-  
+        error: function (xhr, status, error) {
+          console.error("Error:", error);
+        },
       });
-  
     }
   });
-  
+
   // Clear error message when modal is closed
 
   // $("#StaffConfirmationYesBtn").on("click", function () {
@@ -776,58 +773,74 @@ $("#add-staff").on("hidden.bs.modal", function () {
       var name = $("#StaffName").val();
       var email = $("#StaffEmail").val();
       var telephone = $("#StaffTelephone").val();
+
       $.ajax({
         url: "./ajax/editstaff_validation.php",
         method: "POST",
         data: {
-            id: id,
-            name: name,
-            email: email,
-            telephone: telephone,
+          id: id,
+          name: name,
+          email: email,
+          telephone: telephone,
         },
         success: function (response) {
           if (response) {
+            // Handle validation errors
             var responseData = JSON.parse(response);
             if (responseData.name) {
-                $("#name-edit-error")
-                    .text(responseData.name)
-                    .addClass("text-danger")
-                    .show();
+              $("#name-edit-error")
+                .text(responseData.name)
+                .addClass("text-danger")
+                .show();
             } else {
-                $("#name-edit-error").hide();
+              $("#name-edit-error").hide();
             }
             if (responseData.email) {
-                $("#email-edit-error")
-                    .text(responseData.email)
-                    .addClass("text-danger")
-                    .show();
+              $("#email-edit-error")
+                .text(responseData.email)
+                .addClass("text-danger")
+                .show();
             } else {
-                $("#email-edit-error").hide();
+              $("#email-edit-error").hide();
             }
-            if ($("#StaffTelephone").val().trim() === '') {
+            if ($("#StaffTelephone").val().trim() === "") {
+              $("#telephone-edit-error").hide();
+            } else {
+              if (responseData.telephone) {
+                $("#telephone-edit-error")
+                  .text(responseData.telephone)
+                  .addClass("text-danger")
+                  .show();
+              } else {
                 $("#telephone-edit-error").hide();
-            } else {
-                if (responseData.telephone) {
-                    $("#telephone-edit-error")
-                        .text(responseData.telephone)
-                        .addClass("text-danger")
-                        .show();
-                } else {
-                    $("#telephone-edit-error").hide();
-                }
+              }
             }
-        } else {
-            $("#telephone-edit-error").hide(); // Hide the error message if there is no response for the telephone field
-        }
-        
+          } else {
+            // If no validation errors, submit the form
+            $("#EditStaff").submit(); // Submit the form
+          }
         },
         error: function (xhr, status, error) {
-            console.error("Error:", error);
+          console.error("Error:", error);
         },
-    });
-    
+      });
     }
   });
+// Clear error messages when the modal is closed
+$('#EditStaff').on('hidden.bs.modal', function () {
+  $("#name-edit-error").hide();
+  $("#email-edit-error").hide();
+  $("#telephone-edit-error").hide();
+});
+
+// Clear error messages when the modal is reopened
+$('#EditStaff').on('shown.bs.modal', function () {
+  $("#name-edit-error").hide();
+  $("#email-edit-error").hide();
+  $("#telephone-edit-error").hide();
+});
+
+
   $("#UpdateStaffConfirmationBtn").on("click", function () {
     // $("#edit-show-info").modal("show");
     $("#EditStaffConfirmation").modal("hide");
@@ -898,21 +911,54 @@ $("#add-staff").on("hidden.bs.modal", function () {
         $("#StaffEmail").val(staffData.email);
         $("#StaffTelephone").val(staffData.telephone);
         $("#StaffStatus-Options-E").val(staffData.status);
-    $(".editButton").on("click", function () {
-    var id = $(this).data("id");
-    $.ajax({
-      url: "./ajax/staff.php",
-      method: "POST",
-      data: { id: id },
-      success: function (response) {
-        var staffData = JSON.parse(response);
-        // console.log(staffData);
-        $("#StaffId").val(staffData.id);
-        $("#StaffName").val(staffData.name);
-        $("#StaffEmail").val(staffData.email);
-        $("#StaffTelephone").val(staffData.telephone);
-        $("#StaffStatus-Options-E").val(staffData.status);
+        $(".editButton").on("click", function () {
+          var id = $(this).data("id");
+          $.ajax({
+            url: "./ajax/staff.php",
+            method: "POST",
+            data: { id: id },
+            success: function (response) {
+              var staffData = JSON.parse(response);
+              // console.log(staffData);
+              $("#StaffId").val(staffData.id);
+              $("#StaffName").val(staffData.name);
+              $("#StaffEmail").val(staffData.email);
+              $("#StaffTelephone").val(staffData.telephone);
+              $("#StaffStatus-Options-E").val(staffData.status);
 
+              // $("#Services-Options-E").val(staffData.services);
+              $(`input[type=checkbox]`).prop("checked", false);
+              staffData.services?.forEach((service) => {
+                $(`input[type=checkbox][value='${service}']`).prop(
+                  "checked",
+                  true
+                );
+              });
+              // Assuming staffData.profile is defined somewhere
+              if (staffData.profile) {
+                $("#image-preview-E").attr(
+                  "src",
+                  `https://drpleger.de/termin-buchen/images/${staffData.profile}`
+                );
+                $("#open-image-picker-E").text("Bild ändern");
+              } else {
+                $("#open-image-picker-E").text("Bild hochladen");
+                // If staffData.profile does not exist, set the src attribute to an empty string
+                $("#image-preview-E").attr(
+                  "src",
+                  `https://drpleger.de/termin-buchen/images/logo.png`
+                );
+              }
+
+              $("#edit-staff").modal("show");
+
+              // updateCheckboxForServices(staffData.services);
+            },
+            error: function (xhr, status, error) {
+              console.error("Error:", error);
+            },
+          });
+        });
         // $("#Services-Options-E").val(staffData.services);
         $(`input[type=checkbox]`).prop("checked", false);
         staffData.services?.forEach((service) => {
@@ -920,38 +966,20 @@ $("#add-staff").on("hidden.bs.modal", function () {
         });
         // Assuming staffData.profile is defined somewhere
         if (staffData.profile) {
-          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/${staffData.profile}`);
-          $('#open-image-picker-E').text('Bild ändern');
+          $("#image-preview-E").attr(
+            "src",
+            `https://drpleger.de/termin-buchen/images/${staffData.profile}`
+          );
+          $("#open-image-picker-E").text("Bild ändern");
         } else {
-          $('#open-image-picker-E').text('Bild hochladen')
+          $("#open-image-picker-E").text("Bild hochladen");
           // If staffData.profile does not exist, set the src attribute to an empty string
-          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/logo.png`);
+          $("#image-preview-E").attr(
+            "src",
+            `https://drpleger.de/termin-buchen/images/logo.png`
+          );
         }
-       
-        $("#edit-staff").modal("show");
 
-        // updateCheckboxForServices(staffData.services);
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
-  });
-        // $("#Services-Options-E").val(staffData.services);
-        $(`input[type=checkbox]`).prop("checked", false);
-        staffData.services?.forEach((service) => {
-          $(`input[type=checkbox][value='${service}']`).prop("checked", true);
-        });
-        // Assuming staffData.profile is defined somewhere
-        if (staffData.profile) {
-          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/${staffData.profile}`);
-          $('#open-image-picker-E').text('Bild ändern');
-        } else {
-          $('#open-image-picker-E').text('Bild hochladen')
-          // If staffData.profile does not exist, set the src attribute to an empty string
-          $("#image-preview-E").attr("src", `https://drpleger.de/termin-buchen/images/logo.png`);
-        }
-       
         $("#edit-staff").modal("show");
 
         // updateCheckboxForServices(staffData.services);
@@ -977,7 +1005,6 @@ $("#add-staff").on("hidden.bs.modal", function () {
   $(".deleteButton").on("click", function () {
     var id = $(this).data("id");
     $("#Confirmation").modal("show");
-    
   });
 
   // Services Form validation
@@ -1067,200 +1094,6 @@ $("#add-staff").on("hidden.bs.modal", function () {
         success: function (response) {
           // $("#ShowInfo").modal("show");
           $("#add-services").modal("hide");
-          },
-        error: function (xhr, status, error) {
-          console.error("Error:", error);
-        },
-      });
-    }
-  });
-  });
-
-  $("#ServicesShowInfoBtn").click(function () {
-    $("#AddServices").trigger("reset");
-    validator.resetForm();
-    location.reload();
-  });
-
-  $("#ConfirmationNoBtn").click(function () {
-    $("#AddServices").trigger("reset");
-    validator.resetForm();
-    location.reload();
-  });
-
-  // Confirm Messages
-
-  $("#ConfirmationYesBtn").on("click", function () {
-    var services = $("#serviceGermany").val();
-    var services_en = $("#servicesEnglish").val();
-    $.ajax({
-      url: "./ajax/addservices.php",
-      method: "POST",
-      data: { services: services, services_en: services_en },
-      success: function (response) {
-        $("#ShowInfo").modal("show");
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
-  });
-
-  // Edit Services validation
-
-  var validatorEdit = $("#EditServices").validate({
-    rules: {
-      editEnglish: {
-        required: true,
-      },
-      editGermany: {
-        required: true,
-      },
-    },
-    messages: {
-      editEnglish: {
-        required: "Der Name des Dienstes ist erforderlich (Englisch).",
-      },
-      editGermany: {
-        required: "Der Name des Dienstes ist erforderlich (Deutschland).",
-      },
-    },
-    errorPlacement: function (error, element) {
-      var fieldName = $(element).attr("name");
-      error.insertAfter("#" + fieldName + "-error");
-      error.addClass("text-danger");
-    },
-    highlight: function (element) {
-      $(element).siblings(".error").addClass("text-danger");
-    },
-    unhighlight: function (element) {
-      $(element).siblings(".error").removeClass("text-danger");
-    },
-  });
-
-  // Delete Get ID
-  $(".deleteservices").on("click", function (e) {
-    var id = $(this).attr("data-id");
-    $("#deleteid").val(id);
-    $.ajax({
-      url: "./ajax/deleteservices.php",
-      method: "POST",
-      data: {
-        id: id,
-      },
-      success: function (response) {
-        // $("#deletedConfirmation").modal("hide");
-        // $("#deleteSlotShowInfo").modal("show");
-        location.reload();
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
-  });
-
-  //  Delete Query Services
-  $("#deleteConfirmationYesBtn").on("click", function () {
-    var id = $("#deleteid").val();
-    $.ajax({
-      url: "./ajax/deleteservices.php",
-      method: "POST",
-      data: {
-        id: id,
-      },
-      success: function (response) {
-        $("#deletedConfirmation").modal("hide");
-        $("#deleteSlotShowInfo").modal("show");
-        location.reload();
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
-  });
-
-  $("#ServicesShow").on("click", function () {
-    location.reload();
-  });
-
-  // Get Data Services
-  $(".editservices").on("click", function () {
-    var servicesId = $(this).attr("data-id");
-    $.ajax({
-      url: "./ajax/editservices.php",
-      method: "GET",
-      data: {
-        servicesId: servicesId,
-      },
-      success: function (response) {
-        var responseData = JSON.parse(response);
-        $("#editId").val(responseData.serviceId);
-        $("#editGermany").val(responseData.germany);
-        $("#editEnglish").val(responseData.english);
-        // $('#edit-slot').modal('show');
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
-  });
-
-  // Edit Services
-  $("#updateServicesBtn").on("click", function () {
-    $("#editGermany-error").text("").hide();
-    $("#editEnglish-error").text("").hide();
-    if ($("#EditServices").valid()) {
-      var services = $("#editGermany").val();
-      var services_en = $("#editEnglish").val();
-      var servicesId = $("#editId").val();
-      $.ajax({
-        url: "./ajax/editservicesvalidation.php",
-        method: "POST",
-        data: {
-          servicesId: servicesId,
-          services: services,
-          services_en: services_en,
-        },
-        success: function (response) {
-          if (response) {
-            var responseData = JSON.parse(response);
-            if (responseData.germany) {
-              $("#editGermany-error")
-                .text(responseData.germany)
-                .addClass("text-danger")
-                .show();
-            } else {
-              $("#editGermany-error").text("").hide();
-            }
-            if (responseData.english) {
-              $("#editEnglish-error")
-                .text(responseData.english)
-                .addClass("text-danger")
-                .show();
-            } else {
-              $("#editEnglish-error").text("").hide();
-            }
-          } else {
-            // $("#EditSlotConfirmation").modal("show");
-          }
-        },
-        error: function (xhr, status, error) {
-          console.error("Error:", error);
-        },
-      });
-      $.ajax({
-        url: "./ajax/updateservices.php",
-        method: "POST",
-        data: {
-          servicesId: servicesId,
-          services: services,
-          services_en: services_en,
-        },
-        success: function (response) {
-          $("#edit-services").modal("hide");
-          location.reload();
-          // $("#EditSlotConfirmation").modal("hide");
-          // $("#editSlotShowInfo").modal("show");
         },
         error: function (xhr, status, error) {
           console.error("Error:", error);
@@ -1268,17 +1101,209 @@ $("#add-staff").on("hidden.bs.modal", function () {
       });
     }
   });
+});
 
-  $("#cancelEdit").on("click", function () {
-    validatorEdit.resetForm();
-    location.reload();
-    $("#EditServices").trigger("reset");
+$("#ServicesShowInfoBtn").click(function () {
+  $("#AddServices").trigger("reset");
+  validator.resetForm();
+  location.reload();
+});
+
+$("#ConfirmationNoBtn").click(function () {
+  $("#AddServices").trigger("reset");
+  validator.resetForm();
+  location.reload();
+});
+
+// Confirm Messages
+
+$("#ConfirmationYesBtn").on("click", function () {
+  var services = $("#serviceGermany").val();
+  var services_en = $("#servicesEnglish").val();
+  $.ajax({
+    url: "./ajax/addservices.php",
+    method: "POST",
+    data: { services: services, services_en: services_en },
+    success: function (response) {
+      $("#ShowInfo").modal("show");
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
   });
+});
 
-  $("#EditConfirmationYesBtn").on("click", function () {
+// Edit Services validation
+
+var validatorEdit = $("#EditServices").validate({
+  rules: {
+    editEnglish: {
+      required: true,
+    },
+    editGermany: {
+      required: true,
+    },
+  },
+  messages: {
+    editEnglish: {
+      required: "Der Name des Dienstes ist erforderlich (Englisch).",
+    },
+    editGermany: {
+      required: "Der Name des Dienstes ist erforderlich (Deutschland).",
+    },
+  },
+  errorPlacement: function (error, element) {
+    var fieldName = $(element).attr("name");
+    error.insertAfter("#" + fieldName + "-error");
+    error.addClass("text-danger");
+  },
+  highlight: function (element) {
+    $(element).siblings(".error").addClass("text-danger");
+  },
+  unhighlight: function (element) {
+    $(element).siblings(".error").removeClass("text-danger");
+  },
+});
+
+// Delete Get ID
+$(".deleteservices").on("click", function (e) {
+  var id = $(this).attr("data-id");
+  $("#deleteid").val(id);
+  $.ajax({
+    url: "./ajax/deleteservices.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      // $("#deletedConfirmation").modal("hide");
+      // $("#deleteSlotShowInfo").modal("show");
+      location.reload();
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
+});
+
+//  Delete Query Services
+$("#deleteConfirmationYesBtn").on("click", function () {
+  var id = $("#deleteid").val();
+  $.ajax({
+    url: "./ajax/deleteservices.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      $("#deletedConfirmation").modal("hide");
+      $("#deleteSlotShowInfo").modal("show");
+      location.reload();
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
+});
+
+$("#ServicesShow").on("click", function () {
+  location.reload();
+});
+
+// Get Data Services
+$(".editservices").on("click", function () {
+  var servicesId = $(this).attr("data-id");
+  $.ajax({
+    url: "./ajax/editservices.php",
+    method: "GET",
+    data: {
+      servicesId: servicesId,
+    },
+    success: function (response) {
+      var responseData = JSON.parse(response);
+      $("#editId").val(responseData.serviceId);
+      $("#editGermany").val(responseData.germany);
+      $("#editEnglish").val(responseData.english);
+      // $('#edit-slot').modal('show');
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
+});
+
+// Edit Services
+$("#updateServicesBtn").on("click", function () {
+  $("#editGermany-error").text("").hide();
+  $("#editEnglish-error").text("").hide();
+  if ($("#EditServices").valid()) {
     var services = $("#editGermany").val();
     var services_en = $("#editEnglish").val();
     var servicesId = $("#editId").val();
+    $.ajax({
+      url: "./ajax/editservicesvalidation.php",
+      method: "POST",
+      data: {
+        servicesId: servicesId,
+        services: services,
+        services_en: services_en,
+      },
+      success: function (response) {
+        if (response) {
+          var responseData = JSON.parse(response);
+          if (responseData.germany) {
+            $("#editGermany-error")
+              .text(responseData.germany)
+              .addClass("text-danger")
+              .show();
+          } else {
+            $("#editGermany-error").text("").hide();
+          }
+          if (responseData.english) {
+            $("#editEnglish-error")
+              .text(responseData.english)
+              .addClass("text-danger")
+              .show();
+          } else {
+            $("#editEnglish-error").text("").hide();
+          }
+        } else {
+          // $("#EditSlotConfirmation").modal("show");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
+    $.ajax({
+      url: "./ajax/updateservices.php",
+      method: "POST",
+      data: {
+        servicesId: servicesId,
+        services: services,
+        services_en: services_en,
+      },
+      success: function (response) {
+        $("#edit-services").modal("hide");
+        location.reload();
+        // $("#EditSlotConfirmation").modal("hide");
+        // $("#editSlotShowInfo").modal("show");
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      },
+    });
+  }
+});
 
-  });
+$("#cancelEdit").on("click", function () {
+  validatorEdit.resetForm();
+  location.reload();
+  $("#EditServices").trigger("reset");
+});
 
+$("#EditConfirmationYesBtn").on("click", function () {
+  var services = $("#editGermany").val();
+  var services_en = $("#editEnglish").val();
+  var servicesId = $("#editId").val();
+});

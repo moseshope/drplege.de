@@ -34,10 +34,10 @@ if ($startDate !== null && $endDate !== null) {
 // Construct the WHERE clause
 $whereClause = "";
 if (!empty($conditions)) {
-    $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2 AND " . implode(" AND ", $conditions);
-} else {
-    $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2";
-}
+  $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2 AND " . implode(" AND ", $conditions);
+  } else {
+  $whereClause = "WHERE (user.status = '1' OR user.status = '0') AND role = 2";
+  }
 
 
 $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
@@ -71,12 +71,12 @@ if ($StaffResult && $StaffResult->num_rows > 0) {
     if ($sericesResult->num_rows > 0) {
       while ($row1 = $sericesResult->fetch_assoc()) {
         $services[] = $row1['services'];
-      }
+        }
       $row['serviceList'] = $services;
-    }
+      }
     $staffList[] = $row;
+    }
   }
-}
 
 // Pagination
 $itemsPerPage = 20;
@@ -165,9 +165,9 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                   <div class="text-start mx-auto">
                     <ul>
                       <?php
-                    $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
-                    foreach ($serviceList as $service) {
-                      ?>
+                          $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
+                          foreach ($serviceList as $service) {
+                            ?>
                       <li class="text-left"><?= $service ?></li>
                       <?php } ?>
                     </ul>
@@ -180,31 +180,31 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
                 <!-- <td class="text-center">
               <?php
-                if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
-                  $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
-                  echo implode(', ', $timesArray);
-                  } else {
-                  echo 'No';
-                  }
-                ?>
+              if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
+                $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
+                echo implode(', ', $timesArray);
+                } else {
+                echo 'No';
+                }
+              ?>
               <button class="cursor-pointer showTimeBtn"
               style="background-color: var(--main); color: white;"
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
                 <?php
                     if ($staffList[$i]['status'] === '1') {
-                        $buttonClass = 'custom-success-btn';
-                        $buttonText = 'Aktiv';
-                    } elseif ($staffList[$i]['status'] === '0') {
-                        $buttonClass = 'custom-warnings-btn';
-                        $buttonText = 'Deaktiviert';
-                    } else {
-                        $buttonClass = 'custom-danger-btn';
-                        $buttonText = 'Deleted';
-                    }
-                ?>
+                      $buttonClass = 'custom-success-btn';
+                      $buttonText = 'Aktiv';
+                      } elseif ($staffList[$i]['status'] === '0') {
+                      $buttonClass = 'custom-warnings-btn';
+                      $buttonText = 'Deaktiviert';
+                      } else {
+                      $buttonClass = 'custom-danger-btn';
+                      $buttonText = 'Deleted';
+                      }
+                    ?>
                 <td class="text-center"><button
-                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText;?></button>
+                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
                 </td>
                 <td>
                   <div class="d-flex justify-content-center">
@@ -217,7 +217,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                     <form method="post" action="./controller/deletestaff.php">
                       <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
                       <button type="button" class="iconButton deleteStaffButton"
-                        data-id="<?php echo $staffList[$i]['id'];?>">
+                        data-id="<?php echo $staffList[$i]['id']; ?>">
                         <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
                       </button>
                       <?php } ?>
@@ -256,36 +256,36 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                 <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
                 <!-- <td class="text-center">
               <?php
-                if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
-                  $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
-                  echo implode(', ', $timesArray);
-                  } else {
-                  echo 'No';
-                  }
-                ?> 
+              if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
+                $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
+                echo implode(', ', $timesArray);
+                } else {
+                echo 'No';
+                }
+              ?> 
               <button class="cursor-pointer showTimeBtn"
               style="background-color: var(--main); color: white;"
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
                 <?php
-                if ($staffList[$i]['status'] === '1') {
-                  $buttonClass = 'custom-success-btn';
-                  $buttonText = 'Aktiv';
-                  } elseif ($staffList[$i]['status'] === '0') {
-                  $buttonClass = 'custom-warnings-btn';
-                  $buttonText = 'Deaktiviert';
-                  } else {
-                  $buttonClass = 'custom-danger-btn';
-                  $buttonText = 'Deleted';
-                  }
-                ?>
+                    if ($staffList[$i]['status'] === '1') {
+                      $buttonClass = 'custom-success-btn';
+                      $buttonText = 'Aktiv';
+                      } elseif ($staffList[$i]['status'] === '0') {
+                      $buttonClass = 'custom-warnings-btn';
+                      $buttonText = 'Deaktiviert';
+                      } else {
+                      $buttonClass = 'custom-danger-btn';
+                      $buttonText = 'Deleted';
+                      }
+                    ?>
                 <td class="text-center"><button
                     class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
                 </td>
                 <!-- <td>
               <div class="d-flex justify-content-center dropdown">
               <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {
-                        ; ?>
+                ; ?>
               <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
               style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
               class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
@@ -356,84 +356,71 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             </div>
           </div>
           <div class="col-lg-6 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
-                  placeholder="Passwort" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-password">
-                  <i class="fas fa-eye" id="eye-icon"></i>
-                </span>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-password-icon"
+                  onclick="togglePasswordVisibility()"></i>
               </div>
-              <span class="error" id="password-error"></span>
+              <script>
+              function togglePasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
             </div>
           </div>
-
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const passwordInput = document.getElementById('password');
-            const togglePasswordButton = document.getElementById('toggle-password');
-            const eyeIcon = document.getElementById('eye-icon');
-
-            // Function to toggle the password visibility
-            function togglePasswordVisibility() {
-              if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-              } else {
-                passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-              }
-            }
-
-            // Attach the function to the button's click event
-            togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-          });
-          </script>
           <div class="col-lg-6 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort bestätigen</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
-                  id="confirm_password" placeholder="Passwort bestätigen" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-confirm_password">
-                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
-                </span>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
               </div>
-              <span class="error" id="confirm_password-error"></span>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
+
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
             </div>
           </div>
 
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const passwordInputConfirm = document.getElementById('confirm_password');
-            const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
-            const eyeIconConfirm = document.getElementById('eye-icon-confirm');
-
-            // Function to toggle the password visibility
-            function togglePasswordConfirmVisibility() {
-              if (passwordInputConfirm.type === 'password') {
-                passwordInputConfirm.type = 'text';
-                eyeIconConfirm.classList.remove('fa-eye');
-                eyeIconConfirm.classList.add('fa-eye-slash');
-              } else {
-                passwordInputConfirm.type = 'password';
-                eyeIconConfirm.classList.remove('fa-eye-slash');
-                eyeIconConfirm.classList.add('fa-eye');
-              }
-            }
-            // Attach the function to the button's click event
-            togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
-          });
-          </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
@@ -457,13 +444,13 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <label class="my-1" for="Services">Leistung</label>
               <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
                 <?php
-              foreach ($servicesArray as $service) {
-                echo '<div class="form-check">';
-                echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['id'] . '">';
-                echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
-                echo '</div>';
-                }
-              ?>
+                foreach ($servicesArray as $service) {
+                  echo '<div class="form-check">';
+                  echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="' . $service['services'] . '" value="' . $service['id'] . '">';
+                  echo '<label class="form-check-label" for="' . $service['services'] . '">' . $service['services'] . '</label>';
+                  echo '</div>';
+                  }
+                ?>
               </div>
               <span class="error" id="staff_services-error"></span>
             </div>
@@ -699,13 +686,13 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <label class="my-1" for="Services">Leistungen</label>
               <div style="height: 150px; overflow-x: hidden; overflow-y:scroll;">
                 <?php
-          foreach ($servicesArray as $service) {
-            echo '<div class="form-check">';
-            echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="edit_' . $service['services'] . '" value="' . $service['id'] . '">';
-            echo '<label class="form-check-label" for="edit_' . $service['services'] . '">' . $service['services'] . '</label>';
-            echo '</div>';
-            }
-          ?>
+                foreach ($servicesArray as $service) {
+                  echo '<div class="form-check">';
+                  echo '<input class="form-check-input" type="checkbox" name="staff_services[]" id="edit_' . $service['services'] . '" value="' . $service['id'] . '">';
+                  echo '<label class="form-check-label" for="edit_' . $service['services'] . '">' . $service['services'] . '</label>';
+                  echo '</div>';
+                  }
+                ?>
               </div>
 
               <span class="error" id="staff_services-error"></span>

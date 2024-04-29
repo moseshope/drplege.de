@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['staff_id'])) {
-    header("Location: login");
-}
-include('config/database.php');
-include('layout/header.php');
-include('layout/sidebar.php');
+  header("Location: login");
+  }
+include ('config/database.php');
+include ('layout/header.php');
+include ('layout/sidebar.php');
 
 $id = $_SESSION['staff_id'];
 $sql = "select * from user where id='$id' and deleted_at IS NULL";
@@ -13,112 +13,109 @@ $result = $connect->query($sql);
 $row = $result->fetch_assoc();
 $role = $row['role'];
 
-if($role == 1){
+if ($role == 1) {
 
-    $adminData = "select * from user where id='$id'";
-    $result = $connect->query($adminData);
-    $row = $result->fetch_assoc();
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") 
-    {
-        $current_password = mysqli_real_escape_string($connect,md5($_POST['current_password']));
-    
-        if($current_password == $row['password']){
-            $password = mysqli_real_escape_string($connect,md5($_POST['password']));
-            $password_plain=mysqli_real_escape_string($connect,($_POST['password']));
-            $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
-        
-            $sql = "update user set password='$password' password_plain='$password_plain' where id='$id'";
-            if ($connect->query($sql) === TRUE) {
-            }
-        }else{
-            $error = "Invalid current password.";
+  $adminData = "select * from user where id='$id'";
+  $result = $connect->query($adminData);
+  $row = $result->fetch_assoc();
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $current_password = mysqli_real_escape_string($connect, md5($_POST['current_password']));
+
+    if ($current_password == $row['password']) {
+      $password = mysqli_real_escape_string($connect, md5($_POST['password']));
+      $password_plain = mysqli_real_escape_string($connect, ($_POST['password']));
+      $confirm_password = mysqli_real_escape_string($connect, $_POST['confirm_password']);
+
+      $sql = "update user set password='$password' password_plain='$password_plain' where id='$id'";
+      if ($connect->query($sql) === TRUE) {
         }
+      } else {
+      $error = "Invalid current password.";
+      }
     }
-}else{
-    $doctorData = "select * from user where id='$id'";
-    $result = $connect->query($doctorData);
-    $row = $result->fetch_assoc();
-    $profile = $row['profile'];
-    if(!empty($profile)){
-        $filePath = 'https://drpleger.de/termin-buchen/images/'.$profile;
-        $buttonName='Bild ändern';
-    }else{
-        $filePath = 'https://drpleger.de/termin-buchen/images/logo.png';
-        $buttonName= 'Bild hochladen';
+  } else {
+  $doctorData = "select * from user where id='$id'";
+  $result = $connect->query($doctorData);
+  $row = $result->fetch_assoc();
+  $profile = $row['profile'];
+  if (!empty($profile)) {
+    $filePath = 'https://drpleger.de/termin-buchen/images/' . $profile;
+    $buttonName = 'Bild ändern';
+    } else {
+    $filePath = 'https://drpleger.de/termin-buchen/images/logo.png';
+    $buttonName = 'Bild hochladen';
     }
 
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") 
-    {
-        $password = $_POST['password'];
-        if($password){
-            $password_plain = mysqli_real_escape_string($connect, $_POST ['password']);
-            $password = mysqli_real_escape_string($connect,md5($_POST['password']));
-            $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
-            // 
-            if($_FILES["profile"]["name"]) {
-              // If a file is uploaded
-              $originalFileName = $_FILES["profile"]["name"];
-              $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-              // Get the current timestamp
-              $timestamp = time();
-              // Concatenate the timestamp with the original filename (separated by an underscore)
-              $profileName = $timestamp . "_" . $originalFileName;
-              // Move the uploaded file to the desired location with the composed profile name
-              $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
-              
-              // If the previous profile image exists, delete it
-              if (!empty($profile) && file_exists("../../images/" . $profile)) {
-                  unlink("../../images/" . $profile);
-              }
-          } else {
-              // If no file is uploaded, use the existing profile name
-              $profileName = $profile;
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $password = $_POST['password'];
+    if ($password) {
+      $password_plain = mysqli_real_escape_string($connect, $_POST['password']);
+      $password = mysqli_real_escape_string($connect, md5($_POST['password']));
+      $confirm_password = mysqli_real_escape_string($connect, $_POST['confirm_password']);
+      // 
+      if ($_FILES["profile"]["name"]) {
+        // If a file is uploaded
+        $originalFileName = $_FILES["profile"]["name"];
+        $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+        // Get the current timestamp
+        $timestamp = time();
+        // Concatenate the timestamp with the original filename (separated by an underscore)
+        $profileName = $timestamp . "_" . $originalFileName;
+        // Move the uploaded file to the desired location with the composed profile name
+        $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../../images/" . $profileName);
+
+        // If the previous profile image exists, delete it
+        if (!empty($profile) && file_exists("../../images/" . $profile)) {
+          unlink("../../images/" . $profile);
           }
-          
-                $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
-            }else{
-                if($_FILES["profile"]["name"]) {
-                    // If a file is uploaded
-                    $originalFileName = $_FILES["profile"]["name"];
-                    $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-                    // Get the current timestamp
-                    $timestamp = time();
-                    // Concatenate the timestamp with the original filename (separated by an underscore)
-                    $profileName = $timestamp . "_" . $originalFileName;
-                    // Move the uploaded file to the desired location with the composed profile name
-                    $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
-                } else {
-                    // If no file is uploaded, use the existing profile name
-                    $profileName = $profile;
-                }
-                
-            
-                $sql = "update user set profile='$profileName' where id='$id'";
-                if($sql == true)
-                { ?>
+        } else {
+        // If no file is uploaded, use the existing profile name
+        $profileName = $profile;
+        }
+
+      $sql = "update user set password='$password',profile='$profileName',password_plain='$password_plain' where id='$id'";
+      } else {
+      if ($_FILES["profile"]["name"]) {
+        // If a file is uploaded
+        $originalFileName = $_FILES["profile"]["name"];
+        $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+        // Get the current timestamp
+        $timestamp = time();
+        // Concatenate the timestamp with the original filename (separated by an underscore)
+        $profileName = $timestamp . "_" . $originalFileName;
+        // Move the uploaded file to the desired location with the composed profile name
+        $path = move_uploaded_file($_FILES["profile"]["tmp_name"], "../images/" . $profileName);
+        } else {
+        // If no file is uploaded, use the existing profile name
+        $profileName = $profile;
+        }
+
+
+      $sql = "update user set profile='$profileName' where id='$id'";
+      if ($sql == true) { ?>
 <script>
 window.location = "profile";
 </script>
-<?php } 
-            }
-        
-            // echo $sql;
-            $result = $connect->query($sql);
-            if ($result) {
-                $doctorData1 = "select * from user where id='$id'";
-                $result = $connect->query($doctorData1);
-                $row = $result->fetch_assoc();
-                $profile = $row['profile'];
-                if(!empty($profile)){
-        
-                    $filePath = 'https://drpleger.de/termin-buchen/images/'.$profile;
-                }
-            }
-        
+<?php }
+      }
+
+    // echo $sql;
+    $result = $connect->query($sql);
+    if ($result) {
+      $doctorData1 = "select * from user where id='$id'";
+      $result = $connect->query($doctorData1);
+      $row = $result->fetch_assoc();
+      $profile = $row['profile'];
+      if (!empty($profile)) {
+
+        $filePath = 'https://drpleger.de/termin-buchen/images/' . $profile;
+        }
+      }
+
     }
-}
+  }
 ?>
 
 <!-- Main -->
@@ -128,138 +125,114 @@ window.location = "profile";
       <h1 class="page-heading">Profil</h1>
     </div>
     <div class="px-2 profile-form ">
-      <?php if($role == 1) {?>
+      <?php if ($role == 1) { ?>
 
       <form method="post" id="profileForm">
         <div class="row">
           <div class="col-lg-5 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">Name</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['name']?>" disabled>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>" disabled>
             </div>
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">E-Mail</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['email']?>" disabled>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>" disabled>
             </div>
-            <!-- <div class="form-group p-2 my-2">
-                                    <label class="my-1" for="name">Current password</label>
-                                    <input type="password" name="current_password" class="form-control custom-input" id="current_password"
-                                        placeholder="Enter current password" value="">
-                                    <span class="error" id="current_password-error"></span>
-                                </div> -->
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Aktuelles Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="current_password" class="form-control custom-input pe-5"
-                  id="current_password" placeholder="Aktuelles Passwort eingeben" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-current_password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-current_password">
-                  <i class="fas fa-eye" id="eye-icon-current"></i>
-                </span>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
+                Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="current_password" id="current_password"
+                  placeholder="Aktuelles Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
+                  onclick="toggleCurrentPasswordVisibility()"></i>
               </div>
-              <span class="error" id="current_password-error"></span>
-            </div>
+              <script>
+              function toggleCurrentPasswordVisibility() {
+                const passwordInput = document.getElementById('current_password');
+                const eyeIcon = document.getElementById('toggle-current-password-icon');
 
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInputCurrent = document.getElementById('current_password');
-              const togglePasswordButtonCurrent = document.getElementById('toggle-current_password');
-              const eyeIconCurrent = document.getElementById('eye-icon-current');
-
-              // Function to toggle the password visibility
-              function togglePasswordVisibilityCurrent() {
-                if (passwordInputCurrent.type === 'password') {
-                  passwordInputCurrent.type = 'text';
-                  eyeIconCurrent.classList.remove('fa-eye');
-                  eyeIconCurrent.classList.add('fa-eye-slash');
-                } else {
-                  passwordInputCurrent.type = 'password';
-                  eyeIconCurrent.classList.remove('fa-eye-slash');
-                  eyeIconCurrent.classList.add('fa-eye');
-                }
-              }
-
-              // Attach the function to the button's click event
-              togglePasswordButtonCurrent.addEventListener('click', togglePasswordVisibilityCurrent);
-            });
-            </script>
-
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Neues Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
-                  placeholder="Passwort eingeben" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-password">
-                  <i class="fas fa-eye" id="eye-icon"></i>
-                </span>
-              </div>
-              <span class="error" id="password-error"></span>
-            </div>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInput = document.getElementById('password');
-              const togglePasswordButton = document.getElementById('toggle-password');
-              const eyeIcon = document.getElementById('eye-icon');
-
-              // Function to toggle the password visibility
-              function togglePasswordVisibility() {
+                // Toggle password visibility
                 if (passwordInput.type === 'password') {
                   passwordInput.type = 'text';
-                  eyeIcon.classList.remove('fa-eye');
-                  eyeIcon.classList.add('fa-eye-slash');
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
                 } else {
                   passwordInput.type = 'password';
-                  eyeIcon.classList.remove('fa-eye-slash');
-                  eyeIcon.classList.add('fa-eye');
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
               }
-
-              // Attach the function to the button's click event
-              togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-            });
-            </script>
-
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort bestätigen</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
-                  id="confirm_password" placeholder="Passwort bestätigen" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-confirm_password">
-                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
-                </span>
-              </div>
-              <span class="error" id="confirm_password-error"></span>
+              </script>
+              <p class="error mb-0" id="current_password-error"></p>
             </div>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInputConfirm = document.getElementById('confirm_password');
-              const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
-              const eyeIconConfirm = document.getElementById('eye-icon-confirm');
 
-              // Function to toggle the password visibility
-              function togglePasswordConfirmVisibility() {
-                if (passwordInputConfirm.type === 'password') {
-                  passwordInputConfirm.type = 'text';
-                  eyeIconConfirm.classList.remove('fa-eye');
-                  eyeIconConfirm.classList.add('fa-eye-slash');
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
+                  onclick="toggleNewPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleNewPasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-new-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
                 } else {
-                  passwordInputConfirm.type = 'password';
-                  eyeIconConfirm.classList.remove('fa-eye-slash');
-                  eyeIconConfirm.classList.add('fa-eye');
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
               }
-              // Attach the function to the button's click event
-              togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
-            });
-            </script>
+              </script>
+              <p class="error mb-0" id="password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
+
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="confirm_password-error"></p>
+            </div>
 
             <div class="p-2 my-3">
               <button type="button" id="profileSubmit" class="success-button cursor-pointer"
@@ -302,132 +275,113 @@ window.location = "profile";
           </div>
         </div>
       </form>
-      <?php }else{?>
+      <?php } else { ?>
       <form method="post" id="profileForm" enctype="multipart/form-data">
         <div class="row">
           <div class="col-lg-5 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">Name</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['name']?>">
+              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>">
             </div>
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">E-Mail</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['email']?>">
+              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>">
             </div>
-
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Aktuelles Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="current_password" class="form-control custom-input pe-5"
-                  id="current_password" placeholder="Aktuelles Passwort eingeben" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-current_password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-current_password">
-                  <i class="fas fa-eye" id="eye-icon-current"></i>
-                </span>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
+                Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="current_password" id="current_password"
+                  placeholder="Aktuelles Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
+                  onclick="toggleCurrentPasswordVisibility()"></i>
               </div>
-              <span class="error" id="current_password-error"></span>
-            </div>
+              <script>
+              function toggleCurrentPasswordVisibility() {
+                const passwordInput = document.getElementById('current_password');
+                const eyeIcon = document.getElementById('toggle-current-password-icon');
 
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInputCurrent = document.getElementById('current_password');
-              const togglePasswordButtonCurrent = document.getElementById('toggle-current_password');
-              const eyeIconCurrent = document.getElementById('eye-icon-current');
-
-              // Function to toggle the password visibility
-              function togglePasswordVisibilityCurrent() {
-                if (passwordInputCurrent.type === 'password') {
-                  passwordInputCurrent.type = 'text';
-                  eyeIconCurrent.classList.remove('fa-eye');
-                  eyeIconCurrent.classList.add('fa-eye-slash');
-                } else {
-                  passwordInputCurrent.type = 'password';
-                  eyeIconCurrent.classList.remove('fa-eye-slash');
-                  eyeIconCurrent.classList.add('fa-eye');
-                }
-              }
-
-              // Attach the function to the button's click event
-              togglePasswordButtonCurrent.addEventListener('click', togglePasswordVisibilityCurrent);
-            });
-            </script>
-
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Neues Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
-                  placeholder="Passwort eingeben" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-password">
-                  <i class="fas fa-eye" id="eye-icon"></i>
-                </span>
-              </div>
-              <span class="error" id="password-error"></span>
-            </div>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInput = document.getElementById('password');
-              const togglePasswordButton = document.getElementById('toggle-password');
-              const eyeIcon = document.getElementById('eye-icon');
-
-              // Function to toggle the password visibility
-              function togglePasswordVisibility() {
+                // Toggle password visibility
                 if (passwordInput.type === 'password') {
                   passwordInput.type = 'text';
-                  eyeIcon.classList.remove('fa-eye');
-                  eyeIcon.classList.add('fa-eye-slash');
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
                 } else {
                   passwordInput.type = 'password';
-                  eyeIcon.classList.remove('fa-eye-slash');
-                  eyeIcon.classList.add('fa-eye');
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
               }
-
-              // Attach the function to the button's click event
-              togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-            });
-            </script>
-
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort bestätigen</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
-                  id="confirm_password" placeholder="Passwort bestätigen" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-confirm_password">
-                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
-                </span>
-              </div>
-              <span class="error" id="confirm_password-error"></span>
+              </script>
+              <p class="error mb-0" id="current_password-error"></p>
             </div>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const passwordInputConfirm = document.getElementById('confirm_password');
-              const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
-              const eyeIconConfirm = document.getElementById('eye-icon-confirm');
 
-              // Function to toggle the password visibility
-              function togglePasswordConfirmVisibility() {
-                if (passwordInputConfirm.type === 'password') {
-                  passwordInputConfirm.type = 'text';
-                  eyeIconConfirm.classList.remove('fa-eye');
-                  eyeIconConfirm.classList.add('fa-eye-slash');
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
+                  onclick="toggleNewPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleNewPasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-new-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
                 } else {
-                  passwordInputConfirm.type = 'password';
-                  eyeIconConfirm.classList.remove('fa-eye-slash');
-                  eyeIconConfirm.classList.add('fa-eye');
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
               }
-              // Attach the function to the button's click event
-              togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
-            });
-            </script>
+              </script>
+              <p class="error mb-0" id="password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
+
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="confirm_password-error"></p>
+            </div>
+
             <div class="col-lg-6 col-12">
               <div class="form-group p-2 my-2">
                 <label class="my-1" for="Status">Profil</label>
@@ -438,15 +392,15 @@ window.location = "profile";
                     <button class="custom-main-btn" style="padding-top: 6px; padding-bottom: 6px;" type="button"
                       id="open-image-picker-E">
                       <i class="bi bi-upload mr-1"></i>
-                      <span><?php 
-                              echo $buttonName
-                          ?></span>
+                      <span><?php
+                                    echo $buttonName
+                                      ?></span>
                     </button>
                   </div>
                   <div>
-                    <?php 
-                      echo '<img src="'.$filePath.'" class="mx-5" height="100" width="100" id="image-preview-E">';
-                  ?>
+                    <?php
+                                  echo '<img src="' . $filePath . '" class="mx-5" height="100" width="100" id="image-preview-E">';
+                                  ?>
                   </div>
                 </div>
               </div>
@@ -492,7 +446,7 @@ window.location = "profile";
           </div>
         </div>
       </form>
-      <?php }?>
+      <?php } ?>
     </div>
   </div>
 </div>
@@ -508,9 +462,9 @@ window.location = "profile";
 <script src="asset/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<?php if($role == 1){?>
+<?php if ($role == 1) { ?>
 <script src="asset/js/script.js"></script>
-<?php }else{?>
+<?php } else { ?>
 <script src="asset/js/script2.js"></script>
 <script>
 document.getElementById("open-image-picker-E").addEventListener('click', () => {
@@ -520,7 +474,7 @@ document.getElementById('profile-image-E').addEventListener('change', (event) =>
   document.getElementById('image-preview-E').src = URL.createObjectURL(event.target.files[0]);
 })
 </script>
-<?php }?>
+<?php } ?>
 <!-- <script type="text/javascript">
         $(document).ready(function() {
     // $('#profileForm').validate({
@@ -583,7 +537,7 @@ document.getElementById('profile-image-E').addEventListener('change', (event) =>
 });
     </script> -->
 <!-- logout script  -->
-<?php include('layout/script.php')?>
+<?php include ('layout/script.php') ?>
 </body>
 
 </html>

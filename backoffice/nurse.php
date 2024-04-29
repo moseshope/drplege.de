@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['staff_id'])) {
-    header("Location: login");
-}
-include('config/database.php');
-include('layout/header.php');
-include('layout/sidebar.php');
+  header("Location: login");
+  }
+include ('config/database.php');
+include ('layout/header.php');
+include ('layout/sidebar.php');
 
 // get services 
 $GetServices = "select * from services where deleted_at IS NULL";
@@ -13,10 +13,10 @@ $ServiceResult = $connect->query($GetServices);
 $servicesArray = array();
 
 if ($ServiceResult->num_rows > 0) {
-    while ($row = $ServiceResult->fetch_assoc()) {
-        $servicesArray[] = $row; 
+  while ($row = $ServiceResult->fetch_assoc()) {
+    $servicesArray[] = $row;
     }
-}
+  }
 
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
 $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
@@ -24,33 +24,33 @@ $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
 
 $conditions = array();
 if ($searchTerm !== null) {
-    $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%')";
-}
+  $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%')";
+  }
 if ($startDate !== null && $endDate !== null) {
-    $conditions[] = "user.created_at BETWEEN '$startDate' AND '$endDate'";
-}
+  $conditions[] = "user.created_at BETWEEN '$startDate' AND '$endDate'";
+  }
 
 // Construct the WHERE clause
 $whereClause = "";
 if (!empty($conditions)) {
-    $whereClause = "WHERE user.deleted_at IS NULL  AND role = 3 AND " . implode(" AND ", $conditions);
-}else{
-    $whereClause = "WHERE user.deleted_at IS NULL  AND role = 3"; 
-}
+  $whereClause = "WHERE user.deleted_at IS NULL  AND role = 3 AND " . implode(" AND ", $conditions);
+  } else {
+  $whereClause = "WHERE user.deleted_at IS NULL  AND role = 3";
+  }
 
 $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
 if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
 
-    $column = isset($_GET['column']) ? $_GET['column'] : null;
-    if($column == 'doctor') {
-        $orderClause = "user.name $orderBy";
+  $column = isset($_GET['column']) ? $_GET['column'] : null;
+  if ($column == 'doctor') {
+    $orderClause = "user.name $orderBy";
     } else {
-        $orderClause = "patients.status $orderBy";
+    $orderClause = "patients.status $orderBy";
     }
 
-} else {
-    $orderClause = "user.id DESC";
-}
+  } else {
+  $orderClause = "user.id DESC";
+  }
 
 $GetStaff = "SELECT user.*, COUNT(CASE WHEN patients.status = 'Vollendet' THEN patients.id ELSE NULL END) AS patient_count
     FROM user
@@ -62,16 +62,16 @@ $StaffResult = $connect->query($GetStaff);
 $staffList = array();
 
 if ($StaffResult->num_rows > 0) {
-    while ($row = $StaffResult->fetch_assoc()) {
-        $staffList[] = $row;
+  while ($row = $StaffResult->fetch_assoc()) {
+    $staffList[] = $row;
     }
-}
+  }
 
 // Pagination
 $itemsPerPage = 20;
 $totalItems = count($staffList);
 $totalPages = ceil($totalItems / $itemsPerPage);
-$currentPage = isset($_GET['page']) ? max(1, min((int)$_GET['page'], $totalPages)) : 1;
+$currentPage = isset($_GET['page']) ? max(1, min((int) $_GET['page'], $totalPages)) : 1;
 $startIndex = ($currentPage - 1) * $itemsPerPage;
 $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 // }
@@ -88,10 +88,10 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         <div class="dashboard-search my-auto">
           <i class="bi bi-search"></i>
           <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
-            value="<?php echo $searchTerm?>">
+            value="<?php echo $searchTerm ?>">
         </div>
         <div class="flex-grow-1"></div>
-        
+
         <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
           data-bs-target="#add-nurse"><i class="bi bi-plus" style="color: white; "></i>Mitarbeiter hinzufügen</button>
       </div>
@@ -112,46 +112,48 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               </tr>
             </thead>
             <tbody>
-              <?php  for ($i = $startIndex; $i <= $endIndex; $i++) {;?>
-              <tr class="doctor-row">
-                <td class="align-middle" style="max-width: 100px;"><?php echo $i + 1; ?></td>
-                <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['name']; ?></td>
-                <td class="align-middle" style="max-width: 100px;"><?php echo  $staffList[$i]['email']; ?></td>
-                <?php
-                    if ($staffList[$i]['status'] === '1') {
-                        $buttonClass = 'custom-success-btn';
-                        $buttonText = 'Aktiv';
+              <?php for ($i = $startIndex; $i <= $endIndex; $i++) {
+                ; ?>
+                <tr class="doctor-row">
+                  <td class="align-middle" style="max-width: 100px;"><?php echo $i + 1; ?></td>
+                  <td class="align-middle" style="max-width: 100px;"><?php echo $staffList[$i]['name']; ?></td>
+                  <td class="align-middle" style="max-width: 100px;"><?php echo $staffList[$i]['email']; ?></td>
+                  <?php
+                  if ($staffList[$i]['status'] === '1') {
+                    $buttonClass = 'custom-success-btn';
+                    $buttonText = 'Aktiv';
                     } elseif ($staffList[$i]['status'] === '0') {
-                        $buttonClass = 'custom-warnings-btn';
-                        $buttonText = 'Deaktiviert';
+                    $buttonClass = 'custom-warnings-btn';
+                    $buttonText = 'Deaktiviert';
                     } else {
-                        $buttonClass = 'custom-danger-btn';
-                        $buttonText = 'Deleted';
+                    $buttonClass = 'custom-danger-btn';
+                    $buttonText = 'Deleted';
                     }
-                ?>
-                <td class="text-center"><button
-                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText;?></button>
-                </td>
-                <td>
-                  <div class="d-flex justify-content-center">
-                    <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {; ?>
-                    <!-- Edit button -->
-                    <div class="editNurseButton" data-id="<?php echo $staffList[$i]['id'];?>" data-bs-toggle="modal">
-                      <i class="fas fa-edit p-2 cursor-pointer"></i>
+                  ?>
+                  <td class="text-center"><button
+                      class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
+                  </td>
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {
+                        ; ?>
+                        <!-- Edit button -->
+                        <div class="editNurseButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
+                          <i class="fas fa-edit p-2 cursor-pointer"></i>
+                        </div>
+                        <!-- Delete button -->
+                        <form method="post" action="./controller/deletenurse.php">
+                          <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
+                          <button type="button" class="iconButton deleteNurseButton"
+                            data-id="<?php echo $staffList[$i]['id']; ?>">
+                            <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
+                          </button>
+                        <?php } ?>
+                      </form>
                     </div>
-                    <!-- Delete button -->
-                    <form method="post" action="./controller/deletenurse.php">
-                      <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
-                      <button type="button" class="iconButton deleteNurseButton"
-                        data-id="<?php echo $staffList[$i]['id'];?>">
-                        <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
-                      </button>
-                      <?php } ?>
-                    </form>
-                  </div>
 
-                </td>
-              </tr>
+                  </td>
+                </tr>
               <?php } ?>
             </tbody>
           </table>
@@ -199,87 +201,71 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 
 
           <div class="col-lg-6 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="password" class="form-control custom-input pe-5" id="password"
-                  placeholder="Passwort" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-password">
-                  <i class="fas fa-eye" id="eye-icon"></i>
-                </span>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-password-icon"
+                  onclick="togglePasswordVisibility()"></i>
               </div>
-              <span class="error" id="password-error"></span>
+              <script>
+              function togglePasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
             </div>
           </div>
-
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const passwordInput = document.getElementById('password');
-            const togglePasswordButton = document.getElementById('toggle-password');
-            const eyeIcon = document.getElementById('eye-icon');
-
-            // Function to toggle the password visibility
-            function togglePasswordVisibility() {
-              if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-              } else {
-                passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-              }
-            }
-
-            // Attach the function to the button's click event
-            togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-          });
-          </script>
-
-
-
           <div class="col-lg-6 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="password">Passwort bestätigen</label>
-              <div class="password-input-container position-relative d-flex align-items-center">
-                <!-- Password input -->
-                <input type="password" name="confirm_password" class="form-control custom-input pe-5"
-                  id="confirm_password" placeholder="Passwort bestätigen" required>
-                <!-- Eye button to toggle visibility -->
-                <span class="toggle-password position-absolute end-0" style="margin-right:16px;" role="button"
-                  id="toggle-confirm_password">
-                  <i class="fas fa-eye" id="eye-icon-confirm"></i>
-                </span>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
               </div>
-              <span class="error" id="confirm_password-error"></span>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
+
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
             </div>
           </div>
 
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const passwordInputConfirm = document.getElementById('confirm_password');
-            const togglePasswordButtonConfirm = document.getElementById('toggle-confirm_password');
-            const eyeIconConfirm = document.getElementById('eye-icon-confirm');
-
-            // Function to toggle the password visibility
-            function togglePasswordConfirmVisibility() {
-              if (passwordInputConfirm.type === 'password') {
-                passwordInputConfirm.type = 'text';
-                eyeIconConfirm.classList.remove('fa-eye');
-                eyeIconConfirm.classList.add('fa-eye-slash');
-              } else {
-                passwordInputConfirm.type = 'password';
-                eyeIconConfirm.classList.remove('fa-eye-slash');
-                eyeIconConfirm.classList.add('fa-eye');
-              }
-            }
-            // Attach the function to the button's click event
-            togglePasswordButtonConfirm.addEventListener('click', togglePasswordConfirmVisibility);
-          });
-          </script>
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
@@ -474,12 +460,12 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
 <script>
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
-<?php if($totalItems > $itemsPerPage){ ?>
-CreatePagination({
-  elementId: "custom-pagination",
-  totalPage: <?php echo $totalPages; ?>,
-  currentPage: currentPage ? Number(currentPage) : 1
-})
+<?php if ($totalItems > $itemsPerPage) { ?>
+  CreatePagination({
+    elementId: "custom-pagination",
+    totalPage: <?php echo $totalPages; ?>,
+    currentPage: currentPage ? Number(currentPage) : 1
+  })
 <?php } ?>
 </script>
 <script>
@@ -562,7 +548,7 @@ $('#cancelNurse').on('click', function() {
 })
 </script>
 <!-- logout script  -->
-<?php include('layout/script.php')?>
+<?php include ('layout/script.php') ?>
 </body>
 
 </html>

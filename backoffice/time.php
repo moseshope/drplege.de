@@ -364,6 +364,7 @@ $('#confirmationBtn').on('click', function() {
 // })
 
 $('#reset').on('click', function() {
+  $('#selectTime').find('input[type=checkbox]').prop('checked', false);
   $.ajax({
     url: './ajax/resettime.php',
     method: 'GET',

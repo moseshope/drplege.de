@@ -127,19 +127,19 @@ if ($role == 1) {
     </div>
     <?php if ($role == 1) { ?>
     <?php /* <div class="row mt-5">
-     <div class="col-md-6 col-lg-4  col-12 mb-5">
-         <div class="dashboard-box d-flex flex-column justify-content-between">
-             <div class="d-flex justify-content-center align-items-center mt-4">
-                 <i class="mx-2 d-flex align-items-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-person-vcard" viewBox="0 0 16 16">
-                         <path
-                             d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
-                         <path
-                             d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12z" />
-                     </svg>
-                 </i>
-                 <p class="mb-0 text-truncate" id=""><?php echo $totalPatients?></p>
+<div class="col-md-6 col-lg-4  col-12 mb-5">
+<div class="dashboard-box d-flex flex-column justify-content-between">
+   <div class="d-flex justify-content-center align-items-center mt-4">
+       <i class="mx-2 d-flex align-items-center">
+           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+               class="bi bi-person-vcard" viewBox="0 0 16 16">
+               <path
+                   d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+               <path
+                   d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12z" />
+           </svg>
+       </i>
+       <p class="mb-0 text-truncate" id=""><?php echo $totalPatients?></p>
 
 </div>
 <div class="row mb-3">
@@ -226,31 +226,31 @@ if ($role == 1) {
 
 <?php /* <div class="py-2 px-md-5 px-3 w-100">
 <div class="dashboard-search m-2 mx-0">
- <i class="bi bi-search"></i>
- <input type="text" class="form-control custom-input" id="Search-input"
-     placeholder="Suche" oninput="search()">
+<i class="bi bi-search"></i>
+<input type="text" class="form-control custom-input" id="Search-input"
+placeholder="Suche" oninput="search()">
 </div>
 <div class="row mt-3">
- <div class="col-xxl-8  col-12 mb-5">
-     <div class="today-appointments px-4 ">
-         <div class="d-flex justify-content-center py-3">
-             <h4>Today's Appointments</h4>
-         </div>
-         <div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
-             <table class="table table-hover">
-                 <thead>
-                     <tr>
-                         <td style="min-width: 100px;">Patient</td>
-                         <td style="min-width: 150px;">Doctor</td>
-                         <td>Service</td>
-                         <td>Time</td>
-                         <td>
-                             <div class="d-flex justify-content-center">Action</div>
-                         </td>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <?php for ($i = $startIndex; $i <= $endIndex; $i++) {;?>
+<div class="col-xxl-8  col-12 mb-5">
+<div class="today-appointments px-4 ">
+<div class="d-flex justify-content-center py-3">
+   <h4>Today's Appointments</h4>
+</div>
+<div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
+   <table class="table table-hover">
+       <thead>
+           <tr>
+               <td style="min-width: 100px;">Patient</td>
+               <td style="min-width: 150px;">Doctor</td>
+               <td>Service</td>
+               <td>Time</td>
+               <td>
+                   <div class="d-flex justify-content-center">Action</div>
+               </td>
+           </tr>
+       </thead>
+       <tbody>
+           <?php for ($i = $startIndex; $i <= $endIndex; $i++) {;?>
 <tr>
 <td><?php echo $PatientsList[$i]['name'];?></td>
 <td><?php echo $PatientsList[$i]['doctor'];?></td>
@@ -508,7 +508,7 @@ if ($role == 1) {
         <div class="d-flex justify-content-center align-items-center py-2 my-3">
           <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
             style="margin-right: 5px;">Abbrechen</button>
-          <button type="button" id="addStaffBtn" class="success-button cursor-pointer">Einreichen</button>
+          <button type="button" id="addStaffBtn" class="success-button cursor-pointer">Aktualisieren</button>
         </div>
       </div>
     </div>
@@ -573,16 +573,16 @@ if ($role == 1) {
           ?>
         </ul>
         <?php /*<!-- <div class="form-group p-2 mt-2 mb-4">
-             <input type="hidden" name="service_id" value="" id="serviceId">
-             <label class="my-1" for="add">Dienste hinzufügen</label>
-             <input type="text" name="services" class="form-control custom-input" id="add" placeholder="Dienste hinzufügen">
-             <p  class="error" id="service-error"></p>
-         </div> -->
-     <!-- <div class="d-flex justify-content-center align-items-center">
-         <button type="button" id="servicesAddBtn" class="success-button cursor-pointer"><i class="bi bi-plus"
-                 style="color: white;width: 20px;height: 20px;"></i>Hinzufügen</button>
-         <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-     </div> */ ?>
+   <input type="hidden" name="service_id" value="" id="serviceId">
+   <label class="my-1" for="add">Dienste hinzufügen</label>
+   <input type="text" name="services" class="form-control custom-input" id="add" placeholder="Dienste hinzufügen">
+   <p  class="error" id="service-error"></p>
+</div> -->
+<!-- <div class="d-flex justify-content-center align-items-center">
+<button type="button" id="servicesAddBtn" class="success-button cursor-pointer"><i class="bi bi-plus"
+       style="color: white;width: 20px;height: 20px;"></i>Hinzufügen</button>
+<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
+</div> */ ?>
       </div>
     </div>
   </div>
@@ -694,7 +694,7 @@ if ($role == 1) {
         <div class="d-flex justify-content-center align-items-center my-3">
           <button type="button" class="cancel-button cursor-pointer" style="margin-right: 5px;"
             data-bs-dismiss="modal">Abbrechen</button>
-          <button type="button" class="success-button cursor-pointer" id="UpdatePatients">Update</button>
+          <button type="button" class="success-button cursor-pointer" id="UpdatePatients">Aktualisieren</button>
         </div>
       </div>
     </div>
@@ -939,23 +939,23 @@ if ($role == 1) {
 
       displayedListings.forEach(function(patient, index) {
         const row = `<tr>
-                        <td>${patient.name}</td>
-                        <td>${patient.doctor}</td>
-                        <td>${patient.services}</td>
-                        <td>${patient.visits} </td>
-                        <td>
-                          <div class="d-flex justify-content-center dropdown">
-                              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                  <i class="fa-solid fa-right-left"></i>
-                              </span>
-                              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                              </span>
-                          </div>
-                        </td>
+                            <td>${patient.name}</td>
+                            <td>${patient.doctor}</td>
+                            <td>${patient.services}</td>
+                            <td>${patient.visits} </td>
+                            <td>
+                              <div class="d-flex justify-content-center dropdown">
+                                  <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                                      <i class="fa-solid fa-right-left"></i>
+                                  </span>
+                                  <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                                      <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                                  </span>
+                              </div>
+                            </td>
 
-                          <!-- Add other table cells based on your data structure -->
-                      </tr>`;
+                              <!-- Add other table cells based on your data structure -->
+                          </tr>`;
         tbody.append(row);
       });
     }
@@ -1105,20 +1105,31 @@ if ($role == 1) {
     }
 
     function cancelRebookingModal(index) {
-      $.ajax({
-        url: './ajax/rebookingpatients.php',
-        method: 'GET',
-        data: {
-          patientId: index
-        },
-        success: function(response) {
-          location.reload(true);
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
+      // Show the confirmation modal
+      $('#Confirmation').modal('show');
+
+      // When the confirmation "Ja" button is clicked
+      $('#ConfirmationYesBtn').click(function() {
+        // Make AJAX request to cancel the rebooking
+        $.ajax({
+          url: './ajax/rebookingpatients.php',
+          method: 'GET',
+          data: {
+            patientId: index
+          },
+          success: function(response) {
+            location.reload(true); // Reload the page upon success
+          },
+          error: function(xhr, status, error) {
+            console.error('Error:', error);
+          }
+        });
       });
-      console.log(index);
+
+      // When the confirmation "Nein" button is clicked, close the modal
+      $('.cancel-button').click(function() {
+        $('#Confirmation').modal('hide');
+      });
     }
     </script>
     <script>
@@ -1375,22 +1386,22 @@ if ($role == 1) {
           convertToAMPMFormat(patient.visits) :
           'N/A';
         const row = `<tr>
-                          <td>${patient.name}</td>
-                          <td>${patient.doctor}</td>
-                          <td>${patient.services}</td>
-                          <td>${patient.visits} </td>
-                          <td>
-                          <div class="d-flex justify-content-center dropdown">
-                              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                  <i class="fa-solid fa-right-left"></i>
-                              </span>
-                              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                              </span>
-                          </div>
-                        </td>
-                          <!-- Add other table cells based on your data structure -->
-                      </tr>`;
+                              <td>${patient.name}</td>
+                              <td>${patient.doctor}</td>
+                              <td>${patient.services}</td>
+                              <td>${patient.visits} </td>
+                              <td>
+                              <div class="d-flex justify-content-center dropdown">
+                                  <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                                      <i class="fa-solid fa-right-left"></i>
+                                  </span>
+                                  <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                                      <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                                  </span>
+                              </div>
+                            </td>
+                              <!-- Add other table cells based on your data structure -->
+                          </tr>`;
         tbody.append(row);
       });
     }
@@ -1549,20 +1560,31 @@ if ($role == 1) {
     })
 
     function cancelRebookingModal(index) {
-      $.ajax({
-        url: './ajax/rebookingpatients.php',
-        method: 'GET',
-        data: {
-          patientId: index
-        },
-        success: function(response) {
-          location.reload(true);
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
+      // Show the confirmation modal
+      $('#Confirmation').modal('show');
+
+      // When the confirmation "Ja" button is clicked
+      $('#ConfirmationYesBtn').click(function() {
+        // Make AJAX request to cancel the rebooking
+        $.ajax({
+          url: './ajax/rebookingpatients.php',
+          method: 'GET',
+          data: {
+            patientId: index
+          },
+          success: function(response) {
+            location.reload(true); // Reload the page upon success
+          },
+          error: function(xhr, status, error) {
+            console.error('Error:', error);
+          }
+        });
       });
-      console.log(index);
+
+      // When the confirmation "Nein" button is clicked, close the modal
+      $('.cancel-button').click(function() {
+        $('#Confirmation').modal('hide');
+      });
     }
     </script>
   <?php } ?>

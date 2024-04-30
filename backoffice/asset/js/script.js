@@ -894,19 +894,30 @@ $('#EditStaff').on('shown.bs.modal', function () {
   $("#profileSubmit").on("click", function () {
     if ($("#profileForm").valid()) {
       var currentPassword = $("#current_password").val();
+      var newPassword = $("#password").val();
+      var confirmPassword = $("#confirm_password").val();
+  
+      // Check if new password and confirm password match
+      if (newPassword !== confirmPassword) {
+        $("#confirm_password-error")
+          .text("Passwords do not match")
+          .addClass("text-danger");
+        return;
+      }
+  
       $.ajax({
         url: "./ajax/profile.php",
         method: "POST",
-        data: { currentPassword: currentPassword },
+        data: { currentPassword: currentPassword, newPassword: newPassword },
         success: function (response) {
-          if (response) {
-            var responseData = JSON.parse(response);
+          if (response.error) {
             $("#current_password-error")
-              .text(responseData)
+              .text(response.error)
               .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
-            $("#Confirmation").modal("show");
+            // $("#Confirmation").modal("show");
+            location.reload();
           }
         },
         error: function (xhr, status, error) {
@@ -915,7 +926,7 @@ $('#EditStaff').on('shown.bs.modal', function () {
       });
     }
   });
-
+  
   // set value edit employee form
   $(".editStaffButton").on("click", function () {
     var id = $(this).data("id");

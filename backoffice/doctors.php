@@ -1029,25 +1029,19 @@ $(document).ready(function() {
 });
 
 $('#Search-input').on('keyup', function(e) {
-  if (e.key === 'Enter' || e.keyCode === 13) {
-    var searchValue = $(this).val();
+  var searchValue = $(this).val().trim(); // Trim whitespace from the input
+  if (searchValue.length > 2) { // Check if the length of the input is greater than 3 characters
     var url = window.location.href.split('?')[0];
     window.location.href = url + '?search=' + encodeURIComponent(searchValue);
     console.log("Search value:", searchValue);
+    // Delay focusing until after URL change
+    setTimeout(function() {
+      $('#Search-input').focus();
+    }, 100); // Adjust the delay time as needed
   }
 });
-$('#applyDatepicker').on('click', function() {
 
-  var startDate = $('#start-date').val();
-  var endDate = $('#end-date').val();
 
-  var url = window.location.href;
-  var separator = url.indexOf('?') !== -1 ? '&' : '?';
-  var newUrl = url + separator + 'start_date=' + encodeURIComponent(startDate) + '&end_date=' + encodeURIComponent(
-    endDate);
-  window.location.href = newUrl;
-
-});
 
 $('.Shorting').on('click', function() {
   var column = $(this).data('value');

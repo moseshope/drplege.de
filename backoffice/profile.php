@@ -95,10 +95,10 @@ if ($role == 1) {
 
       $sql = "update user set profile='$profileName' where id='$id'";
       if ($sql == true) { ?>
-        <script>
-        window.location = "profile";
-        </script>
-      <?php }
+<script>
+window.location = "profile";
+</script>
+<?php }
       }
 
     // echo $sql;
@@ -127,325 +127,326 @@ if ($role == 1) {
     <div class="px-2 profile-form ">
       <?php if ($role == 1) { ?>
 
-        <form method="post" id="profileForm">
-          <div class="row">
-            <div class="col-lg-5 col-12">
-              <div class="form-group p-2 my-2">
-                <label class="my-1" for="name">Name</label>
-                <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>" disabled>
-              </div>
-              <div class="form-group p-2 my-2">
-                <label class="my-1" for="name">E-Mail</label>
-                <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>" disabled>
-              </div>
+      <form method="post" id="profileForm">
+        <div class="row">
+          <div class="col-lg-5 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="name">Name</label>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>" disabled>
+            </div>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="name">E-Mail</label>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>" disabled>
+            </div>
 
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
-                  Passwort</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="current_password" id="current_password"
-                    placeholder="Aktuelles Passwort eingeben">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
-                    onclick="toggleCurrentPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleCurrentPasswordVisibility() {
-                  const passwordInput = document.getElementById('current_password');
-                  const eyeIcon = document.getElementById('toggle-current-password-icon');
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
+                Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="current_password" id="current_password"
+                  placeholder="Aktuelles Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
+                  onclick="toggleCurrentPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleCurrentPasswordVisibility() {
+                const passwordInput = document.getElementById('current_password');
+                const eyeIcon = document.getElementById('toggle-current-password-icon');
 
-                  // Toggle password visibility
-                  if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    passwordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
-                </script>
-                <p class="error mb-0" id="current_password-error"></p>
+              }
+              </script>
+              <p class="error mb-0" id="current_password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
+                  onclick="toggleNewPasswordVisibility()"></i>
               </div>
+              <script>
+              function toggleNewPasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-new-password-icon');
 
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="password" id="password"
-                    placeholder="Passwort eingeben">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
-                    onclick="toggleNewPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleNewPasswordVisibility() {
-                  const passwordInput = document.getElementById('password');
-                  const eyeIcon = document.getElementById('toggle-new-password-icon');
-
-                  // Toggle password visibility
-                  if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    passwordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
-                </script>
-                <p class="error mb-0" id="password-error"></p>
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
               </div>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
 
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
-                  bestätigen</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
-                    placeholder="Passwort bestätigen">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
-                    onclick="toggleConfirmPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleConfirmPasswordVisibility() {
-                  const confirmPasswordInput = document.getElementById('confirm_password');
-                  const eyeIcon = document.getElementById('toggle-confirm-password-icon');
-
-                  // Toggle password visibility
-                  if (confirmPasswordInput.type === 'password') {
-                    confirmPasswordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    confirmPasswordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
                 }
-                </script>
-                <p class="error mb-0" id="confirm_password-error"></p>
-              </div>
+              }
+              </script>
+              <p class="error mb-0" id="confirm_password-error"></p>
+            </div>
 
-              <div class="p-2 my-3">
-                <button type="button" id="profileSubmit" class="success-button cursor-pointer"
-                  data-bs-toggle="modal">Speichern</button>
+            <div class="p-2 my-3">
+              <button type="button" id="profileSubmit"
+                onclick="showNotification(message, true)"
+                class="success-button cursor-pointer" data-bs-toggle="modal">Speichern</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
+                  style="margin-right: 3px;">Nein</button>
+                <button type="button" class="success-button cursor-pointer" data-bs-target="#show-info"
+                  data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Confirmation -->
-          <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                  <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-                  <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
-                    style="margin-right: 3px;">Nein</button>
-                  <button type="button" class="success-button cursor-pointer" data-bs-target="#show-info"
-                    data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
-                </div>
+        <div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+              <div class="d-flex justify-content-center align-items-center flex-column py-4">
+                <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Profil erfolgreich
+                  aktualisiert.</h1>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
               </div>
             </div>
           </div>
-
-          <div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered " role="document">
-              <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-                <div class="d-flex justify-content-center align-items-center flex-column py-4">
-                  <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Profil erfolgreich
-                    aktualisiert.</h1>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+        </div>
+      </form>
       <?php } else { ?>
-        <form method="post" id="profileForm" enctype="multipart/form-data">
-          <div class="row">
-            <div class="col-lg-5 col-12">
+      <form method="post" id="profileForm" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-lg-5 col-12">
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="name">Name</label>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>">
+            </div>
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="name">E-Mail</label>
+              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>">
+            </div>
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
+                Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="current_password" id="current_password"
+                  placeholder="Aktuelles Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
+                  onclick="toggleCurrentPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleCurrentPasswordVisibility() {
+                const passwordInput = document.getElementById('current_password');
+                const eyeIcon = document.getElementById('toggle-current-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="current_password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="password" id="password"
+                  placeholder="Passwort eingeben">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
+                  onclick="toggleNewPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleNewPasswordVisibility() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('toggle-new-password-icon');
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  passwordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="password-error"></p>
+            </div>
+
+            <div class="form-group p-2 mt-2">
+              <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
+                bestätigen</label>
+              <div class="d-flex align-items-center input-with-icon hideinputFocus"
+                style="background-color: var(--input-bg); border-radius: 4px;">
+                <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
+                  placeholder="Passwort bestätigen">
+                <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
+                  onclick="toggleConfirmPasswordVisibility()"></i>
+              </div>
+              <script>
+              function toggleConfirmPasswordVisibility() {
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                const eyeIcon = document.getElementById('toggle-confirm-password-icon');
+
+                // Toggle password visibility
+                if (confirmPasswordInput.type === 'password') {
+                  confirmPasswordInput.type = 'text';
+                  // Change icon to eye-slash when password is visible
+                  eyeIcon.classList.remove('bi-eye-fill');
+                  eyeIcon.classList.add('bi-eye-slash-fill');
+                } else {
+                  confirmPasswordInput.type = 'password';
+                  // Change icon back to eye-fill when password is hidden
+                  eyeIcon.classList.remove('bi-eye-slash-fill');
+                  eyeIcon.classList.add('bi-eye-fill');
+                }
+              }
+              </script>
+              <p class="error mb-0" id="confirm_password-error"></p>
+            </div>
+
+            <div class="col-lg-6 col-12">
               <div class="form-group p-2 my-2">
-                <label class="my-1" for="name">Name</label>
-                <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>">
-              </div>
-              <div class="form-group p-2 my-2">
-                <label class="my-1" for="name">E-Mail</label>
-                <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>">
-              </div>
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
-                  Passwort</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="current_password" id="current_password"
-                    placeholder="Aktuelles Passwort eingeben">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-current-password-icon"
-                    onclick="toggleCurrentPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleCurrentPasswordVisibility() {
-                  const passwordInput = document.getElementById('current_password');
-                  const eyeIcon = document.getElementById('toggle-current-password-icon');
-
-                  // Toggle password visibility
-                  if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    passwordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
-                }
-                </script>
-                <p class="error mb-0" id="current_password-error"></p>
-              </div>
-
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="password" style="font-family: Cambridge-Round-Regular;">Neues Passwort</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="password" id="password"
-                    placeholder="Passwort eingeben">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-new-password-icon"
-                    onclick="toggleNewPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleNewPasswordVisibility() {
-                  const passwordInput = document.getElementById('password');
-                  const eyeIcon = document.getElementById('toggle-new-password-icon');
-
-                  // Toggle password visibility
-                  if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    passwordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
-                }
-                </script>
-                <p class="error mb-0" id="password-error"></p>
-              </div>
-
-              <div class="form-group p-2 mt-2">
-                <label class="my-1" for="confirm_password" style="font-family: Cambridge-Round-Regular;">Passwort
-                  bestätigen</label>
-                <div class="d-flex align-items-center input-with-icon hideinputFocus"
-                  style="background-color: var(--input-bg); border-radius: 4px;">
-                  <input type="password" class="form-control custom-input" name="confirm_password" id="confirm_password"
-                    placeholder="Passwort bestätigen">
-                  <i class="bi bi-eye-fill mx-2 mr-4 cursor-pointer" id="toggle-confirm-password-icon"
-                    onclick="toggleConfirmPasswordVisibility()"></i>
-                </div>
-                <script>
-                function toggleConfirmPasswordVisibility() {
-                  const confirmPasswordInput = document.getElementById('confirm_password');
-                  const eyeIcon = document.getElementById('toggle-confirm-password-icon');
-
-                  // Toggle password visibility
-                  if (confirmPasswordInput.type === 'password') {
-                    confirmPasswordInput.type = 'text';
-                    // Change icon to eye-slash when password is visible
-                    eyeIcon.classList.remove('bi-eye-fill');
-                    eyeIcon.classList.add('bi-eye-slash-fill');
-                  } else {
-                    confirmPasswordInput.type = 'password';
-                    // Change icon back to eye-fill when password is hidden
-                    eyeIcon.classList.remove('bi-eye-slash-fill');
-                    eyeIcon.classList.add('bi-eye-fill');
-                  }
-                }
-                </script>
-                <p class="error mb-0" id="confirm_password-error"></p>
-              </div>
-
-              <div class="col-lg-6 col-12">
-                <div class="form-group p-2 my-2">
-                  <label class="my-1" for="Status">Profil</label>
-                  <input hidden type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
-                    aria-invalid="false">
-                  <div class="d-flex align-items-center">
-                    <div class="mr-2">
-                      <button class="custom-main-btn" style="padding-top: 6px; padding-bottom: 6px;" type="button"
-                        id="open-image-picker-E">
-                        <i class="bi bi-upload mr-1"></i>
-                        <span><?php
+                <label class="my-1" for="Status">Profil</label>
+                <input hidden type="file" name="profile" class="form-control custom-input d-none" id="profile-image-E"
+                  aria-invalid="false">
+                <div class="d-flex align-items-center">
+                  <div class="mr-2">
+                    <button class="custom-main-btn" style="padding-top: 6px; padding-bottom: 6px;" type="button"
+                      id="open-image-picker-E">
+                      <i class="bi bi-upload mr-1"></i>
+                      <span><?php
                         echo $buttonName
                           ?></span>
-                      </button>
-                    </div>
-                    <div>
-                      <?php
+                    </button>
+                  </div>
+                  <div>
+                    <?php
                       echo '<img src="' . $filePath . '" class="mx-5" height="100" width="100" id="image-preview-E">';
                       ?>
-                    </div>
                   </div>
                 </div>
               </div>
-              <div class="p-2 my-3">
-                <button type="button" id="profileSubmitDoctor" class="success-button cursor-pointer"
-                  data-bs-toggle="modal">Speichern</button>
-              </div>
+            </div>
+            <div class="p-2 my-3">
+              <button type="button" id="profileSubmitDoctor" onclick="showNotification(message, true)" class="success-button cursor-pointer"
+                data-bs-toggle="modal">Speichern</button>
             </div>
           </div>
+        </div>
 
-          <!-- role==2 Confirmation -->
-          <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                  <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
-                  <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
-                    style="margin-right: 3px;">Nein</button>
-                  <button type="button" class="success-button cursor-pointer" data-bs-target="#show-info"
-                    data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
-                </div>
+        <!-- role==2 Confirmation -->
+        <div class="modal fade " id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
+                <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
+                  style="margin-right: 3px;">Nein</button>
+                <button type="button" class="success-button cursor-pointer" data-bs-target="#show-info"
+                  data-bs-toggle="modal" data-bs-dismiss="modal" style="margin-left: 3px;">Ja</button>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered " role="document">
-              <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
-                <div class="d-flex justify-content-center align-items-center flex-column py-4">
-                  <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Profil erfolgreich
-                    aktualisiert.</h1>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
-                </div>
+        <div class="modal fade " id="show-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content p-3 custom-modal" style="border-radius: 16px;">
+              <div class="d-flex justify-content-center align-items-center flex-column py-4">
+                <h1 class="modal-heading" style="font-weight: 800;font-size: var(--md-heading);">Profil erfolgreich
+                  aktualisiert.</h1>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="success-button cursor-pointer" data-bs-dismiss="modal">Okay</button>
               </div>
             </div>
           </div>
-        </form>
+        </div>
+      </form>
       <?php } ?>
     </div>
   </div>
@@ -463,17 +464,17 @@ if ($role == 1) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <?php if ($role == 1) { ?>
-  <script src="asset/js/script.js"></script>
+<script src="asset/js/script.js"></script>
 <?php } else { ?>
-  <script src="asset/js/script2.js"></script>
-  <script>
-  document.getElementById("open-image-picker-E").addEventListener('click', () => {
-    document.getElementById('profile-image-E').click()
-  });
-  document.getElementById('profile-image-E').addEventListener('change', (event) => {
-    document.getElementById('image-preview-E').src = URL.createObjectURL(event.target.files[0]);
-  })
-  </script>
+<script src="asset/js/script2.js"></script>
+<script>
+document.getElementById("open-image-picker-E").addEventListener('click', () => {
+  document.getElementById('profile-image-E').click()
+});
+document.getElementById('profile-image-E').addEventListener('change', (event) => {
+  document.getElementById('image-preview-E').src = URL.createObjectURL(event.target.files[0]);
+})
+</script>
 <?php } ?>
 <!-- <script type="text/javascript">
         $(document).ready(function() {

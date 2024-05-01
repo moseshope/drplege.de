@@ -376,6 +376,45 @@ $(document).ready(function () {
     // $("#show-info").modal("show");
   });
 
+
+  function showNotification(message, status) {
+    var notification = document.createElement("div");
+  
+    var icon = document.createElement("i");
+    icon.className = status
+      ? "fas fa-check"
+      : "fas fa-exclamation-triangle";
+    if (!status) {
+      icon.style.position = "relative";
+      icon.style.top = "-1px";
+    }
+    icon.style.marginRight = "10px";
+  
+    notification.appendChild(icon);
+    notification.appendChild(document.createTextNode(message));
+  
+    notification.style.position = "fixed";
+    notification.style.top = "30px";
+    notification.style.right = "20px";
+    notification.style.backgroundColor = status
+      ? "#5da53e"
+      : "#d9534f";
+    notification.style.color = "white";
+    notification.style.padding = "16px 12px"; // Increased Padding
+    notification.style.borderRadius = "5px";
+    notification.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.5)";
+    notification.style.zIndex = 1000;
+    notification.style.display = "flex";
+    notification.style.alignItems = "center";
+    notification.style.fontFamily = "'Baloo 2', sans-serif"; // Baloo 2 font
+  
+    document.body.appendChild(notification);
+  
+    setTimeout(function () {
+      notification.remove();
+    }, 5000);
+  }
+
   // update profile
   $("#profileSubmitDoctor").on("click", function () {
     if ($("#profileForm").valid()) {
@@ -402,7 +441,7 @@ $(document).ready(function () {
               .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
-            $("#show-info").modal("show");
+            showNotification("Datensatz erfolgreich aktualisiert.", true);
           }
         },
         error: function (xhr, status, error) {

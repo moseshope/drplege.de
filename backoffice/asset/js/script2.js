@@ -380,18 +380,29 @@ $(document).ready(function () {
   $("#profileSubmitDoctor").on("click", function () {
     if ($("#profileForm").valid()) {
       var currentPassword = $("#current_password").val();
+      var newPassword = $("#password").val();
+      var confirmPassword = $("#confirm_password").val();
+  
+      // Check if new password and confirm password match
+      if (newPassword !== confirmPassword) {
+        $("#confirm_password-error")
+          .text("Passwords do not match")
+          .addClass("text-danger");
+        return;
+      }
+  
       $.ajax({
-        url: "./ajax/profile.php",
+        url: "./ajax/profiledoctors.php",
         method: "POST",
-        data: { currentPassword: currentPassword },
+        data: { currentPassword: currentPassword, newPassword: newPassword },
         success: function (response) {
-          if (response) {
-            var responseData = JSON.parse(response);
-            $("#currentpassword-error").text(responseData).addClass("text-danger");
-            location.reload();
+          if (response.error) {
+            $("#current_password-error")
+              .text(response.error)
+              .addClass("text-danger");
           } else {
-            $("#currentpassword-error").hide();
-            // $("#Confirmation").modal("show");
+            $("#current_password-error").hide();
+            $("#show-info").modal("show");
           }
         },
         error: function (xhr, status, error) {
@@ -399,11 +410,7 @@ $(document).ready(function () {
         },
       });
     }
-    // if ($('#profileForm').valid()) {
-    //     $('#Confirmation').modal('show');
-    // }
   });
-
   // set value edit employee form
   $(".editStaffButton").on("click", function () {
     var id = $(this).data("id");

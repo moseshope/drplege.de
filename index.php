@@ -230,7 +230,7 @@ if ($ServiceResult->num_rows > 0) {
                         </div>
                         <div class="col-md-12">
                           <div class="form-field checkbox">
-                            <input type="checkbox" id="reminderCheckbox">
+                            <input type="checkbox" id="reminderCheckbox" disabled>
                             <label for="reminderCheckbox"><?= $ln['reminder_checkbox'] ?></label>
                           </div>
                         </div>

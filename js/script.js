@@ -98,10 +98,6 @@ $(document).ready(function () {
       birthdate: {
         required: true,
       },
-      email: {
-        required: true,
-        email: true,
-      },
       phone: {
         required: true,
         digits: true,
@@ -115,10 +111,6 @@ $(document).ready(function () {
       birthdate: {
         required: "Geburtsdatum ist erforderlich.",
       },
-      // email: {
-      //   required: "E-Mail ist erforderlich.",
-      //   email: "Bitte geben Sie eine gültige E-Mail Adresse ein.",
-      // },
       phone: {
         required: "Telefonnummer ist erforderlich.",
         digits: "Nur Zahlen erlaubt.",

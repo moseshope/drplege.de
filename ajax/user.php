@@ -14,7 +14,7 @@ header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if ($_POST['name'] && $_POST['birthdate'] && $_POST['phone'] && $_POST['email']) {
+    if ($_POST['name'] && $_POST['birthdate'] && $_POST['phone']) {
 
         $createdAt = date("Y-m-d");
 

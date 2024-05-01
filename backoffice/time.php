@@ -1,11 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['staff_id'])) {
-    header("Location: login");
-}
-include('config/database.php');
-include('./layout/header.php');
-include('./layout/sidebar.php');
+  header("Location: login");
+  }
+include ('config/database.php');
+include ('./layout/header.php');
+include ('./layout/sidebar.php');
 
 $GetTime = "select * from time_slots";
 $result = $connect->query($GetTime);
@@ -13,20 +13,21 @@ $timeList = array();
 
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $timeList[] = $row['time'];
+  while ($row = $result->fetch_assoc()) {
+    $timeList[] = $row['time'];
     }
-}
+  }
 
-function sortTimeSlots($a, $b) {
-    if ($a == "Holiday" || $a == "Not available") {
-        return 1;
+function sortTimeSlots($a, $b)
+  {
+  if ($a == "Holiday" || $a == "Not available") {
+    return 1;
     } elseif ($b == "Holiday" || $b == "Not available") {
-        return -1;
+    return -1;
     }
 
-    return strtotime($a) - strtotime($b);
-}
+  return strtotime($a) - strtotime($b);
+  }
 
 usort($timeList, 'sortTimeSlots');
 
@@ -120,6 +121,13 @@ usort($timeList, 'sortTimeSlots');
                   value="<?php echo $endDate; ?>">
               </div>
             </div>
+            <div id="weekdaysSelectedValues" class="d-flex justify-content-md-center flex-wrap mx-2 mt-3 mb-2">
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">MO</input>
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">DI</input>
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">MI</input>
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">DO</input>
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">FR</input>
+            </div>
             <div class="d-flex justify-content-center align-items-center my-3">
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
                 style="background-color: var(--main); color: white; border-radius: 16px;"
@@ -139,24 +147,24 @@ usort($timeList, 'sortTimeSlots');
             </label>
           </div>
           <ul class="row" id="selectTime">
-            <?php 
-                echo "<form>";
-                foreach ($timeList as $time) {
-                    if($time === "Holiday"){
-                        echo "<label class='col-12 col-md-6 col-lg-4'>
+            <?php
+            echo "<form>";
+            foreach ($timeList as $time) {
+              if ($time === "Holiday") {
+                echo "<label class='col-12 col-md-6 col-lg-4'>
                                 <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Urlaub
                               </label>";
-                    }else if($time === "Not available"){
-                        echo "<label class='col-12 col-md-6 col-lg-4'>
+                } else if ($time === "Not available") {
+                echo "<label class='col-12 col-md-6 col-lg-4'>
                                 <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Nicht verfügbar
                               </label>";
-                    }else{
-                        echo "<label class='col-12 col-md-6 col-lg-4'>
+                } else {
+                echo "<label class='col-12 col-md-6 col-lg-4'>
                                 <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
                               </label>";
-                    }
                 }
-                echo "</form>";
+              }
+            echo "</form>";
             ?>
           </ul>
           <div class="d-flex justify-content-center align-items-center mt-5 mb-3">
@@ -383,8 +391,7 @@ $('#reset').on('click', function() {
 $('#resetConfirmationBtn').on('click', function() {
   // $('#reset-show-info').modal('show');
 })
-$('#resetShowInfoBtn').on('click', function() {
-})
+$('#resetShowInfoBtn').on('click', function() {})
 </script>
 
 <script>
@@ -429,7 +436,7 @@ $(document).ready(function() {
 });
 </script>
 <!-- logout  -->
-<?php include('./layout/script.php')?>
+<?php include ('./layout/script.php') ?>
 </body>
 
 </html>

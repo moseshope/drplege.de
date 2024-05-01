@@ -11,32 +11,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $doctorData = "SELECT * FROM user WHERE id='$id'";
         $result = $connect->query($doctorData);
         $row = $result->fetch_assoc();
+        $profile = $row['profile'];
+
+        if (!empty($_FILES["profile"]["name"])) {
+            // If a file is uploaded
+            $originalFileName = $_FILES["profile"]["name"];
+            $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+            // Get the current timestamp
+            $timestamp = time();
+            // Concatenate the timestamp with the original filename (separated by an underscore)
+            $profileName = $timestamp . "_" . $originalFileName;
+            // Move the uploaded file to the desired location with the composed profile name
+            $uploadDirectory = "../../images/";
+            $profilePath = $uploadDirectory . $profileName;
+            if (move_uploaded_file($_FILES["profile"]["tmp_name"], $profilePath)) {
+                // If the previous profile image exists, delete it
+                if (!empty($profile) && file_exists("../../images/" . $profile)) {
+                    unlink("../../images/" . $profile);
+                }
+            } else {
+                // Handle file upload error
+                echo json_encode(array('error' => 'Failed to upload profile image.'));
+                exit;
+            }
+        } else {
+            // If no file is uploaded, use the existing profile name
+            $profileName = $profile;
+        }
 
         $currentPassword = md5($_POST['currentPassword']);
         if ($currentPassword == $row['password']) {
             // Update the hashed password
             $newPasswordHashed = md5($_POST['newPassword']);
-            $updateQuery = "UPDATE user SET password='$newPasswordHashed' WHERE id='$id'";
+            $updateQuery = "UPDATE user SET password='$newPasswordHashed', profile='$profileName' WHERE id='$id'";
             $updateResult = $connect->query($updateQuery);
 
-            // Update the plain text password
-            $newPasswordPlain = $_POST['newPassword'];
-            $updateQueryPlain = "UPDATE user SET password_plain='$newPasswordPlain' WHERE id='$id'";
-            $updateResultPlain = $connect->query($updateQueryPlain);
-
-            if ($updateResult && $updateResultPlain) {
+            if ($updateResult) {
                 echo json_encode(array('success' => true));
-                } else {
-                echo json_encode(array('error' => 'Failed to update password.'));
-                }
             } else {
-            echo json_encode(array('error' => 'Invalid current password.'));
+                echo json_encode(array('error' => 'Failed to update password.'));
             }
         } else {
-        echo json_encode(array('error' => 'Current password or new password is empty.'));
+            echo json_encode(array('error' => 'Invalid current password.'));
         }
     } else {
+        echo json_encode(array('error' => 'Current password or new password is empty.'));
+    }
+} else {
     // Handle if the request method is not POST
     echo json_encode(array('error' => 'Invalid request method.'));
-    }
+}
 ?>

@@ -916,8 +916,7 @@ $('#EditStaff').on('shown.bs.modal', function () {
               .addClass("text-danger");
           } else {
             $("#current_password-error").hide();
-            // $("#Confirmation").modal("show");
-            location.reload();
+            $("#show-info").modal("show");
           }
         },
         error: function (xhr, status, error) {

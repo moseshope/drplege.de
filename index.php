@@ -9,10 +9,10 @@ $GetServices = "select * from services where deleted_at IS NULL";
 $ServiceResult = $connect->query($GetServices);
 $servicesArray = array();
 if ($ServiceResult->num_rows > 0) {
-	while ($row = $ServiceResult->fetch_assoc()) {
-		$servicesArray[] = $row;
-		}
-	}
+  while ($row = $ServiceResult->fetch_assoc()) {
+    $servicesArray[] = $row;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -110,16 +110,16 @@ if ($ServiceResult->num_rows > 0) {
                   <div class="common-box  mb-4 treatment-list">
                     <ul>
                       <?php
-											if ($lang == 'de') {
-												foreach ($servicesArray as $service) {
-													echo "<li class='next-step service-button' data-name=" . $service['services'] . " value='" . $service['id'] . "'><button type='button'>" . $service['services'] . "</button></li>";
-													}
-												} else {
-												foreach ($servicesArray as $service) {
-													echo "<li class='next-step service-button' data-name=" . $service['services'] . " value='" . $service['id'] . "'><button type='button'>" . $service['services_en'] . "</button></li>";
-													}
-												}
-											?>
+                      if ($lang == 'de') {
+                        foreach ($servicesArray as $service) {
+                          echo "<li class='next-step service-button' data-name=" . $service['services'] . " value='" . $service['id'] . "'><button type='button'>" . $service['services'] . "</button></li>";
+                          }
+                        } else {
+                        foreach ($servicesArray as $service) {
+                          echo "<li class='next-step service-button' data-name=" . $service['services'] . " value='" . $service['id'] . "'><button type='button'>" . $service['services_en'] . "</button></li>";
+                          }
+                        }
+                      ?>
                     </ul>
                   </div>
                 </div>
@@ -141,15 +141,15 @@ if ($ServiceResult->num_rows > 0) {
                 <div class="treatment-box">
                   <p><?= $ln['select_date'] ?></p>
                   <?php /*<!-- <div class="common-box  mb-4 doctor-list-box">
-														<div class="calendar-wrapper">
-															<button id="btnPrev" type="button"></button>
-															<button id="btnNext" type="button"></button>
-															<div id="divCal">
-																
-															</div>
+                       <div class="calendar-wrapper">
+                         <button id="btnPrev" type="button"></button>
+                         <button id="btnNext" type="button"></button>
+                         <div id="divCal">
+                           
+                         </div>
 
-														</div>
-													</div> -->*/ ?>
+                       </div>
+                     </div> -->*/ ?>
                   <div class="calendar">
                     <div class="header">
                       <div class="cursor-pointer" onclick="prevMonth()">
@@ -208,11 +208,11 @@ if ($ServiceResult->num_rows > 0) {
                           <div class="form-field">
                             <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthdate"
                               id="birthdateInput" placeholder="<?= $ln['birth_date_input'] ?>">
-                              <p class="error m-0" id="birthdate-error"></p>
+                            <p class="error m-0" id="birthdate-error"></p>
                           </div>
                           <!-- <div class="form-field">
-													<input type="date" name="birthdate" id="birthdateInput" placeholder="Datum der Geburt*">
-													<p  class="error" id="birthdate-error"></p> -->
+                          <input type="date" name="birthdate" id="birthdateInput" placeholder="Datum der Geburt*">
+                          <p  class="error" id="birthdate-error"></p> -->
                           <!-- </div> -->
                         </div>
                         <div class="col-md-6">
@@ -224,7 +224,8 @@ if ($ServiceResult->num_rows > 0) {
                         </div>
                         <div class="col-md-12">
                           <div class="form-field">
-                            <input type="email" name="email" id="emailInput" placeholder="E-Mail">
+                            <input type="email" name="email" id="emailInput" placeholder="E-Mail"
+                              onchange="toggleCheckbox()">
                             <!-- <p class="error m-0" id="email-error"></p> -->
                           </div>
                         </div>
@@ -234,6 +235,22 @@ if ($ServiceResult->num_rows > 0) {
                             <label for="reminderCheckbox"><?= $ln['reminder_checkbox'] ?></label>
                           </div>
                         </div>
+
+                        <script>
+                        function toggleCheckbox() {
+                          var emailInput = document.getElementById('emailInput');
+                          var reminderCheckbox = document.getElementById('reminderCheckbox');
+
+                          // Enable the checkbox if there's any value in the email input
+                          if (emailInput.value.trim() !== '') {
+                            reminderCheckbox.disabled = false;
+                          } else {
+                            reminderCheckbox.disabled = true;
+                            reminderCheckbox.checked = false; // Uncheck the checkbox when the email input is empty
+                          }
+                        }
+                        </script>
+
                         <div class="col-md-12">
                           <div class="form-field button-flex">
                             <button type="button" id="submitButton"

@@ -1,11 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['staff_id'])) {
-    header("Location: login");
-}
-include('config/database.php');
-include('./layout/header.php');
-include('./layout/sidebar.php');
+  header("Location: login");
+  }
+include ('config/database.php');
+include ('./layout/header.php');
+include ('./layout/sidebar.php');
 
 $id = $_SESSION['staff_id'];
 $sql = "select * from user where id='$id' and deleted_at IS NULL";
@@ -13,148 +13,148 @@ $result = $connect->query($sql);
 $row = $result->fetch_assoc();
 $role = $row['role'];
 
-if($role == 2){
+if ($role == 2) {
 
-    $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
-    $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
-    $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
-    
-    if(empty($startDate)){
-        $startFormattedDate = null;
-    }else{
-        $startDateTime = DateTime::createFromFormat('Y-m-d', $startDate);
-        $startFormattedDate = $startDateTime->format('d.m.Y');
+  $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+  $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
+  $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
+
+  if (empty($startDate)) {
+    $startFormattedDate = null;
+    } else {
+    $startDateTime = DateTime::createFromFormat('Y-m-d', $startDate);
+    $startFormattedDate = $startDateTime->format('d.m.Y');
     }
-    
-    if(empty($endDate)){
-        $endFormattedDate = null;
-    }else{
-        $endDateTime = DateTime::createFromFormat('Y-m-d', $endDate);
-        $endFormattedDate = $endDateTime->format('d.m.Y');
+
+  if (empty($endDate)) {
+    $endFormattedDate = null;
+    } else {
+    $endDateTime = DateTime::createFromFormat('Y-m-d', $endDate);
+    $endFormattedDate = $endDateTime->format('d.m.Y');
     }
-    $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
-    
-    $conditions = array();
-    if ($searchTerm !== null) {
-        $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
+  $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
+
+  $conditions = array();
+  if ($searchTerm !== null) {
+    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
     }
-    if ($startDate !== null && $endDate !== null) {
-        $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";
+  if ($startDate !== null && $endDate !== null) {
+    $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";
     }
-    $whereClause = "";
-    if (!empty($conditions)) {
-        $whereClause ="WHERE patients.doctor='$id' AND patients.deleted_at IS NULL AND ". implode(" AND ", $conditions);
-    }else{
-        $whereClause = "WHERE patients.doctor='$id' AND patients.deleted_at IS NULL";
+  $whereClause = "";
+  if (!empty($conditions)) {
+    $whereClause = "WHERE patients.doctor='$id' AND patients.deleted_at IS NULL AND " . implode(" AND ", $conditions);
+    } else {
+    $whereClause = "WHERE patients.doctor='$id' AND patients.deleted_at IS NULL";
     }
-    
-    $orderClause = "";
-    if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
-        $orderClause = "patients.status $orderBy,";
-    } 
-    
-        $GetPatients = "SELECT patients.*, user.name AS doctor, services.services 
+
+  $orderClause = "";
+  if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
+    $orderClause = "patients.status $orderBy,";
+    }
+
+  $GetPatients = "SELECT patients.*, user.name AS doctor, services.services 
         FROM patients 
         LEFT JOIN user ON patients.doctor = user.id 
         LEFT JOIN services ON patients.services= services.id 
          $whereClause 
         ORDER BY $orderClause patients.id DESC";
-    
-        $PatientsResult = $connect->query($GetPatients);
-        $PatientsList = array();
-        
-        if ($PatientsResult->num_rows > 0) {
-            while ($row = $PatientsResult->fetch_assoc()) {
-                $PatientsList[] = $row;
-            }
-        }
-        
-        $itemsPerPage = 20;
-        $totalItems = count($PatientsList);
-        $totalPages = ceil($totalItems / $itemsPerPage);
-        $currentPage = isset($_GET['page']) ? max(1, min((int)$_GET['page'], $totalPages)) : 1;
-        $startIndex = ($currentPage - 1) * $itemsPerPage;
-        $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
-}else{
-    $GetStaff = "select * from user where deleted_at IS NULL AND role = 2";
-    $StaffResult = $connect->query($GetStaff);
-    $staffList = array();
 
-    if ($StaffResult->num_rows > 0) {
-        while ($row = $StaffResult->fetch_assoc()) {
-            $staffList[] = $row;
-        }
+  $PatientsResult = $connect->query($GetPatients);
+  $PatientsList = array();
+
+  if ($PatientsResult->num_rows > 0) {
+    while ($row = $PatientsResult->fetch_assoc()) {
+      $PatientsList[] = $row;
+      }
     }
 
-    $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
-    $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
-    $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
-    if(empty($startDate)){
-        $startFormattedDate = null;
-    }else{
-        $startDateTime = DateTime::createFromFormat('Y-m-d', $startDate);
-        $startFormattedDate = $startDateTime->format('d.m.Y');
+  $itemsPerPage = 20;
+  $totalItems = count($PatientsList);
+  $totalPages = ceil($totalItems / $itemsPerPage);
+  $currentPage = isset($_GET['page']) ? max(1, min((int) $_GET['page'], $totalPages)) : 1;
+  $startIndex = ($currentPage - 1) * $itemsPerPage;
+  $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
+  } else {
+  $GetStaff = "select * from user where deleted_at IS NULL AND role = 2";
+  $StaffResult = $connect->query($GetStaff);
+  $staffList = array();
+
+  if ($StaffResult->num_rows > 0) {
+    while ($row = $StaffResult->fetch_assoc()) {
+      $staffList[] = $row;
+      }
     }
 
-    if(empty($endDate)){
-        $endFormattedDate = null;
-    }else{
-        $endDateTime = DateTime::createFromFormat('Y-m-d', $endDate);
-        $endFormattedDate = $endDateTime->format('d.m.Y');
+  $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+  $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
+  $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
+  if (empty($startDate)) {
+    $startFormattedDate = null;
+    } else {
+    $startDateTime = DateTime::createFromFormat('Y-m-d', $startDate);
+    $startFormattedDate = $startDateTime->format('d.m.Y');
     }
 
-    $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
-
-    $conditions = array();
-    if ($searchTerm !== null) {
-        $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
-    }
-    if ($startDate !== null && $endDate !== null) {
-        $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";
+  if (empty($endDate)) {
+    $endFormattedDate = null;
+    } else {
+    $endDateTime = DateTime::createFromFormat('Y-m-d', $endDate);
+    $endFormattedDate = $endDateTime->format('d.m.Y');
     }
 
-    $whereClause = "";
-    if (!empty($conditions)) {
-        $whereClause = "WHERE patients.deleted_at IS NULL AND " . implode(" AND ", $conditions);
-    }else{
-        $whereClause = "WHERE patients.deleted_at IS NULL";
+  $orderBy = isset($_GET['orderby']) ? $_GET['orderby'] : null;
+
+  $conditions = array();
+  if ($searchTerm !== null) {
+    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
+    }
+  if ($startDate !== null && $endDate !== null) {
+    $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";
     }
 
-    if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
+  $whereClause = "";
+  if (!empty($conditions)) {
+    $whereClause = "WHERE patients.deleted_at IS NULL AND " . implode(" AND ", $conditions);
+    } else {
+    $whereClause = "WHERE patients.deleted_at IS NULL";
+    }
 
-        $column = isset($_GET['column']) ? $_GET['column'] : null;
-        if($column == 'doctor') {
-            $orderClause = "user.name $orderBy";
-        } else {
-            $orderClause = "patients.status $orderBy";
-        }
+  if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
+
+    $column = isset($_GET['column']) ? $_GET['column'] : null;
+    if ($column == 'doctor') {
+      $orderClause = "user.name $orderBy";
+      } else {
+      $orderClause = "patients.status $orderBy";
+      }
 
     } else {
-        $orderClause = "patients.id DESC";
+    $orderClause = "patients.id DESC";
     }
 
-    $GetPatients = "SELECT patients.*, user.name AS doctor, services.services FROM patients 
+  $GetPatients = "SELECT patients.*, user.name AS doctor, services.services FROM patients 
                     LEFT JOIN user ON patients.doctor = user.id 
                     LEFT JOIN services ON patients.services= services.id 
                     $whereClause
                     ORDER BY  
                     $orderClause";
-    $PatientsResult = $connect->query($GetPatients);
-    $PatientsList = array();
+  $PatientsResult = $connect->query($GetPatients);
+  $PatientsList = array();
 
-    if ($PatientsResult->num_rows > 0) {
-        while ($row = $PatientsResult->fetch_assoc()) {
-            $PatientsList[] = $row;
-        }
+  if ($PatientsResult->num_rows > 0) {
+    while ($row = $PatientsResult->fetch_assoc()) {
+      $PatientsList[] = $row;
+      }
     }
 
-    $itemsPerPage = 20;
-    $totalItems = count($PatientsList);
-    $totalPages = ceil($totalItems / $itemsPerPage);
-    $currentPage = isset($_GET['page']) ? max(1, min((int)$_GET['page'], $totalPages)) : 1;
-    $startIndex = ($currentPage - 1) * $itemsPerPage;
-    $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1); 
-}
+  $itemsPerPage = 20;
+  $totalItems = count($PatientsList);
+  $totalPages = ceil($totalItems / $itemsPerPage);
+  $currentPage = isset($_GET['page']) ? max(1, min((int) $_GET['page'], $totalPages)) : 1;
+  $startIndex = ($currentPage - 1) * $itemsPerPage;
+  $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
+  }
 
 
 ?>
@@ -172,7 +172,7 @@ if($role == 2){
         <div class="dashboard-search m-2 mx-0">
           <i class="bi bi-search"></i>
           <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
-            value="<?php echo $searchTerm?>">
+            value="<?php echo $searchTerm ?>">
         </div>
         <!-- </form> -->
         <!-- <form method="post"> -->
@@ -210,7 +210,7 @@ if($role == 2){
         <table class="table table-hover">
           <thead>
             <tr>
-              <?php if($role == 2 || $role == 3){?>
+              <?php if ($role == 2 || $role == 3) { ?>
               <td>#</td>
               <td>Name</td>
               <td>ID</td>
@@ -222,7 +222,7 @@ if($role == 2){
               <td>
                 <div class="d-flex justify-content-center">Optionen</div>
               </td>
-              <?php }else{?>
+              <?php } else { ?>
               <td>#</td>
               <td>Name</td>
               <td>ID</td>
@@ -236,182 +236,168 @@ if($role == 2){
               <td>
                 <div class="d-flex justify-content-center">Optionen</div>
               </td>
-              <?php }?>
+              <?php } ?>
             </tr>
           </thead>
           <tbody>
 
-            <?php if($role == 2 || $role == 3){for ($i = $startIndex; $i <= $endIndex; $i++) {?>
+            <?php if ($role == 2 || $role == 3) {
+              for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
             <tr class="patient-row">
               <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
               <td style="min-width: 120px; max-width: 200px;">
                 <div class="d-flex p-0 m-0 flex-column">
                   <h5 class="mb-0">
-                    <?php echo $PatientsList[$i]['name'];?>
+                    <?php echo $PatientsList[$i]['name']; ?>
                   </h5>
                   <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
                       style="font-weight: 500;">E:
-                    </span><a style="color: var(--main);" href="mailto:<?php echo $PatientsList[$i]['email'];?>">
-                      <?php echo $PatientsList[$i]['email'];?>
+                    </span><a style="color: var(--main);" href="mailto:<?php echo $PatientsList[$i]['email']; ?>">
+                      <?php echo $PatientsList[$i]['email']; ?>
                     </a></p>
                   <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
                       style="color: var(--main);font-weight: 500;">T:
-                    </span><a style="color: var(--main);" href="tel:<?php echo $PatientsList[$i]['telephone'];?>">
-                      <?php echo $PatientsList[$i]['telephone'];?>
+                    </span><a style="color: var(--main);" href="tel:<?php echo $PatientsList[$i]['telephone']; ?>">
+                      <?php echo $PatientsList[$i]['telephone']; ?>
                     </a></p>
                 </div>
               </td>
-              <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id'];?></td>
-              <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services'];?></td>
-              <td><?php echo $PatientsList[$i]['selected_date'];?> | <?php echo $PatientsList[$i]['visits'];?></td>
+              <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id']; ?></td>
+              <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services']; ?></td>
+              <td><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?></td>
 
-              <td><?php echo $PatientsList[$i]['recipe'];?></td>
+              <td><?php echo $PatientsList[$i]['recipe']; ?></td>
               <?php
                   if ($PatientsList[$i]['status'] === 'vollendet') {
-                      $buttonClass = 'cursor-default custom-success-btn';
-                  } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
-                      $buttonClass = 'cursor-default custom-danger-btn';
-                  } 
-                    elseif ($PatientsList[$i]['status'] === 'bevorstehen') {
-                      $buttonClass = 'cursor-default custom-upcoming-btn';
-                  } 
-                  
-                  
-              ?>
+                    $buttonClass = 'cursor-default custom-success-btn';
+                    } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
+                    $buttonClass = 'cursor-default custom-danger-btn';
+                    } elseif ($PatientsList[$i]['status'] === 'bevorstehen') {
+                    $buttonClass = 'cursor-default custom-upcoming-btn';
+                    }
+
+
+                  ?>
 
               <td class="text-center">
                 <button class="statusBtn <?php echo $buttonClass; ?>" id="status-<?php echo $i + 1; ?>"
                   data-id="<?php echo $PatientsList[$i]['id']; ?>">
-                  <?php 
+                  <?php
                       $currentDate = date("d.m.Y");
                       $selectedDate = $PatientsList[$i]['selected_date'];
                       $status = $PatientsList[$i]['status'];
-                      if($status == 'vollendet' || $status == 'abgesagt'){
+                      if ($status == 'vollendet' || $status == 'abgesagt') {
+                        echo $status;
+                        } else {
+                        if ($selectedDate < $currentDate) {
+                          echo 'Ausstehend';
+                          } else {
                           echo $status;
-                      }else{
-                          if($selectedDate < $currentDate){
-                              echo 'Ausstehend';
-                          }else{
-                              echo $status;
                           }
-                      }
-                  ?>
+                        }
+                      ?>
                 </button>
                 <p class="mb-0" style="font-size: var(--xs-text); color: var(--secondary); width: fit-content;"
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
-              <td>
-                <?php if($PatientsList[$i]['status'] != 'vollendet') {?>
-                <div class="d-flex justify-content-center dropdown">
-                  <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
-                    style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
-                    class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-list"></i>
+              <td class="text-center">
+                <?php if ($PatientsList[$i]['status'] != 'vollendet') { ?>
+                <div class="d-flex justify-content-center">
+                  <?php if ($PatientsList[$i]['status'] != 'abgesagt') { ?>
+                  <span class="cursor-pointer refreshBtn" data-id="<?php echo $PatientsList[$i]['id']; ?>"
+                    data-bs-toggle="modal" aria-expanded="false">
+                    <i class="fas fa-arrows-repeat p-2"></i> <!-- Change the icon accordingly -->
                   </span>
-                  <ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
-                    <li class="px-2 py-1 cursor-pointer addCalenderBtn" data-id="<?php echo $PatientsList[$i]['id'];?>"
-                      data-index="<?php echo $i; ?>" style="border-bottom: 1px solid gray;" data-bs-toggle="modal"
-                      onClick="addCalenderBtn(event)">
-                      Add to calendar
-                    </li>
-                    <?php if($PatientsList[$i]['status'] != 'abgesagt') {?>
-                    <li class="px-2 py-1 mx-2 cursor-pointer refreshBtn" data-id="<?php echo $PatientsList[$i]['id'];?>"
-                      style="border-bottom: 1px solid #d7caca;;" data-bs-toggle="modal">
-                      Update
-                    </li>
-                    <li class="px-2 py-1 mx-2 cursor-pointer cancelBtn" data-id="<?php echo $PatientsList[$i]['id'];?>"
-                      data-index="<?php echo $i; ?>" style="border-bottom: 1px solid #d7caca;;" data-bs-toggle="modal"
-                      onClick="cancelBtn(event)">
-                      Abbrechen
-                    </li>
-                    <?php } ?>
-                    <li class="px-2 py-1 cursor-pointer deleteBtn" data-id="<?php echo $PatientsList[$i]['id'];?>"
-                      style="color: #d1232a;" data-bs-toggle="modal">
-                      Löschen
-                    </li>
-                  </ul>
+                  <?php } ?>
+                  <span class="cursor-pointer deleteBtn text-danger" data-id="<?php echo $PatientsList[$i]['id']; ?>"
+                    data-bs-toggle="modal" aria-expanded="false">
+                    <i class="fas fa-trash p-2"></i> <!-- Change the icon accordingly -->
+                  </span>
                 </div>
                 <?php } ?>
               </td>
+
             </tr>
-            <?php }}else{ for ($i = $startIndex; $i <= $endIndex; $i++) {?>
+            <?php }
+              } else {
+              for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
             <tr class="doctor-row">
               <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
               <td style="min-width: 120px; max-width: 200px;">
                 <div class="d-flex p-0 m-0 flex-column">
-                  <h5 class="mb-0"><?php echo $PatientsList[$i]['name'];?></h5>
+                  <h5 class="mb-0"><?php echo $PatientsList[$i]['name']; ?></h5>
                   <p class="mb-0" style="color: var(--main); font-size: var(--xs-text);"><span
                       style="font-weight: 500;">E:
                     </span><a style="color: var(--main);"
-                      href="mailto:<?php echo $PatientsList[$i]['email'];?>"><?php echo $PatientsList[$i]['email'];?></a>
+                      href="mailto:<?php echo $PatientsList[$i]['email']; ?>"><?php echo $PatientsList[$i]['email']; ?></a>
                   </p>
                   <p class="mb-0" style="color: var(--main); font-size: var(--xs-text);"><span
                       style="color: var(--main);font-weight: 500;">T:
                     </span><a style="color: var(--main);"
-                      href="tel:<?php echo $PatientsList[$i]['telephone'];?>"><?php echo $PatientsList[$i]['telephone'];?></a>
+                      href="tel:<?php echo $PatientsList[$i]['telephone']; ?>"><?php echo $PatientsList[$i]['telephone']; ?></a>
                   </p>
                 </div>
               </td>
-              <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id'];?></td>
-              <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services'];?></td>
-              <td><?php echo $PatientsList[$i]['doctor'];?></td>
-              <td><?php echo $PatientsList[$i]['selected_date'];?> | <?php echo $PatientsList[$i]['visits'];?> </td>
-              <td><?php echo $PatientsList[$i]['recipe'];?></td>
+              <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id']; ?></td>
+              <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services']; ?></td>
+              <td><?php echo $PatientsList[$i]['doctor']; ?></td>
+              <td><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?> </td>
+              <td><?php echo $PatientsList[$i]['recipe']; ?></td>
               <?php
-                if ($PatientsList[$i]['status'] === 'vollendet') {
+                  if ($PatientsList[$i]['status'] === 'vollendet') {
                     $buttonClass = 'cursor-default custom-success-btn';
-                } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
+                    } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
                     $buttonClass = 'cursor-default custom-danger-btn';
-                } 
-                elseif ($PatientsList[$i]['status'] == 'bevorstehen') {
+                    } elseif ($PatientsList[$i]['status'] == 'bevorstehen') {
                     $buttonClass = 'cursor-default custom-upcoming-btn';
-                } 
-            
-                
-                ?>
+                    }
+
+
+                  ?>
 
               <td class="text-center">
                 <button class="statusBtn <?php echo $buttonClass; ?>" id="status-<?php echo $i + 1; ?>"
                   data-id="<?php echo $PatientsList[$i]['id']; ?>">
-                  <?php 
-                    $currentDate = date("d.m.Y");
-                    $selectedDate = $PatientsList[$i]['selected_date'];
-                    $status = $PatientsList[$i]['status'];
-                    if($status == 'vollendet' || $status == 'abgesagt'){
+                  <?php
+                      $currentDate = date("d.m.Y");
+                      $selectedDate = $PatientsList[$i]['selected_date'];
+                      $status = $PatientsList[$i]['status'];
+                      if ($status == 'vollendet' || $status == 'abgesagt') {
                         echo $status;
-                    }else{
-                        if($selectedDate < $currentDate){
-                            echo 'Ausstehend';
-                        }else{
-                            echo $status;
+                        } else {
+                        if ($selectedDate < $currentDate) {
+                          echo 'Ausstehend';
+                          } else {
+                          echo $status;
+                          }
                         }
-                    }
-                ?>
+                      ?>
                 </button>
                 <p class="mb-0" style="font-size: var(--xs-text); color: var(--secondary); width: fit-content;"
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
               <td>
-                <?php if($PatientsList[$i]['status'] != 'vollendet') {?>
+                <?php if ($PatientsList[$i]['status'] != 'vollendet') { ?>
                 <div class="d-flex justify-content-center">
                   <?php if ($PatientsList[$i]['status'] !== 'abgesagt') { ?>
                   <!-- Edit Button -->
-                  <button class="btn btn-primary mx-1 patientsEditButton"
+                  <div class="patientsEditButton"
                     data-id="<?php echo $PatientsList[$i]['id']; ?>" data-bs-toggle="modal">
-                    Bearbeiten
-                  </button>
+                    <i class="fas fa-edit p-2 cursor-pointer"></i>
+                  </div>
                   <?php } ?>
                   <!-- Delete Button -->
-                  <button class="btn btn-danger mx-1 patientsDeleteButton"
+                  <div class="patientsDeleteButton"
                     data-id="<?php echo $PatientsList[$i]['id']; ?>" data-bs-toggle="modal">
-                    Löschen
-                  </button>
+                    <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
+                  </div>
                 </div>
 
                 <?php } ?>
               </td>
             </tr>
-            <?php }}?>
+            <?php }
+              } ?>
           </tbody>
         </table>
       </div>
@@ -654,12 +640,12 @@ if($role == 2){
           <div class="form-group p-2 my-2">
             <label class="my-1" for="Status">Arzt wechseln</label>
             <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
-              <?php 
-                                    foreach ($staffList as $staff) {
-                                        $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
-                                        echo "<option value='".$staff['id']."' id='".$staff['id']."'>" . $staff['name'] . "</option>";
-                                    }
-                                ?>
+              <?php
+              foreach ($staffList as $staff) {
+                $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
+                echo "<option value='" . $staff['id'] . "' id='" . $staff['id'] . "'>" . $staff['name'] . "</option>";
+                }
+              ?>
             </select>
             <p class="error" id="doctor-error"></p>
           </div>
@@ -779,7 +765,7 @@ if($role == 2){
 <script src="asset/js/pagination.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<?php if($role == 2 || $role == 3){?>
+<?php if ($role == 2 || $role == 3) { ?>
 <script src="asset/js/script2.js"></script>
 <script>
 $("#editPatientForm").validate({
@@ -1055,7 +1041,7 @@ $('#datepicker').on('change', function() {
 <script>
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
-<?php if($totalItems > $itemsPerPage){ ?>
+<?php if ($totalItems > $itemsPerPage) { ?>
 
 CreatePagination({
   elementId: "custom-pagination",
@@ -1124,7 +1110,7 @@ $('#clearDatepicker').on('click', function() {
   window.location.href = baseUrl;
 })
 </script>
-<?php }else{?>
+<?php } else { ?>
 <script src="asset/js/script.js"></script>
 <script>
 $(document).ready(function() {
@@ -1174,7 +1160,7 @@ $(document).ready(function() {
 <script>
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
-<?php if($totalItems > $itemsPerPage){ ?>
+<?php if ($totalItems > $itemsPerPage) { ?>
 CreatePagination({
   elementId: "custom-pagination",
   totalPage: <?php echo $totalPages; ?>,
@@ -1303,10 +1289,10 @@ $('#clearDatepicker').on('click', function() {
   window.location.href = baseUrl;
 })
 </script>
-<?php }?>
+<?php } ?>
 
 <!-- logout  -->
-<?php include('./layout/script.php')?>
+<?php include ('./layout/script.php') ?>
 </body>
 
 </html>

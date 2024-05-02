@@ -27,7 +27,7 @@ function generateCalendar() {
   for (let i = 1; i <= daysInMonth; i++) {
     const date2 = new Date();
     const date1 = new Date(`${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${String(i).padStart(2, "0")}`);
-    row.innerHTML += `<td><div id="${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${i}" class="${date2.getDate() === i && date2.getFullYear() === currentYear && date2.getMonth() === currentMonth && "today"} ${date1 < date2 && "disable-date"}">${i}</div></td>`;
+    row.innerHTML += `<td><div id="${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${i.toString().padStart(2, "0")}" class="${date2.getDate() === i && date2.getFullYear() === currentYear && date2.getMonth() === currentMonth && "today"} ${date1 < date2 && "disable-date"}">${i}</div></td>`;
 
     if (firstDay + i === 7 || (i + firstDay) / conditionCount === 7 || i === daysInMonth) {
       daysTable.innerHTML += row.innerHTML;
@@ -50,6 +50,7 @@ let selectedDates = [];
 // Function to handle date selection
 function handleDateClick(event) {
 
+  if(event.ctrlKey) return;
   const date = event.target.textContent;
   const formattedDate = `${date.padStart(2, "0")}-${(currentMonth + 1).toString().padStart(2, "0")}-${currentYear}`;
   const date1 = new Date(`${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${date.padStart(2, "0")}`);
@@ -59,10 +60,10 @@ function handleDateClick(event) {
   
   if (selectedDateOne) {
 
-    const selectedDate = [];
+    selectedDate = [];
     for (let i = Math.min(selectedDateOne, date); i <= Math.max(selectedDateOne, date); i++) {
-      document.getElementById(`${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${i}`).classList.add("selected-date");
-      selectedDate.push(`${i.toString().padStart(2, "0")}-${(currentMonth + 1).toString().padStart(2, "0")}-${currentYear}`)
+      document.getElementById(`${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${i.toString().padStart(2, "0")}`).classList.add("selected-date");
+      selectedDate.push(`${currentYear}-${(currentMonth + 1).toString().padStart(2, "0")}-${i.toString().padStart(2, "0")}`)
     }
     selectedDateOne = null;
     return selectedDate;

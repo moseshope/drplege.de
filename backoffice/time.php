@@ -100,7 +100,11 @@ if ($result->num_rows > 0) {
           <!-- <form method="post"> from to date, button to apply and cancel -->
           <div class="mx-2">
             <div class="d-flex justify-content-md-center flex-wrap m-2">
-              <div class="input-date">
+              <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                <input type="text" id="dateRangePicker" name="daterange" class="form-control text-center">
+              </div>
+              <!-- <div class="input-date">
                 <input class="mx-1" style="width: 140px;" type="date" id="start-date" name="start_date"
                   placeholder="Start Date" value="<?php echo $startDate; ?>">
               </div>
@@ -108,14 +112,19 @@ if ($result->num_rows > 0) {
               <div class="input-date">
                 <input class="mx-1" style="width: 140px;" type="date" id="end-date" name="end_date"
                   placeholder="End Date" value="<?php echo $endDate; ?>">
-              </div>
+              </div> -->
             </div>
             <div id="weekdaysSelectedValues" class="d-flex justify-content-md-center flex-wrap mx-2 mt-3 mb-2">
-              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">MO</input>
-              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">DI</input>
-              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">MI</input>
-              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">DO</input>
-              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days" class="mx-2" value="1">FR</input>
+              <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days[]" class="mx-2 check-days"
+                value="1"><label for="weekSchedulerWidgetDayMon">MO</label></input>
+              <input id="weekSchedulerWidgetDayTue" type="checkbox" name="days[]" class="mx-2 check-days"
+                value="2"><label for="weekSchedulerWidgetDayTue">DI</label></input>
+              <input id="weekSchedulerWidgetDayWed" type="checkbox" name="days[]" class="mx-2 check-days"
+                value="3"><label for="weekSchedulerWidgetDayWed">MI</label></input>
+              <input id="weekSchedulerWidgetDayThu" type="checkbox" name="days[]" class="mx-2 check-days"
+                value="4"><label for="weekSchedulerWidgetDayThu">DO</label></input>
+              <input id="weekSchedulerWidgetDayFri" type="checkbox" name="days[]" class="mx-2 check-days"
+                value="5"><label for="weekSchedulerWidgetDayFri">FR</label></input>
             </div>
             <div class="d-flex justify-content-center align-items-center my-3">
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
@@ -233,19 +242,70 @@ if ($result->num_rows > 0) {
   </div>
 </div>
 <!-- Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <script src="asset/js/index.js"></script>
 <script src="asset/js/calender-2.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-</script>
 
 <script>
+function getDatesInRangeWithWeekdays(startDate, endDate, weekdays) {
+  const dates = [];
+  let currentDate = new Date(startDate);
+
+  // Iterate through each date in the range
+  while (currentDate <= endDate) {
+    // Check if the current date's weekday is in the selected weekdays
+    if (weekdays.includes(currentDate.getDay())) {
+      dates.push(moment(currentDate).format("YYYY-MM-DD")); // Add the date to the list
+    }
+    // Move to the next day
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return dates;
+}
+
+var start = moment().format("YYYY-MM-DD"),
+  end = moment().format("YYYY-MM-DD");
+
+function handleChangeRange() {
+  let days = [];
+  $("input.check-days:checked").each(function() {
+    days.push(Number($(this).val()));
+  });
+  $(`.selected-date`).removeClass("selected-date");
+  selectedDate = getDatesInRangeWithWeekdays(start, end, days);
+  // console.log(selectedDate)
+  selectedDate.forEach(val => {
+    $(`#${val}`).addClass("selected-date");
+  });
+
+}
+
+$("input.check-days").change(() => {
+  handleChangeRange();
+});
+
+$('input[name="daterange"]').daterangepicker({
+    locale: {
+      format: 'YYYY-MM-DD',
+      separator: ' To '
+    },
+    minDate: moment().format("YYYY-MM-DD"),
+    startDate: start,
+    endDate: end,
+
+  },
+
+  function(_start, _end, label) {
+    start = _start;
+    end = _end;
+    handleChangeRange();
+  });
 // select All Time
 const timesList = document.querySelectorAll('#selectTime input');
 
@@ -279,7 +339,14 @@ function getDate(event) {
   date = event.target.id;
 
   if (event.ctrlKey) {
-    selectedDate.push(event.target.id)
+    if (selectedDate.includes(event.target.id)) {
+      selectedDate = selectedDate.filter(date => date != event.target.id);
+      event.target.classList.remove("selected-date");
+    } else {
+      selectedDate.push(event.target.id);
+      event.target.classList.add("selected-date");
+      seper
+    }
   } else {
     selectedDate = [event.target.id]
     $.ajax({
@@ -324,29 +391,29 @@ $('#refresh').on('click', function() {
   selectedValues = $('input.optionalFeature:checked').map(function() {
     return $(this).val();
   }).get();
-  location.reload();
-  // $('#Confirmation').modal('show');
+  // location.reload();
+  $('#Confirmation').modal('show');
 })
 
 $('#confirmationBtn').on('click', function() {
-  // $('#show-info').modal('show');
+  $('#show-info').modal('show');
 })
-// $('#showInfoBtn').on('click', function() {
-//     $.ajax({
-//         url: './ajax/stafftime.php',
-//         method: 'POST',
-//         data: { 
-//             date: selectedDate, 
-//             selectedValues: selectedValues,
-//         },
-//         success: function (response) {
-//             // location.reload();
-//         },
-//         error: function (xhr, status, error) {
-//             console.error('Error:', error);
-//         }
-//     });
-// })
+$('#showInfoBtn').on('click', function() {
+  $.ajax({
+    url: './ajax/stafftime.php',
+    method: 'POST',
+    data: {
+      date: selectedDate,
+      selectedValues: selectedValues,
+    },
+    success: function(response) {
+      location.reload();
+    },
+    error: function(xhr, status, error) {
+      console.error('Error:', error);
+    }
+  });
+})
 
 $('#reset').on('click', function() {
   $('#selectTime').find('input[type=checkbox]').prop('checked', false);
@@ -407,9 +474,7 @@ $(document).ready(function() {
         console.error('Error:', error);
       }
     });
-  })
-
-
+  });
 });
 </script>
 <!-- logout  -->

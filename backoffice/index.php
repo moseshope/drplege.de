@@ -654,7 +654,7 @@ if ($role == 1) {
       year: 'numeric'
     });
     $('#appointmentHeading').text(formattedDate);
-    $('#calendarBody .selected-date').removeClass('selected-date');
+    // $('#calendarBody .selected-date').removeClass('selected-date');
 
     updateUrlParam('date', clickedDate);
 
@@ -1090,7 +1090,7 @@ if ($role == 1) {
       year: 'numeric'
     });
     $('#appointmentHeading').text(formattedDate);
-    $('#calendarBody .selected-date').removeClass('selected-date');
+    // $('#calendarBody .selected-date').removeClass('selected-date');
 
     updateUrlParam('date', clickedDate);
     // updateUrlParam('page', currentPage);

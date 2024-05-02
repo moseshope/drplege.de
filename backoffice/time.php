@@ -18,18 +18,7 @@ if ($result->num_rows > 0) {
     }
   }
 
-function sortTimeSlots($a, $b)
-  {
-  if ($a == "Holiday" || $a == "Not available") {
-    return 1;
-    } elseif ($b == "Holiday" || $b == "Not available") {
-    return -1;
-    }
 
-  return strtotime($a) - strtotime($b);
-  }
-
-usort($timeList, 'sortTimeSlots');
 
 ?>
 
@@ -109,16 +98,16 @@ usort($timeList, 'sortTimeSlots');
             <h4 style="font-weight: 700;">Zeit auswählen</h4>
           </div>
           <!-- <form method="post"> from to date, button to apply and cancel -->
-          <div class="mx-2 w-100">
+          <div class="mx-2">
             <div class="d-flex justify-content-md-center flex-wrap m-2">
               <div class="input-date">
-                <input class="mx-2" type="date" id="start-date" name="start_date" placeholder="Start Date"
-                  value="<?php echo $startDate; ?>">
+                <input class="mx-1" style="width: 140px;" type="date" id="start-date" name="start_date"
+                  placeholder="Start Date" value="<?php echo $startDate; ?>">
               </div>
               <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;">To</p>
               <div class="input-date">
-                <input class="mx-2" type="date" id="end-date" name="end_date" placeholder="End Date"
-                  value="<?php echo $endDate; ?>">
+                <input class="mx-1" style="width: 140px;" type="date" id="end-date" name="end_date"
+                  placeholder="End Date" value="<?php echo $endDate; ?>">
               </div>
             </div>
             <div id="weekdaysSelectedValues" class="d-flex justify-content-md-center flex-wrap mx-2 mt-3 mb-2">
@@ -150,19 +139,9 @@ usort($timeList, 'sortTimeSlots');
             <?php
             echo "<form>";
             foreach ($timeList as $time) {
-              if ($time === "Holiday") {
-                echo "<label class='col-12 col-md-6 col-lg-4'>
-                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Urlaub
-                              </label>";
-                } else if ($time === "Not available") {
-                echo "<label class='col-12 col-md-6 col-lg-4'>
-                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> Nicht verfügbar
-                              </label>";
-                } else {
-                echo "<label class='col-12 col-md-6 col-lg-4'>
-                                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
-                              </label>";
-                }
+              echo "<label class='col-12 col-md-6 col-lg-4'>
+                <input type='checkbox' class='optionalFeature' name='optionalFeature[]' value='$time'> $time 
+              </label>";
               }
             echo "</form>";
             ?>
@@ -273,9 +252,8 @@ const timesList = document.querySelectorAll('#selectTime input');
 timesList.forEach((t) => t.addEventListener('change', () => {
   let checkSelectAll = true;
   for (const time of timesList) {
-    if (time.value !== "Holiday" && time.value !== "Not available") {
-      if (time.checked === false) checkSelectAll = false;
-    }
+
+    if (time.checked === false) checkSelectAll = false;
   }
   document.getElementById('selectAllCheckBox').checked = checkSelectAll;
 }));
@@ -284,9 +262,8 @@ const handleSelectAll = (e) => {
   const selected = document.getElementById('selectAllCheckBox').checked;
   if (selected) {
     for (const time of timesList) {
-      if (time.value !== "Holiday" && time.value !== "Not available") {
-        time.checked = true;
-      }
+
+      time.checked = true;
     }
   } else
     for (const time of timesList) time.checked = false;

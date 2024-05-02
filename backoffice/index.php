@@ -126,286 +126,92 @@ if ($role == 1) {
       <h1 class="page-heading">Übersicht</h1>
     </div>
     <?php if ($role == 1) { ?>
-    <?php /* <div class="row mt-5">
-<div class="col-md-6 col-lg-4  col-12 mb-5">
-<div class="dashboard-box d-flex flex-column justify-content-between">
-   <div class="d-flex justify-content-center align-items-center mt-4">
-       <i class="mx-2 d-flex align-items-center">
-           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-               class="bi bi-person-vcard" viewBox="0 0 16 16">
-               <path
-                   d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
-               <path
-                   d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12z" />
-           </svg>
-       </i>
-       <p class="mb-0 text-truncate" id=""><?php echo $totalPatients?></p>
 
-</div>
-<div class="row mb-3">
-<div class="col-xl-6 col-12 d-flex justify-content-center align-items-center">
- <button onclick="redirectToPatientPage()">Alle anzeigen</button>
-</div>
-<div class="col-xl-6 col-12 d-flex justify-content-center align-items-center">
- <button data-bs-toggle="modal" data-bs-target="#show-services">Leistungen</button>
-</div>
+    <?php } else { ?>
+    <div class="row w-100 box-row">
+      <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
 
-</div>
-<div class="box-menubar">
-<p>Gesamtzahl der Patienten</p>
-</div>
-</div>
-</div>
+      </div>
 
-<div class="col-md-6 col-lg-4  col-12 d-flex justify-content-center mb-5">
-<div class="dashboard-box d-flex flex-column justify-content-between">
-<div class="d-flex justify-content-center align-items-center mt-4">
- <i class="bi bi-person-lines-fill mx-2 d-flex align-items-center"></i>
- <p class="mb-0 text-truncate"><?php echo $totalEmployee?></p>
-</div>
-<div class="row mb-3">
- <div class="col-xl-6 col-12 d-flex justify-content-center align-items-center">
-   <button type="button" data-bs-toggle="modal" data-bs-target="#add-staff">Personal hinzufügen</button>
- </div>
- <div class="col-xl-6 col-12 d-flex justify-content-center align-items-center">
-   <button onclick="redirectToEmployeePage()">Alle anzeigen Alle</button>
- </div>
+      <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
 
-</div>
-<div class="box-menubar">
- <p>Gesamtzahl der Mitarbeiter</p>
-</div>
-</div>
-</div>
-
-<div class="col-md-6 col-lg-4  col-12  d-md-flex justify-content-end mb-5">
-<div class="dashboard-box d-flex flex-column justify-content-between">
-<div class="d-flex justify-content-center align-items-center mt-4">
- <i class="bi bi-calendar-plus mx-2 d-flex align-items-center"></i>
- <p class="mb-0 text-truncate" id="totalPatients"></p>
-
-</div>
-<div class=" d-flex justify-content-center align-items-center mb-3">
- <button onclick="redirectToPatientPage()">Alle anzeigen Alle</button>
-</div>
-
-<div class="box-menubar">
- <p>Gesamtzahl der Termine</p>
-</div>
-</div>
-</div>
-</div> */ ?>
-<?php } else { ?>
-  <div class="row w-100 box-row">
-    <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
-      <!-- <div class="dashboard-box d-flex flex-column justify-content-between">
-                        <div class="d-flex justify-content-center align-items-center mt-5">
-                            <img src="asset/images/calender.png" alt="calender-icon" height="60px">
-                            <p class="text-truncate" id="totalPatients"></p>
-                        </div>
-                        <div class="box-menubar">
-                            <p>Heutige Termine</p>
-                        </div>
-                    </div> -->
-    </div>
-
-    <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
-      <!-- <div class="dashboard-box d-flex flex-column justify-content-between">
-                        <div class="d-flex justify-content-center align-items-center mt-5">
-                        <img src="asset/images/patient.png" alt="calender-icon" height="60px">
-                            <p class="text-truncate" id=""><?php echo $totalPatients1 ?></p>
-                        </div>
-                        <div class="box-menubar">
-                            <p>Behandelte Patienten</p>
-                        </div>
-                    </div> -->
-    </div>
-  </div>
-<?php } ?>
-</div>
-
-<?php /* <div class="py-2 px-md-5 px-3 w-100">
-<div class="dashboard-search m-2 mx-0">
-<i class="bi bi-search"></i>
-<input type="text" class="form-control custom-input" id="Search-input"
-placeholder="Suche" oninput="search()">
-</div>
-<div class="row mt-3">
-<div class="col-xxl-8  col-12 mb-5">
-<div class="today-appointments px-4 ">
-<div class="d-flex justify-content-center py-3">
-   <h4>Today's Appointments</h4>
-</div>
-<div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
-   <table class="table table-hover">
-       <thead>
-           <tr>
-               <td style="min-width: 100px;">Patient</td>
-               <td style="min-width: 150px;">Doctor</td>
-               <td>Service</td>
-               <td>Time</td>
-               <td>
-                   <div class="d-flex justify-content-center">Action</div>
-               </td>
-           </tr>
-       </thead>
-       <tbody>
-           <?php for ($i = $startIndex; $i <= $endIndex; $i++) {;?>
-<tr>
-<td><?php echo $PatientsList[$i]['name'];?></td>
-<td><?php echo $PatientsList[$i]['doctor'];?></td>
-<td><?php echo $PatientsList[$i]['services'];?></td>
-<td><?php echo $PatientsList[$i]['visits'];?></td>
-<td>
-
-<div class="d-flex justify-content-center dropdown">
- <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
-   style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
-   class="px-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-
-   <i class="bi bi-list"></i>
- </span>
- <ul id="Drop-menu-<?php echo $i + 1; ?>" class="dropdown-content">
-
-   <li class="px-2 py-1 cursor-pointer patientsEditButton" data-id="<?php echo $PatientsList[$i]['id'];?>"
-     style="border-bottom: 1px solid gray;" data-bs-toggle="modal">
-     Rebooking
-   </li>
-   <li onclick="HandleDropMenu('Drop-menu-1')" data-bs-toggle="modal" data-bs-target="#Confirmation"
-     class="px-2 py-1 cursor-pointer" style="color: var(--main);">
-     Cancel
-   </li>
- </ul>
-</div>
-</td>
-</tr>
-<?php } ?>
-</tbody>
-</table>
-</div>
-
-<div>
-<ul class="custom-pagination" id="custom-pagination">
-</ul>
-</div>
-
-</div>
-</div>
-<div class="col-xxl-4 col-12 mb-5 mb-xl-0">
-<div class="my-calendar px-4">
-<div class="d-flex justify-content-center py-3" style="color: var(--main);">
- <h4 style="font-weight: 700;">Appointment on Future Dates</h4>
-</div>
-<div class="calendar">
- <div class="header">
-   <div class="cursor-pointer" onclick="prevMonth()">
-     <span class="prev icon" style="color: black;">&lt;</span>
-     <span class="pre-month-year"></span>
-   </div>
-   <div class="cursor-pointer" onclick="nextMonth()">
-     <span class="month-year next"></span>
-     <span class="next icon">></span>
-   </div>
- </div>
- <table class="days">
-   <thead>
-     <tr>
-       <th>S</th>
-       <th>M</th>
-       <th>T</th>
-       <th>W</th>
-       <th>T</th>
-       <th>F</th>
-       <th>S</th>
-     </tr>
-   </thead>
-   <tbody id="calendarBody" onclick="getDate(event)"></tbody>
- </table>
-</div>
-</div>
-</div>
-</div>
-</div> */ ?>
-<div class="py-2 px-md-5 px-3 w-100">
-  <div class="dashboard-search m-2 mx-0">
-    <i class="bi bi-search"></i>
-    <input type="text" class="w-100" id="Search-input" placeholder="Suche">
-  </div>
-  <div class="row mt-3">
-    <div class="col-xxl-8 col-12 mb-5">
-      <div class="today-appointments px-4">
-        <div class="d-flex justify-content-center py-3">
-          <h4 id='appointmentHeading'>Heutige Termine</h4>
-        </div>
-        <div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <td>Patient</td>
-                <td>Arzt</td>
-                <td>Leistung</td>
-                <td>Uhrzeit</td>
-                <td>
-                  <div class="d-flex justify-content-center">Aktion</div>
-                </td>
-              </tr>
-            </thead>
-            <tbody id="patientList">
-
-            </tbody>
-          </table>
-        </div>
-        <!-- pagination -->
-        <div>
-          <ul class="custom-pagination" id="custom-pagination">
-          </ul>
-        </div>
-        <!-- <div class="d-flex justify-content-center align-items-center ">
-                            <button type="button"
-                                    class="cursor-pointer custom-secondary-button mb-4 mt-2 mt-sm-0">Alle anzeigen Alle
-                            </button>
-                        </div> -->
       </div>
     </div>
-    <div class="col-xxl-4  col-12 mb-5 mb-xl-0">
-      <div class="my-calender px-2"><?php /*
-<div class="d-flex justify-content-center py-3" style="color: var(--main);">
-<h4 style="font-weight: 700;">Ernennung zu zukünftigen Terminen</h4>
-</div>*/ ?>
-        <div class="calendar">
-          <div class="header">
-            <div class="cursor-pointer" onclick="prevMonth()">
-              <span class="prev icon" style="color: black;"><i
-                  class="fa-solid fa-circle-chevron-left me-3 mt-1"></i></span>
-              <span class="pre-month-year invisible position-absolute"></span>
-            </div>
-            <div>
-              <span class="month-year next"></span>
-            </div>
-            <div class="cursor-pointer" onclick="nextMonth()">
-              <span class="next-month-year text-dark invisible position-absolute"></span>
-              <span class="icon text-dark"><i class="fa-solid fa-circle-chevron-right ms-3 mt-1"></i></span>
-            </div>
+    <?php } ?>
+  </div>
+
+  <div class="py-2 px-md-5 px-3 w-100">
+    <div class="dashboard-search m-2 mx-0">
+      <i class="bi bi-search"></i>
+      <input type="text" class="w-100" id="Search-input" placeholder="Suche">
+    </div>
+    <div class="row mt-3">
+      <div class="col-xxl-8 col-12 mb-5">
+        <div class="today-appointments px-4">
+          <div class="d-flex justify-content-center py-3">
+            <h4 id='appointmentHeading'>Heutige Termine</h4>
           </div>
-          <table class="days">
-            <thead>
-              <tr>
-                <th>M</th>
-                <th>D</th>
-                <th>M</th>
-                <th>D</th>
-                <th>F</th>
-                <th>S</th>
-                <th>S</th>
-              </tr>
-            </thead>
-            <tbody id="calendarBody" onclick="getDate(event)"></tbody>
-          </table>
+          <div class="table-responsive" id="Search-Options" onchange="handleSelect('Search-input')">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <td>Patient</td>
+                  <td>Arzt</td>
+                  <td>Leistung</td>
+                  <td class="text-center">Uhrzeit</td>
+                  <td>
+                    <div class="d-flex justify-content-center">Aktion</div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody id="patientList">
+
+              </tbody>
+            </table>
+          </div>
+          <!-- pagination -->
+          <div>
+            <ul class="custom-pagination" id="custom-pagination">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-4  col-12 mb-5 mb-xl-0">
+        <div class="my-calender px-2">
+          <div class="calendar">
+            <div class="header">
+              <div class="cursor-pointer" onclick="prevMonth()">
+                <span class="prev icon" style="color: black;"><i
+                    class="fa-solid fa-circle-chevron-left me-3 mt-1"></i></span>
+                <span class="pre-month-year invisible position-absolute"></span>
+              </div>
+              <div>
+                <span class="month-year next"></span>
+              </div>
+              <div class="cursor-pointer" onclick="nextMonth()">
+                <span class="next-month-year text-dark invisible position-absolute"></span>
+                <span class="icon text-dark"><i class="fa-solid fa-circle-chevron-right ms-3 mt-1"></i></span>
+              </div>
+            </div>
+            <table class="days">
+              <thead>
+                <tr>
+                  <th>M</th>
+                  <th>D</th>
+                  <th>M</th>
+                  <th>D</th>
+                  <th>F</th>
+                  <th>S</th>
+                  <th>S</th>
+                </tr>
+              </thead>
+              <tbody id="calendarBody" onclick="getDate(event)"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- Modals -->
@@ -572,17 +378,7 @@ placeholder="Suche" oninput="search()">
             }
           ?>
         </ul>
-        <?php /*<!-- <div class="form-group p-2 mt-2 mb-4">
-   <input type="hidden" name="service_id" value="" id="serviceId">
-   <label class="my-1" for="add">Dienste hinzufügen</label>
-   <input type="text" name="services" class="form-control custom-input" id="add" placeholder="Dienste hinzufügen">
-   <p  class="error" id="service-error"></p>
-</div> -->
-<!-- <div class="d-flex justify-content-center align-items-center">
-<button type="button" id="servicesAddBtn" class="success-button cursor-pointer"><i class="bi bi-plus"
-       style="color: white;width: 20px;height: 20px;"></i>Hinzufügen</button>
-<button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal">Abbrechen</button>
-</div> */ ?>
+
       </div>
     </div>
   </div>
@@ -642,53 +438,53 @@ placeholder="Suche" oninput="search()">
                 id="patientsTelephone"></span></a> </p>
         </div>
         <?php if ($role == 1) { ?>
-          <div class="col-lg-12 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="Status">Arzt wechseln</label>
-              <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
-                <?php
+        <div class="col-lg-12 col-12">
+          <div class="form-group p-2 my-2">
+            <label class="my-1" for="Status">Arzt wechseln</label>
+            <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
+              <?php
                 foreach ($staffList as $staff) {
                   $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
                   echo "<option value='" . $staff['id'] . "' id='" . $staff['id'] . "'>" . $staff['name'] . "</option>";
                   }
                 ?>
-              </select>
-              <p class="error" id="doctor-error"></p>
-            </div>
+            </select>
+            <p class="error" id="doctor-error"></p>
           </div>
-          <div class="col-lg-12 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="time">Arzt wechseln</label>
-              <input type="date" name="date" class="form-control custom-input" id="datepicker" placeholder="Select date">
-              <p class="error" id="date-error"></p>
-            </div>
+        </div>
+        <div class="col-lg-12 col-12">
+          <div class="form-group p-2 my-2">
+            <label class="my-1" for="time">Arzt wechseln</label>
+            <input type="date" name="date" class="form-control custom-input" id="datepicker" placeholder="Select date">
+            <p class="error" id="date-error"></p>
           </div>
+        </div>
 
-          <div class="col-lg-12 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="Status">Zeit ändern</label>
-              <select name="time" class="form-control custom-input" id="timeList">
-              </select>
-              <p class="error" id="time-error"></p>
-            </div>
+        <div class="col-lg-12 col-12">
+          <div class="form-group p-2 my-2">
+            <label class="my-1" for="Status">Zeit ändern</label>
+            <select name="time" class="form-control custom-input" id="timeList">
+            </select>
+            <p class="error" id="time-error"></p>
           </div>
+        </div>
         <?php } else { ?>
-          <div class="col-lg-12 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="time">Datum ändern</label>
-              <input type="date" name="date" class="form-control custom-input" id="datepicker" placeholder="Select date">
-              <p class="error" id="date-error"></p>
-            </div>
+        <div class="col-lg-12 col-12">
+          <div class="form-group p-2 my-2">
+            <label class="my-1" for="time">Datum ändern</label>
+            <input type="date" name="date" class="form-control custom-input" id="datepicker" placeholder="Select date">
+            <p class="error" id="date-error"></p>
           </div>
+        </div>
 
-          <div class="col-lg-12 col-12">
-            <div class="form-group p-2 my-2">
-              <label class="my-1" for="Status">Uhrzeit ändern</label>
-              <select name="time" class="form-control custom-input" id="timeList">
-              </select>
-              <p class="error" id="time-error"></p>
-            </div>
+        <div class="col-lg-12 col-12">
+          <div class="form-group p-2 my-2">
+            <label class="my-1" for="Status">Uhrzeit ändern</label>
+            <select name="time" class="form-control custom-input" id="timeList">
+            </select>
+            <p class="error" id="time-error"></p>
           </div>
+        </div>
         <?php } ?>
 
         <div class="d-flex justify-content-center align-items-center my-3">
@@ -780,813 +576,813 @@ placeholder="Suche" oninput="search()">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <?php if ($role == 1) { ?>
-    <script src="asset/js/script.js"></script>
-    <script>
-    $(document).ready(function() {
+  <script src="asset/js/script.js"></script>
+  <script>
+  $(document).ready(function() {
 
-      $('#EditPatients').validate({
-        rules: {
-          doctor: {
-            required: true,
-          },
-          date: {
-            required: true,
-          },
-          time: {
-            required: true,
-          },
+    $('#EditPatients').validate({
+      rules: {
+        doctor: {
+          required: true,
         },
-        messages: {
-          doctor: {
-            required: "Ein Arzt ist erforderlich.",
-          },
-          date: {
-            required: "Das Datum ist erforderlich.",
-          },
-          time: {
-            required: "Zeit ist erforderlich.",
-          },
+        date: {
+          required: true,
         },
-        errorPlacement: function(error, element) {
-          if (element.attr("name") == "doctor") {
-            error.insertAfter("#doctor-error");
-          } else if (element.attr("name") == "date") {
-            error.insertAfter("#date-error");
-          } else if (element.attr("name") == "time") {
-            error.insertAfter("#time-error");
-          }
-          error.addClass('text-danger');
+        time: {
+          required: true,
         },
-        highlight: function(element) {
-          $(element).siblings('.error').addClass('text-danger');
+      },
+      messages: {
+        doctor: {
+          required: "Ein Arzt ist erforderlich.",
         },
-        unhighlight: function(element) {
-          $(element).siblings('.error').removeClass('text-danger');
+        date: {
+          required: "Das Datum ist erforderlich.",
         },
-      });
-    });
-    </script>
-    <script>
-    var clickedDate = '';
-    $(document).ready(function() {
-      const date = new URLSearchParams(window.location.search).get('date');
-      highlightSelectedDate(date);
-      fetchData(); // Fetch data on page load
-    });
-
-    function getCurrentDate() {
-      var todayDate = new Date();
-      var todayDateString = todayDate.toISOString().split('T')[0];
-      const paramDate = new URLSearchParams(window.location.search);
-      return paramDate.has('date') ? String(paramDate.get('date')) : todayDateString;
-    }
-
-    function getCurrentPage() {
-      const params = new URLSearchParams(window.location.search);
-      return params.has('page') ? Number(params.get('page')) : 1;
-    }
-
-    function getDate(event) {
-      clickedDate = event.target.id;
-      if (!event.target.id) return;
-      const newDate = formatDate(clickedDate);
-      const currentPage = getCurrentPage();
-
-      var formattedDate = new Date(clickedDate).toLocaleDateString('de-DE', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-      $('#appointmentHeading').text(formattedDate);
-      $('#calendarBody .selected-date').removeClass('selected-date');
-
-      updateUrlParam('date', clickedDate);
-
-      $(event.target).addClass('selected-date');
-
-      highlightSelectedDate(newDate);
-      fetchData();
-    }
-
-    function fetchData() {
-      const currentDate = getCurrentDate();
-      const date = new URLSearchParams(window.location.search).get('date');
-      const currentPage = getCurrentPage();
-      const searchQuery = $('#Search-input').val().trim();
-
-      $.ajax({
-        url: './ajax/patients.php',
-        method: 'GET',
-        data: {
-          date: date,
-          page: currentPage,
-          searchQuery: searchQuery
+        time: {
+          required: "Zeit ist erforderlich.",
         },
-        success: function(data) {
-          if (data == 'null') {
-            updateUrlParam('date', '');
-            location.reload(true);
-          } else {
-            try {
-              var getData = JSON.parse(data);
-              var dataArray = getData.data;
-
-              var listingsPerPage = 5;
-              var totalRecord = dataArray.length;
-              var AppointmentRecord = getData.statusDoneData.length;
-              var totalPage = Math.ceil(totalRecord / listingsPerPage);
-              updatePagination(totalPage);
-              updatePatientTable(dataArray, listingsPerPage, totalRecord);
-
-              const date = new URLSearchParams(window.location.search).get('date');
-              highlightSelectedDate(date);
-
-              updateUrlParam('search', searchQuery);
-
-              $('#totalPatients').text(`${totalRecord}`);
-              $('#completeAppointment').text(`${AppointmentRecord}`);
-            } catch (error) {
-              console.error('Error parsing JSON:', error);
-            }
-          }
-        },
-        error: function(xhr, status, error) {
-          console.error('Error fetching patient data:', error);
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") == "doctor") {
+          error.insertAfter("#doctor-error");
+        } else if (element.attr("name") == "date") {
+          error.insertAfter("#date-error");
+        } else if (element.attr("name") == "time") {
+          error.insertAfter("#time-error");
         }
-      });
-    }
+        error.addClass('text-danger');
+      },
+      highlight: function(element) {
+        $(element).siblings('.error').addClass('text-danger');
+      },
+      unhighlight: function(element) {
+        $(element).siblings('.error').removeClass('text-danger');
+      },
+    });
+  });
+  </script>
+  <script>
+  var clickedDate = '';
+  $(document).ready(function() {
+    const date = new URLSearchParams(window.location.search).get('date');
+    highlightSelectedDate(date);
+    fetchData(); // Fetch data on page load
+  });
 
-    updateUrlParam('page', getCurrentPage());
-    updateUrlParam('date', getCurrentDate());
+  function getCurrentDate() {
+    var todayDate = new Date();
+    var todayDateString = todayDate.toISOString().split('T')[0];
+    const paramDate = new URLSearchParams(window.location.search);
+    return paramDate.has('date') ? String(paramDate.get('date')) : todayDateString;
+  }
 
+  function getCurrentPage() {
+    const params = new URLSearchParams(window.location.search);
+    return params.has('page') ? Number(params.get('page')) : 1;
+  }
 
-    function updatePatientTable(dataArray, listingsPerPage, totalRecord) {
-      const tbody = $('#patientList');
-      tbody.empty();
+  function getDate(event) {
+    clickedDate = event.target.id;
+    if (!event.target.id) return;
+    const newDate = formatDate(clickedDate);
+    const currentPage = getCurrentPage();
 
-      if (dataArray.length === 0) {
-        const noRecordRow = `<tr><td colspan="5" class="text-center">Keine Einträge gefunden</td></tr>`;
-        tbody.append(noRecordRow);
-        return;
+    var formattedDate = new Date(clickedDate).toLocaleDateString('de-DE', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    $('#appointmentHeading').text(formattedDate);
+    $('#calendarBody .selected-date').removeClass('selected-date');
+
+    updateUrlParam('date', clickedDate);
+
+    $(event.target).addClass('selected-date');
+
+    highlightSelectedDate(newDate);
+    fetchData();
+  }
+
+  function fetchData() {
+    const currentDate = getCurrentDate();
+    const date = new URLSearchParams(window.location.search).get('date');
+    const currentPage = getCurrentPage();
+    const searchQuery = $('#Search-input').val().trim();
+
+    $.ajax({
+      url: './ajax/patients.php',
+      method: 'GET',
+      data: {
+        date: date,
+        page: currentPage,
+        searchQuery: searchQuery
+      },
+      success: function(data) {
+        if (data == 'null') {
+          updateUrlParam('date', '');
+          location.reload(true);
+        } else {
+          try {
+            var getData = JSON.parse(data);
+            var dataArray = getData.data;
+
+            var listingsPerPage = 5;
+            var totalRecord = dataArray.length;
+            var AppointmentRecord = getData.statusDoneData.length;
+            var totalPage = Math.ceil(totalRecord / listingsPerPage);
+            updatePagination(totalPage);
+            updatePatientTable(dataArray, listingsPerPage, totalRecord);
+
+            const date = new URLSearchParams(window.location.search).get('date');
+            highlightSelectedDate(date);
+
+            updateUrlParam('search', searchQuery);
+
+            $('#totalPatients').text(`${totalRecord}`);
+            $('#completeAppointment').text(`${AppointmentRecord}`);
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching patient data:', error);
       }
-
-      var currentPage = getCurrentPage();
-      var startIndex = (currentPage - 1) * listingsPerPage;
-      var endIndex = Math.min(startIndex + listingsPerPage - 1, totalRecord - 1);
-
-      var displayedListings = dataArray.slice(startIndex, endIndex + 1);
-
-
-      displayedListings.forEach(function(patient, index) {
-        const row = `<tr>
-                            <td>${patient.name}</td>
-                            <td>${patient.doctor}</td>
-                            <td>${patient.services}</td>
-                            <td>${patient.visits} </td>
-                            <td>
-                              <div class="d-flex justify-content-center dropdown">
-                                  <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                      <i class="fa-solid fa-right-left"></i>
-                                  </span>
-                                  <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                      <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                                  </span>
-                              </div>
-                            </td>
-
-                              <!-- Add other table cells based on your data structure -->
-                          </tr>`;
-        tbody.append(row);
-      });
-    }
-
-    function convertToAMPMFormat(time24) {
-      const [hours, minutes] = time24.split(':');
-      const parsedHours = parseInt(hours, 10);
-      const period = parsedHours >= 12 ? 'PM' : 'AM';
-      const formattedHours = parsedHours % 12 || 12; // Convert to 12-hour format
-
-      return `${formattedHours}:${minutes} ${period}`;
-    }
-
-    function formatDate(date) {
-      const year = new Date().getFullYear();
-      const month = new Date().getMonth() + 1;
-
-      const formattedMonth = month < 10 ? `0${month}` : month;
-      const formattedDay = date < 10 ? `0${date}` : date;
-
-      return `${year}-${formattedMonth}-${formattedDay}`;
-    }
-
-    function openRebookingModal(index) {
-
-      $.ajax({
-        url: './ajax/patients.php',
-        method: 'POST',
-        data: {
-          id: index
-        },
-        success: function(response) {
-          var patientsData = JSON.parse(response);
-
-          // Populate data into the edit-patients modal
-          $('#PatientsId').val(patientsData.id);
-          $('#PatientsName').html(patientsData.name);
-          $('#patientsEmail').html(patientsData.email);
-          $('#patientsTelephone').html(patientsData.telephone);
-          $('#doctorSelect').val(patientsData.doctor);
-          $('#time').val(patientsData.visits);
-
-          $('#edit-patients').modal('show');
-
-          openRebookingModal();
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
-      $('#edit-patients').modal('show');
-    }
-
-    function updatePagination(totalPage) {
-      const params = new URLSearchParams(window.location.search);
-      const currentPage = getCurrentPage();
-      CreatePagination({
-        elementId: "custom-pagination",
-        totalPage: totalPage,
-        currentPage: currentPage
-      });
-    }
-
-    function updateUrlParam(key, value) {
-      const url = new URL(window.location.href);
-      url.searchParams.set(key, value);
-      window.history.replaceState({}, '', url);
-    }
-
-    function highlightSelectedDate(date) {
-      $('#calendarBody .selected-date').removeClass('selected-date');
-      $(`#${date}`).addClass('selected-date');
-    }
-
-    function editService(clickedElement) {
-      var serviceId = clickedElement.id;
-      $.ajax({
-        url: './ajax/service.php',
-        method: 'GET',
-        data: {
-          serviceId: serviceId
-        },
-        success: function(response) {
-          var serviceData = JSON.parse(response);
-
-          $('#serviceId').val(serviceData.id);
-          $('#add').val(serviceData.services);
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
-    }
-
-    var serviceId = "";
-
-    function deleteService(clickedElement) {
-      $('#show-services').modal('hide');
-      $('#deleteServiceConfirmation').modal('show');
-      serviceId = clickedElement.id;
-    }
-
-    $('#deleteServiceYesBtn').on('click', function() {
-      $('#deleteServiceConfirmation').modal('hide');
-      $('#service-delete-show-info').modal('show');
-      $.ajax({
-        url: './ajax/service.php',
-        method: 'POST',
-        data: {
-          deleteServiceId: serviceId
-        },
-        success: function(response) {
-
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
     });
+  }
 
-    $('#serviceOkBtn').on('click', function() {
-      location.reload(true);
-    })
+  updateUrlParam('page', getCurrentPage());
+  updateUrlParam('date', getCurrentDate());
 
-    function selectDoctor(clickedElement) {
-      var doctorId = clickedElement.id;
 
-      $.ajax({
-        url: './ajax/staff.php',
-        method: 'GET',
-        data: {
-          doctorId: doctorId
-        },
-        success: function(response) {
-          var timeArrayWrapper = JSON.parse(response);
+  function updatePatientTable(dataArray, listingsPerPage, totalRecord) {
+    const tbody = $('#patientList');
+    tbody.empty();
 
-          var timeArray = JSON.parse(timeArrayWrapper.time);
-          $('#timeList').empty();
-          timeArray.forEach(function(time) {
-            $('#timeList').append('<option>' + time + '</option>');
-          });
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
+    if (dataArray.length === 0) {
+      const noRecordRow = `<tr><td colspan="5" class="text-center">Keine Einträge gefunden</td></tr>`;
+      tbody.append(noRecordRow);
+      return;
     }
 
-    function cancelRebookingModal(index) {
-      // Show the confirmation modal
-      $('#Confirmation').modal('show');
+    var currentPage = getCurrentPage();
+    var startIndex = (currentPage - 1) * listingsPerPage;
+    var endIndex = Math.min(startIndex + listingsPerPage - 1, totalRecord - 1);
 
-      // When the confirmation "Ja" button is clicked
-      $('#ConfirmationYesBtn').click(function() {
-        // Make AJAX request to cancel the rebooking
-        $.ajax({
-          url: './ajax/rebookingpatients.php',
-          method: 'GET',
-          data: {
-            patientId: index
-          },
-          success: function(response) {
-            location.reload(true); // Reload the page upon success
-          },
-          error: function(xhr, status, error) {
-            console.error('Error:', error);
-          }
+    var displayedListings = dataArray.slice(startIndex, endIndex + 1);
+
+
+    displayedListings.forEach(function(patient, index) {
+      const row = `<tr>
+                                      <td>${patient.name}</td>
+                                      <td>${patient.doctor}</td>
+                                      <td>${patient.services}</td>
+                                      <td class="text-center">${patient.visits} </td>
+                                      <td>
+                                        <div class="d-flex justify-content-center dropdown">
+                                            <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                                                <i class="fa-solid fa-right-left"></i>
+                                            </span>
+                                            <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                                                <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                                            </span>
+                                        </div>
+                                      </td>
+
+                                        <!-- Add other table cells based on your data structure -->
+                                    </tr>`;
+      tbody.append(row);
+    });
+  }
+
+  function convertToAMPMFormat(time24) {
+    const [hours, minutes] = time24.split(':');
+    const parsedHours = parseInt(hours, 10);
+    const period = parsedHours >= 12 ? 'PM' : 'AM';
+    const formattedHours = parsedHours % 12 || 12; // Convert to 12-hour format
+
+    return `${formattedHours}:${minutes} ${period}`;
+  }
+
+  function formatDate(date) {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = date < 10 ? `0${date}` : date;
+
+    return `${year}-${formattedMonth}-${formattedDay}`;
+  }
+
+  function openRebookingModal(index) {
+
+    $.ajax({
+      url: './ajax/patients.php',
+      method: 'POST',
+      data: {
+        id: index
+      },
+      success: function(response) {
+        var patientsData = JSON.parse(response);
+
+        // Populate data into the edit-patients modal
+        $('#PatientsId').val(patientsData.id);
+        $('#PatientsName').html(patientsData.name);
+        $('#patientsEmail').html(patientsData.email);
+        $('#patientsTelephone').html(patientsData.telephone);
+        $('#doctorSelect').val(patientsData.doctor);
+        $('#time').val(patientsData.visits);
+
+        $('#edit-patients').modal('show');
+
+        openRebookingModal();
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+    $('#edit-patients').modal('show');
+  }
+
+  function updatePagination(totalPage) {
+    const params = new URLSearchParams(window.location.search);
+    const currentPage = getCurrentPage();
+    CreatePagination({
+      elementId: "custom-pagination",
+      totalPage: totalPage,
+      currentPage: currentPage
+    });
+  }
+
+  function updateUrlParam(key, value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    window.history.replaceState({}, '', url);
+  }
+
+  function highlightSelectedDate(date) {
+    $('#calendarBody .selected-date').removeClass('selected-date');
+    $(`#${date}`).addClass('selected-date');
+  }
+
+  function editService(clickedElement) {
+    var serviceId = clickedElement.id;
+    $.ajax({
+      url: './ajax/service.php',
+      method: 'GET',
+      data: {
+        serviceId: serviceId
+      },
+      success: function(response) {
+        var serviceData = JSON.parse(response);
+
+        $('#serviceId').val(serviceData.id);
+        $('#add').val(serviceData.services);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  }
+
+  var serviceId = "";
+
+  function deleteService(clickedElement) {
+    $('#show-services').modal('hide');
+    $('#deleteServiceConfirmation').modal('show');
+    serviceId = clickedElement.id;
+  }
+
+  $('#deleteServiceYesBtn').on('click', function() {
+    $('#deleteServiceConfirmation').modal('hide');
+    $('#service-delete-show-info').modal('show');
+    $.ajax({
+      url: './ajax/service.php',
+      method: 'POST',
+      data: {
+        deleteServiceId: serviceId
+      },
+      success: function(response) {
+
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+
+  $('#serviceOkBtn').on('click', function() {
+    location.reload(true);
+  })
+
+  function selectDoctor(clickedElement) {
+    var doctorId = clickedElement.id;
+
+    $.ajax({
+      url: './ajax/staff.php',
+      method: 'GET',
+      data: {
+        doctorId: doctorId
+      },
+      success: function(response) {
+        var timeArrayWrapper = JSON.parse(response);
+
+        var timeArray = JSON.parse(timeArrayWrapper.time);
+        $('#timeList').empty();
+        timeArray.forEach(function(time) {
+          $('#timeList').append('<option>' + time + '</option>');
         });
-      });
-
-      // When the confirmation "Nein" button is clicked, close the modal
-      $('.cancel-button').click(function() {
-        $('#Confirmation').modal('hide');
-      });
-    }
-    </script>
-    <script>
-    $(document).ready(function() {
-      $('#Services-Options').on('change', function() {
-        var selectedOptions = $(this).val();
-        $('#Services-input').val(selectedOptions ? selectedOptions.join(', ') : '');
-      });
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
     });
+  }
 
-    var doctorId = '';
-    $("#doctorSelect").change(function() {
-      doctorId = $(this).children("option:selected").attr("id");
-      $('#timeList').empty();
-    })
-    $('#datepicker').on('change', function() {
-      var selectedDate = $(this).val();
-      doctorId = $('#doctorSelect').val();
+  function cancelRebookingModal(index) {
+    // Show the confirmation modal
+    $('#Confirmation').modal('show');
 
+    // When the confirmation "Ja" button is clicked
+    $('#ConfirmationYesBtn').click(function() {
+      // Make AJAX request to cancel the rebooking
       $.ajax({
-        url: './ajax/datetimelist.php',
+        url: './ajax/rebookingpatients.php',
         method: 'GET',
         data: {
-          doctorId: doctorId,
-          selectedDate: selectedDate,
+          patientId: index
         },
         success: function(response) {
-
-          if (!response) {
-            alert('This date time not available')
-            $('#timeList').empty();
-          } else {
-            try {
-              var timeArrayWrapper = JSON.parse(response);
-
-              // Check if timeArrayWrapper is not null and has the 'time' property
-              $('#timeList').empty();
-              if (timeArrayWrapper !== null && 'time' in timeArrayWrapper) {
-                var timeArray = JSON.parse(timeArrayWrapper.time);
-
-
-                timeArray.forEach(function(time) {
-                  $('#timeList').append('<option>' + time + '</option>');
-                });
-              }
-
-            } catch (error) {
-              console.error('Error parsing JSON:', error);
-              // Handle the error if parsing fails
-            }
-          }
+          location.reload(true); // Reload the page upon success
         },
         error: function(xhr, status, error) {
           console.error('Error:', error);
         }
       });
-
-    })
-    </script>
-    <script>
-    function redirectToPatientPage() {
-      window.location.href = "patients";
-    }
-    </script>
-    <script>
-    document.getElementById("open-image-picker").addEventListener('click', () => {
-      document.getElementById('profile-image').click()
     });
 
-    function redirectToEmployeePage() {
-      window.location.href = "login";
-    }
-    </script>
-    <script>
-    document.getElementById('profile-image').addEventListener('change', function(event) {
-      var file = event.target.files[0];
-      if (file) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var image = document.getElementById('image-preview');
-          image.src = e.target.result;
-          // Set max height and width
-          image.style.maxHeight = '100px';
-          image.style.maxWidth = '100px';
-        };
-        reader.readAsDataURL(file);
+    // When the confirmation "Nein" button is clicked, close the modal
+    $('.cancel-button').click(function() {
+      $('#Confirmation').modal('hide');
+    });
+  }
+  </script>
+  <script>
+  $(document).ready(function() {
+    $('#Services-Options').on('change', function() {
+      var selectedOptions = $(this).val();
+      $('#Services-input').val(selectedOptions ? selectedOptions.join(', ') : '');
+    });
+  });
+
+  var doctorId = '';
+  $("#doctorSelect").change(function() {
+    doctorId = $(this).children("option:selected").attr("id");
+    $('#timeList').empty();
+  })
+  $('#datepicker').on('change', function() {
+    var selectedDate = $(this).val();
+    doctorId = $('#doctorSelect').val();
+
+    $.ajax({
+      url: './ajax/datetimelist.php',
+      method: 'GET',
+      data: {
+        doctorId: doctorId,
+        selectedDate: selectedDate,
+      },
+      success: function(response) {
+
+        if (!response) {
+          alert('This date time not available')
+          $('#timeList').empty();
+        } else {
+          try {
+            var timeArrayWrapper = JSON.parse(response);
+
+            // Check if timeArrayWrapper is not null and has the 'time' property
+            $('#timeList').empty();
+            if (timeArrayWrapper !== null && 'time' in timeArrayWrapper) {
+              var timeArray = JSON.parse(timeArrayWrapper.time);
+
+
+              timeArray.forEach(function(time) {
+                $('#timeList').append('<option>' + time + '</option>');
+              });
+            }
+
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+            // Handle the error if parsing fails
+          }
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
       }
     });
-    </script>
+
+  })
+  </script>
+  <script>
+  function redirectToPatientPage() {
+    window.location.href = "patients";
+  }
+  </script>
+  <script>
+  document.getElementById("open-image-picker").addEventListener('click', () => {
+    document.getElementById('profile-image').click()
+  });
+
+  function redirectToEmployeePage() {
+    window.location.href = "login";
+  }
+  </script>
+  <script>
+  document.getElementById('profile-image').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var image = document.getElementById('image-preview');
+        image.src = e.target.result;
+        // Set max height and width
+        image.style.maxHeight = '100px';
+        image.style.maxWidth = '100px';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  </script>
   <?php } else { ?>
-    <script src="asset/js/script2.js"></script>
-    <script>
-    $(document).ready(function() {
+  <script src="asset/js/script2.js"></script>
+  <script>
+  $(document).ready(function() {
 
-      $('#EditPatients').validate({
-        rules: {
-          date: {
-            required: true,
-          },
-          time: {
-            required: true,
-          },
+    $('#EditPatients').validate({
+      rules: {
+        date: {
+          required: true,
         },
-        messages: {
+        time: {
+          required: true,
+        },
+      },
+      messages: {
 
-          date: {
-            required: "Date is required.",
-          },
-          time: {
-            required: "Time is required.",
-          },
+        date: {
+          required: "Date is required.",
         },
-        errorPlacement: function(error, element) {
-          if (element.attr("name") == "doctor") {
-            error.insertAfter("#doctor-error");
-          } else if (element.attr("name") == "date") {
-            error.insertAfter("#date-error");
-          } else if (element.attr("name") == "time") {
-            error.insertAfter("#time-error");
-          }
-          error.addClass('text-danger');
+        time: {
+          required: "Time is required.",
         },
-        highlight: function(element) {
-          $(element).siblings('.error').addClass('text-danger');
-        },
-        unhighlight: function(element) {
-          $(element).siblings('.error').removeClass('text-danger');
-        },
-      });
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") == "doctor") {
+          error.insertAfter("#doctor-error");
+        } else if (element.attr("name") == "date") {
+          error.insertAfter("#date-error");
+        } else if (element.attr("name") == "time") {
+          error.insertAfter("#time-error");
+        }
+        error.addClass('text-danger');
+      },
+      highlight: function(element) {
+        $(element).siblings('.error').addClass('text-danger');
+      },
+      unhighlight: function(element) {
+        $(element).siblings('.error').removeClass('text-danger');
+      },
     });
-    </script>
-    <script>
-    var clickedDate = '';
-    $(document).ready(function() {
-      const date = new URLSearchParams(window.location.search).get('date');
-      highlightSelectedDate(date);
-      fetchData();
+  });
+  </script>
+  <script>
+  var clickedDate = '';
+  $(document).ready(function() {
+    const date = new URLSearchParams(window.location.search).get('date');
+    highlightSelectedDate(date);
+    fetchData();
+  });
+
+  function getCurrentDate() {
+    var todayDate = new Date();
+    var todayDateString = todayDate.toISOString().split('T')[0];
+    // var selectedDate = clickedDate ? clickedDate : todayDateString;
+    const paramDate = new URLSearchParams(window.location.search);
+    return paramDate.has('date') ? String(paramDate.get('date')) : todayDateString;
+  }
+
+  function getCurrentPage() {
+    const params = new URLSearchParams(window.location.search);
+    return params.has('page') ? Number(params.get('page')) : 1;
+  }
+
+  function getDate(event) {
+    clickedDate = event.target.id;
+    if (!event.target.id) return;
+    const newDate = formatDate(clickedDate);
+    const currentPage = getCurrentPage();
+
+    var formattedDate = new Date(clickedDate).toLocaleDateString('de-DE', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
     });
+    $('#appointmentHeading').text(formattedDate);
+    $('#calendarBody .selected-date').removeClass('selected-date');
 
-    function getCurrentDate() {
-      var todayDate = new Date();
-      var todayDateString = todayDate.toISOString().split('T')[0];
-      // var selectedDate = clickedDate ? clickedDate : todayDateString;
-      const paramDate = new URLSearchParams(window.location.search);
-      return paramDate.has('date') ? String(paramDate.get('date')) : todayDateString;
-    }
-
-    function getCurrentPage() {
-      const params = new URLSearchParams(window.location.search);
-      return params.has('page') ? Number(params.get('page')) : 1;
-    }
-
-    function getDate(event) {
-      clickedDate = event.target.id;
-      if (!event.target.id) return;
-      const newDate = formatDate(clickedDate);
-      const currentPage = getCurrentPage();
-
-      var formattedDate = new Date(clickedDate).toLocaleDateString('de-DE', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-      $('#appointmentHeading').text(formattedDate);
-      $('#calendarBody .selected-date').removeClass('selected-date');
-
-      updateUrlParam('date', clickedDate);
-      // updateUrlParam('page', currentPage);
-
-      $(event.target).addClass('selected-date');
-
-      highlightSelectedDate(newDate);
-      fetchData();
-    }
-    // const currentPage = getCurrentPage();
-    // var todayDate = new Date();
-    // var todayDateString = todayDate.toISOString().split('T')[0];
+    updateUrlParam('date', clickedDate);
     // updateUrlParam('page', currentPage);
-    // updateUrlParam('date', todayDateString);
 
-    function fetchData() {
-      const currentDate = getCurrentDate();
-      const date = new URLSearchParams(window.location.search).get('date');
-      const currentPage = getCurrentPage();
-      const searchQuery = $('#Search-input').val().trim();
+    $(event.target).addClass('selected-date');
 
-      $.ajax({
-        url: './ajax/patients.php',
-        method: 'GET',
-        data: {
-          date: date,
-          page: currentPage,
-          searchQuery: searchQuery
-        },
-        success: function(data) {
-          if (data == 'null') {
-            updateUrlParam('date', '');
-            location.reload(true);
-          } else {
+    highlightSelectedDate(newDate);
+    fetchData();
+  }
+  // const currentPage = getCurrentPage();
+  // var todayDate = new Date();
+  // var todayDateString = todayDate.toISOString().split('T')[0];
+  // updateUrlParam('page', currentPage);
+  // updateUrlParam('date', todayDateString);
 
-            try {
-              var getData = JSON.parse(data);
-              var dataArray = getData.data;
+  function fetchData() {
+    const currentDate = getCurrentDate();
+    const date = new URLSearchParams(window.location.search).get('date');
+    const currentPage = getCurrentPage();
+    const searchQuery = $('#Search-input').val().trim();
 
-              var listingsPerPage = 5;
-              var totalRecord = dataArray.length;
-              // var AppointmentRecord = getData.statusDoneData.length;
-              var totalPage = Math.ceil(totalRecord / listingsPerPage);
-              updatePagination(totalPage);
-              updatePatientTable(dataArray, listingsPerPage, totalRecord);
+    $.ajax({
+      url: './ajax/patients.php',
+      method: 'GET',
+      data: {
+        date: date,
+        page: currentPage,
+        searchQuery: searchQuery
+      },
+      success: function(data) {
+        if (data == 'null') {
+          updateUrlParam('date', '');
+          location.reload(true);
+        } else {
 
-              // // Retrieve the date from the URL and highlight it in the calendar
-              const date = new URLSearchParams(window.location.search).get('date');
-              highlightSelectedDate(date);
+          try {
+            var getData = JSON.parse(data);
+            var dataArray = getData.data;
 
-              updateUrlParam('search', searchQuery);
-              // updateUrlParam('page', getCurrentPage()); 
-              // updateUrlParam('date', getCurrentDate()); 
+            var listingsPerPage = 5;
+            var totalRecord = dataArray.length;
+            // var AppointmentRecord = getData.statusDoneData.length;
+            var totalPage = Math.ceil(totalRecord / listingsPerPage);
+            updatePagination(totalPage);
+            updatePatientTable(dataArray, listingsPerPage, totalRecord);
 
-              $('#totalPatients').text(`${totalRecord}`);
-              // $('#completeAppointment').text(`${AppointmentRecord}`);
-            } catch (error) {
-              console.error('Error parsing JSON:', error);
-            }
+            // // Retrieve the date from the URL and highlight it in the calendar
+            const date = new URLSearchParams(window.location.search).get('date');
+            highlightSelectedDate(date);
+
+            updateUrlParam('search', searchQuery);
+            // updateUrlParam('page', getCurrentPage()); 
+            // updateUrlParam('date', getCurrentDate()); 
+
+            $('#totalPatients').text(`${totalRecord}`);
+            // $('#completeAppointment').text(`${AppointmentRecord}`);
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
           }
-        },
-        error: function(xhr, status, error) {
-          console.error('Error fetching patient data:', error);
         }
-      });
-    }
-    updateUrlParam('page', getCurrentPage());
-    updateUrlParam('date', getCurrentDate());
-
-    function updatePatientTable(dataArray, listingsPerPage, totalRecord) {
-      const tbody = $('#patientList');
-      tbody.empty();
-
-      if (dataArray.length === 0) {
-        const noRecordRow = `<tr><td colspan="5" class="text-center">No records found</td></tr>`;
-        tbody.append(noRecordRow);
-        return;
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching patient data:', error);
       }
+    });
+  }
+  updateUrlParam('page', getCurrentPage());
+  updateUrlParam('date', getCurrentDate());
 
-      var currentPage = getCurrentPage();
-      var startIndex = (currentPage - 1) * listingsPerPage;
-      var endIndex = Math.min(startIndex + listingsPerPage - 1, totalRecord - 1);
+  function updatePatientTable(dataArray, listingsPerPage, totalRecord) {
+    const tbody = $('#patientList');
+    tbody.empty();
 
-      var displayedListings = dataArray.slice(startIndex, endIndex + 1);
-
-
-      displayedListings.forEach(function(patient, index) {
-        const formattedVisitTime = patient.visits ?
-          convertToAMPMFormat(patient.visits) :
-          'N/A';
-        const row = `<tr>
-                              <td>${patient.name}</td>
-                              <td>${patient.doctor}</td>
-                              <td>${patient.services}</td>
-                              <td>${patient.visits} </td>
-                              <td>
-                              <div class="d-flex justify-content-center dropdown">
-                                  <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                      <i class="fa-solid fa-right-left"></i>
-                                  </span>
-                                  <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                      <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                                  </span>
-                              </div>
-                            </td>
-                              <!-- Add other table cells based on your data structure -->
-                          </tr>`;
-        tbody.append(row);
-      });
+    if (dataArray.length === 0) {
+      const noRecordRow = `<tr><td colspan="5" class="text-center">No records found</td></tr>`;
+      tbody.append(noRecordRow);
+      return;
     }
 
-    function convertToAMPMFormat(time24) {
-      const [hours, minutes] = time24.split(':');
-      const parsedHours = parseInt(hours, 10);
-      const period = parsedHours >= 12 ? 'PM' : 'AM';
-      const formattedHours = parsedHours % 12 || 12; // Convert to 12-hour format
+    var currentPage = getCurrentPage();
+    var startIndex = (currentPage - 1) * listingsPerPage;
+    var endIndex = Math.min(startIndex + listingsPerPage - 1, totalRecord - 1);
 
-      return `${formattedHours}:${minutes} ${period}`;
-    }
+    var displayedListings = dataArray.slice(startIndex, endIndex + 1);
 
-    function formatDate(date) {
-      const year = new Date().getFullYear();
-      const month = new Date().getMonth() + 1;
 
-      const formattedMonth = month < 10 ? `0${month}` : month;
-      const formattedDay = date < 10 ? `0${date}` : date;
+    displayedListings.forEach(function(patient, index) {
+      const formattedVisitTime = patient.visits ?
+        convertToAMPMFormat(patient.visits) :
+        'N/A';
+      const row = `<tr>
+        <td>${patient.name}</td>
+        <td>${patient.doctor}</td>
+        <td>${patient.services}</td>
+        <td class="text-center">${patient.visits} </td>
+        <td>
+        <div class="d-flex justify-content-center dropdown">
+            <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                <i class="fa-solid fa-right-left"></i>
+            </span>
+            <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+            </span>
+        </div>
+      </td>
+        <!-- Add other table cells based on your data structure -->
+      </tr>`;
+      tbody.append(row);
+    });
+  }
 
-      return `${year}-${formattedMonth}-${formattedDay}`;
-    }
+  function convertToAMPMFormat(time24) {
+    const [hours, minutes] = time24.split(':');
+    const parsedHours = parseInt(hours, 10);
+    const period = parsedHours >= 12 ? 'PM' : 'AM';
+    const formattedHours = parsedHours % 12 || 12; // Convert to 12-hour format
 
-    function openRebookingModal(index) {
-      console.log(index);
-      $.ajax({
-        url: './ajax/patients.php',
-        method: 'POST',
-        data: {
-          id: index
-        },
-        success: function(response) {
-          var patientsData = JSON.parse(response);
-          $('#PatientsId').val(patientsData.id);
-          $('#PatientsName').html(patientsData.name);
-          $('#patientsEmail').html(patientsData.email);
-          $('#patientsTelephone').html(patientsData.telephone);
-          $('#doctor-input').val(patientsData.doctor);
-          $('#time').val(patientsData.visits);
+    return `${formattedHours}:${minutes} ${period}`;
+  }
 
-          $('#edit-patients').modal('show');
+  function formatDate(date) {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
 
-          openRebookingModal();
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
-      $('#edit-patients').modal('show');
-    }
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = date < 10 ? `0${date}` : date;
 
-    function updatePagination(totalPage) {
-      const params = new URLSearchParams(window.location.search);
-      const currentPage = getCurrentPage();
-      CreatePagination({
-        elementId: "custom-pagination",
-        totalPage: totalPage,
-        currentPage: currentPage
-      });
-    }
+    return `${year}-${formattedMonth}-${formattedDay}`;
+  }
 
-    function updateUrlParam(key, value) {
-      const url = new URL(window.location.href);
-      url.searchParams.set(key, value);
-      window.history.replaceState({}, '', url);
-    }
+  function openRebookingModal(index) {
+    console.log(index);
+    $.ajax({
+      url: './ajax/patients.php',
+      method: 'POST',
+      data: {
+        id: index
+      },
+      success: function(response) {
+        var patientsData = JSON.parse(response);
+        $('#PatientsId').val(patientsData.id);
+        $('#PatientsName').html(patientsData.name);
+        $('#patientsEmail').html(patientsData.email);
+        $('#patientsTelephone').html(patientsData.telephone);
+        $('#doctor-input').val(patientsData.doctor);
+        $('#time').val(patientsData.visits);
 
-    function highlightSelectedDate(date) {
-      $('#calendarBody .selected-date').removeClass('selected-date');
-      $(`#${date}`).addClass('selected-date');
-    }
+        $('#edit-patients').modal('show');
 
-    $('#UpdatePatients').on('click', function() {
-      if ($('#EditPatients').valid()) {
-        $('#edit-patients').modal('hide');
-        $('#EditConfirmation').modal('show');
+        openRebookingModal();
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
       }
-    })
-    $('#EditConfirmationYesBtn').on('click', function() {
-      $('#EditConfirmation').modal('hide');
-      $('#edit-show-info').modal('show');
-    })
+    });
+    $('#edit-patients').modal('show');
+  }
 
-    function getDoctorData(selectedOption) {
-      // var doctorId = "";
-      doctorId = selectedOption.value;
-      var selectedText = selectedOption.innerText;
-      var selectedOption = document.getElementById("doctor-Options");
-      document.getElementById("doctor-input").value = selectedText;
-      document.getElementById("doctorId-input").value = doctorId;
+  function updatePagination(totalPage) {
+    const params = new URLSearchParams(window.location.search);
+    const currentPage = getCurrentPage();
+    CreatePagination({
+      elementId: "custom-pagination",
+      totalPage: totalPage,
+      currentPage: currentPage
+    });
+  }
 
+  function updateUrlParam(key, value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    window.history.replaceState({}, '', url);
+  }
+
+  function highlightSelectedDate(date) {
+    $('#calendarBody .selected-date').removeClass('selected-date');
+    $(`#${date}`).addClass('selected-date');
+  }
+
+  $('#UpdatePatients').on('click', function() {
+    if ($('#EditPatients').valid()) {
+      $('#edit-patients').modal('hide');
+      $('#EditConfirmation').modal('show');
     }
+  })
+  $('#EditConfirmationYesBtn').on('click', function() {
+    $('#EditConfirmation').modal('hide');
+    $('#edit-show-info').modal('show');
+  })
 
-    function selectDoctor(clickedElement) {
-      var doctorId = clickedElement.id;
+  function getDoctorData(selectedOption) {
+    // var doctorId = "";
+    doctorId = selectedOption.value;
+    var selectedText = selectedOption.innerText;
+    var selectedOption = document.getElementById("doctor-Options");
+    document.getElementById("doctor-input").value = selectedText;
+    document.getElementById("doctorId-input").value = doctorId;
 
-      $.ajax({
-        url: './ajax/staff.php',
-        method: 'GET',
-        data: {
-          doctorId: doctorId
-        },
-        success: function(response) {
-          var timeArrayWrapper = JSON.parse(response);
+  }
 
-          var timeArray = JSON.parse(timeArrayWrapper.time);
-          $('#timeList').empty();
-          timeArray.forEach(function(time) {
-            $('#timeList').append('<option>' + time + '</option>');
-          });
-          // Log the length of the timeArray
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
-    }
+  function selectDoctor(clickedElement) {
+    var doctorId = clickedElement.id;
 
-    $('#datepicker').on('change', function() {
-      var selectedDate = $(this).val();
-      $.ajax({
-        url: './ajax/datetimelist.php',
-        method: 'GET',
-        data: {
-          selectedDate: selectedDate,
-        },
-        success: function(response) {
+    $.ajax({
+      url: './ajax/staff.php',
+      method: 'GET',
+      data: {
+        doctorId: doctorId
+      },
+      success: function(response) {
+        var timeArrayWrapper = JSON.parse(response);
 
-          if (!response) {
-            alert('This date time not available')
-            $('#timeList').empty();
-          } else {
-            try {
-              var timeArrayWrapper = JSON.parse(response);
-
-              $('#timeList').empty();
-              if (timeArrayWrapper !== null && 'time' in timeArrayWrapper) {
-                var timeArray = JSON.parse(timeArrayWrapper.time);
-
-
-                timeArray.forEach(function(time) {
-                  $('#timeList').append('<option>' + time + '</option>');
-                });
-              }
-
-            } catch (error) {
-              console.error('Error parsing JSON:', error);
-            }
-          }
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-        }
-      });
-
-    })
-
-    function cancelRebookingModal(index) {
-      // Show the confirmation modal
-      $('#Confirmation').modal('show');
-
-      // When the confirmation "Ja" button is clicked
-      $('#ConfirmationYesBtn').click(function() {
-        // Make AJAX request to cancel the rebooking
-        $.ajax({
-          url: './ajax/rebookingpatients.php',
-          method: 'GET',
-          data: {
-            patientId: index
-          },
-          success: function(response) {
-            location.reload(true); // Reload the page upon success
-          },
-          error: function(xhr, status, error) {
-            console.error('Error:', error);
-          }
+        var timeArray = JSON.parse(timeArrayWrapper.time);
+        $('#timeList').empty();
+        timeArray.forEach(function(time) {
+          $('#timeList').append('<option>' + time + '</option>');
         });
-      });
+        // Log the length of the timeArray
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+  }
 
-      // When the confirmation "Nein" button is clicked, close the modal
-      $('.cancel-button').click(function() {
-        $('#Confirmation').modal('hide');
+  $('#datepicker').on('change', function() {
+    var selectedDate = $(this).val();
+    $.ajax({
+      url: './ajax/datetimelist.php',
+      method: 'GET',
+      data: {
+        selectedDate: selectedDate,
+      },
+      success: function(response) {
+
+        if (!response) {
+          alert('This date time not available')
+          $('#timeList').empty();
+        } else {
+          try {
+            var timeArrayWrapper = JSON.parse(response);
+
+            $('#timeList').empty();
+            if (timeArrayWrapper !== null && 'time' in timeArrayWrapper) {
+              var timeArray = JSON.parse(timeArrayWrapper.time);
+
+
+              timeArray.forEach(function(time) {
+                $('#timeList').append('<option>' + time + '</option>');
+              });
+            }
+
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+
+  })
+
+  function cancelRebookingModal(index) {
+    // Show the confirmation modal
+    $('#Confirmation').modal('show');
+
+    // When the confirmation "Ja" button is clicked
+    $('#ConfirmationYesBtn').click(function() {
+      // Make AJAX request to cancel the rebooking
+      $.ajax({
+        url: './ajax/rebookingpatients.php',
+        method: 'GET',
+        data: {
+          patientId: index
+        },
+        success: function(response) {
+          location.reload(true); // Reload the page upon success
+        },
+        error: function(xhr, status, error) {
+          console.error('Error:', error);
+        }
       });
-    }
-    </script>
+    });
+
+    // When the confirmation "Nein" button is clicked, close the modal
+    $('.cancel-button').click(function() {
+      $('#Confirmation').modal('hide');
+    });
+  }
+  </script>
   <?php } ?>
   <?php include ('layout/script.php') ?>
   <?php

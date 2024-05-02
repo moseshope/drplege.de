@@ -1,4 +1,28 @@
 $(document).ready(function () {
+  var searchTimer = null,
+    searchDelay = 300;
+
+  $("#Search-input").on("input", function (e) {
+    clearTimeout(searchTimer);
+    var searchValue = $(this).val().trim(); // Trim whitespace from the input
+    if (searchValue.length > 2 || !searchValue) {
+      // Check if the length of the input is greater than 3 characters
+      searchTimer = setTimeout(function () {
+        var url = window.location.href.split("?")[0];
+        console.log("Search value:", searchValue);
+        window.location.href =
+          url + "?search=" + encodeURIComponent(searchValue);
+        // Delay focusing until after URL change
+        // Adjust the delay time as needed
+      }, searchDelay);
+    }
+  });
+
+  $("#Search-input").focus();
+  let val = $("#Search-input").val();
+  $("#Search-input").val("");
+  $("#Search-input").val(val);
+  
   $("#ServiceForm").validate({
     rules: {
       services: {

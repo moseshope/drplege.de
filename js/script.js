@@ -90,6 +90,7 @@ function getTime(clickedElement) {
 }
 
 $(document).ready(function () {
+
   $("#userForm").validate({
     rules: {
       name: {
@@ -160,7 +161,8 @@ $(document).ready(function () {
               <div class="doctor-image">
                 <img src="${
                   doctor.profile != null && doctor.profile != ""
-                    ? "https://drpleger.de/termin-buchen/images/" + doctor.profile
+                    ? "https://drpleger.de/termin-buchen/images/" +
+                      doctor.profile
                     : "https://drpleger.de/termin-buchen/backoffice/asset/images/logo.png"
                 }" style="height: 100px; width: 100px; border-radius: 100px; object-fit: containt;">
                   </div>

@@ -13,6 +13,9 @@ $sql = "select * from user where id='$id' and deleted_at IS NULL";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc();
 $role = $row['role'];
+
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+
 if ($role == 1) {
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -131,7 +134,7 @@ if ($role == 1) {
   <div class="py-2 px-md-5 px-3 w-100">
     <div class="dashboard-search m-2 mx-0">
       <i class="bi bi-search"></i>
-      <input type="text" class="w-100" id="Search-input" placeholder="Suche">
+      <input type="text" class="w-100" id="Search-input" placeholder="Suche" value="<?= $searchTerm ?>">
     </div>
     <div class="row mt-3">
       <div class="col-xxl-8 col-12 mb-5">
@@ -661,6 +664,7 @@ if ($role == 1) {
     $.ajax({
       url: './ajax/patients.php',
       method: 'GET',
+      dataType: "JSON",
       data: {
         date: date,
         page: currentPage,
@@ -672,7 +676,7 @@ if ($role == 1) {
           location.reload(true);
         } else {
           try {
-            var getData = JSON.parse(data);
+            var getData = data;
             var dataArray = getData.data;
 
             var listingsPerPage = 5;

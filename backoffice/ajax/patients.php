@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $dateString = mysqli_real_escape_string($connect,$_GET['date']);
     $formattedDate = date("Y-m-d", strtotime($dateString));
     $searchQuery = mysqli_real_escape_string($connect,$_GET['searchQuery']);
-    if($formattedDate >= $currentDate){
+    if(true){
     $responseData = array();
     $date = new DateTime($dateString);
     $formattedDate = $date->format('d.m.Y');

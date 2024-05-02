@@ -368,13 +368,13 @@ if ($role == 1) {
           <?php
           foreach ($servicesArray as $service) {
             echo "<li>
-                                    <div class='row'>
-                                        <div class='col-8'>
-                                            <p class='col-8 mb-0'>" . $service['services'] . "</p>
-                                        </div>
-                                        
-                                    </div>
-                                </li>";
+              [<div class='row'>
+                  <div class='col-8'>
+                      <p class='col-8 mb-0'>" . $service['services'] . "</p>
+                  </div>
+                  
+              </div>
+          </li>";
             }
           ?>
         </ul>
@@ -426,10 +426,10 @@ if ($role == 1) {
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 32px;">
         <div class="d-flex justify-content-center align-items-center mb-4 py-2">
-          <h1 class="modal-heading" style="font-weight: 800; font-size: var(--xl-text);">Termin Details Bearbeiten</h1>
+          <h1 class="modal-heading" style="font-weight: 800; font-size: var(--xl-text);">Termin bearbeiten</h1>
         </div>
         <input type="hidden" name="id" value="" class="form-control custom-input" id="PatientsId">
-        <p class="py-2" style="font-weight: 800;font-size: var(--md-text);">Patiernen: <span id="PatientsName"></span>
+        <p class="py-2" style="font-weight: 800;font-size: var(--md-text);">Patient: <span id="PatientsName"></span>
         </p>
         <div class="d-flex justify-content-between flex-wrap py-1">
           <p><span style="font-weight: 800;">E-Mail: </span> <a href="mailto:patientsEmail"><span
@@ -440,7 +440,7 @@ if ($role == 1) {
         <?php if ($role == 1) { ?>
         <div class="col-lg-12 col-12">
           <div class="form-group p-2 my-2">
-            <label class="my-1" for="Status">Arzt wechseln</label>
+            <label class="my-1" for="Status">datum wechseln</label>
             <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
               <?php
                 foreach ($staffList as $staff) {
@@ -955,7 +955,7 @@ if ($role == 1) {
       success: function(response) {
 
         if (!response) {
-          alert('This date time not available')
+          // alert('This date time not available')
           $('#timeList').empty();
         } else {
           try {

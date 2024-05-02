@@ -47,9 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Function to handle profile image upload
 function handleProfileImageUpload($userId) {
     global $connect;
-    if (!empty($_FILES["profile"]["name"])) {
+    if (!empty($_FILES["profileImage"]["name"])) {
         // If a file is uploaded
-        $originalFileName = $_FILES["profile"]["name"];
+        $originalFileName = $_FILES["profileImage"]["name"];
         $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
         // Get the current timestamp
         $timestamp = time();
@@ -58,7 +58,7 @@ function handleProfileImageUpload($userId) {
         // Move the uploaded file to the desired location with the composed profile name
         $uploadDirectory = "../../images/";
         $profilePath = $uploadDirectory . $profileName;
-        if (move_uploaded_file($_FILES["profile"]["tmp_name"], $profilePath)) {
+        if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $profilePath)) {
             // If the previous profile image exists, delete it
             $doctorData = "SELECT profile FROM user WHERE id='$userId'";
             $result = $connect->query($doctorData);

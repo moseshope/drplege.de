@@ -125,19 +125,7 @@ if ($role == 1) {
     <div class="d-flex justify-content-center align-items-center">
       <h1 class="page-heading">Übersicht</h1>
     </div>
-    <?php if ($role == 1) { ?>
-
-    <?php } else { ?>
-    <div class="row w-100 box-row">
-      <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
-
-      </div>
-
-      <div class="col-md-6 col-xl-4 col-xxl-3 col-12">
-
-      </div>
-    </div>
-    <?php } ?>
+    
   </div>
 
   <div class="py-2 px-md-5 px-3 w-100">

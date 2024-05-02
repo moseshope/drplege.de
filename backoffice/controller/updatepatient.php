@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $recipe = $_POST['recipe'];
         $updated_at = date("Y-m-d");
 
-        // if($status == 'Vollendet'){
+        // if($status == 'vollendet'){
         $mail = new PHPMailer(true);
         $mail->CharSet = PHPMailer::CHARSET_UTF8;
         $mail->isSMTP();

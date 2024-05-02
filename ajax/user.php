@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $reminder = $_POST['reminder'] == 'true' ? 1 : 0;
-        $status = "Bevorstehende";
+        $status = "bevorstehen";
 
         $sql = "INSERT INTO patients (name,birthdate,telephone,email,services,doctor,selected_date,visits,status,reminder,created_at)
             VALUES ('$name', '$birthdate', '$phone', '$email', '$serviceId', '$doctorId', '$selectedDate', '$time', '$status','$reminder', '$createdAt')";

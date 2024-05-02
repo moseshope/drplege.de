@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if(isset($_POST['cancelPatientId'])){
         $id = $_POST['cancelPatientId'];
         echo $id;
-        $status = "Abgesagt";
+        $status = "abgesagt";
         $getData = "select * from patients where id='$id'";
         $resultData = $connect->query($getData);
         $rowData = $resultData->fetch_assoc();

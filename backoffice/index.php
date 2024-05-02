@@ -97,7 +97,7 @@ if ($role == 1) {
 
   $totalPatients = $PatientsResult->num_rows;
 
-  $GetPatients1 = "select * from patients where doctor='$id' AND deleted_at IS NULL AND status='Vollendet'";
+  $GetPatients1 = "select * from patients where doctor='$id' AND deleted_at IS NULL AND status='vollendet'";
   $PatientsResult1 = $connect->query($GetPatients1);
 
   $totalPatients1 = $PatientsResult1->num_rows;

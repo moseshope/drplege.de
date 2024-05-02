@@ -267,41 +267,41 @@ if($role == 2){
 
               <td><?php echo $PatientsList[$i]['recipe'];?></td>
               <?php
-                                            if ($PatientsList[$i]['status'] === 'Vollendet') {
-                                                $buttonClass = 'custom-success-btn';
-                                            } elseif ($PatientsList[$i]['status'] === 'Abgesagt') {
-                                                $buttonClass = 'custom-danger-btn';
-                                            } 
-                                             elseif ($PatientsList[$i]['status'] === 'Bevorstehende') {
-                                                $buttonClass = 'custom-upcoming-btn';
-                                            } 
-                                           
-                                            
-                                        ?>
+                  if ($PatientsList[$i]['status'] === 'vollendet') {
+                      $buttonClass = 'cursor-default custom-success-btn';
+                  } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
+                      $buttonClass = 'cursor-default custom-danger-btn';
+                  } 
+                    elseif ($PatientsList[$i]['status'] === 'bevorstehen') {
+                      $buttonClass = 'cursor-default custom-upcoming-btn';
+                  } 
+                  
+                  
+              ?>
 
-              <td class="d-flex justify-content-center flex-column align-items-center">
+              <td class="text-center">
                 <button class="statusBtn <?php echo $buttonClass; ?>" id="status-<?php echo $i + 1; ?>"
                   data-id="<?php echo $PatientsList[$i]['id']; ?>">
                   <?php 
-                                                    $currentDate = date("d.m.Y");
-                                                    $selectedDate = $PatientsList[$i]['selected_date'];
-                                                    $status = $PatientsList[$i]['status'];
-                                                    if($status == 'Vollendet' || $status == 'Abgesagt'){
-                                                        echo $status;
-                                                    }else{
-                                                        if($selectedDate < $currentDate){
-                                                            echo 'Ausstehend';
-                                                        }else{
-                                                            echo $status;
-                                                        }
-                                                    }
-                                                ?>
+                      $currentDate = date("d.m.Y");
+                      $selectedDate = $PatientsList[$i]['selected_date'];
+                      $status = $PatientsList[$i]['status'];
+                      if($status == 'vollendet' || $status == 'abgesagt'){
+                          echo $status;
+                      }else{
+                          if($selectedDate < $currentDate){
+                              echo 'Ausstehend';
+                          }else{
+                              echo $status;
+                          }
+                      }
+                  ?>
                 </button>
                 <p class="mb-0" style="font-size: var(--xs-text); color: var(--secondary); width: fit-content;"
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
               <td>
-                <?php if($PatientsList[$i]['status'] != 'Vollendet') {?>
+                <?php if($PatientsList[$i]['status'] != 'vollendet') {?>
                 <div class="d-flex justify-content-center dropdown">
                   <span onclick="HandleDropMenu('Drop-menu-<?php echo $i + 1; ?>')"
                     style="border-radius: 50%;border: 1px solid var(--secondary);color: var(--secondary);"
@@ -314,7 +314,7 @@ if($role == 2){
                       onClick="addCalenderBtn(event)">
                       Add to calendar
                     </li>
-                    <?php if($PatientsList[$i]['status'] != 'Abgesagt') {?>
+                    <?php if($PatientsList[$i]['status'] != 'abgesagt') {?>
                     <li class="px-2 py-1 mx-2 cursor-pointer refreshBtn" data-id="<?php echo $PatientsList[$i]['id'];?>"
                       style="border-bottom: 1px solid #d7caca;;" data-bs-toggle="modal">
                       Update
@@ -358,43 +358,43 @@ if($role == 2){
               <td><?php echo $PatientsList[$i]['selected_date'];?> | <?php echo $PatientsList[$i]['visits'];?> </td>
               <td><?php echo $PatientsList[$i]['recipe'];?></td>
               <?php
-                                                if ($PatientsList[$i]['status'] === 'Vollendet') {
-                                                    $buttonClass = 'custom-success-btn';
-                                                } elseif ($PatientsList[$i]['status'] === 'Abgesagt') {
-                                                    $buttonClass = 'custom-danger-btn';
-                                                } 
-                                                elseif ($PatientsList[$i]['status'] == 'Bevorstehende') {
-                                                    $buttonClass = 'custom-upcoming-btn';
-                                                } 
-                                            
-                                                
-                                            ?>
+                if ($PatientsList[$i]['status'] === 'vollendet') {
+                    $buttonClass = 'cursor-default custom-success-btn';
+                } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
+                    $buttonClass = 'cursor-default custom-danger-btn';
+                } 
+                elseif ($PatientsList[$i]['status'] == 'bevorstehen') {
+                    $buttonClass = 'cursor-default custom-upcoming-btn';
+                } 
+            
+                
+                ?>
 
-              <td class="d-flex justify-content-center flex-column align-items-center">
+              <td class="text-center">
                 <button class="statusBtn <?php echo $buttonClass; ?>" id="status-<?php echo $i + 1; ?>"
                   data-id="<?php echo $PatientsList[$i]['id']; ?>">
                   <?php 
-                                                        $currentDate = date("d.m.Y");
-                                                        $selectedDate = $PatientsList[$i]['selected_date'];
-                                                        $status = $PatientsList[$i]['status'];
-                                                        if($status == 'Vollendet' || $status == 'Abgesagt'){
-                                                            echo $status;
-                                                        }else{
-                                                            if($selectedDate < $currentDate){
-                                                                echo 'Ausstehend';
-                                                            }else{
-                                                                echo $status;
-                                                            }
-                                                        }
-                                                    ?>
+                    $currentDate = date("d.m.Y");
+                    $selectedDate = $PatientsList[$i]['selected_date'];
+                    $status = $PatientsList[$i]['status'];
+                    if($status == 'vollendet' || $status == 'abgesagt'){
+                        echo $status;
+                    }else{
+                        if($selectedDate < $currentDate){
+                            echo 'Ausstehend';
+                        }else{
+                            echo $status;
+                        }
+                    }
+                ?>
                 </button>
                 <p class="mb-0" style="font-size: var(--xs-text); color: var(--secondary); width: fit-content;"
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
               <td>
-                <?php if($PatientsList[$i]['status'] != 'Vollendet') {?>
+                <?php if($PatientsList[$i]['status'] != 'vollendet') {?>
                 <div class="d-flex justify-content-center">
-                  <?php if ($PatientsList[$i]['status'] !== 'Abgesagt') { ?>
+                  <?php if ($PatientsList[$i]['status'] !== 'abgesagt') { ?>
                   <!-- Edit Button -->
                   <button class="btn btn-primary mx-1 patientsEditButton"
                     data-id="<?php echo $PatientsList[$i]['id']; ?>" data-bs-toggle="modal">
@@ -579,7 +579,7 @@ if($role == 2){
         <div class="form-group p-2 my-2">
           <label class="my-1" for="status">Status</label>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="status" name="status" value="Vollendet">
+            <input class="form-check-input" type="checkbox" id="status" name="status" value="vollendet">
             <label class="form-check-label" for="status">Als abgeschlossen markieren</label>
           </div>
         </div>
@@ -836,7 +836,7 @@ $('#conformationYesBtn').on('click', function() {
 });
 $('#showInfoBtn').on('click', function() {
   $('#Confirmation').modal('hide');
-  if (buttonText == 'Bevorstehende' || buttonText == 'Vollendet') {
+  if (buttonText == 'bevorstehen' || buttonText == 'vollendet') {
     $('#' + appointmentTransferId).html('Transfer Appointment').css('color', 'green');
   } else {
     $('#' + appointmentTransferId).html('Appointment Not Transferred');

@@ -54,7 +54,7 @@ if ($orderBy !== null && in_array($orderBy, ['asc', 'desc'])) {
   $orderClause = "user.id ASC";
   }
 
-$GetStaff = "SELECT user.*, COUNT(CASE WHEN patients.status = 'Vollendet' THEN patients.id ELSE NULL END) AS patient_count
+$GetStaff = "SELECT user.*, COUNT(CASE WHEN patients.status = 'vollendet' THEN patients.id ELSE NULL END) AS patient_count
 FROM user
 LEFT JOIN patients ON user.id = patients.doctor
 $whereClause

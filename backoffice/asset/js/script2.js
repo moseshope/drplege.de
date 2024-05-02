@@ -253,12 +253,20 @@ $(document).ready(function () {
       },
     });
   });
+
   $("#profileSubmitDoctor").on("click", function () {
     var currentPassword = $("#current_password").val();
     if (currentPassword !== "") {
       // profile form validation
       $("#profileForm").validate({
         rules: {
+          name: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true,
+          },
           current_password: {
             required: true,
           },
@@ -273,23 +281,33 @@ $(document).ready(function () {
           },
         },
         messages: {
+          name: {
+            required: "Bitte geben Sie Ihren Namen ein.",
+          },
+          email: {
+            required: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+            email: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+          },
           current_password: {
-            required: "Bitte geben Sie Ihr Passwort ein",
-            // minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
+            required: "Bitte geben Sie Ihr aktuelles Passwort ein.",
             equalTo: "Aktuelles Passwort ungültig.",
           },
           password: {
-            required: "Bitte geben Sie Ihr Passwort ein",
+            required: "Bitte geben Sie ein neues Passwort ein.",
             minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
           },
           confirm_password: {
-            required: "Bitte geben Sie Ihr Passwort ein",
+            required: "Bitte bestätigen Sie Ihr neues Passwort.",
             minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
             equalTo: "Passwörter stimmen nicht überein",
           },
         },
         errorPlacement: function (error, element) {
-          if (element.attr("name") == "current_password") {
+          if (element.attr("name") == "name") {
+            error.insertAfter(element);
+          } else if (element.attr("name") == "email") {
+            error.insertAfter(element);
+          } else if (element.attr("name") == "current_password") {
             error.insertAfter("#current_password-error");
           } else if (element.attr("name") == "password") {
             error.insertAfter("#password-error");
@@ -310,6 +328,7 @@ $(document).ready(function () {
       });
     }
   });
+  
   // add service
   $("#ShowServicesBtn").on("click", function () {
     $("#show-services").modal("show");
@@ -410,51 +429,57 @@ $(document).ready(function () {
   }
 
   // update profile
-  $("#profileSubmitDoctor").on("click", function () {
-    var currentPassword = $("#current_password").val();
-    var newPassword = $("#password").val();
-    var confirmPassword = $("#confirm_password").val();
-    var profileImage = $("#profile-image-E")[0].files[0]; // Get the profile image file
+$("#profileSubmitDoctor").on("click", function () {
+  var currentPassword = $("#current_password").val();
+  var newPassword = $("#password").val();
+  var confirmPassword = $("#confirm_password").val();
+  var telephone = $("#StaffTelephone").val();
+  var profileImage = $("#profile-image-E")[0].files[0]; // Get the profile image file
+  var name = $("#name").val(); // Get the value of the name field
+  var email = $("#email").val(); // Get the value of the email field
 
-    // Check if any of the password fields are empty
-    if (currentPassword === "") {
-      $("#current_password-error").addClass("text-danger");
-      return;
-    }
+  // Check if any of the password fields are empty
+  if (currentPassword === "") {
+    $("#current_password-error").addClass("text-danger");
+    return;
+  }
 
-    // Check if new password and confirm password match
-    if (newPassword !== confirmPassword) {
-      $("#confirm_password-error").addClass("text-danger");
-      return;
-    }
+  // Check if new password and confirm password match
+  if (newPassword !== confirmPassword) {
+    $("#confirm_password-error").addClass("text-danger");
+    return;
+  }
 
-    // If all checks pass, proceed with AJAX request
-    var formData = new FormData();
-    formData.append("currentPassword", currentPassword);
-    formData.append("newPassword", newPassword);
-    formData.append("profile", profileImage); // Append the profile image file to FormData
+  // If all checks pass, proceed with AJAX request
+  var formData = new FormData();
+  formData.append("currentPassword", currentPassword);
+  formData.append("newPassword", newPassword);
+  formData.append("telephone", telephone);
+  formData.append("profile", profileImage); // Append the profile image file to FormData
+  formData.append("name", name); // Append the name field value to FormData
+  formData.append("email", email); // Append the email field value to FormData
 
-    $.ajax({
-      url: "./ajax/profiledoctors.php",
-      method: "POST",
-      data: formData, // Send FormData object instead of regular data object
-      processData: false, // Prevent jQuery from processing the data
-      contentType: false, // Prevent jQuery from setting contentType
-      success: function (response) {
-        if (response.error) {
-          $("#current_password-error")
-            .text(response.error)
-            .addClass("text-danger");
-        } else {
-          $("#current_password-error").hide();
-          showNotification("Datensatz erfolgreich aktualisiert.", true);
-        }
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
+  $.ajax({
+    url: "./ajax/profiledoctors.php",
+    method: "POST",
+    data: formData, // Send FormData object instead of regular data object
+    processData: false, // Prevent jQuery from processing the data
+    contentType: false, // Prevent jQuery from setting contentType
+    success: function (response) {
+      if (response.error) {
+        $("#current_password-error").text(response.error).addClass("text-danger");
+      } else {
+        $("#current_password-error").hide();
+        location.reload();
+        showNotification("Datensatz erfolgreich aktualisiert.", true);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
   });
+});
+
 
   // set value edit employee form
   $(".editStaffButton").on("click", function () {

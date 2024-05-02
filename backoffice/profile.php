@@ -235,8 +235,7 @@ window.location = "profile";
             </div>
 
             <div class="p-2 my-3">
-              <button type="button" id="profileSubmit"
-                onclick="showNotification(message, true)"
+              <button type="button" id="profileSubmit" onclick="showNotification(message, true)"
                 class="success-button cursor-pointer" data-bs-toggle="modal">Speichern</button>
             </div>
           </div>
@@ -282,11 +281,13 @@ window.location = "profile";
           <div class="col-lg-5 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">Name</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>">
+              <input type="text" class="form-control custom-input" id="name" value="<?php echo $row['name'] ?>" name="name">
+              <p class="error mb-0" id="name-error"></p> <!-- Error message for name -->
             </div>
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">E-Mail</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>">
+              <input type="text" class="form-control custom-input" id="email" value="<?php echo $row['email'] ?>" name="email">
+              <p class="error mb-0" id="email-error"></p> <!-- Error message for email -->
             </div>
             <div class="form-group p-2 mt-2">
               <label class="my-1" for="current_password" style="font-family: Cambridge-Round-Regular;">Aktuelles
@@ -383,6 +384,13 @@ window.location = "profile";
               <p class="error mb-0" id="confirm_password-error"></p>
             </div>
 
+            <div class="form-group p-2 my-2">
+              <label class="my-1" for="Telephone">Telefon</label>
+              <input type="text" name="telephone" value="<?php echo $row['telephone'] ?>"
+                class="form-control custom-input" id="StaffTelephone" placeholder="Telefon">
+              <span class="error" id="telephone-edit-error"></span>
+            </div>
+
             <div class="col-lg-6 col-12">
               <div class="form-group p-2 my-2">
                 <label class="my-1" for="Status">Profil</label>
@@ -407,8 +415,8 @@ window.location = "profile";
               </div>
             </div>
             <div class="p-2 my-3">
-              <button type="button" id="profileSubmitDoctor" onclick="showNotification(message, true)" class="success-button cursor-pointer"
-                data-bs-toggle="modal">Speichern</button>
+              <button type="button" id="profileSubmitDoctor" onclick="showNotification(message, true)"
+                class="success-button cursor-pointer" data-bs-toggle="modal">Speichern</button>
             </div>
           </div>
         </div>
@@ -476,67 +484,6 @@ document.getElementById('profile-image-E').addEventListener('change', (event) =>
 })
 </script>
 <?php } ?>
-<!-- <script type="text/javascript">
-        $(document).ready(function() {
-    // $('#profileForm').validate({
-    //     rules: {
-    //         email: {
-    //             required: true,
-    //             email: true 
-    //         },
-    //         password: {
-    //             required: true,
-    //             minlength: 6
-    //         },
-    //         confirm_password: {
-    //             required: true,
-    //             minlength: 6,
-    //             equalTo: "#password" // Validation to ensure it matches the password field
-    //         }
-    //     },
-    //     messages: {
-    //         email: {
-    //             required: "Please enter your email address",
-    //             email: "Please enter a valid email address"
-    //         },
-    //         password: {
-    //             required: "Please enter your password",
-    //             minlength: "Your password must be at least 6 characters long"
-    //         },
-    //         confirm_password: {
-    //             required: "Please enter your password",
-    //             minlength: "Your password must be at least 6 characters long",
-    //             equalTo: "Passwords do not match"
-    //         }
-    //     },
-    //     errorPlacement: function(error, element) {
-    //         if (element.attr("name") == "email") {
-    //             error.insertAfter("#email-error");
-    //         } else if (element.attr("name") == "password") {
-    //             error.insertAfter("#password-error");
-    //         } else if (element.attr("name") == "confirm_password") {
-    //             error.insertAfter("#confirm_password-error");
-    //         }
-    //         error.addClass('text-danger');
-    //     },
-    //     highlight: function(element) {
-    //         $(element).siblings('.error').addClass('text-danger');
-    //     },
-    //     unhighlight: function(element) {
-    //         $(element).siblings('.error').removeClass('text-danger');
-    //     },
-    //     submitHandler: function(form) {
-    //         form.submit();
-    //     }
-    // });
-
-    // $('#profileSubmit').on('click', function() {
-    //     if ($('#profileForm').valid()) {
-    //         $('#Confirmation').modal('show');
-    //     }
-    // });
-});
-    </script> -->
 <!-- logout script  -->
 <?php include ('layout/script.php') ?>
 </body>

@@ -4,7 +4,7 @@ include ('../config/database.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if all required fields are provided
-    if (!empty($_POST['currentPassword']) && !empty($_POST['newPassword'])) {
+    if (!empty($_POST['currentPassword']) && !empty($_POST['newPassword']) && !empty($_POST['name']) && !empty($_POST['email'])) {
         // Your database connection and session handling code
         $id = $_SESSION['staff_id'];
 
@@ -43,19 +43,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($currentPassword == $row['password']) {
             // Update the hashed password
             $newPasswordHashed = md5($_POST['newPassword']);
-            $updateQuery = "UPDATE user SET password='$newPasswordHashed', profile='$profileName' WHERE id='$id'";
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $telephone = $_POST['telephone']; // Add the telephone field update
+            $updateQuery = "UPDATE user SET password='$newPasswordHashed', name='$name', email='$email', telephone='$telephone', profile='$profileName' WHERE id='$id'";
             $updateResult = $connect->query($updateQuery);
 
             if ($updateResult) {
                 echo json_encode(array('success' => true));
             } else {
-                echo json_encode(array('error' => 'Failed to update password.'));
+                echo json_encode(array('error' => 'Failed to update profile.'));
             }
         } else {
             echo json_encode(array('error' => 'Invalid current password.'));
         }
     } else {
-        echo json_encode(array('error' => 'Current password or new password is empty.'));
+        echo json_encode(array('error' => 'Required fields are empty.'));
     }
 } else {
     // Handle if the request method is not POST

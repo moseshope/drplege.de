@@ -36,7 +36,7 @@ if ($role == 2) {
 
   $conditions = array();
   if ($searchTerm !== null) {
-    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
+    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%' OR patients.id LIKE '%$searchTerm%')";
     }
   if ($startDate !== null && $endDate !== null) {
     $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";
@@ -107,7 +107,7 @@ if ($role == 2) {
 
   $conditions = array();
   if ($searchTerm !== null) {
-    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%')";
+    $conditions[] = "(patients.name LIKE '%$searchTerm%' OR patients.email LIKE '%$searchTerm%' OR user.name LIKE '%$searchTerm%' OR services.services LIKE '%$searchTerm%' OR patients.id LIKE '%$searchTerm%')";
     }
   if ($startDate !== null && $endDate !== null) {
     $conditions[] = "STR_TO_DATE(patients.selected_date, '%d.%m.%Y') BETWEEN STR_TO_DATE('$startFormattedDate', '%d.%m.%Y') AND STR_TO_DATE('$endFormattedDate', '%d.%m.%Y')";

@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#Search-input").on("input", function (e) {
     clearTimeout(searchTimer);
     var searchValue = $(this).val().trim(); // Trim whitespace from the input
-    if (searchValue.length > 2 || !searchValue) {
+    if (searchValue.length > 1 || !searchValue) {
       // Check if the length of the input is greater than 3 characters
       searchTimer = setTimeout(function () {
         var url = window.location.href.split("?")[0];

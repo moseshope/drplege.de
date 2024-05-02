@@ -25,6 +25,21 @@ $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
 
 $conditions = array();
 if ($searchTerm !== null) {
+  $sql = "SELECT sd.user_id FROM services_docs AS sd LEFT JOIN services AS s ON sd.service_id = s.id WHERE s.services LIKE '%$searchTerm%'";
+
+  $result = $connect->query($sql);
+  $userIds = [];
+  if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $userIds[] = "'{$row["user_id"]}'";
+      }
+    }
+    
+  if (count($userIds) > 0) {
+    $userIds = implode(",", $userIds);
+    $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%' OR user.telephone LIKE '%$searchTerm%' OR user.id IN ($userIds))";
+    }
+  } else {
   $conditions[] = "(user.name LIKE '%$searchTerm%' OR user.email LIKE '%$searchTerm%')";
   }
 if ($startDate !== null && $endDate !== null) {
@@ -112,8 +127,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
         <div class="flex-grow-1"></div>
 
         <?php if ($role == 1) { ?>
-          <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
-            data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
+                <button type="submit" class="cursor-pointer custom-secondary-button my-auto" data-bs-toggle="modal"
+                  data-bs-target="#add-staff"><i class="bi bi-plus" style="color: white; "></i>Doktor</button>
         <?php } ?>
       </div>
 
@@ -123,20 +138,20 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
             <thead>
               <tr>
                 <?php if ($role == 1) { ?>
-                  <td>#</td>
-                  <td>Arzt</td>
-                  <td class="text-center">Leistung</td>
-                  <td class="text-center">Status<i data-value="status"
-                      class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
-                      style="font-size: 14px;display: inline-block;"></i> </td>
-                  <td>
-                    <div class="d-flex justify-content-center">Optionen</div>
-                  </td>
+                        <td>#</td>
+                        <td>Arzt</td>
+                        <td class="text-center">Leistung</td>
+                        <td class="text-center">Status<i data-value="status"
+                            class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
+                            style="font-size: 14px;display: inline-block;"></i> </td>
+                        <td>
+                          <div class="d-flex justify-content-center">Optionen</div>
+                        </td>
                 <?php } else { ?>
-                  <td>#</td>
-                  <td>Arzt</td>
-                  <td class="text-center">Leistung</td>
-                  <td class="text-center">Status </td>
+                        <td>#</td>
+                        <td>Arzt</td>
+                        <td class="text-center">Leistung</td>
+                        <td class="text-center">Status </td>
                 <?php } ?>
               </tr>
             </thead>
@@ -144,45 +159,45 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <?php if ($role == 1) {
                 for ($i = $startIndex; $i <= $endIndex; $i++) {
                   ; ?>
-                  <tr class="doctor-row">
-                    <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
-                    <td style="min-width: 150px; max-width: 250px;">
-                      <div class="d-flex p-0 m-0 flex-column">
-                        <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
-                        <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                            style="font-weight: 500;">E:
-                          </span><a style="color: var(--main);"
-                            href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
-                        </p>
-                        <?php if (!empty($staffList[$i]['telephone'])): ?>
-                          <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);">
-                            <span style="color: var(--main); font-weight: 500;">T:</span>
-                            <a style="color: var(--main);" href="tel:<?php echo $staffList[$i]['telephone']; ?>">
-                              <?php echo $staffList[$i]['telephone']; ?>
-                            </a>
-                          </p>
-                        <?php endif; ?>
+                              <tr class="doctor-row">
+                                <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
+                                <td style="min-width: 150px; max-width: 250px;">
+                                  <div class="d-flex p-0 m-0 flex-column">
+                                    <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
+                                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                                        style="font-weight: 500;">E:
+                                      </span><a style="color: var(--main);"
+                                        href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                                    </p>
+                                    <?php if (!empty($staffList[$i]['telephone'])): ?>
+                                            <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);">
+                                              <span style="color: var(--main); font-weight: 500;">T:</span>
+                                              <a style="color: var(--main);" href="tel:<?php echo $staffList[$i]['telephone']; ?>">
+                                                <?php echo $staffList[$i]['telephone']; ?>
+                                              </a>
+                                            </p>
+                                    <?php endif; ?>
 
-                      </div>
-                    </td>
-                    <td class="">
-                      <div class="text-start mx-auto">
-                        <ul>
-                          <?php
-                          $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
-                          foreach ($serviceList as $service) {
-                            ?>
-                            <li class="text-left"><?= $service ?></li>
-                          <?php } ?>
-                        </ul>
-                      </div>
-                    </td>
-                    <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
-                    <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
+                                  </div>
+                                </td>
+                                <td class="">
+                                  <div class="text-start mx-auto">
+                                    <ul>
+                                      <?php
+                                      $serviceList = isset($staffList[$i]['serviceList']) ? $staffList[$i]['serviceList'] : [];
+                                      foreach ($serviceList as $service) {
+                                        ?>
+                                              <li class="text-left"><?= $service ?></li>
+                                      <?php } ?>
+                                    </ul>
+                                  </div>
+                                </td>
+                                <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
+                                <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
 
-                    <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
-                    <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
-                    <!-- <td class="text-center">
+                                <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
+                                <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
+                                <!-- <td class="text-center">
               <?php
               if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
                 $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
@@ -195,70 +210,70 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               style="background-color: var(--main); color: white;"
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
-                    <?php
-                    if ($staffList[$i]['status'] === '1') {
-                      $buttonClass = 'custom-success-btn';
-                      $buttonText = 'Aktiv';
-                      } elseif ($staffList[$i]['status'] === '0') {
-                      $buttonClass = 'custom-warnings-btn';
-                      $buttonText = 'Deaktiviert';
-                      } else {
-                      $buttonClass = 'custom-danger-btn';
-                      $buttonText = 'Deleted';
-                      }
-                    ?>
-                    <td class="text-center"><button
-                        class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
-                    </td>
-                    <td>
-                      <div class="d-flex justify-content-center">
-                        <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') { ?>
-                          <!-- Edit button -->
-                          <div class="editStaffButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
-                            <i class="fas fa-edit cursor-pointer p-2"></i>
-                          </div>
-                          <!-- Delete button -->
-                          <form method="post" action="./controller/deletestaff.php">
-                            <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
-                            <button type="button" class="iconButton deleteStaffButton"
-                              data-id="<?php echo $staffList[$i]['id']; ?>">
-                              <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
-                            </button>
-                          <?php } ?>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                <?php }
+                                <?php
+                                if ($staffList[$i]['status'] === '1') {
+                                  $buttonClass = 'custom-success-btn';
+                                  $buttonText = 'Aktiv';
+                                  } elseif ($staffList[$i]['status'] === '0') {
+                                  $buttonClass = 'custom-warnings-btn';
+                                  $buttonText = 'Deaktiviert';
+                                  } else {
+                                  $buttonClass = 'custom-danger-btn';
+                                  $buttonText = 'Deleted';
+                                  }
+                                ?>
+                                <td class="text-center"><button
+                                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
+                                </td>
+                                <td>
+                                  <div class="d-flex justify-content-center">
+                                    <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') { ?>
+                                            <!-- Edit button -->
+                                            <div class="editStaffButton" data-id="<?php echo $staffList[$i]['id']; ?>" data-bs-toggle="modal">
+                                              <i class="fas fa-edit cursor-pointer p-2"></i>
+                                            </div>
+                                            <!-- Delete button -->
+                                            <form method="post" action="./controller/deletestaff.php">
+                                              <input type="hidden" name="id" value="<?= $staffList[$i]['id'] ?>">
+                                              <button type="button" class="iconButton deleteStaffButton"
+                                                data-id="<?php echo $staffList[$i]['id']; ?>">
+                                                <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
+                                              </button>
+                                      <?php } ?>
+                                    </form>
+                                  </div>
+                                </td>
+                              </tr>
+                      <?php }
                 } else {
                 for ($i = $startIndex; $i <= $endIndex; $i++) { ?>
-                  <tr class="doctor-row">
-                    <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
-                    <td style="min-width: 150px; max-width: 250px;">
-                      <div class="d-flex p-0 m-0 flex-column">
-                        <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
-                        <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                            style="font-weight: 500;">E:
-                          </span><a style="color: var(--main);"
-                            href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
-                        </p>
-                        <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                            style="color: var(--main);font-weight: 500;">T:
-                          </span><a style="color: var(--main);"
-                            href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
-                        </p>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
-                        data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
-                    </td>
-                    <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
-                    <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
+                              <tr class="doctor-row">
+                                <td style="max-width: 100px;"><?php echo $i + 1; ?></td>
+                                <td style="min-width: 150px; max-width: 250px;">
+                                  <div class="d-flex p-0 m-0 flex-column">
+                                    <h5 class="mb-0"><?php echo $staffList[$i]['name']; ?></h5>
+                                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                                        style="font-weight: 500;">E:
+                                      </span><a style="color: var(--main);"
+                                        href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
+                                    </p>
+                                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
+                                        style="color: var(--main);font-weight: 500;">T:
+                                      </span><a style="color: var(--main);"
+                                        href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                                    </p>
+                                  </div>
+                                </td>
+                                <td class="text-center">
+                                  <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;"
+                                    data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
+                                </td>
+                                <!-- <td  class="created-at"><?php //echo $staffList[$i]['created_at']; ?></td> -->
+                                <!-- <td  class="created-at"><?php echo date('d.m.Y', strtotime($staffList[$i]['created_at'])); ?></td> -->
 
-                    <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
-                    <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
-                    <!-- <td class="text-center">
+                                <!-- <td class="cursor-pointer text-center patientList" data-id="<?php echo $staffList[$i]['id']; ?>" id="treated"><?php echo $staffList[$i]['patient_count']; ?></td> -->
+                                <!-- <td class="text-center"><?php //echo $staffList[$i]['time']; ?></td> -->
+                                <!-- <td class="text-center">
               <?php
               if (!empty($staffList[$i]['time']) && $staffList[$i]['time'] != 'null') {
                 $timesArray = $staffList[$i]['time'] ? json_decode($staffList[$i]['time'], true) : [];
@@ -271,22 +286,22 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               style="background-color: var(--main); color: white;"
               data-id="<?php echo $staffList[$i]['id']; ?>">Alle anzeigen</button>
               </td> -->
-                    <?php
-                    if ($staffList[$i]['status'] === '1') {
-                      $buttonClass = 'custom-success-btn';
-                      $buttonText = 'Aktiv';
-                      } elseif ($staffList[$i]['status'] === '0') {
-                      $buttonClass = 'custom-warnings-btn';
-                      $buttonText = 'Deaktiviert';
-                      } else {
-                      $buttonClass = 'custom-danger-btn';
-                      $buttonText = 'Deleted';
-                      }
-                    ?>
-                    <td class="text-center"><button
-                        class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
-                    </td>
-                    <!-- <td>
+                                <?php
+                                if ($staffList[$i]['status'] === '1') {
+                                  $buttonClass = 'custom-success-btn';
+                                  $buttonText = 'Aktiv';
+                                  } elseif ($staffList[$i]['status'] === '0') {
+                                  $buttonClass = 'custom-warnings-btn';
+                                  $buttonText = 'Deaktiviert';
+                                  } else {
+                                  $buttonClass = 'custom-danger-btn';
+                                  $buttonText = 'Deleted';
+                                  }
+                                ?>
+                                <td class="text-center"><button
+                                    class="cursor-default <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
+                                </td>
+                                <!-- <td>
               <div class="d-flex justify-content-center dropdown">
               <?php if ($staffList[$i]['status'] === '1' || $staffList[$i]['status'] === '0') {
                 ; ?>
@@ -309,8 +324,8 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <?php } ?>
               </div>
               </td> -->
-                  </tr>
-                <?php }
+                              </tr>
+                      <?php }
                 } ?>
             </tbody>
           </table>
@@ -959,11 +974,11 @@ $(document).ready(function() {
 const params = new URLSearchParams(window.location.search);
 const currentPage = params.get('page');
 <?php if ($totalItems > $itemsPerPage) { ?>
-  CreatePagination({
-    elementId: "custom-pagination",
-    totalPage: <?php echo $totalPages; ?>,
-    currentPage: currentPage ? Number(currentPage) : 1
-  })
+        CreatePagination({
+          elementId: "custom-pagination",
+          totalPage: <?php echo $totalPages; ?>,
+          currentPage: currentPage ? Number(currentPage) : 1
+        })
 <?php } ?>
 </script>
 

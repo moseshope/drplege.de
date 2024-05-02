@@ -154,11 +154,15 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
                       </span><a style="color: var(--main);"
                         href="mailto:<?php echo $staffList[$i]['email']; ?>"><?php echo $staffList[$i]['email']; ?></a>
                     </p>
-                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);"><span
-                        style="color: var(--main);font-weight: 500;">T:
-                      </span><a style="color: var(--main);"
-                        href="tel:<?php echo $staffList[$i]['telephone']; ?>"><?php echo $staffList[$i]['telephone']; ?></a>
+                    <?php if (!empty($staffList[$i]['telephone'])): ?>
+                    <p class="mb-0" style="color: var(--main); font-size: var(--sm-text);">
+                      <span style="color: var(--main); font-weight: 500;">T:</span>
+                      <a style="color: var(--main);" href="tel:<?php echo $staffList[$i]['telephone']; ?>">
+                        <?php echo $staffList[$i]['telephone']; ?>
+                      </a>
                     </p>
+                    <?php endif; ?>
+
                   </div>
                 </td>
                 <td class="">
@@ -661,7 +665,7 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
               <span class="error" id="email-edit-error"></span>
             </div>
           </div>
-          
+
           <?php
           // Assuming $status is retrieved or set somewhere in your PHP code
           $status = isset($status) ? $status : ''; // Initialize $status variable if not already set

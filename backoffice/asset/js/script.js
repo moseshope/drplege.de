@@ -93,10 +93,10 @@ $(document).ready(function () {
         required: true,
         equalTo: "#password",
       },
-      telephone: {
-        required: true,
-        validatePhone: true,
-      },
+      // telephone: {
+      //   required: true,
+      //   validatePhone: true,
+      // },
       status: {
         required: true,
       },
@@ -122,10 +122,10 @@ $(document).ready(function () {
         required: "Bitte geben Sie Ihr Kennwort ein",
         equalTo: "Passwörter stimmen nicht überein",
       },
-      telephone: {
-        required: "Telefonnummer ist erforderlich.",
-        validatePhone: "Bitte geben Sie eine gültige Telefonnummer ein.",
-      },
+      // telephone: {
+      //   required: "Telefonnummer ist erforderlich.",
+      //   validatePhone: "Bitte geben Sie eine gültige Telefonnummer ein.",
+      // },
       status: {
         required: "Status ist erforderlich.",
       },
@@ -165,10 +165,10 @@ $(document).ready(function () {
         required: true,
         email: true,
       },
-      telephone: {
-        required: true,
-        validatePhone: true,
-      },
+      // telephone: {
+      //   required: true,
+      //   validatePhone: true,
+      // },
       status: {
         required: true,
       },
@@ -184,10 +184,10 @@ $(document).ready(function () {
         required: "E-Mail ist erforderlich.",
         email: "Bitte geben Sie eine gültige E-Mail Adresse ein.",
       },
-      telephone: {
-        required: "Telefonnummer ist erforderlich.",
-        validatePhone: "Bitte geben Sie eine gültige Telefonnummer ein.",
-      },
+      // telephone: {
+      //   required: "Telefonnummer ist erforderlich.",
+      //   validatePhone: "Bitte geben Sie eine gültige Telefonnummer ein.",
+      // },
       status: {
         required: "Status ist erforderlich.",
       },

@@ -32,10 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo json_encode(['email' => $message]);
         }
     }
-    if(empty($telephone)){
-        $message = "Telephone is required";
-        echo json_encode(['telephone' => $message]);
-    }else{
+    if($telephone){
         $sql = "select * from user where telephone = '$telephone' && deleted_at IS NULL";
         $result = $connect->query($sql);
         if($result->num_rows > 0){

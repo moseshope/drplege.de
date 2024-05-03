@@ -58,7 +58,7 @@ if ($role == 2) {
         LEFT JOIN user ON patients.doctor = user.id 
         LEFT JOIN services ON patients.services= services.id 
          $whereClause 
-        ORDER BY $orderClause patients.id DESC";
+        ORDER BY $orderClause patients.selected_date DESC";
 
   $PatientsResult = $connect->query($GetPatients);
   $PatientsList = array();
@@ -130,15 +130,15 @@ if ($role == 2) {
       }
 
     } else {
-    $orderClause = "patients.id DESC";
+    $orderClause = "patients.selected_date DESC";
     }
 
   $GetPatients = "SELECT patients.*, user.name AS doctor, services.services FROM patients 
-                    LEFT JOIN user ON patients.doctor = user.id 
-                    LEFT JOIN services ON patients.services= services.id 
-                    $whereClause
-                    ORDER BY  
-                    $orderClause";
+    LEFT JOIN user ON patients.doctor = user.id 
+    LEFT JOIN services ON patients.services= services.id 
+    $whereClause
+    ORDER BY  
+    $orderClause";
   $PatientsResult = $connect->query($GetPatients);
   $PatientsList = array();
 
@@ -290,7 +290,7 @@ if ($role == 2) {
                         echo $status;
                         } else {
                         if ($selectedDate < $currentDate) {
-                          echo 'offen';
+                          echo 'geplant';
                           } else {
                           echo $status;
                           }
@@ -366,7 +366,7 @@ if ($role == 2) {
                         echo $status;
                         } else {
                         if ($selectedDate < $currentDate) {
-                          echo 'offen';
+                          echo 'geplant';
                           } else {
                           echo $status;
                           }

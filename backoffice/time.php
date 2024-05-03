@@ -7,7 +7,7 @@ include ('config/database.php');
 include ('./layout/header.php');
 include ('./layout/sidebar.php');
 
-$GetTime = "select * from time_slots";
+$GetTime = "select * from time_slots ORDER BY time ASC";
 $result = $connect->query($GetTime);
 $timeList = array();
 
@@ -17,9 +17,6 @@ if ($result->num_rows > 0) {
     $timeList[] = $row['time'];
     }
   }
-
-
-
 ?>
 
 <!-- Main -->
@@ -101,7 +98,7 @@ if ($result->num_rows > 0) {
           <div class="mx-2">
             <div class="d-flex justify-content-md-center flex-wrap m-2">
               <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                 <input type="text" id="dateRangePicker" name="daterange" class="form-control text-center">
               </div>
               <!-- <div class="input-date">
@@ -293,6 +290,13 @@ $("input.check-days").change(() => {
 $('input[name="daterange"]').daterangepicker({
     locale: {
       format: 'YYYY-MM-DD',
+      applyLabel: 'Anwenden',
+      cancelLabel: 'Abbrechen',
+      daysOfWeek: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+      monthNames: [
+        'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+      ],
     },
     minDate: moment().format("YYYY-MM-DD"),
     startDate: start,

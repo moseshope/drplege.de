@@ -151,7 +151,7 @@ if ($role == 1) {
                   <td>Leistung</td>
                   <td class="text-center">Uhrzeit</td>
                   <td>
-                    <div class="d-flex justify-content-center">Aktion</div>
+                    <div class="d-flex justify-content-center">Optionen</div>
                   </td>
                 </tr>
               </thead>

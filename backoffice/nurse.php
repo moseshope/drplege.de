@@ -85,10 +85,13 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
     </div>
     <div class="px-2">
       <div class="d-flex flex-wrap">
-        <div class="dashboard-search my-auto">
+      <div class="dashboard-search my-auto">
           <i class="bi bi-search"></i>
           <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
             value="<?php echo $searchTerm ?>">
+            <div class="" id="searchCancel" type="button">
+              <i class="bi bi-x-square cursor-pointer"></i>
+            </div>
         </div>
         <div class="flex-grow-1"></div>
 

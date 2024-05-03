@@ -34,11 +34,6 @@ $endIndex = min($startIndex + $itemsPerPage - 1, $totalItems - 1);
     </div>
     <div class="d-flex flex-wrap">
       <form method="post">
-        <!-- <div class="dashboard-search m-2 mx-0">
-                        <i class="bi bi-search"></i>
-                        <input type="text" class="w-100" id="Search-input"
-                            placeholder="Search" name="search" value="<?php echo $searchTime ?>">
-                    </div> -->
       </form>
       <div class="flex-grow-1">
       </div>

@@ -173,6 +173,9 @@ if ($role == 2) {
           <i class="bi bi-search"></i>
           <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
             value="<?php echo $searchTerm ?>">
+            <div class="" id="searchCancel" type="button">
+              <i class="bi bi-x-square cursor-pointer"></i>
+            </div>
         </div>
         <!-- </form> -->
         <!-- <form method="post"> -->

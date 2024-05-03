@@ -22,7 +22,22 @@ $(document).ready(function () {
   let val = $("#Search-input").val();
   $("#Search-input").val("");
   $("#Search-input").val(val);
-  
+
+  $("#searchCancel").click(function () {
+    clearTimeout(searchTimer);
+    $("#Search-input").val('').focus();
+    var searchValue = $(this).val().trim();
+    searchTimer = setTimeout(function () {
+      var url = window.location.href.split("?")[0];
+      console.log("Search value:", searchValue);
+      window.location.href =
+        url + "?search=" + encodeURIComponent(searchValue);
+      // Delay focusing until after URL change
+      // Adjust the delay time as needed
+    }, searchDelay);
+
+  })
+
   $("#ServiceForm").validate({
     rules: {
       services: {

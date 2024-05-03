@@ -128,13 +128,17 @@ if ($role == 1) {
     <div class="d-flex justify-content-center align-items-center">
       <h1 class="page-heading">Übersicht</h1>
     </div>
-    
+
   </div>
 
   <div class="py-2 px-md-5 px-3 w-100">
     <div class="dashboard-search m-2 mx-0">
       <i class="bi bi-search"></i>
-      <input type="text" class="w-100" id="Search-input" placeholder="Suche" value="<?= $searchTerm ?>">
+      <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
+        value="<?php echo $searchTerm ?>">
+      <div class="" id="searchCancel" type="button">
+        <i class="bi bi-x-square cursor-pointer"></i>
+      </div>
     </div>
     <div class="row mt-3">
       <div class="col-xxl-8 col-12 mb-5">
@@ -412,13 +416,14 @@ if ($role == 1) {
 </form>
 
 <form id="EditPatients" action="./controller/editpatients.php" method="post">
-  <div class="modal fade" id="edit-patients" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" 
+  <div class="modal fade" id="edit-patients" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 32px;">
         <div class="d-flex justify-content-center align-items-center py-2">
           <div class="flex-grow-1"></div>
-          <h1 class="modal-heading" style="font-weight: 800; margin-left:32px; font-size: var(--xl-text);">Termin bearbeiten</h1>
+          <h1 class="modal-heading" style="font-weight: 800; margin-left:32px; font-size: var(--xl-text);">Termin
+            bearbeiten</h1>
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:30px;"
             aria-label="Close"></button>
@@ -436,7 +441,8 @@ if ($role == 1) {
         <div class="col-lg-12 col-12">
           <div class="form-group p-2 my-2">
             <label class="my-1" for="Status">datum wechseln</label>
-            <select name="doctor" class="form-select cursor-pointer custom-input selectedDoctor" id="doctorSelect" value="">
+            <select name="doctor" class="form-select cursor-pointer custom-input selectedDoctor" id="doctorSelect"
+              value="">
               <?php
                 foreach ($staffList as $staff) {
                   $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
@@ -731,23 +737,23 @@ if ($role == 1) {
 
     displayedListings.forEach(function(patient, index) {
       const row = `<tr>
-                                      <td>${patient.name}</td>
-                                      <td>${patient.doctor}</td>
-                                      <td>${patient.services}</td>
-                                      <td class="text-center">${patient.visits} </td>
-                                      <td>
-                                        <div class="d-flex justify-content-center dropdown">
-                                            <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                                <i class="fa-solid fa-right-left"></i>
-                                            </span>
-                                            <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                                <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                                            </span>
-                                        </div>
-                                      </td>
+                                        <td>${patient.name}</td>
+                                        <td>${patient.doctor}</td>
+                                        <td>${patient.services}</td>
+                                        <td class="text-center">${patient.visits} </td>
+                                        <td>
+                                          <div class="d-flex justify-content-center dropdown">
+                                              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                                                  <i class="fa-solid fa-right-left"></i>
+                                              </span>
+                                              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                                                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                                              </span>
+                                          </div>
+                                        </td>
 
-                                        <!-- Add other table cells based on your data structure -->
-                                    </tr>`;
+                                          <!-- Add other table cells based on your data structure -->
+                                      </tr>`;
       tbody.append(row);
     });
   }
@@ -1178,22 +1184,22 @@ if ($role == 1) {
         convertToAMPMFormat(patient.visits) :
         'N/A';
       const row = `<tr>
-        <td>${patient.name}</td>
-        <td>${patient.doctor}</td>
-        <td>${patient.services}</td>
-        <td class="text-center">${patient.visits} </td>
-        <td>
-        <div class="d-flex justify-content-center dropdown">
-            <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                <i class="fa-solid fa-right-left"></i>
-            </span>
-            <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-            </span>
-        </div>
-      </td>
-        <!-- Add other table cells based on your data structure -->
-      </tr>`;
+          <td>${patient.name}</td>
+          <td>${patient.doctor}</td>
+          <td>${patient.services}</td>
+          <td class="text-center">${patient.visits} </td>
+          <td>
+          <div class="d-flex justify-content-center dropdown">
+              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                  <i class="fa-solid fa-right-left"></i>
+              </span>
+              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+              </span>
+          </div>
+        </td>
+          <!-- Add other table cells based on your data structure -->
+        </tr>`;
       tbody.append(row);
     });
   }

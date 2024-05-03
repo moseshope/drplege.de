@@ -215,7 +215,7 @@ if ($role == 2) {
                 <td>Name</td>
                 <td>ID</td>
                 <td>Leistung</td>
-                <td>Besuch</td>
+                <td class="text-center">Besuch</td>
                 <td>Rezept</td>
                 <td class="text-center">Status<i class="fa-solid fa-arrow-up ms-2" stlye="font-size:14px"
                     id="ASCstatus"></i><i class="fa-solid fa-arrow-down" stlye="font-size:14px" id="DESCstatus"></i></td>
@@ -229,7 +229,7 @@ if ($role == 2) {
                 <td>Leistung</td>
                 <td>Arzt<i data-value="doctor" class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
                     style="font-size: 14px;display: inline-block;"></i></td>
-                <td>Termin</td>
+                <td class="text-center">Termin</td>
                 <td>Rezept</td>
                 <td class="text-center">Status <i data-value="status" class="fa-solid fa-arrow-up-arrow-down Shorting"
                     style="font-size: 14px;display: inline-block;"></i> </td>
@@ -264,7 +264,7 @@ if ($role == 2) {
                   </td>
                   <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id']; ?></td>
                   <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services']; ?></td>
-                  <td><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?></td>
+                  <td class="text-center"><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?></td>
 
                   <td><?php echo $PatientsList[$i]['recipe']; ?></td>
                   <?php
@@ -341,7 +341,7 @@ if ($role == 2) {
                   <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id']; ?></td>
                   <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services']; ?></td>
                   <td><?php echo $PatientsList[$i]['doctor']; ?></td>
-                  <td><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?> </td>
+                  <td class="text-center"><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?> </td>
                   <td><?php echo $PatientsList[$i]['recipe']; ?></td>
                   <?php
                   if ($PatientsList[$i]['status'] === 'durchgeführt') {

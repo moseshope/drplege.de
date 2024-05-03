@@ -418,7 +418,7 @@ if ($role == 1) {
       <div class="modal-content p-3 custom-modal" style="border-radius: 32px;">
         <div class="d-flex justify-content-center align-items-center py-2">
           <div class="flex-grow-1"></div>
-          <h1 class="modal-heading" style="font-weight: 800; font-size: var(--xl-text);">Termin bearbeiten</h1>
+          <h1 class="modal-heading" style="font-weight: 800; margin-left:32px; font-size: var(--xl-text);">Termin bearbeiten</h1>
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:30px;"
             aria-label="Close"></button>

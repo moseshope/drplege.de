@@ -206,14 +206,10 @@ if ($ServiceResult->num_rows > 0) {
                         </div>
                         <div class="col-md-6">
                           <div class="form-field">
-                            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthdate"
+                            <input type="date" onfocus="(this.type='date')" onblur="(this.type='date')" name="birthdate"
                               id="birthdateInput" placeholder="<?= $ln['birth_date_input'] ?>">
                             <p class="error m-0" id="birthdate-error"></p>
                           </div>
-                          <!-- <div class="form-field">
-                          <input type="date" name="birthdate" id="birthdateInput" placeholder="Datum der Geburt*">
-                          <p  class="error" id="birthdate-error"></p> -->
-                          <!-- </div> -->
                         </div>
                         <div class="col-md-6">
                           <div class="form-field">

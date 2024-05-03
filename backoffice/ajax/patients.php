@@ -34,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         JOIN user ON patients.doctor = user.id 
         JOIN services ON patients.services = services.id 
         WHERE patients.selected_date = '$formattedDate'
-        AND  patients.status = 'bevorstehen'
+        AND  patients.status = 'geplant'
         AND  patients.deleted_at IS NULL
         AND (patients.name LIKE '%$searchQuery%' OR user.name LIKE '%$searchQuery%' OR services.services LIKE '%$searchQuery%')";
    
-    $sql1 = "select * from patients where selected_date='$formattedDate' && status='vollendet'";
+    $sql1 = "select * from patients where selected_date='$formattedDate' && status='durchgeführt'";
     
     $result = $connect->query($sql);
     $result1 = $connect->query($sql1);

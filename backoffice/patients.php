@@ -268,11 +268,11 @@ if ($role == 2) {
 
               <td><?php echo $PatientsList[$i]['recipe']; ?></td>
               <?php
-                  if ($PatientsList[$i]['status'] === 'vollendet') {
+                  if ($PatientsList[$i]['status'] === 'durchgeführt') {
                     $buttonClass = 'cursor-default custom-success-btn';
                     } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
                     $buttonClass = 'cursor-default custom-danger-btn';
-                    } elseif ($PatientsList[$i]['status'] === 'bevorstehen') {
+                    } elseif ($PatientsList[$i]['status'] === 'geplant') {
                     $buttonClass = 'cursor-default custom-upcoming-btn';
                     }
 
@@ -286,11 +286,11 @@ if ($role == 2) {
                       $currentDate = date("d.m.Y");
                       $selectedDate = $PatientsList[$i]['selected_date'];
                       $status = $PatientsList[$i]['status'];
-                      if ($status == 'vollendet' || $status == 'abgesagt') {
+                      if ($status == 'durchgeführt' || $status == 'abgesagt') {
                         echo $status;
                         } else {
                         if ($selectedDate < $currentDate) {
-                          echo 'Ausstehend';
+                          echo 'offen';
                           } else {
                           echo $status;
                           }
@@ -301,7 +301,7 @@ if ($role == 2) {
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
               <td class="text-center">
-                <?php if ($PatientsList[$i]['status'] != 'vollendet') { ?>
+                <?php if ($PatientsList[$i]['status'] != 'durchgeführt') { ?>
                 <div class="d-flex justify-content-center">
                   <?php if ($PatientsList[$i]['status'] != 'abgesagt') { ?>
                   <span class="cursor-pointer refreshBtn" data-id="<?php echo $PatientsList[$i]['id']; ?>"
@@ -344,11 +344,11 @@ if ($role == 2) {
               <td><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?> </td>
               <td><?php echo $PatientsList[$i]['recipe']; ?></td>
               <?php
-                  if ($PatientsList[$i]['status'] === 'vollendet') {
+                  if ($PatientsList[$i]['status'] === 'durchgeführt') {
                     $buttonClass = 'cursor-default custom-success-btn';
                     } elseif ($PatientsList[$i]['status'] === 'abgesagt') {
                     $buttonClass = 'cursor-default custom-danger-btn';
-                    } elseif ($PatientsList[$i]['status'] == 'bevorstehen') {
+                    } elseif ($PatientsList[$i]['status'] == 'geplant') {
                     $buttonClass = 'cursor-default custom-upcoming-btn';
                     }
 
@@ -362,11 +362,11 @@ if ($role == 2) {
                       $currentDate = date("d.m.Y");
                       $selectedDate = $PatientsList[$i]['selected_date'];
                       $status = $PatientsList[$i]['status'];
-                      if ($status == 'vollendet' || $status == 'abgesagt') {
+                      if ($status == 'durchgeführt' || $status == 'abgesagt') {
                         echo $status;
                         } else {
                         if ($selectedDate < $currentDate) {
-                          echo 'Ausstehend';
+                          echo 'offen';
                           } else {
                           echo $status;
                           }
@@ -377,7 +377,7 @@ if ($role == 2) {
                   id="appointmentTransfer-<?php echo $i + 1; ?>"> </p>
               </td>
               <td>
-                <?php if ($PatientsList[$i]['status'] != 'vollendet') { ?>
+                <?php if ($PatientsList[$i]['status'] != 'durchgeführt') { ?>
                 <div class="d-flex justify-content-center">
                   <?php if ($PatientsList[$i]['status'] !== 'abgesagt') { ?>
                   <!-- Edit Button -->
@@ -565,7 +565,7 @@ if ($role == 2) {
         <div class="form-group p-2 my-2">
           <label class="my-1" for="status">Status</label>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="status" name="status" value="vollendet">
+            <input class="form-check-input" type="checkbox" id="status" name="status" value="durchgeführt">
             <label class="form-check-label" for="status">Als abgeschlossen markieren</label>
           </div>
         </div>
@@ -822,7 +822,7 @@ $('#conformationYesBtn').on('click', function() {
 });
 $('#showInfoBtn').on('click', function() {
   $('#Confirmation').modal('hide');
-  if (buttonText == 'bevorstehen' || buttonText == 'vollendet') {
+  if (buttonText == 'geplant' || buttonText == 'durchgeführt') {
     $('#' + appointmentTransferId).html('Transfer Appointment').css('color', 'green');
   } else {
     $('#' + appointmentTransferId).html('Appointment Not Transferred');

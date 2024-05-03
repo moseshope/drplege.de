@@ -91,6 +91,27 @@ function getTime(clickedElement) {
 
 $(document).ready(function () {
 
+  const errorMessages = {
+    en: {
+      name: "Name is required.",
+      birthdate: "Birthdate is required.",
+      phone: "Phone number is required.",
+      digits: "Only numbers allowed.",
+      maxlength: "Contact should be a 14-digit number.",
+    },
+    de: {
+      name: "Name ist erforderlich.",
+      birthdate: "Geburtsdatum ist erforderlich.",
+      phone: "Telefonnummer ist erforderlich.",
+      digits: "Nur Zahlen erlaubt.",
+      maxlength: "Kontakt sollte eine 14-stellige Nummer sein.",
+    },
+  };
+
+  // Retrieve the selected language from sessionStorage
+  const lang = sessionStorage.getItem("lang") || "en"; // Default to English if no language is selected
+
+  // Set up validation plugin with dynamic error messages
   $("#userForm").validate({
     rules: {
       name: {
@@ -107,15 +128,15 @@ $(document).ready(function () {
     },
     messages: {
       name: {
-        required: "Name ist erforderlich.",
+        required: errorMessages[lang].name,
       },
       birthdate: {
-        required: "Geburtsdatum ist erforderlich.",
+        required: errorMessages[lang].birthdate,
       },
       phone: {
-        required: "Telefonnummer ist erforderlich.",
-        digits: "Nur Zahlen erlaubt.",
-        maxlength: "Kontakt sollte eine 14-stellige Nummer sein.",
+        required: errorMessages[lang].phone,
+        digits: errorMessages[lang].digits,
+        maxlength: errorMessages[lang].maxlength,
       },
     },
     errorPlacement: function (error, element) {

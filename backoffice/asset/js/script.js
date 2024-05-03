@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   var searchTimer = null,
     searchDelay = 300;
 
@@ -683,6 +682,7 @@ $(document).ready(function () {
     },
   });
 
+  // Function to clear validation messages
   // Edit Nurse Modal
   // set value edit employee form
   $(".editNurseButton").on("click", function () {
@@ -727,14 +727,16 @@ $(document).ready(function () {
             if (responseData.name) {
               $("#name-edit-error")
                 .text(responseData.name)
-                .addClass("text-danger");
+                .addClass("text-danger")
+                .show();
             } else {
               $("#name-edit-error").hide();
             }
             if (responseData.email) {
               $("#email-edit-error")
                 .text(responseData.email)
-                .addClass("text-danger");
+                .addClass("text-danger")
+                .show();
             } else {
               $("#email-edit-error").hide();
             }
@@ -915,81 +917,77 @@ $(document).ready(function () {
   });
 
   // update profile
-// Define the showNotification function outside the click handler
-function showNotification(message, status) {
-  var notification = document.createElement("div");
+  // Define the showNotification function outside the click handler
+  function showNotification(message, status) {
+    var notification = document.createElement("div");
 
-  var icon = document.createElement("i");
-  icon.className = status
-    ? "fas fa-check"
-    : "fas fa-exclamation-triangle";
-  if (!status) {
-    icon.style.position = "relative";
-    icon.style.top = "-1px";
-  }
-  icon.style.marginRight = "10px";
-
-  notification.appendChild(icon);
-  notification.appendChild(document.createTextNode(message));
-
-  notification.style.position = "fixed";
-  notification.style.top = "30px";
-  notification.style.right = "20px";
-  notification.style.backgroundColor = status
-    ? "#5da53e"
-    : "#d9534f";
-  notification.style.color = "white";
-  notification.style.padding = "16px 12px"; // Increased Padding
-  notification.style.borderRadius = "5px";
-  notification.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.5)";
-  notification.style.zIndex = 1000;
-  notification.style.display = "flex";
-  notification.style.alignItems = "center";
-  notification.style.fontFamily = "'Baloo 2', sans-serif"; // Baloo 2 font
-
-  document.body.appendChild(notification);
-
-  setTimeout(function () {
-    notification.remove();
-  }, 5000);
-}
-
-// Attach click handler to profileSubmit button
-$("#profileSubmit").on("click", function () {
-  if ($("#profileForm").valid()) {
-    var currentPassword = $("#current_password").val();
-    var newPassword = $("#password").val();
-    var confirmPassword = $("#confirm_password").val();
-
-    // Check if new password and confirm password match
-    if (newPassword !== confirmPassword) {
-      $("#confirm_password-error")
-        .text("Passwords do not match")
-        .addClass("text-danger");
-      return;
+    var icon = document.createElement("i");
+    icon.className = status ? "fas fa-check" : "fas fa-exclamation-triangle";
+    if (!status) {
+      icon.style.position = "relative";
+      icon.style.top = "-1px";
     }
+    icon.style.marginRight = "10px";
 
-    $.ajax({
-      url: "./ajax/profile.php",
-      method: "POST",
-      data: { currentPassword: currentPassword, newPassword: newPassword },
-      success: function (response) {
-        if (response.error) {
-          $("#current_password-error")
-            .text(response.error)
-            .addClass("text-danger");
-        } else {
-          $("#current_password-error").hide();
-          // Call the showNotification function with success message
-          showNotification("Datensatz erfolgreich aktualisiert.", true);
-        }
-      },
-      error: function (xhr, status, error) {
-        console.error("Error:", error);
-      },
-    });
+    notification.appendChild(icon);
+    notification.appendChild(document.createTextNode(message));
+
+    notification.style.position = "fixed";
+    notification.style.top = "30px";
+    notification.style.right = "20px";
+    notification.style.backgroundColor = status ? "#5da53e" : "#d9534f";
+    notification.style.color = "white";
+    notification.style.padding = "16px 12px"; // Increased Padding
+    notification.style.borderRadius = "5px";
+    notification.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.5)";
+    notification.style.zIndex = 1000;
+    notification.style.display = "flex";
+    notification.style.alignItems = "center";
+    notification.style.fontFamily = "'Baloo 2', sans-serif"; // Baloo 2 font
+
+    document.body.appendChild(notification);
+
+    setTimeout(function () {
+      notification.remove();
+    }, 5000);
   }
-});
+
+  // Attach click handler to profileSubmit button
+  $("#profileSubmit").on("click", function () {
+    if ($("#profileForm").valid()) {
+      var currentPassword = $("#current_password").val();
+      var newPassword = $("#password").val();
+      var confirmPassword = $("#confirm_password").val();
+
+      // Check if new password and confirm password match
+      if (newPassword !== confirmPassword) {
+        $("#confirm_password-error")
+          .text("Passwords do not match")
+          .addClass("text-danger");
+        return;
+      }
+
+      $.ajax({
+        url: "./ajax/profile.php",
+        method: "POST",
+        data: { currentPassword: currentPassword, newPassword: newPassword },
+        success: function (response) {
+          if (response.error) {
+            $("#current_password-error")
+              .text(response.error)
+              .addClass("text-danger");
+          } else {
+            $("#current_password-error").hide();
+            // Call the showNotification function with success message
+            showNotification("Datensatz erfolgreich aktualisiert.", true);
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("Error:", error);
+        },
+      });
+    }
+  });
 
   // set value edit employee form
   $(".editStaffButton").on("click", function () {

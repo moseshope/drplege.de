@@ -264,7 +264,7 @@ if ($role == 1) {
           <div class="col-lg-6 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="Status">Status</label>
-              <select name="status" class="form-control custom-input" id="Status">
+              <select name="status" class="form-select custom-input cursor-pointer" id="Status">
                 <option>Aktiv</option>
                 <option>Inaktiv</option>
               </select>
@@ -412,12 +412,16 @@ if ($role == 1) {
 </form>
 
 <form id="EditPatients" action="./controller/editpatients.php" method="post">
-  <div class="modal fade " id="edit-patients" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  <div class="modal fade" id="edit-patients" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" 
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content p-3 custom-modal" style="border-radius: 32px;">
-        <div class="d-flex justify-content-center align-items-center mb-4 py-2">
+        <div class="d-flex justify-content-center align-items-center py-2">
+          <div class="flex-grow-1"></div>
           <h1 class="modal-heading" style="font-weight: 800; font-size: var(--xl-text);">Termin bearbeiten</h1>
+          <div class="flex-grow-1"></div>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" style="width:30px;"
+            aria-label="Close"></button>
         </div>
         <input type="hidden" name="id" value="" class="form-control custom-input" id="PatientsId">
         <p class="py-2" style="font-weight: 800;font-size: var(--md-text);">Patient: <span id="PatientsName"></span>
@@ -432,7 +436,7 @@ if ($role == 1) {
         <div class="col-lg-12 col-12">
           <div class="form-group p-2 my-2">
             <label class="my-1" for="Status">datum wechseln</label>
-            <select name="doctor" class="form-control custom-input selectedDoctor" id="doctorSelect" value="">
+            <select name="doctor" class="form-select cursor-pointer custom-input selectedDoctor" id="doctorSelect" value="">
               <?php
                 foreach ($staffList as $staff) {
                   $selected = ($staff['id'] == $patientsData['doctor']) ? 'selected' : '';
@@ -454,7 +458,7 @@ if ($role == 1) {
         <div class="col-lg-12 col-12">
           <div class="form-group p-2 my-2">
             <label class="my-1" for="Status">Zeit ändern</label>
-            <select name="time" class="form-control custom-input" id="timeList">
+            <select name="time" class="form-select cursor-pointer custom-input" id="timeList">
             </select>
             <p class="error" id="time-error"></p>
           </div>
@@ -471,7 +475,7 @@ if ($role == 1) {
         <div class="col-lg-12 col-12">
           <div class="form-group p-2 my-2">
             <label class="my-1" for="Status">Uhrzeit ändern</label>
-            <select name="time" class="form-control custom-input" id="timeList">
+            <select name="time" class="form-select cursor-pointer custom-input" id="timeList">
             </select>
             <p class="error" id="time-error"></p>
           </div>

@@ -388,15 +388,10 @@ $(document).ready(function () {
         required: true,
         email: true,
       },
-      current_password: {
-        required: true,
-      },
       password: {
-        required: true,
         minlength: 6,
       },
       confirm_password: {
-        required: true,
         minlength: 6,
         equalTo: "#password",
       },

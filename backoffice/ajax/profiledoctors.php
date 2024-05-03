@@ -3,41 +3,51 @@ session_start();
 include ('../config/database.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Check if all required fields are provided
-    if (!empty($_POST['currentPassword']) && !empty($_POST['newPassword']) && !empty($_POST['name']) && !empty($_POST['email'])) {
-        // Your database connection and session handling code
+    if (!empty($_POST['name']) && !empty($_POST['email'])) {
         $id = $_SESSION['staff_id'];
-
-        // Handle profile image upload
         $profileImageName = handleProfileImageUpload($id);
-
-        // Extract other form data
         $currentPassword = md5($_POST['currentPassword']);
         $newPasswordHashed = md5($_POST['newPassword']);
         $password_plain = $_POST['newPassword'];
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $telephone = $_POST['telephone']; // Add the telephone field update
-
-        // Check if current password matches
+        $telephone = $_POST['telephone'];        
         $doctorData = "SELECT * FROM user WHERE id='$id'";
         $result = $connect->query($doctorData);
         $row = $result->fetch_assoc();
-        if ($currentPassword == $row['password']) {
-            // Update the hashed password, name, email, telephone, and profile in the database
-            $updateQuery = "UPDATE user SET password='$newPasswordHashed', name='$name', email='$email', telephone='$telephone', password_plain='$password_plain', profile='$profileImageName' WHERE id='$id'";
-            $updateResult = $connect->query($updateQuery);
-
-            if ($updateResult) {
-                echo json_encode(array('success' => true));
+        if (!empty($_POST['currentPassword']) && $currentPassword == $row['password']) {
+            if (!empty($_POST['newPassword'])) {
+                $updateQuery = "UPDATE user SET password='$newPasswordHashed', name='$name', email='$email', telephone='$telephone', password_plain='$password_plain', profile='$profileImageName' WHERE id='$id'";
+                $updateResult = $connect->query($updateQuery);
+                if ($updateResult) {
+                    echo json_encode(array('success' => true));
+                } else {
+                    echo json_encode(array('error' => 'Ungültiges aktuelles Passwort.'));
+                }
             } else {
-                echo json_encode(array('error' => 'Failed to update profile.'));
+                $updateQuery = "UPDATE user SET name='$name', email='$email', telephone='$telephone', profile='$profileImageName' WHERE id='$id'";
+                $updateResult = $connect->query($updateQuery);
+                if ($updateResult) {
+                    echo json_encode(array('success' => true));
+                } else {
+                    echo json_encode(array('error' => 'Ungültiges aktuelles Passwort.'));
+                }
             }
-        } else {
+        } 
+        elseif (empty($_POST['currentPassword']) && empty($_POST['newPassword']) ) {
+            $updateQuery = "UPDATE user SET name='$name', email='$email', telephone='$telephone', profile='$profileImageName' WHERE id='$id'";
+                $updateResult = $connect->query($updateQuery);
+                if ($updateResult) {
+                    echo json_encode(array('success' => true));
+                } else {
+                    echo json_encode(array('error' => 'Erforderliche Felder sind leer.'));
+                }
+        } 
+        else {
             echo json_encode(array('error' => 'Ungültiges aktuelles Passwort.'));
         }
     } else {
-        echo json_encode(array('error' => 'Required fields are empty.'));
+        echo json_encode(array('error' => 'Erforderliche Felder sind leer.'));
     }
 } else {
     // Handle if the request method is not POST

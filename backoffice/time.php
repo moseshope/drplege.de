@@ -293,7 +293,6 @@ $("input.check-days").change(() => {
 $('input[name="daterange"]').daterangepicker({
     locale: {
       format: 'YYYY-MM-DD',
-      separator: ' To '
     },
     minDate: moment().format("YYYY-MM-DD"),
     startDate: start,

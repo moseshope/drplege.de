@@ -306,7 +306,7 @@ if ($role == 2) {
                   <?php if ($PatientsList[$i]['status'] != 'abgesagt') { ?>
                   <span class="cursor-pointer refreshBtn" data-id="<?php echo $PatientsList[$i]['id']; ?>"
                     data-bs-toggle="modal" aria-expanded="false">
-                    <i class="fas fa-arrows-repeat p-2"></i> <!-- Change the icon accordingly -->
+                    <i class="fas fa-edit p-2"></i> <!-- Change the icon accordingly -->
                   </span>
                   <?php } ?>
                   <span class="cursor-pointer deleteBtn text-danger" data-id="<?php echo $PatientsList[$i]['id']; ?>"

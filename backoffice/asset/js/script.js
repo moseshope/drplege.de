@@ -313,38 +313,49 @@ $(document).ready(function () {
   // profile form validation
   $("#profileForm").validate({
     rules: {
-      current_password: {
+      name: {
         required: true,
-        minlength: 6,
+      },
+      email: {
+        required: true,
+        email: true,
       },
       password: {
-        required: true,
         minlength: 6,
       },
       confirm_password: {
-        required: true,
         minlength: 6,
-        equalTo: "#password", // Validation to ensure it matches the password field
+        equalTo: "#password",
       },
     },
     messages: {
+      name: {
+        required: "Bitte geben Sie Ihren Namen ein.",
+      },
+      email: {
+        required: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+        email: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      },
       current_password: {
-        required: "Bitte geben Sie Ihr Passwort ein",
-        // minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
+        required: "Bitte geben Sie Ihr aktuelles Passwort ein.",
         equalTo: "Aktuelles Passwort ungültig.",
       },
       password: {
-        required: "Bitte geben Sie Ihr Passwort ein",
+        required: "Bitte geben Sie ein neues Passwort ein.",
         minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
       },
       confirm_password: {
-        required: "Bitte geben Sie Ihr Passwort ein",
+        required: "Bitte bestätigen Sie Ihr neues Passwort.",
         minlength: "Ihr Passwort muss mindestens 6 Zeichen lang sein",
         equalTo: "Passwörter stimmen nicht überein",
       },
     },
     errorPlacement: function (error, element) {
-      if (element.attr("name") == "current_password") {
+      if (element.attr("name") == "name") {
+        error.insertAfter(element);
+      } else if (element.attr("name") == "email") {
+        error.insertAfter(element);
+      } else if (element.attr("name") == "current_password") {
         error.insertAfter("#current_password-error");
       } else if (element.attr("name") == "password") {
         error.insertAfter("#password-error");
@@ -952,30 +963,24 @@ $(document).ready(function () {
     }, 5000);
   }
 
-  // Attach click handler to profileSubmit button
   $("#profileSubmit").on("click", function () {
     if ($("#profileForm").valid()) {
+      var name = $("#name").val();
+      var email = $("#email").val();
       var currentPassword = $("#current_password").val();
       var newPassword = $("#password").val();
-      var confirmPassword = $("#confirm_password").val();
-
-      // Check if new password and confirm password match
-      if (newPassword !== confirmPassword) {
-        $("#confirm_password-error")
-          .text("Passwords do not match")
-          .addClass("text-danger");
-        return;
-      }
 
       $.ajax({
         url: "./ajax/profile.php",
         method: "POST",
-        data: { currentPassword: currentPassword, newPassword: newPassword },
+        data: { name: name, email: email, currentPassword: currentPassword, newPassword: newPassword },
+        dataType: "JSON",
         success: function (response) {
           if (response.error) {
             $("#current_password-error")
               .text(response.error)
-              .addClass("text-danger");
+              .addClass("text-danger")
+              .show();
           } else {
             $("#current_password-error").hide();
             // Call the showNotification function with success message
@@ -988,6 +993,8 @@ $(document).ready(function () {
       });
     }
   });
+
+  // Attach click handler to profileSubmit button
 
   // set value edit employee form
   $(".editStaffButton").on("click", function () {

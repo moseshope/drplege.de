@@ -132,11 +132,11 @@ window.location = "profile";
           <div class="col-lg-5 col-12">
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">Name</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['name'] ?>" disabled>
+              <input type="text" class="form-control custom-input" id="name" value="<?php echo $row['name'] ?>">
             </div>
             <div class="form-group p-2 my-2">
               <label class="my-1" for="name">E-Mail</label>
-              <input type="text" class="form-control custom-input" value="<?php echo $row['email'] ?>" disabled>
+              <input type="text" class="form-control custom-input" id="email" value="<?php echo $row['email'] ?>">
             </div>
 
             <div class="form-group p-2 mt-2">

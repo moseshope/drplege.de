@@ -507,8 +507,8 @@ if ($role == 1) {
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-        <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
-          style="margin-right: 3px;">Nein</button>
+          <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
+            style="margin-right: 3px;">Nein</button>
           <button type="button" class="success-button cursor-pointer" id="EditConfirmationYesBtn"
             style="margin-left: 3px;">Ja</button>
         </div>
@@ -737,23 +737,23 @@ if ($role == 1) {
 
     displayedListings.forEach(function(patient, index) {
       const row = `<tr>
-                                        <td>${patient.name}</td>
-                                        <td>${patient.doctor}</td>
-                                        <td>${patient.services}</td>
-                                        <td class="text-center">${patient.visits} </td>
-                                        <td>
-                                          <div class="d-flex justify-content-center dropdown">
-                                              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                                                  <i class="fa-solid fa-right-left"></i>
-                                              </span>
-                                              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                                                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-                                              </span>
-                                          </div>
-                                        </td>
+                                          <td>${patient.name}</td>
+                                          <td>${patient.doctor}</td>
+                                          <td>${patient.services}</td>
+                                          <td class="text-center">${patient.visits} </td>
+                                          <td>
+                                            <div class="d-flex justify-content-center dropdown">
+                                                <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                                                    <i class="fa-solid fa-right-left"></i>
+                                                </span>
+                                                <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                                                    <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                                                </span>
+                                            </div>
+                                          </td>
 
-                                          <!-- Add other table cells based on your data structure -->
-                                      </tr>`;
+                                            <!-- Add other table cells based on your data structure -->
+                                        </tr>`;
       tbody.append(row);
     });
   }
@@ -1167,7 +1167,9 @@ if ($role == 1) {
     tbody.empty();
 
     if (dataArray.length === 0) {
-      const noRecordRow = `<tr><td colspan="5" class="text-center">No records found</td></tr>`;
+      const noRecordRow = `<tr><td colspan="5" class="text-center">Keine Einträge vorhanden
+
+  </td></tr>`;
       tbody.append(noRecordRow);
       return;
     }
@@ -1184,22 +1186,22 @@ if ($role == 1) {
         convertToAMPMFormat(patient.visits) :
         'N/A';
       const row = `<tr>
-          <td>${patient.name}</td>
-          <td>${patient.doctor}</td>
-          <td>${patient.services}</td>
-          <td class="text-center">${patient.visits} </td>
-          <td>
-          <div class="d-flex justify-content-center dropdown">
-              <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
-                  <i class="fa-solid fa-right-left"></i>
-              </span>
-              <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
-                  <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
-              </span>
-          </div>
-        </td>
-          <!-- Add other table cells based on your data structure -->
-        </tr>`;
+            <td>${patient.name}</td>
+            <td>${patient.doctor}</td>
+            <td>${patient.services}</td>
+            <td class="text-center">${patient.visits} </td>
+            <td>
+            <div class="d-flex justify-content-center dropdown">
+                <span class="px-1 cursor-pointer" onclick="openRebookingModal(${patient.id})">
+                    <i class="fa-solid fa-right-left"></i>
+                </span>
+                <span class="px-1 cursor-pointer" onclick="cancelRebookingModal(${patient.id})">
+                    <i class="fa-regular fa-circle-xmark" style="margin-left: .5rem;"></i>
+                </span>
+            </div>
+          </td>
+            <!-- Add other table cells based on your data structure -->
+          </tr>`;
       tbody.append(row);
     });
   }

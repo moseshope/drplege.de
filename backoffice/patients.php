@@ -184,7 +184,7 @@ if ($role == 2) {
             <input class="mx-2" type="date" id="start-date" name="start_date" placeholder="Start Date"
               value="<?php echo $startDate; ?>">
           </div>
-          <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;">To</p>
+          <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;"> - </p>
           <div class="input-date">
             <input class="mx-2" type="date" id="end-date" name="end_date" placeholder="End Date"
               value="<?php echo $endDate; ?>">
@@ -219,7 +219,7 @@ if ($role == 2) {
                 <td>ID</td>
                 <td>Leistung</td>
                 <td class="text-center">Termin</td>
-                <td>Rezept</td>
+                <td>Notiz</td>
                 <td class="text-center">Status<i class="fa-solid fa-arrow-up ms-2" stlye="font-size:14px"
                     id="ASCstatus"></i><i class="fa-solid fa-arrow-down" stlye="font-size:14px" id="DESCstatus"></i></td>
                 <td>
@@ -230,10 +230,10 @@ if ($role == 2) {
                 <td>Name</td>
                 <td>ID</td>
                 <td>Leistung</td>
-                <td>Arzt<i data-value="doctor" class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
+                <td class="text-center">Arzt<i data-value="doctor" class="fa-solid fa-arrow-up-arrow-down Shorting ms-1"
                     style="font-size: 14px;display: inline-block;"></i></td>
                 <td class="text-center">Termin</td>
-                <td>Rezept</td>
+                <td>Notiz</td>
                 <td class="text-center">Status <i data-value="status" class="fa-solid fa-arrow-up-arrow-down Shorting"
                     style="font-size: 14px;display: inline-block;"></i> </td>
                 <td>
@@ -343,7 +343,7 @@ if ($role == 2) {
                   </td>
                   <td style="min-width: 80px;"><?php echo $PatientsList[$i]['id']; ?></td>
                   <td style="max-width: 200px;"><?php echo $PatientsList[$i]['services']; ?></td>
-                  <td><?php echo $PatientsList[$i]['doctor']; ?></td>
+                  <td class="text-center"><?php echo $PatientsList[$i]['doctor']; ?></td>
                   <td class="text-center"><?php echo $PatientsList[$i]['selected_date']; ?> | <?php echo $PatientsList[$i]['visits']; ?> </td>
                   <td><?php echo $PatientsList[$i]['recipe']; ?></td>
                   <?php

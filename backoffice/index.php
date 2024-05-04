@@ -137,7 +137,7 @@ if ($role == 1) {
       <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search"
         value="<?php echo $searchTerm ?>">
       <div class="" id="searchCancel" type="button">
-        <i class="bi bi-x-square cursor-pointer"></i>
+        <i class="fa-solid fa-xmark cursor-pointer" style="margin-top: 2px;"></i>
       </div>
     </div>
     <div class="row mt-3">

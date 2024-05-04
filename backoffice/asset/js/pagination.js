@@ -28,11 +28,11 @@ const GoToPage = (currentPage, totalPage, elementId) => {
 function CreatePagination({ elementId, totalPage = 1, currentPage = 1 }) {
     const Pagination = document.getElementById(elementId);
 
-    Pagination.innerHTML = `<li class="previous ${currentPage === 1 ? "disable-btn" : ""}" onClick="handlePreviousPage(${currentPage},${totalPage},'${elementId}')"><i class="fa-solid fa-chevron-left"></i></li>`
+    Pagination.innerHTML = `<li class="previous ${currentPage === 1 ? "disable-btn" : "disable-btn"}" ><i class="fa-solid fa-chevron-left"></i></li>`
     for (let i = 0; i < totalPage; i++) {
-        if (i === currentPage - 2 || i === currentPage - 1 || i === currentPage || (currentPage === 1 && i === 2) || (i === totalPage && i === totalPage - 2)) Pagination.innerHTML += `<li class='pages ${currentPage === i + 1 ? "active-page" : ""}' onClick="GoToPage(${i + 1},${totalPage},'${elementId}')">${i + 1}</li>`
+        if (i === currentPage - 2 || i === currentPage - 1 || i === currentPage || (currentPage === 1 && i === 2) || (i === totalPage && i === totalPage - 2)) Pagination.innerHTML += `<li class='pages ${currentPage === i + 1 ? "active-page" : ""}' >${i + 1}</li>`
     }
-    Pagination.innerHTML += `<li class="next ${currentPage === totalPage ? "disable-btn" : ""}" onClick="handleNextPage(${currentPage},${totalPage},'${elementId}')"><i class="fa-solid fa-chevron-right"></i></li>`;
+    Pagination.innerHTML += `<li class="next ${currentPage === totalPage ? "disable-btn" : "disable-btn"}" '${elementId}')"><i class="fa-solid fa-chevron-right"></i></li>`;
 
     return currentPage;
 }

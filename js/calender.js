@@ -12,7 +12,7 @@ let currentYear = currentDate.getFullYear();
 
 // Function to generate the calendar table
 function generateCalendar() {
-  // ${moment(date1).format('YYYY-MM-DD') && "disable-date"}
+  // ${moment(date1).format('DD-MM-YYYY') && "disable-date"}
   let availableDates = selectedService[1]?.availableDates || [];
   const daysInMonth = 32 - new Date(currentYear, currentMonth, 32).getDate();
   let firstDay = new Date(currentYear, currentMonth).getDay();
@@ -41,7 +41,7 @@ function generateCalendar() {
       "today"
     } ${date1 < date2 && "disable-date"} ${
       !availableDates.includes(moment(`${currentYear}-${(currentMonth + 1).toString()
-        .padStart(2, "0")}-${String(i).padStart(2, "0")}`).format("YYYY-MM-DD")) &&
+        .padStart(2, "0")}-${String(i).padStart(2, "0")}`).format("DD-MM-YYYY")) &&
       "disable-date"
     }">${i}</div></td>`;
 

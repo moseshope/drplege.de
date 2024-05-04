@@ -104,12 +104,12 @@ $AvailableTImeList = $AvailableTime -> fetch_assoc();
             <div class="d-flex justify-content-center align-items-center my-3">
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
                 style="background-color: var(--main); color: white; border-radius: 16px;"
-                id="applyDatepicker">Anwenden</button>
+                id="applyDatepicker">Termin hinzufügen</button>
               <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
 
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
                 style="background-color: var(--main); color: white; border-radius: 16px;"
-                id="clearDatepicker">Löschen</button>
+                id="clearDatepicker">Termin löschen</button>
               <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
 
             </div>
@@ -236,7 +236,7 @@ function getDatesInRangeWithWeekdays(startDate, endDate, weekdays) {
   while (currentDate <= endDate) {
     // Check if the current date's weekday is in the selected weekdays
     if (weekdays.includes(currentDate.getDay())) {
-      dates.push(moment(currentDate).format("YYYY-MM-DD")); // Add the date to the list
+      dates.push(moment(currentDate).format("DD-MM-YYYY")); // Add the date to the list
     }
     // Move to the next day
     currentDate.setDate(currentDate.getDate() + 1);
@@ -244,8 +244,8 @@ function getDatesInRangeWithWeekdays(startDate, endDate, weekdays) {
   return dates;
 }
 
-var start = moment().format("YYYY-MM-DD"),
-  end = moment().format("YYYY-MM-DD");
+var start = moment().format("DD-MM-YYYY"),
+  end = moment().format("DD-MM-YYYY");
 
 function handleChangeRange() {
   let days = [];
@@ -265,28 +265,37 @@ $("input.check-days").change(() => {
   handleChangeRange();
 });
 
+var start = moment(); // Define or initialize start date
+var end = moment(); // Define or initialize end date
+
 $('input[name="daterange"]').daterangepicker({
+    
     locale: {
-      format: 'YYYY-MM-DD',
+      format: 'DD-MM-YYYY',
       applyLabel: 'Anwenden',
       cancelLabel: 'Abbrechen',
-      daysOfWeek: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+      daysOfWeek: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
       monthNames: [
         'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
         'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
-      ],
+      ]
     },
-    minDate: moment().format("YYYY-MM-DD"),
+    minDate: moment().format("DD-MM-YYYY"),
     startDate: start,
-    endDate: end,
-
-  },
-
-  function(_start, _end, label) {
+    endDate: end
+}, function(_start, _end, label) {
     start = _start;
     end = _end;
     handleChangeRange();
-  });
+});
+
+$('.daterangepicker').css({
+        'border': '1px solid #ccc',
+        'border-radius': '5px',
+        'background-color': '#fff',
+        'width': 'fit-content'
+    });
+
 // select All Time
 const timesList = document.querySelectorAll('#selectTime input');
 

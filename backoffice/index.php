@@ -506,9 +506,9 @@ if ($role == 1) {
           <h1 class="modal-heading" style="font-weight: 800;">Sind Sie sicher?</h1>
           <p class="mb-h text-danger">Diese Aktion ist nicht rückgängig zu machen.</p>
         </div>
+        <div class="d-flex justify-content-center align-items-center">
         <button type="button" class="cancel-button cursor-pointer" data-bs-dismiss="modal"
           style="margin-right: 3px;">Nein</button>
-        <div class="d-flex justify-content-center align-items-center">
           <button type="button" class="success-button cursor-pointer" id="EditConfirmationYesBtn"
             style="margin-left: 3px;">Ja</button>
         </div>

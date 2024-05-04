@@ -218,7 +218,7 @@ if ($role == 2) {
                 <td>Name</td>
                 <td>ID</td>
                 <td>Leistung</td>
-                <td class="text-center">Besuch</td>
+                <td class="text-center">Termin</td>
                 <td>Rezept</td>
                 <td class="text-center">Status<i class="fa-solid fa-arrow-up ms-2" stlye="font-size:14px"
                     id="ASCstatus"></i><i class="fa-solid fa-arrow-down" stlye="font-size:14px" id="DESCstatus"></i></td>

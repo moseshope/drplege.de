@@ -6,6 +6,7 @@ if (!isset($_SESSION['staff_id'])) {
 include ('config/database.php');
 include ('./layout/header.php');
 include ('./layout/sidebar.php');
+$id = $_SESSION['staff_id'];
 
 $GetTime = "select * from time_slots ORDER BY time ASC";
 $result = $connect->query($GetTime);
@@ -17,6 +18,10 @@ if ($result->num_rows > 0) {
     $timeList[] = $row['time'];
     }
   }
+  
+$GetAvaliableTime = "select * from time_slots_user WHERE doctor_id='$id'ORDER BY selected_date ASC";
+$AvailableTime = $connect ->query($GetAvaliableTime);
+$AvailableTImeList = $AvailableTime -> fetch_assoc();
 ?>
 
 <!-- Main -->
@@ -29,34 +34,7 @@ if ($result->num_rows > 0) {
       <div class="col-12 col-lg-6 col-xl-5 col-xxxl-3 col-xxl-4 mb-5">
         <div class="my-calender px-4">
           <div class="d-flex justify-content-center py-3" style="color: var(--main);">
-            <!-- <h4 style="font-weight:700;">Datum auswählen</h4> -->
           </div>
-          <!-- <div class="calendar">
-                            <div class="header">
-                                <div class="cursor-pointer" onclick="prevMonth()" >
-                                    <span class="prev icon" style="color: black;">&lt;</span>
-                                    <span class="pre-month-year"></span>
-                                </div>
-                                <div class="cursor-pointer" onclick="nextMonth()">
-                                    <span class="month-year next"></span>
-                                    <span class="next icon">></span>
-                                </div>
-                            </div>
-                            <table class="days">
-                                <thead>
-                                    <tr>
-                                        <th>S</th>
-                                        <th>M</th>
-                                        <th>T</th>
-                                        <th>W</th>
-                                        <th>T</th>
-                                        <th>F</th>
-                                        <th>S</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div> -->
           <div class="calendar">
             <div class="header">
               <div class="cursor-pointer" onclick="prevMonth()">

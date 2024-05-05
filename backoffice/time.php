@@ -3,26 +3,34 @@ session_start();
 if (!isset($_SESSION['staff_id'])) {
   header("Location: login");
   }
+
 include ('config/database.php');
 include ('./layout/header.php');
 include ('./layout/sidebar.php');
 $id = $_SESSION['staff_id'];
 
-$GetTime = "select * from time_slots ORDER BY time ASC";
+$GetTime = "SELECT * FROM time_slots ORDER BY time ASC";
 $result = $connect->query($GetTime);
 $timeList = array();
-
+$AvailableTimeList = array();
 
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     $timeList[] = $row['time'];
     }
   }
-  
-$GetAvaliableTime = "select * from time_slots_user WHERE doctor_id='$id'ORDER BY selected_date ASC";
-$AvailableTime = $connect ->query($GetAvaliableTime);
-$AvailableTImeList = $AvailableTime -> fetch_assoc();
+
+$GetAvailableTime = "SELECT * FROM time_slots_user WHERE doctor_id='$id' ORDER BY selected_date ASC";
+$TimeResult = $connect->query($GetAvailableTime);
+if ($TimeResult->num_rows > 0) {
+  while ($Timerow = $TimeResult->fetch_assoc()) {
+    $AvailableTimeList[] = $Timerow;
+    }
+  }
+
+$totalItems = count($AvailableTimeList);
 ?>
+
 
 <!-- Main -->
 <div id="main-content">
@@ -79,15 +87,6 @@ $AvailableTImeList = $AvailableTime -> fetch_assoc();
                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                 <input type="text" id="dateRangePicker" name="daterange" class="form-control text-center">
               </div>
-              <!-- <div class="input-date">
-                <input class="mx-1" style="width: 140px;" type="date" id="start-date" name="start_date"
-                  placeholder="Start Date" value="<?php echo $startDate; ?>">
-              </div>
-              <p class="mx-2 mb-0" style="font-size: var(--md-text); color: var(--main); font-weight: 500;">To</p>
-              <div class="input-date">
-                <input class="mx-1" style="width: 140px;" type="date" id="end-date" name="end_date"
-                  placeholder="End Date" value="<?php echo $endDate; ?>">
-              </div> -->
             </div>
             <div id="weekdaysSelectedValues" class="d-flex justify-content-md-center flex-wrap mx-2 mt-3 mb-2">
               <input id="weekSchedulerWidgetDayMon" type="checkbox" name="days[]" class="mx-2 check-days"
@@ -103,13 +102,13 @@ $AvailableTImeList = $AvailableTime -> fetch_assoc();
             </div>
             <div class="d-flex justify-content-center align-items-center my-3">
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
-                style="background-color: var(--main); color: white; border-radius: 16px;"
-                id="applyDatepicker">Termin hinzufügen</button>
+                style="background-color: var(--main); color: white; border-radius: 16px;" id="applyDatepicker">Termin
+                hinzufügen</button>
               <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
 
               <button type="submit" class="cursor-pointer showTimeBtn custom-main-btn mx-3"
-                style="background-color: var(--main); color: white; border-radius: 16px;"
-                id="clearDatepicker">Termin löschen</button>
+                style="background-color: var(--main); color: white; border-radius: 16px;" id="clearDatepicker">Termin
+                löschen</button>
               <!-- <button class="cursor-pointer showAllBtn" style="background-color: var(--main); color: white;" id="FilterClear">Clear</button> -->
 
             </div>
@@ -140,6 +139,72 @@ $AvailableTImeList = $AvailableTime -> fetch_assoc();
       </div>
     </div>
   </div>
+
+  <div class="dashboard-search ms-5">
+    <i class="bi bi-search"></i>
+    <input type="text" class="w-100" id="Search-input" placeholder="Suche" name="search">
+    <div class="" id="searchCancel" type="button">
+      <i class="fa-solid fa-xmark cursor-pointer" style="margin-top: 2px;"></i>
+    </div>
+  </div>
+
+  <!-- Table for available times -->
+  <div class="mt-4 mx-5 custom-table" id="Search-Options" onchange="handleSelect('Search-input')"
+    style="width: min-content;">
+    <div class=" table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td class="text-center">#</td>
+            <td class="text-center" style="max-width: 200px !important;">Datum</td>
+            <td class="text-center" style="max-width: 200px;">Zeit</td>
+            <td class="text-center" style="max-width: 100px;">
+              <div>Optionen</div>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <?php for ($i = 0; $i <= $totalItems; $i++) {
+            ; ?>
+          <tr class="doctor-row">
+            <td class="text-center">
+              <?php echo $i + 1; ?>
+            </td>
+            <td class="text-center">
+              <?php echo date('d-m-Y', strtotime($AvailableTimeList[$i]['selected_date'])); ?>
+            </td>
+            <td class="text-center">
+              <ul style="list-style-type: none; padding: 0; margin: 0;">
+                <?php
+                  $times = json_decode($AvailableTimeList[$i]['time']);
+                  foreach ($times as $Availabletime) {
+                    echo "<li>$Availabletime</li>";
+                    }
+                  ?>
+              </ul>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <!-- Edit button -->
+                <input type="hidden" name="id" value="<?= $Availabletime?>">
+                <div type="button" class="iconButton editTimeBtn" data-id="<?php echo $AvailableTimeList[$i]; ?>">
+                  <i class="fas fa-edit cursor-pointer p-2"></i>
+                </div>
+                <!-- Delete button -->
+                <input type="hidden" name="id" value="<?= $AvailableTimeList[$i] ?>">
+                <div type="button" class="iconButton deleteTimeBtn" data-id="<?php echo $AvailableTimeList[$i]; ?>">
+                  <i class="fas fa-trash cursor-pointer text-danger p-2"></i>
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 
 
@@ -223,7 +288,7 @@ $AvailableTImeList = $AvailableTime -> fetch_assoc();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="asset/css/daterangepicker.css" />
 <script src="asset/js/index.js"></script>
 <script src="asset/js/calender-2.js"></script>
 
@@ -269,32 +334,31 @@ var start = moment(); // Define or initialize start date
 var end = moment(); // Define or initialize end date
 
 $('input[name="daterange"]').daterangepicker({
-    
-    locale: {
-      format: 'DD-MM-YYYY',
-      applyLabel: 'Anwenden',
-      cancelLabel: 'Abbrechen',
-      daysOfWeek: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-      monthNames: [
-        'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
-      ]
-    },
-    minDate: moment().format("DD-MM-YYYY"),
-    startDate: start,
-    endDate: end
+
+  locale: {
+    format: 'DD-MM-YYYY',
+    applyLabel: 'Anwenden',
+    cancelLabel: 'Abbrechen',
+    daysOfWeek: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+    monthNames: [
+      'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+    ]
+  },
+  minDate: moment().format("DD-MM-YYYY"),
+  startDate: start,
+  endDate: end
 }, function(_start, _end, label) {
-    start = _start;
-    end = _end;
-    handleChangeRange();
+  start = _start;
+  end = _end;
+  handleChangeRange();
 });
 
 $('.daterangepicker').css({
-        'border': '1px solid #ccc',
-        'border-radius': '5px',
-        'background-color': '#fff',
-        'width': 'fit-content'
-    });
+  'border': '1px solid #ccc',
+  'border-radius': '5px',
+  'background-color': '#fff',
+});
 
 // select All Time
 const timesList = document.querySelectorAll('#selectTime input');
